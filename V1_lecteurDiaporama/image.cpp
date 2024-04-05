@@ -1,31 +1,27 @@
 #include "image.h"
-
-Image creerImage(string pCategorie, string pTitre, string pChemin)
-{
-    Image image;
-    image.categorie = pCategorie;
-    image.titre = pTitre;
-    image.chemin = pChemin;
-    return image;
+Image::Image(string pCategorie, string pTitre, string pChemin):
+    _categorie(pCategorie),
+    _titre(pTitre),
+    _chemin(pChemin){
 }
 
-string getCategorie(const Image& pImage)
+string Image::getCategorie() const
 {
-    return pImage.categorie;
+    return this->_categorie;
 }
 
-string getTitre(const Image& pImage)
+string Image::getTitre() const
 {
-    return pImage.titre;
+    return this->_titre;
 }
 
-string getChemin(const Image& pImage)
+string Image::getChemin() const
 {
-    return pImage.chemin;
+    return this->_chemin;
 }
 
-void afficher(const Image& pImage)
+void Image::afficher() const
 {
-    cout << "image(titre:" << getTitre(pImage) << ", categorie:"
-         << getCategorie(pImage) << ", chemin:"<< getChemin(pImage) << ")" << endl;
+    cout << "image(titre:" << this->getTitre() << ", categorie:"
+         << this->getCategorie() << ", chemin:"<< this->getChemin() << ")" << endl;
 }
