@@ -1,6 +1,7 @@
 #ifndef IMAGEDANSDIAPORAMA_H
 #define IMAGEDANSDIAPORAMA_H
 #include "image.h"
+#include <vector>
 
 class ImageDansDiaporama : public Image
 {
@@ -14,6 +15,6 @@ private:
 };
 
 typedef vector<Image> Images;
-typedef vector<Diaporama> Diaporamas;
+
 
 #endif // IMAGEDANSDIAPORAMA_H
