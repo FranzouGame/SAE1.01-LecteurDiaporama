@@ -13,7 +13,7 @@ public:
     void creerDiaporama (Diaporama* pDiaporama);
     Diaporama(string pTitre="", unsigned int pVitesseDefilement=0, vector<ImageDansDiaporama> pLocalisationImages = {});
 };
-
+typedef vector<Image> Images;
 typedef vector<Diaporama> Diaporamas;
 
 #endif // DIAPORAMA_H

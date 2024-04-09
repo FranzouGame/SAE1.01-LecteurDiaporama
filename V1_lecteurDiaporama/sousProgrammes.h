@@ -3,7 +3,9 @@
 #include <iostream>
 #include <vector>
 #include "image.h"
-#include "typeDiaporama.h"
+#include "diaporama.h"
+#include "imagedansdiaporama.h"
+#include "image.h"
 using namespace std;
 
 
@@ -22,13 +24,13 @@ unsigned int saisieVerifChoixDiaporama(const Diaporamas& pDiaporamas);
 // Retourne un numéro de diaporama choisi par l'utilisateur (dans la liste des diaporamas existants)
 
 void declencherAction(char pChoixAction, const Diaporamas& pDiaporamas, unsigned int& pDiaporamaCourant,
-                      unsigned int& pImageCourante, const Images& pImages);
+                      unsigned int& pImageCourante, const Image& pImages);
 /* Selon le pChoix fait l'utilisateur, réalise une des actions A)vancer, R)eculer, C)hoisir un autre diaporama, Q)quitter */
 
 
 /* Sous-programmes provisoires pour versions antérieures à l'implantation de la BD
 ----------------------------------------------------------------------------------*/
-void charger (Images& pImages);
+void charger (Image& pImages);
 /* Chargement du tableau des images avec seules les informations textuelles de quelques images.
    Dans une version ultérieure, ces informations seront stockées dans une Base de Données.
 */
