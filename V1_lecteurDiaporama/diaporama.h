@@ -14,6 +14,7 @@ private :
 public:
     void creerDiaporama (Diaporama* );
     Diaporama(string="", unsigned int=0, vector<ImageDansDiaporama> images = vector<ImageDansDiaporama>());
+/* Getter de la class Diaporama */
     string getTitre() const ;
     //getter du titre
     unsigned int getVitesseDefilement() const ;
@@ -24,6 +25,17 @@ public:
     //getter des images
     unsigned int getNbImages()const;
     //retourne le nombre d'images du diaporama
+/* Setter de la class Diaporama */
+    void setPosCourante(unsigned int pPosCourante);
+    //setter de la position courante
+    void setNbImages(unsigned int pNbImages);
+    //setter du nombre d'images
+    void setVitesseDefilement(unsigned int pVitesseDefilement);
+    //setter de la vitesse de défilement
+    void setTitre(string pTitre);
+    //setter du titre
+    void setImageCourante(ImageDansDiaporama pImageCourante);
+    //setter de l'image courante
     void afficherImageCouranteDansDiaporamaCourant (const Diaporama& pDiaporama, const Image& pImage);
     /* Affichage à l'acran des infos de l'image courante dans son diaporama
  *    - titre du diaporama

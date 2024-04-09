@@ -11,7 +11,11 @@ void Diaporama::creerDiaporama (Diaporama* pDiaporama){
     _vitesseDefilement = pDiaporama ->_vitesseDefilement;
     _localisationImages = pDiaporama ->_localisationImages;
 }
-
+/*
+----------------------------------------
+Getter de la class Diaporama
+----------------------------------------
+*/
 string Diaporama::getTitre() const {
     return _titre;
 }
@@ -27,6 +31,26 @@ ImageDansDiaporama Diaporama::getImageCourante() const {
 }
 unsigned int Diaporama::getNbImages()const{
     return this->_nbImages;
+}
+/*
+----------------------------------------
+Setter de la class Diaporama
+----------------------------------------
+*/
+void Diaporama::setPosCourante(unsigned int pPosCourante){
+    this->_posCourante = pPosCourante;
+}
+void Diaporama::setNbImages(unsigned int pNbImages){
+    this->_nbImages = pNbImages;
+}
+void Diaporama::setVitesseDefilement(unsigned int pVitesseDefilement){
+    this->_vitesseDefilement = pVitesseDefilement;
+}
+void Diaporama::setTitre(string pTitre){
+    this->_titre = pTitre;
+}
+void Diaporama::setImageCourante(ImageDansDiaporama pImageCourante){
+    this->_localisationImages[getPosCourante()] = pImageCourante;
 }
 void afficherImageCouranteDansDiaporamaCourant (const Diaporama& pDiaporama, const Image& pImage)
 {
