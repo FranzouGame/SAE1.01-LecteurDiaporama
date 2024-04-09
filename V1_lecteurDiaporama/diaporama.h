@@ -10,8 +10,9 @@ private :
     unsigned int _vitesseDefilement; // vitesse de défilement des images du diaporama
     vector <ImageDansDiaporama> _localisationImages; // images du diaporama
 public:
-    void creerDiaporama (Diaporama* pDiaporama);
-    Diaporama(string pTitre="", unsigned int pVitesseDefilement=0, vector<ImageDansDiaporama> pLocalisationImages = {});
+    void creerDiaporama (Diaporama* );
+    Diaporama(string="", unsigned int=0, vector<ImageDansDiaporama> );
+
 };
 
 typedef vector<Diaporama> Diaporamas;

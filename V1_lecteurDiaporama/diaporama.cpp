@@ -4,7 +4,6 @@ Diaporama::Diaporama(string pTitre, unsigned int pVitesseDefilement, vector<Imag
     _titre(pTitre),
     _vitesseDefilement(pVitesseDefilement),
     _localisationImages(pLocalisationImages)
-
 {}
 
 void Diaporama::creerDiaporama (Diaporama* pDiaporama){
