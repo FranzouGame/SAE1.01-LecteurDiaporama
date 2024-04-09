@@ -10,7 +10,7 @@ private:
 
 public:
     lecteur();
-    void charger (Diaporamas& pDiaporamas);
+    void charger (Diaporama& pDiaporamas);
 };
-
+typedef vector<Diaporama> Diaporamas;
 #endif // LECTEUR_H
