@@ -7,6 +7,7 @@ SOURCES += \
         diaporama.cpp \
         image.cpp \
         imagedansdiaporama.cpp \
+        lecteur.cpp \
         main.cpp \
         sousProgrammes.cpp
 
@@ -14,5 +15,5 @@ HEADERS += \
     diaporama.h \
     image.h \
     imagedansdiaporama.h \
-    sousProgrammes.h \
-    typeDiaporama.h
+    lecteur.h \
+    sousProgrammes.h
