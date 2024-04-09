@@ -2,17 +2,9 @@
 #include <iostream>
 #include <vector>
 #include "image.h"
-#include "typeDiaporama.h"
 using namespace std;
 
 
-void afficherImageCouranteDansDiaporamaCourant (const Diaporama& pDiaporama, unsigned int pImageCourante, const Image& pImage)
-{
-    cout << endl << endl;
-    cout << "DIAPORAMA : " << pDiaporama.titre << endl << endl;
-    cout << pDiaporama.localisationImages[pImageCourante].rang << " sur " <<  nbImages(pDiaporama) << " / ";
-    afficher(pImage);
-}
 
 
 

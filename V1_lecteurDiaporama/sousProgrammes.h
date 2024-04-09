@@ -11,11 +11,6 @@ using namespace std;
 
 /* Sous-programmes provisoires pour versions Non encore graphiques
  * -------------------------------------------------------------- */
-void afficherImageCouranteDansDiaporamaCourant (const Diaporama& pDiaporama, unsigned int pImageCourante, const Image& pImage);
-/* Affichage à l'acran des infos de l'image courante dans son diaporama
- *    - titre du diaporama
-      - image courante : titre, famille, contenu
-      - rang de l'image courante dans le diaporama / nbre total d'images du diaporama */
 
 void saisieVerifChoixActionSurImageCourante(char& pChoixAction);
 // Saisie du choix d'action de l'utilisateur vis-à-vis de l'image et diaporama courants
@@ -30,11 +25,8 @@ void declencherAction(char pChoixAction, const Diaporamas& pDiaporamas, unsigned
 
 /* Sous-programmes provisoires pour versions antérieures à l'implantation de la BD
 ----------------------------------------------------------------------------------*/
-<<<<<<< HEAD
-void charger (Image& pImages);
-=======
 
->>>>>>> b95eda4faa3c62f6837576f648b52b36f55567e7
+void charger (Image& pImages);
 /* Chargement du tableau des images avec seules les informations textuelles de quelques images.
    Dans une version ultérieure, ces informations seront stockées dans une Base de Données.
 */
