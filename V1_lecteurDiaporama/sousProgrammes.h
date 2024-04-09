@@ -28,7 +28,7 @@ void declencherAction(char pChoixAction, const Diaporamas& pDiaporamas, unsigned
 
 /* Sous-programmes provisoires pour versions antérieures à l'implantation de la BD
 ----------------------------------------------------------------------------------*/
-void charger (Images& pImages);
+
 /* Chargement du tableau des images avec seules les informations textuelles de quelques images.
    Dans une version ultérieure, ces informations seront stockées dans une Base de Données.
 */
@@ -43,12 +43,9 @@ void charger (Images& pImages);
 /* Déclarations des sous-programmes utilisés par le lecteur de diaporamas
  * ---------------------------------------------------------------------- */
 
-void avancer(const Diaporama& pDiaporama, unsigned int& pPosImageCourante);            // incrémente pPosImageCourante, modulo nbImages(pDiaporama)
-void reculer(const Diaporama& pDiaporama, unsigned int& pPosImageCourante);             // décrémente pPosImageCourante, modulo nbImages(pDiaporama)
-void changerDiaporama(unsigned int pNumDiaporama);    // permet de choisir un diaporama, 0 si aucun diaporama souhaité
-unsigned int nbImages(const Diaporama& pDiaporama);    // affiche la taille du diaporama pDiaporama
 
-void triCroissantRang (Diaporama& pDiaporama);
+
+
 /* Tri du diaporama pDiaporama par ordre croissant de *rang* des ses images
    A garder aussi lors de l'implémentation de la BD */
 
