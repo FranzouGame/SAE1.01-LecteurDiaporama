@@ -1,13 +1,13 @@
 #include "imagedansdiaporama.h"
 
 ImageDansDiaporama::ImageDansDiaporama(unsigned int pPos, unsigned int pRang):
-    pos(pPos),
-    rang(pRang)
+    _pos(pPos),
+    _rang(pRang)
 {}
 
 int ImageDansDiaporama::getPos() {
-    return this->pos;
+    return this->_pos;
 }
 int ImageDansDiaporama::getRang() {
-    return this->rang;
+    return this->_rang;
 }
