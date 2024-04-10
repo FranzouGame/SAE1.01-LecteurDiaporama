@@ -44,11 +44,22 @@ Setter de la class Diaporama
     //setter du titre
     void setImageCourante(ImageDansDiaporama pImageCourante);
     //setter de l'image courante
+/*
+------------------------------------
+Sous-programme de la class Diaporama
+------------------------------------
+*/
+    void charger (Image& pImages);
+    /* Chargement du tableau des images avec seules les informations textuelles de quelques images.
+   Dans une version ultérieure, ces informations seront stockées dans une Base de Données.
+*/
+
     void afficherImageCouranteDansDiaporamaCourant (const Diaporama& pDiaporama, const Image& pImage);
     /* Affichage à l'acran des infos de l'image courante dans son diaporama
  *    - titre du diaporama
       - image courante : titre, famille, contenu
       - rang de l'image courante dans le diaporama / nbre total d'images du diaporama */
+
 
 };
 typedef vector<Image> Images;

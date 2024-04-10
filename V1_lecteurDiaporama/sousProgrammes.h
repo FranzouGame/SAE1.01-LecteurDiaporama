@@ -26,10 +26,6 @@ void declencherAction(char pChoixAction, const Diaporamas& pDiaporamas, unsigned
 /* Sous-programmes provisoires pour versions antérieures à l'implantation de la BD
 ----------------------------------------------------------------------------------*/
 
-void charger (Image& pImages);
-/* Chargement du tableau des images avec seules les informations textuelles de quelques images.
-   Dans une version ultérieure, ces informations seront stockées dans une Base de Données.
-*/
 
 
 /* Chargement du tableau des diaporamas avec des diaporamas préalablement construits 'en dur'.
