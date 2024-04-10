@@ -20,6 +20,10 @@ string Image::getChemin() const
     return this->_chemin;
 }
 
+Image Image::getImage() const
+{
+    return *this;
+}
 void Image::afficher() const
 {
     cout << "image(titre:" << this->getTitre() << ", categorie:"
