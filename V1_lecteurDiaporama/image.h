@@ -3,20 +3,19 @@
 #include <iostream>
 using namespace std;
 
-// Module de manipulation d'éléments de type Image
-
-struct Image {
-    string titre;              // intitulé de l'image
-    string categorie;          // catégorie de l'image (personne, animal, objet)
-    string chemin;
+class Image
+{
+private:
+    string _titre;
+    string _categorie;
+    string _chemin;
+public:
+    Image(string pTitre="", string pCategorie="", string pChemin = "");
+    ~Image();
+    string getCategorie() const; // Récupérer la catégorie
+    string getTitre() const; // Récupérer le titre
+    string getChemin() const; // Récupérer le chemin
+    void afficher() const; // Afficher toutes les infos d'images
 };
-
-Image creerImage (string pTitre="", string pCategorie="", string pChemin = "");
-//
-string getCategorie(const Image& pImag);
-string getTitre(const Image& pImag);
-string getChemin(const Image& pImag);
-void afficher(const Image& pImag);           // affiche tous les champs de l'image
-
 
 #endif // IMAGE_H
