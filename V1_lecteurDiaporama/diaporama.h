@@ -29,6 +29,10 @@ Getter de la class Diaporama
     //getter des images
     unsigned int getNbImages()const;
     //retourne le nombre d'images du diaporama
+    Diaporama getDiaporama() const;
+    void avancer(const Diaporama& pDiaporama, unsigned int& pPosImageCourante);
+    void reculer(const Diaporama& pDiaporama, unsigned int& pPosImageCourante);
+
 /*
 ------------------------------
 Setter de la class Diaporama
