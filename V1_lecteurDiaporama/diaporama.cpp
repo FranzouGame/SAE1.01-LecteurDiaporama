@@ -82,24 +82,4 @@ void charger (Images& pImages) {
     imageACharger = Image ( "Bambi","animal", "C:\\cartesDisney\\Disney_3.gif");
     pImages.push_back(imageACharger);
 }
-void avancer(const Diaporama& pDiaporama, unsigned int& pPosImageCourante)
-// avance à l'image suivante de l'image courante. Revient à l'image de rang 1 si terminé
-{
-    if (pPosImageCourante == pDiaporama.getPosCourante() - 1)
-    {
-        pPosImageCourante = 0;
-    }
-    else {
-        pPosImageCourante = pPosImageCourante + 1;
-    }
-}
-void reculer(const Diaporama& pDiaporama, unsigned int& pPosImageCourante)
-{
-    if (pPosImageCourante == 0)
-    {
-        pPosImageCourante = pDiaporama.getPosCourante() - 1;
-    }
-    else {
-        pPosImageCourante = pPosImageCourante - 1;
-    }
-}
+
