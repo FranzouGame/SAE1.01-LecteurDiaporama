@@ -59,3 +59,22 @@ void afficherImageCouranteDansDiaporamaCourant (const Diaporama& pDiaporama, con
     cout << pDiaporama.getImageCourante().getRang() << " sur " <<  pDiaporama.getNbImages() << " / ";
     pImage.afficher();
 }
+void charger (Images& pImages) {
+    Image imageACharger;
+    imageACharger = Image( "","objet", "C:\\cartesDisney\\Disney_tapis.gif");
+    pImages.push_back(imageACharger);
+    imageACharger = Image ( "Blanche Neige","personnage", "C:\\cartesDisney\\Disney_4.gif");
+    pImages.push_back(imageACharger);
+    imageACharger = Image ( "Alice","personnage", "C:\\cartesDisney\\Disney_2.gif");
+    pImages.push_back(imageACharger);
+    imageACharger = Image ( "Mickey","animal", "C:\\cartesDisney\\Disney_19.gif");
+    pImages.push_back(imageACharger);
+    imageACharger = Image ( "Pinnochio","personnage", "C:\\cartesDisney\\Disney_29.gif");
+    pImages.push_back(imageACharger);
+    imageACharger = Image ( "chateau","objet", "C:\\cartesDisney\\Disney_0.gif");
+    pImages.push_back(imageACharger);
+    imageACharger = Image ( "Minnie","personnage", "C:\\cartesDisney\\Disney_14.gif");
+    pImages.push_back(imageACharger);
+    imageACharger = Image ( "Bambi","animal", "C:\\cartesDisney\\Disney_3.gif");
+    pImages.push_back(imageACharger);
+}
