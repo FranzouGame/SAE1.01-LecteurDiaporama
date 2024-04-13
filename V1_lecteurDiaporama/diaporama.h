@@ -1,8 +1,10 @@
 #ifndef DIAPORAMA_H
 #define DIAPORAMA_H
+#include <iostream>
 #include <vector>
 #include "image.h"
 #include "imagedansdiaporama.h"
+using namespace std;
 class Diaporama
 {
 private :
@@ -61,7 +63,11 @@ Sous-programme de la class Diaporama
  *    - titre du diaporama
       - image courante : titre, famille, contenu
       - rang de l'image courante dans le diaporama / nbre total d'images du diaporama */
-
+    void afficherImageCouranteDansDiaporamaCourant (const Diaporama& pDiaporama, unsigned int pImageCourante, const Image& pImage);
+    /* Affichage à l'acran des infos de l'image courante dans son diaporama
+ *    - titre du diaporama
+      - image courante : titre, famille, contenu
+      - rang de l'image courante dans le diaporama / nbre total d'images du diaporama */
 
 };
 typedef vector<Image> Images;

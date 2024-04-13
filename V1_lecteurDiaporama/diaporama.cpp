@@ -1,4 +1,6 @@
 #include "diaporama.h"
+#include <iostream>
+using namespace std;
 
 Diaporama::Diaporama(string pTitre, unsigned int pVitesseDefilement, vector<ImageDansDiaporama> pLocalisationImages):
     _titre(pTitre),
@@ -81,5 +83,12 @@ void charger (Images& pImages) {
     pImages.push_back(imageACharger);
     imageACharger = Image ( "Bambi","animal", "C:\\cartesDisney\\Disney_3.gif");
     pImages.push_back(imageACharger);
+}
+void afficherImageCouranteDansDiaporamaCourant (const Diaporama& pDiaporama, unsigned int pImageCourante, const Image& pImage)
+{
+    cout << endl << endl;
+    cout << "DIAPORAMA : " << pDiaporama.getTitre() << endl << endl;
+    cout << pDiaporama.getImageCourante().toString() << " sur " <<  pDiaporama.getNbImages() << " / ";
+    afficherImageCouranteDansDiaporamaCourant(pDiaporama, pImage);
 }
 
