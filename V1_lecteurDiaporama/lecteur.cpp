@@ -7,7 +7,7 @@ void Lecteur::avancer(const Diaporama& pDiaporama, unsigned int& pPosImageCouran
 {
     if (pPosImageCourante == pDiaporama.getPosCourante() - 1)
     {
-        pDiaporama.Diaporama::setPosCourante(0);
+        pPosImageCourante = pDiaporama.getPosCourante();
     }
     else {
         pPosImageCourante = pPosImageCourante + 1;
@@ -38,14 +38,14 @@ void Lecteur::declencherAction(char pChoixAction, const Diaporamas& pDiaporamas,
     switch (pChoixAction)
     {
     case 'A':
-        avancer(pDiaporamas, pDiaporamas[getDiapoCourant()].getPosCourante());
-        position = pDiaporamas.getPosCourante();
-        afficherImageCouranteDansDiaporamaCourant (pDiaporamas.getDiaporama(), pDiaporamas.Image::getImage(), pDiaporama.getDiaporama().getLocalisationImages()[position]);
+        avancer(pDiaporamas[pDiaporamaCourant].getDiaporama(), pImageCourante);
+        position = pDiaporamas[pDiaporamaCourant].getPosCourante();
+        afficherImageCouranteDansDiaporamaCourant (pDiaporamas[pDiaporamaCourant].getDiaporama(), pDiaporamas[pDiaporamaCourant].getImageCourante(), pDiaporamas[pDiaporamaCourant].getDiaporama().getImageCourante());
         break;
     case 'R':
-        reculer(pDiaporamas.getDiaporama(), pDiaporamas.getPosCourante());
-        position = pDiaporamas.getPosCourante();
-        afficherImageCouranteDansDiaporamaCourant (pDiaporamas.getDiaporama(), pDiaporamas.Image::getImage(), pDiaporama.getDiaporama().getLocalisationImages()[position]);
+        reculer(pDiaporamas[pDiaporamaCourant].getDiaporama(), pImageCourante);
+        position = pDiaporamas[pDiaporamaCourant].getPosCourante();
+        afficherImageCouranteDansDiaporamaCourant (pDiaporamas[pDiaporamaCourant].getDiaporama(), pDiaporamas.Image::getImage(), pDiaporama.getDiaporama().getLocalisationImages()[position]);
         break;
     case 'C' :
         cout << "Choisissez un Diaporama " << endl;
