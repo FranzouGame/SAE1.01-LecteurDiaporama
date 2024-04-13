@@ -35,7 +35,7 @@ unsigned int saisieVerifChoixDiaporama(const Diaporamas& pDiaporamas)
          cout << endl << endl << "CHANGEMENT DIAPORAMA : " << endl << endl;
         for (unsigned int num = 1; num < pDiaporamas.size(); num++)
         {
-            cout << num << ": " << pDiaporamas[num].titre;
+            cout << num << ": " << pDiaporamas[num].getTitre() << endl;
             if (num != pDiaporamas.size()-1) { cout << endl; }
         }
         cout << ".......  votre choix ? "; cin >> choixSaisi;
