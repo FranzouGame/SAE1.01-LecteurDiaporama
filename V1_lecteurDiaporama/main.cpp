@@ -1,8 +1,9 @@
 #include <iostream>
 #include <vector>
 #include "image.h"
-#include "typeDiaporama.h"
-#include "sousProgrammes.h"
+#include "imagedansdiaporama.h"
+#include "diaporama.h"
+#include "lecteur.h"
 using namespace std;
 
 
@@ -13,20 +14,20 @@ int main()
      * - Charger les images et diaporamas
      * Dans un second temps, ces contenus proviendront d'une base de données
      --------------------------------------------------------------------------------------*/
+    Lecteur lecteurDiapos;
     Images images;          // les images
     Diaporamas diaporamas;  // les diaporamas
 
+
     // Chargement des urls des images, chargement des diaporamas
-    charger(images);
-    charger(diaporamas);
+    lecteurDiapos.charger(images);
+    lecteurDiapos.charger(diaporamas);
 
-    unsigned int taille_images = images.size();
-    unsigned int taille_diaporamas = diaporamas.size();
-
-    // Tri des images contenues dans les diaporamas pour les placer dans l'ordre d'apparition (rang) souhaité par l'utilisateur
-    for (unsigned int posDiapo = 0; posDiapo < taille_diaporamas; posDiapo++)
+    for(int i = 0; i <= lecteurDiapos.getNombreDiapos(); i++)
     {
-        triCroissantRang(diaporamas[posDiapo]);
+        Diaporama diapoEnTraitement(lecteurDiapos.getDiapoCourant());
+        diapoEnTraitement.triCroissantRang();
+        lecteurDiapos.setDiapoCourant(lecteurDiapos.getNumDiapoCourant() + 1);
     }
 
 

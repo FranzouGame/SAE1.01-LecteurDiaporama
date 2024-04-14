@@ -3,19 +3,36 @@
 #include <iostream>
 using namespace std;
 
+// Module de manipulation d'éléments de type Image
+
 class Image
 {
 private:
-    string _titre;
-    string _categorie;
+    // Attributs
+    string _titre;              // intitulé de l'image
+    string _categorie;          // catégorie de l'image (personne, animal, objet)
     string _chemin;
+
 public:
-    Image(string pTitre="", string pCategorie="", string pChemin = "");
-    ~Image();
-    string getCategorie() const; // Récupérer la catégorie
-    string getTitre() const; // Récupérer le titre
-    string getChemin() const; // Récupérer le chemin
-    void afficher() const; // Afficher toutes les infos d'images
+    // Constructeurs
+    Image();
+    Image(const Image&);
+    Image(string, string, string);
+
+    // Méthodes
+    /*** GETTERS ***/
+    string getCategorie() const;
+    string getTitre() const;
+    string getChemin() const;
+
+    /*** SETTERS ***/
+    void setCategorie(string);
+    void setTitre(string);
+    void setChemin(string);
+
+    /*** AUTRES METHODES ***/
+    void afficher() const;
 };
+
 
 #endif // IMAGE_H
