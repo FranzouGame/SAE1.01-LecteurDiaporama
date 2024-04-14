@@ -18,11 +18,10 @@ void afficherImageCouranteDansDiaporamaCourant (const Diaporama& pDiaporama, uns
 void saisieVerifChoixActionSurImageCourante(char& pChoixAction);
 // Saisie du choix d'action de l'utilisateur vis-à-vis de l'image et diaporama courants
 
-unsigned int saisieVerifChoixDiaporama(const Diaporamas& pDiaporamas);
+
 // Retourne un numéro de diaporama choisi par l'utilisateur (dans la liste des diaporamas existants)
 
-void declencherAction(char pChoixAction, const Diaporamas& pDiaporamas, unsigned int& pDiaporamaCourant,
-                      unsigned int& pImageCourante, const Images& pImages);
+
 /* Selon le pChoix fait l'utilisateur, réalise une des actions A)vancer, R)eculer, C)hoisir un autre diaporama, Q)quitter */
 
 
