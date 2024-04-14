@@ -27,7 +27,7 @@ int main()
     {
         Diaporama diapoEnTraitement(lecteurDiapos.getDiapoCourant());
         diapoEnTraitement.triCroissantRang();
-        lecteurDiapos.setDiapoCourant(lecteurDiapos.getNumDiapoCourant() + 1);
+        lecteurDiapos.setDiapoCourant(diaporamas[i].getDiaporamaCourant());
     }
 
 
@@ -61,14 +61,15 @@ int main()
 
         /* Affichage à l'écran des infos de l'image courante dans son diaporama   */
         system("cls");  // effacer l'écran
-        unsigned int position = diaporamas[diaporamaCourant].localisationImages[imageCourante].pos;
-        afficherImageCouranteDansDiaporamaCourant (diaporamas[diaporamaCourant], imageCourante, images[position]);
+        unsigned int position = diaporamas[diaporamaCourant].getLocalisationImages()[imageCourante].getPos();
+        diaporamas[choixDiaporama].getDiaporamaCourant().afficherImageCouranteDansDiaporamaCourant ();
+
 
 
         /* Menu des actions possibles (saisie choix utilisateur) :
          * A-vancer, R-eculer, C-hanger de diaporama, Q-uitter */
 
-        saisieVerifChoixActionSurImageCourante(choixAction);
+        lecteurDiapos.saisieVerifChoixActionSurImageCourante(choixAction);
         if (choixAction == 'Q')
         {
             break;
@@ -76,7 +77,7 @@ int main()
 
         /* Faire l'action demandée (Avancer - Reculer - Changer de Diaporama - Quitter) */
         system("cls");  // effacer l'écran
-        declencherAction(choixAction, diaporamas, diaporamaCourant, imageCourante, images);
+        lecteurDiapos.declencherAction(choixAction);
     }
 
     /* Fin
