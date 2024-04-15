@@ -11,9 +11,11 @@
 Lecteur::Lecteur()
     : _numDiapoCourant(0) {}
 
-Lecteur::Lecteur(Diaporama diapoCourant, unsigned int numDiapoCourant) :
-     _diapoCourant(diapoCourant),
-    _numDiapoCourant(numDiapoCourant) {}
+Lecteur::Lecteur(vector<Diaporama> diapos, unsigned int numDiapoCourant, unsigned int nbDiapos) :
+    _allDiapos(diapos),
+    _numDiapoCourant(numDiapoCourant),
+    _nombreDiapos(_nombreDiapos)
+{}
 
 
 /*** Getters ***/
@@ -24,7 +26,7 @@ Diaporamas Lecteur::getAllDiapos() const
 
 Diaporama Lecteur::getDiapoCourant() const
 {
-    return _diapoCourant;
+    return _allDiapos[getNumDiapoCourant()];
 }
 
 unsigned int Lecteur::getNumDiapoCourant() const
@@ -46,7 +48,7 @@ void Lecteur::setAllDiapos(const Diaporamas& vecteurDiapos)
 
 void Lecteur::setDiapoCourant(const Diaporama& diapoCourant)
 {
-    this->_diapoCourant = diapoCourant;
+    this->_allDiapos[getNumDiapoCourant() + 1] = diapoCourant;
 }
 
 void Lecteur::setNumDiapoCourant(unsigned int numDiapoCourant)
@@ -63,9 +65,9 @@ void Lecteur::setNombreDiapos(unsigned int nbDiapos)
 /*** Autres méthodes ***/
 void Lecteur::afficherDiapoCourant() {
     cout << "Diaporama courant :\n";
-    cout << "Titre : " << _diapoCourant.getTitre() << endl;
-    cout << "Vitesse de défilement : " << _diapoCourant.getVitesseDefilement() << endl;
-    cout << "Contenant " << _diapoCourant.getNombreImages() << " images ";
+    cout << "Titre : " << getDiapoCourant().getTitre() << endl;
+    cout << "Vitesse de défilement : " << getDiapoCourant().getVitesseDefilement() << endl;
+    cout << "Contenant " << getDiapoCourant().getNombreImages() << " images ";
 }
 
 void Lecteur::declencherAction(char pChoixAction)
@@ -74,11 +76,11 @@ void Lecteur::declencherAction(char pChoixAction)
     switch (pChoixAction)
     {
     case 'A':
-        _diapoCourant.avancer();
+        getDiapoCourant().avancer();
         this->getDiapoCourant().getLocalisationImages()[getDiapoCourant().getPosImageCourante()].afficher();
         break;
     case 'R':
-        _diapoCourant.reculer();
+        getDiapoCourant().reculer();
         this->getDiapoCourant().getLocalisationImages()[getDiapoCourant().getPosImageCourante()].afficher();
         break;
     case 'C':

@@ -15,14 +15,14 @@ class Lecteur
 {
 private:
     vector<Diaporama> _allDiapos;
-    Diaporama _diapoCourant;
     unsigned int _numDiapoCourant;
     unsigned int _nombreDiapos;
 
 public:
     /*** Constructeurs ***/
     Lecteur(); // Constructeur par défaut
-    Lecteur(Diaporama diapoCourant, unsigned int numDiapoCourant);
+    Lecteur(vector<Diaporama> diapos, unsigned int numDiapoCourant, unsigned int nbDiapos);
+
 
     /*** Getters ***/
     Diaporamas getAllDiapos() const;

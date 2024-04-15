@@ -7,6 +7,7 @@
 using namespace std;
 
 
+
 int main()
 {
     /* -------------------------------------------------------------------------------------
@@ -23,13 +24,16 @@ int main()
     lecteurDiapos.charger(images);
     lecteurDiapos.charger(diaporamas);
 
+    cout << "J'ai chargé les images et diapos" << endl;
+
     for(int i = 0; i <= lecteurDiapos.getNombreDiapos(); i++)
     {
         Diaporama diapoEnTraitement(lecteurDiapos.getDiapoCourant());
         diapoEnTraitement.triCroissantRang();
-        lecteurDiapos.setDiapoCourant(lecteurDiapos.getNumDiapoCourant() + 1);
+        lecteurDiapos.setNumDiapoCourant(lecteurDiapos.getNumDiapoCourant() + 1);
     }
 
+    cout << "J'ai tout trié" << endl;
 
     /* ---------------------
      * Lecteur de diaporamas
@@ -61,14 +65,14 @@ int main()
 
         /* Affichage à l'écran des infos de l'image courante dans son diaporama   */
         system("cls");  // effacer l'écran
-        unsigned int position = diaporamas[diaporamaCourant].localisationImages[imageCourante].pos;
-        afficherImageCouranteDansDiaporamaCourant (diaporamas[diaporamaCourant], imageCourante, images[position]);
+        unsigned int position = diaporamas[diaporamaCourant].getLocalisationImages()[imageCourante].getPos();
+        lecteurDiapos.getDiapoCourant().afficherImageCouranteDansDiaporamaCourant ();
 
 
         /* Menu des actions possibles (saisie choix utilisateur) :
          * A-vancer, R-eculer, C-hanger de diaporama, Q-uitter */
 
-        saisieVerifChoixActionSurImageCourante(choixAction);
+        lecteurDiapos.saisieVerifChoixActionSurImageCourante(choixAction);
         if (choixAction == 'Q')
         {
             break;
@@ -76,7 +80,7 @@ int main()
 
         /* Faire l'action demandée (Avancer - Reculer - Changer de Diaporama - Quitter) */
         system("cls");  // effacer l'écran
-        declencherAction(choixAction, diaporamas, diaporamaCourant, imageCourante, images);
+        lecteurDiapos.declencherAction(choixAction);
     }
 
     /* Fin
