@@ -51,8 +51,9 @@ int main()
        - pas de diaporama courant au lancement de l'application
        - le diaporama courant est choisi par l'utilisateur parmi une liste de diaporamas disponibles. */
 
-    diaporamaCourant = 0;
-    imageCourante = 0;
+
+
+
 
 
     /* Faire fonctionner le lecteur
