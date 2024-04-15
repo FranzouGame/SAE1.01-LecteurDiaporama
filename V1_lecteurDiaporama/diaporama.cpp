@@ -45,6 +45,10 @@ unsigned int Diaporama::getPosImageCourante() const
 {
     return _posImageCourante;
 }
+Diaporama Diaporama::getDiaporamaCourant() const
+{
+    return *this;
+}
 
 
 

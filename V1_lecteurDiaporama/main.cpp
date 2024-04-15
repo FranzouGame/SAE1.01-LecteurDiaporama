@@ -30,7 +30,11 @@ int main()
     {
         Diaporama diapoEnTraitement(lecteurDiapos.getDiapoCourant());
         diapoEnTraitement.triCroissantRang();
+<<<<<<< HEAD
         lecteurDiapos.setNumDiapoCourant(lecteurDiapos.getNumDiapoCourant() + 1);
+=======
+        lecteurDiapos.setDiapoCourant(diaporamas[i].getDiaporamaCourant());
+>>>>>>> bd368b65449126d2327b79c1ccf831ab1292ae46
     }
 
     cout << "J'ai tout trié" << endl;
@@ -66,7 +70,12 @@ int main()
         /* Affichage à l'écran des infos de l'image courante dans son diaporama   */
         system("cls");  // effacer l'écran
         unsigned int position = diaporamas[diaporamaCourant].getLocalisationImages()[imageCourante].getPos();
+<<<<<<< HEAD
         lecteurDiapos.getDiapoCourant().afficherImageCouranteDansDiaporamaCourant ();
+=======
+        diaporamas[choixDiaporama].getDiaporamaCourant().afficherImageCouranteDansDiaporamaCourant ();
+
+>>>>>>> bd368b65449126d2327b79c1ccf831ab1292ae46
 
 
         /* Menu des actions possibles (saisie choix utilisateur) :

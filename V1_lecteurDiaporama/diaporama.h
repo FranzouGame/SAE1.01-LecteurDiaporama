@@ -24,6 +24,7 @@ public:
     unsigned int getVitesseDefilement() const;
     unsigned int getNombreImages() const;
     unsigned int getPosImageCourante() const;
+    Diaporama getDiaporamaCourant() const;
 
     /*** Setters ***/
     void setTitre(const string&);
