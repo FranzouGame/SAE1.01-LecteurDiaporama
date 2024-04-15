@@ -1,9 +1,9 @@
 #include <iostream>
 #include <vector>
-#include "image.h"
-#include "typeDiaporama.h"
-#include "sousProgrammes.h"
+#include "diaporama.h"
+#include "lecteur.h"
 using namespace std;
+
 
 
 int main()
@@ -13,22 +13,26 @@ int main()
      * - Charger les images et diaporamas
      * Dans un second temps, ces contenus proviendront d'une base de données
      --------------------------------------------------------------------------------------*/
+    Lecteur lecteurDiapos;
     Images images;          // les images
-    Diaporamas diaporamas;  // les diaporamas
+
 
     // Chargement des urls des images, chargement des diaporamas
-    charger(images);
-    charger(diaporamas);
+    lecteurDiapos.charger(images);
+    lecteurDiapos.chargerDiapos();
 
-    unsigned int taille_images = images.size();
-    unsigned int taille_diaporamas = diaporamas.size();
+    cout << "J'ai chargé les images et diapos" << endl;
 
-    // Tri des images contenues dans les diaporamas pour les placer dans l'ordre d'apparition (rang) souhaité par l'utilisateur
-    for (unsigned int posDiapo = 0; posDiapo < taille_diaporamas; posDiapo++)
+    //lecteurDiapos.getDiapoCourant().afficherImageCouranteDansDiaporamaCourant();
+    cout << "Nombre de diapos : " << lecteurDiapos.getNombreDiapos() << endl;
+
+    for(int i = 1; i < lecteurDiapos.getNombreDiapos(); i++)
     {
-        triCroissantRang(diaporamas[posDiapo]);
+        cout << "Tri numéro " << i << endl;
+        lecteurDiapos.getAllDiapos()[i].triCroissantRang();
     }
 
+    cout << "J'ai tout trié" << endl;
 
     /* ---------------------
      * Lecteur de diaporamas
@@ -54,20 +58,24 @@ int main()
     /* Faire fonctionner le lecteur
        --------------*/
     char choixAction ;              // pour saisir le choix de l'utilisateur dans le menu d'actions possibles
-    unsigned int choixDiaporama ;  // pour saisir le numéro de diaporama choisi par l'utilisiateur
+    unsigned int choixDiaporama = 0 ;  // pour saisir le numéro de diaporama choisi par l'utilisiateur
     while (true)
     {
 
         /* Affichage à l'écran des infos de l'image courante dans son diaporama   */
         system("cls");  // effacer l'écran
-        unsigned int position = diaporamas[diaporamaCourant].localisationImages[imageCourante].pos;
-        afficherImageCouranteDansDiaporamaCourant (diaporamas[diaporamaCourant], imageCourante, images[position]);
 
+        cout << "J'ai efface" << endl;
+
+        //unsigned int position = diaporamas[diaporamaCourant].getLocalisationImages()[imageCourante].getPos();
+        (lecteurDiapos.getAllDiapos()[choixDiaporama]).afficherImageCouranteDansDiaporamaCourant ();
+
+        cout << "Step 1 passee " << endl;
 
         /* Menu des actions possibles (saisie choix utilisateur) :
          * A-vancer, R-eculer, C-hanger de diaporama, Q-uitter */
 
-        saisieVerifChoixActionSurImageCourante(choixAction);
+        lecteurDiapos.saisieVerifChoixActionSurImageCourante(choixAction);
         if (choixAction == 'Q')
         {
             break;
@@ -75,7 +83,7 @@ int main()
 
         /* Faire l'action demandée (Avancer - Reculer - Changer de Diaporama - Quitter) */
         system("cls");  // effacer l'écran
-        declencherAction(choixAction, diaporamas, diaporamaCourant, imageCourante, images);
+        lecteurDiapos.declencherAction(choixAction);
     }
 
     /* Fin
