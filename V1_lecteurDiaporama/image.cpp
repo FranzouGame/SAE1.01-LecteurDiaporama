@@ -43,6 +43,16 @@ string Image::getChemin() const
     return _chemin;
 }
 
+unsigned int Image::getRang() const
+{
+    return _rang;
+}
+unsigned int Image::getPos() const
+{
+    return _pos;
+}
+
+
 
 /*** Setters ***/
 
@@ -60,6 +70,17 @@ void Image::setChemin(string pPath)
 {
     _chemin = pPath;
 }
+
+void Image::setRang(unsigned int pRang)
+{
+    _rang = pRang;
+}
+
+void Image::setPos(unsigned int pPos)
+{
+    _pos = pPos;
+}
+
 
 
 /*** Autres méthodes ***/

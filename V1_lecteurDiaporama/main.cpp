@@ -1,7 +1,5 @@
 #include <iostream>
 #include <vector>
-#include "image.h"
-#include "imagedansdiaporama.h"
 #include "diaporama.h"
 #include "lecteur.h"
 using namespace std;
@@ -17,20 +15,21 @@ int main()
      --------------------------------------------------------------------------------------*/
     Lecteur lecteurDiapos;
     Images images;          // les images
-    Diaporamas diaporamas;  // les diaporamas
 
 
     // Chargement des urls des images, chargement des diaporamas
     lecteurDiapos.charger(images);
-    lecteurDiapos.charger(diaporamas);
+    lecteurDiapos.chargerDiapos();
 
     cout << "J'ai chargé les images et diapos" << endl;
 
-    for(int i = 0; i <= lecteurDiapos.getNombreDiapos(); i++)
+    //lecteurDiapos.getDiapoCourant().afficherImageCouranteDansDiaporamaCourant();
+    cout << "Nombre de diapos : " << lecteurDiapos.getNombreDiapos() << endl;
+
+    for(int i = 1; i < lecteurDiapos.getNombreDiapos(); i++)
     {
-        Diaporama diapoEnTraitement(lecteurDiapos.getDiapoCourant());
-        diapoEnTraitement.triCroissantRang();
-        lecteurDiapos.setNumDiapoCourant(lecteurDiapos.getNumDiapoCourant() + 1);
+        cout << "Tri numéro " << i << endl;
+        lecteurDiapos.getAllDiapos()[i].triCroissantRang();
     }
 
     cout << "J'ai tout trié" << endl;
@@ -59,15 +58,19 @@ int main()
     /* Faire fonctionner le lecteur
        --------------*/
     char choixAction ;              // pour saisir le choix de l'utilisateur dans le menu d'actions possibles
-    unsigned int choixDiaporama ;  // pour saisir le numéro de diaporama choisi par l'utilisiateur
+    unsigned int choixDiaporama = 0 ;  // pour saisir le numéro de diaporama choisi par l'utilisiateur
     while (true)
     {
 
         /* Affichage à l'écran des infos de l'image courante dans son diaporama   */
         system("cls");  // effacer l'écran
-        unsigned int position = diaporamas[diaporamaCourant].getLocalisationImages()[imageCourante].getPos();
-        lecteurDiapos.getDiapoCourant().afficherImageCouranteDansDiaporamaCourant ();
 
+        cout << "J'ai efface" << endl;
+
+        //unsigned int position = diaporamas[diaporamaCourant].getLocalisationImages()[imageCourante].getPos();
+        (lecteurDiapos.getAllDiapos()[choixDiaporama]).afficherImageCouranteDansDiaporamaCourant ();
+
+        cout << "Step 1 passee " << endl;
 
         /* Menu des actions possibles (saisie choix utilisateur) :
          * A-vancer, R-eculer, C-hanger de diaporama, Q-uitter */

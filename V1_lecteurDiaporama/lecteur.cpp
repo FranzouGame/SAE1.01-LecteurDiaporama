@@ -8,18 +8,20 @@
 
 
 /*** Constructeurs ***/
-Lecteur::Lecteur()
-    : _numDiapoCourant(0) {}
+Lecteur::Lecteur():
+    _numDiapoCourant(0),
+    _nombreDiapos(0)
+{}
 
 Lecteur::Lecteur(vector<Diaporama> diapos, unsigned int numDiapoCourant, unsigned int nbDiapos) :
     _allDiapos(diapos),
     _numDiapoCourant(numDiapoCourant),
-    _nombreDiapos(_nombreDiapos)
+    _nombreDiapos(nbDiapos)
 {}
 
 
 /*** Getters ***/
-Diaporamas Lecteur::getAllDiapos() const
+vector<Diaporama> Lecteur::getAllDiapos() const
 {
     return _allDiapos;
 }
@@ -41,14 +43,9 @@ unsigned int Lecteur::getNombreDiapos() const
 
 
 /*** Setters ***/
-void Lecteur::setAllDiapos(const Diaporamas& vecteurDiapos)
+void Lecteur::setAllDiapos(const vector<Diaporama>& vecteurDiapos)
 {
     _allDiapos = vecteurDiapos;
-}
-
-void Lecteur::setDiapoCourant(const Diaporama& diapoCourant)
-{
-    this->_allDiapos[getNumDiapoCourant() + 1] = diapoCourant;
 }
 
 void Lecteur::setNumDiapoCourant(unsigned int numDiapoCourant)
@@ -88,8 +85,7 @@ void Lecteur::declencherAction(char pChoixAction)
         choixDiaporama = saisieVerifChoixDiaporama(); // Vous n'avez pas besoin de passer pDiaporamas ici
         // Changer de diaporama
         setNumDiapoCourant(choixDiaporama);
-        _diapoCourant = _allDiapos[choixDiaporama];
-        _diapoCourant.setPosImageCourante(0);
+        _allDiapos[getNumDiapoCourant()].setPosImageCourante(0);
         break;
 
     default:
@@ -125,7 +121,7 @@ unsigned int Lecteur::saisieVerifChoixDiaporama()
         cout << endl << endl << "CHANGEMENT DIAPORAMA : " << endl << endl;
         for (unsigned int num = 1; num < this->getNombreDiapos(); num++)
         {
-            cout << num << ": " << this->getAllDiapos()[this->getNumDiapoCourant()].getTitre();
+            cout << num << ": " << this->getDiapoCourant().getTitre();
             if (num != this->getNombreDiapos() - 1)
             {
                 cout << endl;
@@ -168,12 +164,10 @@ void Lecteur::charger(Images& pImages) {
     pImages.push_back(imageACharger);
 }
 
-void Lecteur::charger(Diaporamas& pDiaporamas)
+void Lecteur::chargerDiapos()
 {
-    Image imageACharger;
-    ImageDansDiaporama imageDansDiapo;
+    Image imageDansDiapo;
     Diaporama diaporama;
-    Images images;
 
     // Diaporama par défaut
     diaporama.setTitre("Diaporama par defaut");
@@ -185,7 +179,8 @@ void Lecteur::charger(Diaporamas& pDiaporamas)
     diaporama.setLocalisationImages({imageDansDiapo});
 
     // Ajout du diaporama dans le tableau de diaporamas
-    pDiaporamas.push_back(diaporama);
+    _allDiapos.push_back(diaporama);
+    setNombreDiapos(getNombreDiapos() + 1);
 
     // Diaporama de Pantxika
     diaporama.setTitre("Diaporama Pantxika");
@@ -209,8 +204,8 @@ void Lecteur::charger(Diaporamas& pDiaporamas)
     diaporama.getLocalisationImages().push_back(imageDansDiapo);
 
     // Ajout du diaporama dans le tableau de diaporamas
-    pDiaporamas.push_back(diaporama);
-    diaporama.setLocalisationImages({});
+    _allDiapos.push_back(diaporama);
+    setNombreDiapos(getNombreDiapos() + 1);
 
     // Diaporama de Thierry
     diaporama.setTitre("Diaporama Thierry");
@@ -234,8 +229,8 @@ void Lecteur::charger(Diaporamas& pDiaporamas)
     diaporama.getLocalisationImages().push_back(imageDansDiapo);
 
     // Ajout du diaporama dans le tableau de diaporamas
-    pDiaporamas.push_back(diaporama);
-    diaporama.setLocalisationImages({});
+    _allDiapos.push_back(diaporama);
+    setNombreDiapos(getNombreDiapos() + 1);
 
     // Diaporama de Yann
     diaporama.setTitre("Diaporama Yann");
@@ -259,8 +254,8 @@ void Lecteur::charger(Diaporamas& pDiaporamas)
     diaporama.getLocalisationImages().push_back(imageDansDiapo);
 
     // Ajout du diaporama dans le tableau de diaporamas
-    pDiaporamas.push_back(diaporama);
-    diaporama.setLocalisationImages({});
+    _allDiapos.push_back(diaporama);
+    setNombreDiapos(getNombreDiapos() + 1);
 
     // Diaporama de Manu
     // Diaporama de Manu
@@ -285,7 +280,7 @@ void Lecteur::charger(Diaporamas& pDiaporamas)
     diaporama.getLocalisationImages().push_back(imageDansDiapo);
 
     // Ajout du diaporama dans le tableau de diaporamas
-    pDiaporamas.push_back(diaporama);
-    diaporama.setLocalisationImages({});
+    _allDiapos.push_back(diaporama);
+    setNombreDiapos(getNombreDiapos() + 1);
 
 }

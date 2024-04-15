@@ -1,7 +1,8 @@
 #ifndef DIAPORAMA_H
 #define DIAPORAMA_H
 
-#include "imagedansdiaporama.h"
+#include <vector>
+#include "image.h"
 
 
 typedef vector<Image> Images;
@@ -11,24 +12,26 @@ private:
     // Attributs
     string _titre;
     unsigned int _vitesseDefilement;
-    vector<ImageDansDiaporama> _localisationImages;
+    vector<Image> _localisationImages;
     unsigned int _posImageCourante;
 public:
     /*** Constructeurs ***/
     Diaporama();
-    Diaporama(string, unsigned int, vector<ImageDansDiaporama>);
+    Diaporama(string, unsigned int, vector<Image>);
 
     /*** Getters ***/
     string getTitre()const;
-    vector<ImageDansDiaporama> getLocalisationImages() const;
+    vector<Image> getLocalisationImages() const;
     unsigned int getVitesseDefilement() const;
     unsigned int getNombreImages() const;
     unsigned int getPosImageCourante() const;
+    Diaporama getDiaporamaCourant() const;
+    Image getImageCourante() const;
 
     /*** Setters ***/
     void setTitre(const string&);
     void setVitesseDefilement(unsigned int);
-    void setLocalisationImages(const vector<ImageDansDiaporama>&);
+    void setLocalisationImages(const vector<Image>&);
     void setPositionImageDansVecteur(unsigned int);
     void setPosImageCourante(unsigned int);
 
@@ -40,7 +43,6 @@ public:
 };
 
 
-typedef vector<Diaporama> Diaporamas;
 
 
 

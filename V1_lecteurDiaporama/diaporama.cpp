@@ -12,7 +12,7 @@ Diaporama::Diaporama() :
     _titre(""),
     _vitesseDefilement(0) {}
 
-Diaporama::Diaporama(string titre, unsigned int vitesseDefilement, vector<ImageDansDiaporama> _localisationImages) :
+Diaporama::Diaporama(string titre, unsigned int vitesseDefilement, vector<Image> _localisationImages) :
     _titre(titre),
     _vitesseDefilement(vitesseDefilement),
     _localisationImages(_localisationImages) {}
@@ -26,7 +26,7 @@ string Diaporama::getTitre() const
     return _titre;
 }
 
-vector<ImageDansDiaporama> Diaporama::getLocalisationImages() const
+vector<Image> Diaporama::getLocalisationImages() const
 {
     return _localisationImages;
 }
@@ -45,6 +45,15 @@ unsigned int Diaporama::getPosImageCourante() const
 {
     return _posImageCourante;
 }
+Diaporama Diaporama::getDiaporamaCourant() const
+{
+    return *this;
+}
+
+Image Diaporama::getImageCourante() const
+{
+    return getLocalisationImages()[getPosImageCourante()];
+}
 
 
 
@@ -60,7 +69,7 @@ void Diaporama::setVitesseDefilement(unsigned int vitesseDefilement)
     _vitesseDefilement = vitesseDefilement;
 }
 
-void Diaporama::setLocalisationImages(const vector<ImageDansDiaporama>& localisationImages)
+void Diaporama::setLocalisationImages(const vector<Image>& localisationImages)
 {
     _localisationImages = localisationImages;
 }
@@ -83,6 +92,7 @@ void setPositionImageDansVecteur(unsigned int)
 
 void Diaporama::avancer()
 {
+    // Vérifier la postion actuelle, si on est à la dernière image du diaporama, on passe à 0 , sinon on avance d'une image
     if (this->getPosImageCourante() == this->getNombreImages() - 1)
     {
         this->setPosImageCourante(0);
@@ -91,8 +101,10 @@ void Diaporama::avancer()
         this->setPosImageCourante(getPosImageCourante() + 1);
     }
 }
+
 void Diaporama::reculer()
 {
+    // Vérifier la postion actuelle, si on est à 0, on passe à la dernière image du diaporama, sinon on recule d'une image
     if (this->getPosImageCourante() == 0)
     {
        this->setPosImageCourante(getNombreImages() - 1);
@@ -107,28 +119,26 @@ void Diaporama::afficherImageCouranteDansDiaporamaCourant () const
 {
     cout << endl << endl;
     cout << "DIAPORAMA : " << this->getTitre() << endl << endl;
-    cout << this->getLocalisationImages()[this->getPosImageCourante()].getRang() << " sur " <<  this->getNombreImages() << " / ";
-    (this->getLocalisationImages()[this->getPosImageCourante()]).afficher();
+    cout << getImageCourante().getRang() << " sur " <<  this->getNombreImages() << " / ";
+    getImageCourante().afficher();
 }
 
-void Diaporama::triCroissantRang ()
+void Diaporama::triCroissantRang()
 {
     unsigned int taille = this->getNombreImages();
-    for (unsigned int ici = taille-1; ici >=1 ; ici--)
+    for (unsigned int ici = taille - 1; ici >= 1; ici--)
     {
-        // faire monter la bulle ici = déplacer l'élément de rang le plus grand en position ici
-        // par échanges successifs
+        // Parcourir le tableau et échanger les éléments adjacents si nécessaire
         for (unsigned int i = 0; i < ici; i++)
         {
-            if (this->getLocalisationImages()[i].getRang() > this->getLocalisationImages()[i].getRang())
+            // Vérifier si l'élément actuel a un rang supérieur à l'élément suivant
+            if (this->getLocalisationImages()[i].getRang() > this->getLocalisationImages()[i + 1].getRang())
             {
-                // echanger les 2 éléments
-                ImageDansDiaporama temp = this->getLocalisationImages()[i];
+                // Échanger les deux éléments
+                Image temp = this->getLocalisationImages()[i];
                 this->getLocalisationImages()[i] = this->getLocalisationImages()[i + 1];
                 this->getLocalisationImages()[i + 1] = temp;
             }
         }
     }
 }
-
-

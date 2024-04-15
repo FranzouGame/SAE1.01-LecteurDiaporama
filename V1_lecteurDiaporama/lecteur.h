@@ -21,18 +21,17 @@ private:
 public:
     /*** Constructeurs ***/
     Lecteur(); // Constructeur par défaut
-    Lecteur(vector<Diaporama> diapos, unsigned int numDiapoCourant, unsigned int nbDiapos);
+    Lecteur(vector<Diaporama>, unsigned int, unsigned int);
 
 
     /*** Getters ***/
-    Diaporamas getAllDiapos() const;
+    vector<Diaporama> getAllDiapos() const;
     Diaporama getDiapoCourant() const;
     unsigned int getNumDiapoCourant() const;
     unsigned int getNombreDiapos() const;
 
     /*** Setters ***/
     void setAllDiapos(const vector<Diaporama>&);
-    void setDiapoCourant(const Diaporama&);
     void setNumDiapoCourant(unsigned int);
     void setNombreDiapos(unsigned int);
 
@@ -41,7 +40,7 @@ public:
     void saisieVerifChoixActionSurImageCourante(char&);
     unsigned int saisieVerifChoixDiaporama();
     void charger (Images&);
-    void charger(Diaporamas&);
+    void chargerDiapos();
     void afficherDiapoCourant();
     void changerDiapo();
 };
