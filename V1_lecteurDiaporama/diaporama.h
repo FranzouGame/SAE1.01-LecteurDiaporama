@@ -25,7 +25,7 @@ public:
     unsigned int getNombreImages() const;
     unsigned int getPosImageCourante() const;
     Diaporama getDiaporamaCourant() const;
-    const Image& getImageCourante() const;
+    Image getImageCourante() const;
 
     /*** Setters ***/
     void setTitre(const string&);

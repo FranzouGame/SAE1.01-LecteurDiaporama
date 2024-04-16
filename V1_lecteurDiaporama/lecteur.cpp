@@ -1,6 +1,6 @@
 #include "lecteur.h"
 #include "diaporama.h"
-
+#include "image.h"
 
 /***********************
  *      METHODES

@@ -15,11 +15,15 @@ int main()
      --------------------------------------------------------------------------------------*/
     Lecteur lecteurDiapos;
     vector<Image> images;          // les images
-
+    int attente;
 
     // Chargement des urls des images, chargement des diaporamas
     lecteurDiapos.charger(images);
     lecteurDiapos.chargerDiapos();
+
+    lecteurDiapos.getDiapoCourant().getLocalisationImages()[0].afficher();
+
+    cin >> attente;
 
     cout << "J'ai chargé les images et diapos" << endl;
 

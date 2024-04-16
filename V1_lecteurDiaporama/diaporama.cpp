@@ -55,7 +55,7 @@ Diaporama Diaporama::getDiaporamaCourant() const
     return *this;
 }
 
-const Image& Diaporama::getImageCourante() const
+Image Diaporama::getImageCourante() const
 {
     return getLocalisationImages()[getPosImageCourante()];
 }
@@ -83,12 +83,6 @@ void Diaporama::setPosImageCourante(unsigned int pPosCourante)
 {
     _posImageCourante = pPosCourante;
 }
-
-void setPositionImageDansVecteur(unsigned int)
-{
-
-}
-
 
 
 
