@@ -10,12 +10,17 @@
 
 Diaporama::Diaporama() :
     _titre(""),
-    _vitesseDefilement(0) {}
+    _vitesseDefilement(0),
+    _posImageCourante(0)
+    {}
 
-Diaporama::Diaporama(string titre, unsigned int vitesseDefilement, vector<Image> _localisationImages) :
+Diaporama::Diaporama(string titre, unsigned int vitesseDefilement, vector<Image> _localisationImages, unsigned int posImgCourante) :
     _titre(titre),
     _vitesseDefilement(vitesseDefilement),
-    _localisationImages(_localisationImages) {}
+    _localisationImages(_localisationImages),
+        _posImageCourante(posImgCourante){
+
+}
 
 
 
@@ -50,7 +55,7 @@ Diaporama Diaporama::getDiaporamaCourant() const
     return *this;
 }
 
-Image Diaporama::getImageCourante() const
+const Image& Diaporama::getImageCourante() const
 {
     return getLocalisationImages()[getPosImageCourante()];
 }
@@ -119,25 +124,31 @@ void Diaporama::afficherImageCouranteDansDiaporamaCourant () const
 {
     cout << endl << endl;
     cout << "DIAPORAMA : " << this->getTitre() << endl << endl;
-    cout << getImageCourante().getRang() << " sur " <<  this->getNombreImages() << " / ";
+
+    cout << "Jai pas plante 1" << endl;
+
+    cout << getImageCourante().getRang() << " sur " << getNombreImages() << " / ";
+
+
+    cout << "Jai pas plante 2" << endl;
+
     getImageCourante().afficher();
 }
 
-void Diaporama::triCroissantRang()
-{
-    unsigned int taille = this->getNombreImages();
-    for (unsigned int ici = taille - 1; ici >= 1; ici--)
-    {
-        // Parcourir le tableau et échanger les éléments adjacents si nécessaire
-        for (unsigned int i = 0; i < ici; i++)
-        {
-            // Vérifier si l'élément actuel a un rang supérieur à l'élément suivant
-            if (this->getLocalisationImages()[i].getRang() > this->getLocalisationImages()[i + 1].getRang())
-            {
-                // Échanger les deux éléments
-                Image temp = this->getLocalisationImages()[i];
-                this->getLocalisationImages()[i] = this->getLocalisationImages()[i + 1];
-                this->getLocalisationImages()[i + 1] = temp;
+void Diaporama::triCroissantRang() {
+    bool estEchange = true;
+    unsigned int taille = _localisationImages.size();
+
+    // Parcourir le tableau jusqu'à ce qu'il n'y ait plus d'échanges à effectuer
+    for (unsigned int i = 0; i < taille - 1 && estEchange; i++) {
+        estEchange = false;
+        // Parcourir le tableau à partir de la première image
+        for (unsigned int j = 0; j < taille - i - 1; j++) {
+            // Comparer le rang de l'image actuelle avec celui de l'image suivante
+            if (_localisationImages[j].getRang() > _localisationImages[j + 1].getRang()) {
+                // Échanger les deux images si l'ordre n'est pas correct
+                swap(_localisationImages[j], _localisationImages[j + 1]);
+                estEchange = true;
             }
         }
     }

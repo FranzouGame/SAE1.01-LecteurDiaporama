@@ -7,9 +7,9 @@
 
 /*** Constructeurs ***/
 Image::Image():    // Constructeur par défaut
-    _titre(""),
-    _categorie(""),
-    _chemin(""){
+    _titre(" "),
+    _categorie(" "),
+    _chemin(" "){
 }
 
 Image::Image(const Image& origin):    // Constructeur de copie
@@ -18,10 +18,12 @@ Image::Image(const Image& origin):    // Constructeur de copie
     _chemin(origin.getChemin()){
 }
 
-Image::Image(string pTitre, string pCategorie, string pChemin):  // Constructeur complet
+Image::Image(string pTitre, string pCategorie, string pChemin, unsigned int pRang, unsigned int pPos):  // Constructeur complet
     _titre(pTitre),
     _categorie(pCategorie),
-    _chemin(pChemin){
+    _chemin(pChemin),
+    _rang(pRang),
+    _pos(pPos){
 }
 
 
@@ -86,6 +88,7 @@ void Image::setPos(unsigned int pPos)
 /*** Autres méthodes ***/
 void Image::afficher() const
 {
-    cout << "image(titre:" << (*this).getTitre() << ", categorie:"
-         << (*this).getCategorie() << ", chemin:"<< (*this).getChemin() << ")" << endl;
+
+    cout << "image(titre:" << getTitre(); cout << ", categorie:"
+         << getCategorie(); cout << ", chemin:"<< getChemin() << ")" << endl;
 }

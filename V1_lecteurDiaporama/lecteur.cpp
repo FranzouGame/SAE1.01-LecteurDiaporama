@@ -93,8 +93,10 @@ void Lecteur::declencherAction(char pChoixAction)
     }
 }
 
-void Lecteur::saisieVerifChoixActionSurImageCourante(char& pChoixAction)
+char Lecteur::saisieVerifChoixActionSurImageCourante()
 {
+    char pChoixAction;
+
     cout << endl << endl;
     while (true)
     {
@@ -109,7 +111,10 @@ void Lecteur::saisieVerifChoixActionSurImageCourante(char& pChoixAction)
             break;
         }
     }
+
+    return pChoixAction;
 }
+
 unsigned int Lecteur::saisieVerifChoixDiaporama()
 {
     unsigned int choixSaisi;
@@ -138,7 +143,7 @@ unsigned int Lecteur::saisieVerifChoixDiaporama()
     return choixDiaporama;
 }
 
-void Lecteur::charger(Images& pImages) {
+void Lecteur::charger(vector<Image>& pImages) {
     Image imageACharger("objet", "", "C:\\cartesDisney\\Disney_tapis.gif");
     pImages.push_back(imageACharger);
 
@@ -284,3 +289,4 @@ void Lecteur::chargerDiapos()
     setNombreDiapos(getNombreDiapos() + 1);
 
 }
+

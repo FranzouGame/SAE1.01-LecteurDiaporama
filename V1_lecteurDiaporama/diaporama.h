@@ -5,7 +5,6 @@
 #include "image.h"
 
 
-typedef vector<Image> Images;
 
 class Diaporama {
 private:
@@ -17,7 +16,7 @@ private:
 public:
     /*** Constructeurs ***/
     Diaporama();
-    Diaporama(string, unsigned int, vector<Image>);
+    Diaporama(string, unsigned int, vector<Image>, unsigned int);
 
     /*** Getters ***/
     string getTitre()const;
@@ -26,13 +25,12 @@ public:
     unsigned int getNombreImages() const;
     unsigned int getPosImageCourante() const;
     Diaporama getDiaporamaCourant() const;
-    Image getImageCourante() const;
+    const Image& getImageCourante() const;
 
     /*** Setters ***/
     void setTitre(const string&);
     void setVitesseDefilement(unsigned int);
     void setLocalisationImages(const vector<Image>&);
-    void setPositionImageDansVecteur(unsigned int);
     void setPosImageCourante(unsigned int);
 
     /*** Autres méthodes ***/

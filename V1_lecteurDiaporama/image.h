@@ -19,7 +19,7 @@ public:
     // Constructeurs
     Image();
     Image(const Image&);
-    Image(string, string, string);
+    Image(string, string, string, unsigned int=0, unsigned int=0);
 
     // Méthodes
     /*** GETTERS ***/

@@ -37,12 +37,11 @@ public:
 
     /*** Autres méthodes ***/
     void declencherAction(char pChoixAction);
-    void saisieVerifChoixActionSurImageCourante(char&);
+    char saisieVerifChoixActionSurImageCourante();
     unsigned int saisieVerifChoixDiaporama();
-    void charger (Images&);
+    void charger(vector<Image>&);
     void chargerDiapos();
     void afficherDiapoCourant();
-    void changerDiapo();
 };
 
 

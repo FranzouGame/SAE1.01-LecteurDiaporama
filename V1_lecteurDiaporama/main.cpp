@@ -14,7 +14,7 @@ int main()
      * Dans un second temps, ces contenus proviendront d'une base de données
      --------------------------------------------------------------------------------------*/
     Lecteur lecteurDiapos;
-    Images images;          // les images
+    vector<Image> images;          // les images
 
 
     // Chargement des urls des images, chargement des diaporamas
@@ -38,22 +38,15 @@ int main()
      * Lecteur de diaporamas
      * --------------------- */
 
+
+    cout << "Diapo courant : "<< endl;
+    lecteurDiapos.afficherDiapoCourant();
+
+
     // Elements autres que les images et diaporamas
     unsigned int diaporamaCourant ; // identifiant du diaporama courant = indice dans le tableau diaporamas
     unsigned int imageCourante ;    // identifiant de l'image courante du diaporama courant
                                     // = indice de l'image dans le tableau diaporamas[diaporamaCourant].images, trié par ordre croissant de rang
-
-    /* Initialiser le diaporama et l'image courants
-     * ---------------
-       Les valeurs courantes sont définies par défaut
-       --> cela suppose qu'il y a toujours au moins 1 diaporama avec au moins 1 image dedans.
-       Autre option (meilleure, à mettre en place dans la version graphique)) :
-       - pas de diaporama courant au lancement de l'application
-       - le diaporama courant est choisi par l'utilisateur parmi une liste de diaporamas disponibles. */
-
-    diaporamaCourant = 0;
-    imageCourante = 0;
-
 
     /* Faire fonctionner le lecteur
        --------------*/
@@ -68,14 +61,15 @@ int main()
         cout << "J'ai efface" << endl;
 
         //unsigned int position = diaporamas[diaporamaCourant].getLocalisationImages()[imageCourante].getPos();
-        (lecteurDiapos.getAllDiapos()[choixDiaporama]).afficherImageCouranteDansDiaporamaCourant ();
+        (lecteurDiapos.getAllDiapos()[choixDiaporama]).afficherImageCouranteDansDiaporamaCourant();
 
         cout << "Step 1 passee " << endl;
 
         /* Menu des actions possibles (saisie choix utilisateur) :
          * A-vancer, R-eculer, C-hanger de diaporama, Q-uitter */
 
-        lecteurDiapos.saisieVerifChoixActionSurImageCourante(choixAction);
+        choixAction = lecteurDiapos.saisieVerifChoixActionSurImageCourante();
+        cin >> diaporamaCourant;
         if (choixAction == 'Q')
         {
             break;
