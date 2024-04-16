@@ -16,7 +16,8 @@ private:
 public:
     /*** Constructeurs ***/
     Diaporama();
-    Diaporama(string, unsigned int, vector<imageDansDiaporama>, unsigned int);
+    Diaporama(string, unsigned int = 1, vector<imageDansDiaporama> = {}, unsigned int = 0);
+    Diaporama(string, unsigned int, unsigned int);
 
     /*** Getters ***/
     string getTitre()const;

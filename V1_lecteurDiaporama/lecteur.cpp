@@ -189,8 +189,7 @@ void Lecteur::chargerDiapos(Images& images)
     imageDansDiaporama imageDansDiapo;
 
     // Diaporama par défaut
-    Diaporama diapoDefaut;
-    diapoDefaut.setTitre("Diaporama par defaut");
+    Diaporama diapoDefaut("Diaporama par defaut");
     diapoDefaut.setVitesseDefilement(1);
 
     // Ajout de l'unique image du diaporama par défaut
@@ -202,8 +201,7 @@ void Lecteur::chargerDiapos(Images& images)
     setNombreDiapos(getNombreDiapos() + 1);
 
     // Diaporama de Pantxika
-    Diaporama diapoPantxika;
-    diapoPantxika.setTitre("Diaporama Pantxika");
+    Diaporama diapoPantxika ("Diaporama Pantxika");
     diapoPantxika.setVitesseDefilement(2);
 
     // Les images du diaporama de Pantxika
@@ -225,8 +223,7 @@ void Lecteur::chargerDiapos(Images& images)
 
 
     // Diaporama de Thierry
-    Diaporama diapoThierry;
-    diapoThierry.setTitre("Diaporama Thierry");
+    Diaporama diapoThierry("Diaporama Thierry");
     diapoThierry.setVitesseDefilement(4);
 
     // Les images du diaporama de Thierry
@@ -247,8 +244,7 @@ void Lecteur::chargerDiapos(Images& images)
     setNombreDiapos(getNombreDiapos() + 1);
 
     // Diaporama de Yann
-    Diaporama DiapoYann;
-    DiapoYann.setTitre("Diaporama Yann");
+    Diaporama DiapoYann("Diaporama Yann");
     DiapoYann.setVitesseDefilement(3);
 
     // Les images du diaporama de Yann
@@ -270,8 +266,7 @@ void Lecteur::chargerDiapos(Images& images)
 
 
     // Diaporama de Manu
-    Diaporama DiapoManu;
-    DiapoManu.setTitre("Diaporama Manu");
+    Diaporama DiapoManu("Diaporama Manu");
     DiapoManu.setVitesseDefilement(1);
 
     // Les images du diaporama de Manu
