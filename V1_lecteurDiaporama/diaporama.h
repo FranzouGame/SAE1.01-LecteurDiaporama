@@ -3,7 +3,7 @@
 
 #include <vector>
 #include "image.h"
-
+#include "imagedansdiaporama.h"
 
 
 class Diaporama {
@@ -11,29 +11,29 @@ private:
     // Attributs
     string _titre;
     unsigned int _vitesseDefilement;
-    vector<Image> _localisationImages;
+    vector<imageDansDiaporama> _localisationImages;
     unsigned int _posImageCourante;
 public:
     /*** Constructeurs ***/
     Diaporama();
-    Diaporama(string, unsigned int, vector<Image>, unsigned int);
+    Diaporama(string, unsigned int, vector<imageDansDiaporama>, unsigned int);
 
     /*** Getters ***/
     string getTitre()const;
-    vector<Image> getLocalisationImages() const;
+    vector<imageDansDiaporama> getLocalisationImages() const;
     unsigned int getVitesseDefilement() const;
     unsigned int getNombreImages() const;
     unsigned int getPosImageCourante() const;
-    Diaporama getDiaporamaCourant() const;
-    Image getImageCourante() const;
+    imageDansDiaporama getImageCourante() const;
 
     /*** Setters ***/
     void setTitre(const string&);
     void setVitesseDefilement(unsigned int);
-    void setLocalisationImages(const vector<Image>&);
+    void setLocalisationImages(const vector<imageDansDiaporama>&);
     void setPosImageCourante(unsigned int);
 
     /*** Autres méthodes ***/
+    void addImage(const imageDansDiaporama&);
     void avancer();
     void reculer();
     void afficherImageCouranteDansDiaporamaCourant () const;

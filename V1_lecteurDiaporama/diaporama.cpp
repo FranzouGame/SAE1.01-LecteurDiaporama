@@ -14,7 +14,7 @@ Diaporama::Diaporama() :
     _posImageCourante(0)
     {}
 
-Diaporama::Diaporama(string titre, unsigned int vitesseDefilement, vector<Image> _localisationImages, unsigned int posImgCourante) :
+Diaporama::Diaporama(string titre, unsigned int vitesseDefilement, vector<imageDansDiaporama> _localisationImages, unsigned int posImgCourante) :
     _titre(titre),
     _vitesseDefilement(vitesseDefilement),
     _localisationImages(_localisationImages),
@@ -31,7 +31,7 @@ string Diaporama::getTitre() const
     return _titre;
 }
 
-vector<Image> Diaporama::getLocalisationImages() const
+vector<imageDansDiaporama> Diaporama::getLocalisationImages() const
 {
     return _localisationImages;
 }
@@ -50,12 +50,8 @@ unsigned int Diaporama::getPosImageCourante() const
 {
     return _posImageCourante;
 }
-Diaporama Diaporama::getDiaporamaCourant() const
-{
-    return *this;
-}
 
-Image Diaporama::getImageCourante() const
+imageDansDiaporama Diaporama::getImageCourante() const
 {
     return getLocalisationImages()[getPosImageCourante()];
 }
@@ -74,7 +70,7 @@ void Diaporama::setVitesseDefilement(unsigned int vitesseDefilement)
     _vitesseDefilement = vitesseDefilement;
 }
 
-void Diaporama::setLocalisationImages(const vector<Image>& localisationImages)
+void Diaporama::setLocalisationImages(const vector<imageDansDiaporama>& localisationImages)
 {
     _localisationImages = localisationImages;
 }
@@ -88,6 +84,11 @@ void Diaporama::setPosImageCourante(unsigned int pPosCourante)
 
 /*** Autres méthodes ***/
 
+
+void Diaporama::addImage(const imageDansDiaporama& imgDuDiapo)
+{
+    _localisationImages.push_back(imgDuDiapo);
+}
 
 void Diaporama::avancer()
 {
@@ -118,14 +119,7 @@ void Diaporama::afficherImageCouranteDansDiaporamaCourant () const
 {
     cout << endl << endl;
     cout << "DIAPORAMA : " << this->getTitre() << endl << endl;
-
-    cout << "Jai pas plante 1" << endl;
-
     cout << getImageCourante().getRang() << " sur " << getNombreImages() << " / ";
-
-
-    cout << "Jai pas plante 2" << endl;
-
     getImageCourante().afficher();
 }
 

@@ -7,7 +7,7 @@
 using namespace std;
 
 
-// Types et classes nécessaires
+
 
 class Image;
 
@@ -17,6 +17,7 @@ private:
     vector<Diaporama> _allDiapos;
     unsigned int _numDiapoCourant;
     unsigned int _nombreDiapos;
+
 
 public:
     /*** Constructeurs ***/
@@ -39,8 +40,8 @@ public:
     void declencherAction(char pChoixAction);
     char saisieVerifChoixActionSurImageCourante();
     unsigned int saisieVerifChoixDiaporama();
-    void charger(vector<Image>&);
-    void chargerDiapos();
+    void charger(Images&);
+    void chargerDiapos(Images&);
     void afficherDiapoCourant();
 };
 

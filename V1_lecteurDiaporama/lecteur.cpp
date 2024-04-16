@@ -1,6 +1,7 @@
 #include "lecteur.h"
 #include "diaporama.h"
 #include "image.h"
+#include <limits>
 
 /***********************
  *      METHODES
@@ -100,15 +101,28 @@ char Lecteur::saisieVerifChoixActionSurImageCourante()
     cout << endl << endl;
     while (true)
     {
-        cout  << endl ;
-        cout << "ACTIONS :" << "  A-vancer" << "  R-eculer" << "  C-hanger de diaporama " << "  Q-uitter .......  votre choix ? ";
+        cout << endl << endl;
+        cout << "ACTIONS : A-vancer  R-eculer  C-hanger de diaporama  Q-uitter .......  votre choix ? ";
         cin >> pChoixAction;
         pChoixAction = toupper(pChoixAction);
+
+        // Vérifier si l'entrée a réussi
+        if (cin.fail()) {
+            // Réinitialiser l'état d'erreur de cin et vider le tampon d'entrée
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+            cout << "Saisie invalide. Veuillez saisir une action valide." << endl;
+            continue; // Reprendre la boucle pour demander une nouvelle saisie
+        }
 
         if ((pChoixAction == 'A') || (pChoixAction == 'R') || (pChoixAction == 'C') || (pChoixAction == 'Q'))
         {
             declencherAction(pChoixAction);
             break;
+        }
+        else
+        {
+            cout << "Action non reconnue. Veuillez saisir une action valide." << endl;
         }
     }
 
@@ -143,149 +157,138 @@ unsigned int Lecteur::saisieVerifChoixDiaporama()
     return choixDiaporama;
 }
 
-void Lecteur::charger(vector<Image>& pImages) {
+void Lecteur::charger(Images& images) {
     Image imageACharger("objet", "", "C:\\cartesDisney\\Disney_tapis.gif");
-    pImages.push_back(imageACharger);
+    images.push_back(imageACharger);
 
     imageACharger = Image("personnage", "Blanche Neige", "C:\\cartesDisney\\Disney_4.gif");
-    pImages.push_back(imageACharger);
+    images.push_back(imageACharger);
 
     imageACharger = Image("personnage", "Alice", "C:\\cartesDisney\\Disney_2.gif");
-    pImages.push_back(imageACharger);
+    images.push_back(imageACharger);
 
     imageACharger = Image("animal", "Mickey", "C:\\cartesDisney\\Disney_19.gif");
-    pImages.push_back(imageACharger);
+    images.push_back(imageACharger);
 
     imageACharger = Image("personnage", "Pinnochio", "C:\\cartesDisney\\Disney_29.gif");
-    pImages.push_back(imageACharger);
+    images.push_back(imageACharger);
 
     imageACharger = Image("objet", "chateau", "C:\\cartesDisney\\Disney_0.gif");
-    pImages.push_back(imageACharger);
+    images.push_back(imageACharger);
 
     imageACharger = Image("personnage", "Minnie", "C:\\cartesDisney\\Disney_14.gif");
-    pImages.push_back(imageACharger);
+    images.push_back(imageACharger);
 
     imageACharger = Image("animal", "Bambi", "C:\\cartesDisney\\Disney_3.gif");
-    pImages.push_back(imageACharger);
+    images.push_back(imageACharger);
 }
 
-void Lecteur::chargerDiapos()
+void Lecteur::chargerDiapos(Images& images)
 {
-    Image imageDansDiapo;
-    Diaporama diaporama;
+    Image image;
+    imageDansDiaporama imageDansDiapo;
 
     // Diaporama par défaut
-    diaporama.setTitre("Diaporama par defaut");
-    diaporama.setVitesseDefilement(1);
+    Diaporama diapoDefaut;
+    diapoDefaut.setTitre("Diaporama par defaut");
+    diapoDefaut.setVitesseDefilement(1);
 
     // Ajout de l'unique image du diaporama par défaut
-    imageDansDiapo.setPos(0);
-    imageDansDiapo.setRang(1);
-    diaporama.setLocalisationImages({imageDansDiapo});
+    imageDansDiapo = imageDansDiaporama(images,0,1);
+    diapoDefaut.addImage(imageDansDiapo);
 
     // Ajout du diaporama dans le tableau de diaporamas
-    _allDiapos.push_back(diaporama);
+    _allDiapos.push_back(diapoDefaut);
     setNombreDiapos(getNombreDiapos() + 1);
 
     // Diaporama de Pantxika
-    diaporama.setTitre("Diaporama Pantxika");
-    diaporama.setVitesseDefilement(2);
+    Diaporama diapoPantxika;
+    diapoPantxika.setTitre("Diaporama Pantxika");
+    diapoPantxika.setVitesseDefilement(2);
 
     // Les images du diaporama de Pantxika
-    imageDansDiapo.setPos(4);
-    imageDansDiapo.setRang(3);
-    diaporama.setLocalisationImages({imageDansDiapo});
+    imageDansDiapo = imageDansDiaporama(images, 4, 3);
+    diapoPantxika.addImage(imageDansDiapo);
 
-    imageDansDiapo.setPos(1);
-    imageDansDiapo.setRang(2);
-    diaporama.getLocalisationImages().push_back(imageDansDiapo);
+    imageDansDiapo = imageDansDiaporama(images,1 ,2);
+    diapoPantxika.addImage(imageDansDiapo);
 
-    imageDansDiapo.setPos(2);
-    imageDansDiapo.setRang(4);
-    diaporama.getLocalisationImages().push_back(imageDansDiapo);
+    imageDansDiapo = imageDansDiaporama(images,2, 4);
+    diapoPantxika.addImage(imageDansDiapo);
 
-    imageDansDiapo.setPos(3);
-    imageDansDiapo.setRang(1);
-    diaporama.getLocalisationImages().push_back(imageDansDiapo);
+    imageDansDiapo = imageDansDiaporama(images,3 ,1);
+    diapoPantxika.addImage(imageDansDiapo);
 
     // Ajout du diaporama dans le tableau de diaporamas
-    _allDiapos.push_back(diaporama);
+    _allDiapos.push_back(diapoPantxika);
     setNombreDiapos(getNombreDiapos() + 1);
 
+
     // Diaporama de Thierry
-    diaporama.setTitre("Diaporama Thierry");
-    diaporama.setVitesseDefilement(4);
+    Diaporama diapoThierry;
+    diapoThierry.setTitre("Diaporama Thierry");
+    diapoThierry.setVitesseDefilement(4);
 
     // Les images du diaporama de Thierry
-    imageDansDiapo.setPos(4);
-    imageDansDiapo.setRang(1);
-    diaporama.setLocalisationImages({imageDansDiapo});
+    imageDansDiapo = imageDansDiaporama(images,4 ,1);
+    diapoThierry.addImage(imageDansDiapo);
 
-    imageDansDiapo.setPos(1);
-    imageDansDiapo.setRang(2);
-    diaporama.getLocalisationImages().push_back(imageDansDiapo);
+    imageDansDiapo = imageDansDiaporama(images,1 ,2);
+    diapoThierry.addImage(imageDansDiapo);
 
-    imageDansDiapo.setPos(2);
-    imageDansDiapo.setRang(3);
-    diaporama.getLocalisationImages().push_back(imageDansDiapo);
+   imageDansDiapo = imageDansDiaporama(images,2 ,3);
+    diapoThierry.addImage(imageDansDiapo);
 
-    imageDansDiapo.setPos(3);
-    imageDansDiapo.setRang(4);
-    diaporama.getLocalisationImages().push_back(imageDansDiapo);
+    imageDansDiapo = imageDansDiaporama(images,3 ,4);
+    diapoThierry.addImage(imageDansDiapo);
 
     // Ajout du diaporama dans le tableau de diaporamas
-    _allDiapos.push_back(diaporama);
+    _allDiapos.push_back(diapoThierry);
     setNombreDiapos(getNombreDiapos() + 1);
 
     // Diaporama de Yann
-    diaporama.setTitre("Diaporama Yann");
-    diaporama.setVitesseDefilement(3);
+    Diaporama DiapoYann;
+    DiapoYann.setTitre("Diaporama Yann");
+    DiapoYann.setVitesseDefilement(3);
 
     // Les images du diaporama de Yann
-    imageDansDiapo.setPos(4);
-    imageDansDiapo.setRang(2);
-    diaporama.getLocalisationImages().push_back(imageDansDiapo);
+    imageDansDiapo = imageDansDiaporama(images,4 ,2);
+    DiapoYann.addImage(imageDansDiapo);
 
-    imageDansDiapo.setPos(1);
-    imageDansDiapo.setRang(1);
-    diaporama.getLocalisationImages().push_back(imageDansDiapo);
+    imageDansDiapo = imageDansDiaporama(images,1 ,1);
+    DiapoYann.addImage(imageDansDiapo);
 
-    imageDansDiapo.setPos(2);
-    imageDansDiapo.setRang(4);
-    diaporama.getLocalisationImages().push_back(imageDansDiapo);
+    imageDansDiapo = imageDansDiaporama(images,2 ,4);
+    DiapoYann.addImage(imageDansDiapo);
 
-    imageDansDiapo.setPos(3);
-    imageDansDiapo.setRang(3);
-    diaporama.getLocalisationImages().push_back(imageDansDiapo);
+    imageDansDiapo = imageDansDiaporama(images,3 ,3);
+    DiapoYann.addImage(imageDansDiapo);
 
     // Ajout du diaporama dans le tableau de diaporamas
-    _allDiapos.push_back(diaporama);
+    _allDiapos.push_back(DiapoYann);
     setNombreDiapos(getNombreDiapos() + 1);
 
+
     // Diaporama de Manu
-    // Diaporama de Manu
-    diaporama.setTitre("Diaporama Manu");
-    diaporama.setVitesseDefilement(1);
+    Diaporama DiapoManu;
+    DiapoManu.setTitre("Diaporama Manu");
+    DiapoManu.setVitesseDefilement(1);
 
     // Les images du diaporama de Manu
-    imageDansDiapo.setPos(4);
-    imageDansDiapo.setRang(4);
-    diaporama.getLocalisationImages().push_back(imageDansDiapo);
+    imageDansDiapo = imageDansDiaporama(images,4 ,4);
+    DiapoManu.addImage(imageDansDiapo);
 
-    imageDansDiapo.setPos(1);
-    imageDansDiapo.setRang(3);
-    diaporama.getLocalisationImages().push_back(imageDansDiapo);
+    imageDansDiapo = imageDansDiaporama(images,1 ,3);
+    DiapoManu.addImage(imageDansDiapo);
 
-    imageDansDiapo.setPos(2);
-    imageDansDiapo.setRang(2);
-    diaporama.getLocalisationImages().push_back(imageDansDiapo);
+    imageDansDiapo = imageDansDiaporama(images,2 ,2);
+    DiapoManu.addImage(imageDansDiapo);
 
-    imageDansDiapo.setPos(3);
-    imageDansDiapo.setRang(1);
-    diaporama.getLocalisationImages().push_back(imageDansDiapo);
+    imageDansDiapo = imageDansDiaporama(images,3 ,1);
+    DiapoManu.addImage(imageDansDiapo);
 
     // Ajout du diaporama dans le tableau de diaporamas
-    _allDiapos.push_back(diaporama);
+    _allDiapos.push_back(DiapoManu);
     setNombreDiapos(getNombreDiapos() + 1);
 
 }

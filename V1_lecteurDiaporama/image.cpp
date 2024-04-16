@@ -18,12 +18,10 @@ Image::Image(const Image& origin):    // Constructeur de copie
     _chemin(origin.getChemin()){
 }
 
-Image::Image(string pTitre, string pCategorie, string pChemin, unsigned int pRang, unsigned int pPos):  // Constructeur complet
+Image::Image(string pCategorie, string pTitre, string pChemin):  // Constructeur complet
     _titre(pTitre),
     _categorie(pCategorie),
-    _chemin(pChemin),
-    _rang(pRang),
-    _pos(pPos){
+    _chemin(pChemin){
 }
 
 
@@ -45,15 +43,6 @@ string Image::getChemin() const
     return _chemin;
 }
 
-unsigned int Image::getRang() const
-{
-    return _rang;
-}
-unsigned int Image::getPos() const
-{
-    return _pos;
-}
-
 
 
 /*** Setters ***/
@@ -71,16 +60,6 @@ void Image::setTitre(string pTitre)
 void Image::setChemin(string pPath)
 {
     _chemin = pPath;
-}
-
-void Image::setRang(unsigned int pRang)
-{
-    _rang = pRang;
-}
-
-void Image::setPos(unsigned int pPos)
-{
-    _pos = pPos;
 }
 
 

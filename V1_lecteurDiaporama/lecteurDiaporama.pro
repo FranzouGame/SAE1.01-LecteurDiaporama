@@ -6,10 +6,12 @@ CONFIG -= qt
 SOURCES += \
         diaporama.cpp \
         image.cpp \
+        imagedansdiaporama.cpp \
         lecteur.cpp \
         main.cpp
 
 HEADERS += \
     diaporama.h \
     image.h \
+    imagedansdiaporama.h \
     lecteur.h
