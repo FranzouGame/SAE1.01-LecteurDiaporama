@@ -119,7 +119,8 @@ void Diaporama::afficherImageCouranteDansDiaporamaCourant () const
 {
     cout << endl << endl;
     cout << "DIAPORAMA : " << this->getTitre() << endl << endl;
-    cout << getImageCourante().getRang() << " sur " << getNombreImages() << " / ";
+    cout << getImageCourante().getPos() << " sur " << getNombreImages() << " / ";
+    cout << endl << endl;
     getImageCourante().afficher();
 }
 

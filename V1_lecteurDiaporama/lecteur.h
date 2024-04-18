@@ -37,8 +37,8 @@ public:
     void setNombreDiapos(unsigned int);
 
     /*** Autres méthodes ***/
-    void declencherAction(char pChoixAction);
-    char saisieVerifChoixActionSurImageCourante();
+    void declencherAction(char);
+    void saisieVerifChoixActionSurImageCourante(char&);
     unsigned int saisieVerifChoixDiaporama();
     void charger(Images&);
     void chargerDiapos(Images&);

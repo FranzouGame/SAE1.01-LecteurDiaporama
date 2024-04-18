@@ -46,8 +46,7 @@ int main()
 
     /* Faire fonctionner le lecteur
        --------------*/
-    char choixAction ;              // pour saisir le choix de l'utilisateur dans le menu d'actions possibles
-    unsigned int choixDiaporama = 0 ;  // pour saisir le numéro de diaporama choisi par l'utilisiateur
+    char choixAction = ' ' ;              // pour saisir le choix de l'utilisateur dans le menu d'actions possibles
     while (true)
     {
 
@@ -55,12 +54,13 @@ int main()
         system("cls");  // effacer l'écran
 
         //unsigned int position = diaporamas[diaporamaCourant].getLocalisationImages()[imageCourante].getPos();
-        (lecteurDiapos.getAllDiapos()[choixDiaporama]).afficherImageCouranteDansDiaporamaCourant();
+        lecteurDiapos.getDiapoCourant().afficherImageCouranteDansDiaporamaCourant();
 
         /* Menu des actions possibles (saisie choix utilisateur) :
          * A-vancer, R-eculer, C-hanger de diaporama, Q-uitter */
 
-        choixAction = lecteurDiapos.saisieVerifChoixActionSurImageCourante();
+        lecteurDiapos.saisieVerifChoixActionSurImageCourante(choixAction);
+
         if (choixAction == 'Q')
         {
             break;

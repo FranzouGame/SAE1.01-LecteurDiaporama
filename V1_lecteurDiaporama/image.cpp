@@ -68,6 +68,6 @@ void Image::setChemin(string pPath)
 void Image::afficher() const
 {
 
-    cout << "image(titre:" << getTitre(); cout << ", categorie:"
-         << getCategorie(); cout << ", chemin:"<< getChemin() << ")" << endl;
+    cout << "Image : titre: " << getTitre(); cout << ", categorie: "
+         << getCategorie(); cout << ", chemin: "<< getChemin() << "" << endl;
 }

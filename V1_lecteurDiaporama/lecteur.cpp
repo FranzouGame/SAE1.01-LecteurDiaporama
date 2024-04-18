@@ -70,23 +70,23 @@ void Lecteur::afficherDiapoCourant() {
 
 void Lecteur::declencherAction(char pChoixAction)
 {
-    unsigned int choixDiaporama; // Déclaration de la variable choixDiaporama
+    unsigned int choixDiaporama;
     switch (pChoixAction)
     {
     case 'A':
         getDiapoCourant().avancer();
-        this->getDiapoCourant().getLocalisationImages()[getDiapoCourant().getPosImageCourante()].afficher();
+        this->getDiapoCourant().getImageCourante().afficher();
         break;
     case 'R':
         getDiapoCourant().reculer();
-        this->getDiapoCourant().getLocalisationImages()[getDiapoCourant().getPosImageCourante()].afficher();
+        this->getDiapoCourant().getImageCourante().afficher();
         break;
     case 'C':
         cout << "Choisissez un Diaporama " << endl;
         choixDiaporama = saisieVerifChoixDiaporama(); // Vous n'avez pas besoin de passer pDiaporamas ici
         // Changer de diaporama
         setNumDiapoCourant(choixDiaporama);
-        _allDiapos[getNumDiapoCourant()].setPosImageCourante(0);
+        getDiapoCourant().setPosImageCourante(0);
         break;
 
     default:
@@ -94,27 +94,19 @@ void Lecteur::declencherAction(char pChoixAction)
     }
 }
 
-char Lecteur::saisieVerifChoixActionSurImageCourante()
+void Lecteur::saisieVerifChoixActionSurImageCourante(char& pChoixAction)
 {
-    char pChoixAction;
 
     cout << endl << endl;
     while (true)
     {
+        // Afficher le message et proposer la saisie
         cout << endl << endl;
         cout << "ACTIONS : A-vancer  R-eculer  C-hanger de diaporama  Q-uitter .......  votre choix ? ";
         cin >> pChoixAction;
         pChoixAction = toupper(pChoixAction);
 
-        // Vérifier si l'entrée a réussi
-        if (cin.fail()) {
-            // Réinitialiser l'état d'erreur de cin et vider le tampon d'entrée
-            cin.clear();
-            cin.ignore(numeric_limits<streamsize>::max(), '\n');
-            cout << "Saisie invalide. Veuillez saisir une action valide." << endl;
-            continue; // Reprendre la boucle pour demander une nouvelle saisie
-        }
-
+        // Vérifier la saisie
         if ((pChoixAction == 'A') || (pChoixAction == 'R') || (pChoixAction == 'C') || (pChoixAction == 'Q'))
         {
             declencherAction(pChoixAction);
@@ -125,8 +117,6 @@ char Lecteur::saisieVerifChoixActionSurImageCourante()
             cout << "Action non reconnue. Veuillez saisir une action valide." << endl;
         }
     }
-
-    return pChoixAction;
 }
 
 unsigned int Lecteur::saisieVerifChoixDiaporama()
@@ -136,24 +126,31 @@ unsigned int Lecteur::saisieVerifChoixDiaporama()
 
     while (true)
     {
-        system("cls");  // effacer l'écran
+        system("cls");
+
+        // Afficher les différents diaporamas
         cout << endl << endl << "CHANGEMENT DIAPORAMA : " << endl << endl;
-        for (unsigned int num = 1; num < this->getNombreDiapos(); num++)
+        for (unsigned int num = 0; num < this->getNombreDiapos(); num++)
         {
-            cout << num << ": " << this->getDiapoCourant().getTitre();
-            if (num != this->getNombreDiapos() - 1)
+            cout << num << ": " << this->getAllDiapos()[num].getTitre() ;
+            if(num != getNombreDiapos()-1)
             {
-                cout << endl;
+                cout << endl; // Faire un retour à la ligne, sauf pour le dernier diapo
             }
         }
+
+        // Proposer la saisie
         cout << ".......  votre choix ? "; cin >> choixSaisi;
         choixDiaporama = choixSaisi;
 
+        // Vérifier la saisie
         if ((choixDiaporama >= 1)&&(choixDiaporama < static_cast<unsigned int>(this->getNombreDiapos())))
         {
             break;
         }
     }
+
+    // Retourner le choix de l'utilisateur
     return choixDiaporama;
 }
 
