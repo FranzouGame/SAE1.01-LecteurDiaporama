@@ -71,30 +71,16 @@ void Lecteur::declencherAction(char pChoixAction)
     case 'A':
         // L'utilisateur demande à avancer dans le diaporama
         getDiapoCourant().avancer();
-
-        cout << "Jai chnage du num d'image pour " << getDiapoCourant().getPosImageCourante() << endl;
-        cout << "La position de l'image courante est : " << getDiapoCourant().getPosImageCourante();
-
-        cin >> choixDiaporama;
-
-        getDiapoCourant().afficherImageCouranteDansDiaporamaCourant();
         break;
     case 'R':
         // L'utilisateur demande à reculer dans le diaporama
         getDiapoCourant().reculer();
-        getDiapoCourant().afficherImageCouranteDansDiaporamaCourant();
         break;
     case 'C':
         // L'utilisateur demande à changer de diaporama
         cout << "Choisissez un Diaporama " << endl;
         choixDiaporama = saisieVerifChoixDiaporama();
         setNumDiapoCourant(choixDiaporama);
-
-        cout << "Jai chnage de num de diapo courant pour " << getNumDiapoCourant() << endl;
-        cout << "La position de l'image courante est : " << getDiapoCourant().getPosImageCourante();
-
-        cin >> choixDiaporama;
-
         getDiapoCourant().setPosImageCourante(0);
         break;
     default:
@@ -140,7 +126,7 @@ unsigned int Lecteur::saisieVerifChoixDiaporama()
         cout << endl << endl << "CHANGEMENT DIAPORAMA : " << endl << endl;
         for (unsigned int num = 0; num < this->getNombreDiapos(); num++)
         {
-            cout << num << ": " << this->getAllDiapos()[num].getTitre() ;
+            cout << num << ": " << this->getAllDiapos()[num].getTitre() << " contenant " << getAllDiapos()[num].getNombreImages();
             if(num != getNombreDiapos()-1)
             {
                 cout << endl; // Faire un retour à la ligne, sauf pour le dernier diapo
@@ -209,17 +195,20 @@ void Lecteur::chargerDiapos(Images& images)
     diapoPantxika.setVitesseDefilement(2);
 
     // Les images du diaporama de Pantxika
-    imageDansDiapo = imageDansDiaporama(images, 4, 3);
-    diapoPantxika.addImage(imageDansDiapo);
+    // imageDansDiapo = imageDansDiaporama (images, 4, 3);
+    diapoPantxika.addImage(imageDansDiaporama (images, 4, 3));
 
-    imageDansDiapo = imageDansDiaporama(images,1 ,2);
-    diapoPantxika.addImage(imageDansDiapo);
+    // imageDansDiapo = imageDansDiaporama (images,1 ,2);
+    diapoPantxika.addImage(imageDansDiaporama (images,1 ,2));
 
-    imageDansDiapo = imageDansDiaporama(images,2, 4);
-    diapoPantxika.addImage(imageDansDiapo);
+    // imageDansDiapo = imageDansDiaporama (images,2, 4);
+    diapoPantxika.addImage(imageDansDiaporama (images,2, 4));
 
-    imageDansDiapo = imageDansDiaporama(images,3 ,1);
-    diapoPantxika.addImage(imageDansDiapo);
+    // imageDansDiapo = imageDansDiaporama (images,3 ,1);
+    diapoPantxika.addImage(imageDansDiaporama (images,3 ,1));
+
+    // Tri des images par leur rang
+    diapoPantxika.triCroissantRang();
 
     // Ajout du diaporama dans le tableau de diaporamas
     _allDiapos.push_back(diapoPantxika);
@@ -230,17 +219,20 @@ void Lecteur::chargerDiapos(Images& images)
     diapoThierry.setVitesseDefilement(4);
 
     // Les images du diaporama de Thierry
-    imageDansDiapo = imageDansDiaporama(images,4 ,1);
-    diapoThierry.addImage(imageDansDiapo);
+    // imageDansDiapo = imageDansDiaporama(images,4 ,1);
+    diapoThierry.addImage(imageDansDiaporama(images,4 ,1));
 
-    imageDansDiapo = imageDansDiaporama(images,1 ,2);
-    diapoThierry.addImage(imageDansDiapo);
+    // imageDansDiapo = imageDansDiaporama(images,1 ,2);
+    diapoThierry.addImage(imageDansDiaporama(images,1 ,2));
 
-   imageDansDiapo = imageDansDiaporama(images,2 ,3);
-    diapoThierry.addImage(imageDansDiapo);
+    // imageDansDiapo = imageDansDiaporama(images,2 ,3);
+    diapoThierry.addImage(imageDansDiaporama(images,2 ,3));
 
-    imageDansDiapo = imageDansDiaporama(images,3 ,4);
-    diapoThierry.addImage(imageDansDiapo);
+    // imageDansDiapo = imageDansDiaporama(images,3 ,4);
+    diapoThierry.addImage(imageDansDiaporama(images,3 ,4));
+
+    // Tri des images par leur rang
+    diapoThierry.triCroissantRang();
 
     // Ajout du diaporama dans le tableau de diaporamas
     _allDiapos.push_back(diapoThierry);
@@ -262,6 +254,9 @@ void Lecteur::chargerDiapos(Images& images)
     imageDansDiapo = imageDansDiaporama(images,3 ,3);
     DiapoYann.addImage(imageDansDiapo);
 
+    // Tri des images par leur rang
+    DiapoYann.triCroissantRang();
+
     // Ajout du diaporama dans le tableau de diaporamas
     _allDiapos.push_back(DiapoYann);
 
@@ -282,6 +277,9 @@ void Lecteur::chargerDiapos(Images& images)
 
     imageDansDiapo = imageDansDiaporama(images,3 ,1);
     DiapoManu.addImage(imageDansDiapo);
+
+    // Tri des images par leur rang
+    DiapoManu.triCroissantRang();
 
     // Ajout du diaporama dans le tableau de diaporamas
     _allDiapos.push_back(DiapoManu);

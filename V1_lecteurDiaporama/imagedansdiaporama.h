@@ -11,8 +11,8 @@ class imageDansDiaporama : public Image
 {   
 private:
     // Attributs
-    unsigned int _rang;
-    unsigned int _pos;
+    unsigned int _rang; // Rang de l'image dans le tableau d'images
+    unsigned int _pos; // Rang de l'image dans le diaporama
 
 public:
     /*** Constructeurs ***/
@@ -30,6 +30,7 @@ public:
     void setPos(unsigned int);
 
     /*** Autres méthodes ***/
+    void afficherImageCourante() const;
 
 };
 

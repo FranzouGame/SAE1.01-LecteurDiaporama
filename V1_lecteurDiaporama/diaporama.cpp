@@ -93,25 +93,25 @@ void Diaporama::addImage(const imageDansDiaporama& imgDuDiapo)
 void Diaporama::avancer()
 {
     // Vérifier la postion actuelle, si on est à la dernière image du diaporama, on passe à 0 , sinon on avance d'une image
-    if (this->getPosImageCourante() == this->getNombreImages() - 1)
+    if (getPosImageCourante() == getNombreImages() - 1)
     {
-        this->setPosImageCourante(0);
+        setPosImageCourante(0);
     }
     else {
-        this->setPosImageCourante(getPosImageCourante() + 1);
+        setPosImageCourante(getPosImageCourante() + 1);
     }
 }
 
 void Diaporama::reculer()
 {
     // Vérifier la postion actuelle, si on est à 0, on passe à la dernière image du diaporama, sinon on recule d'une image
-    if (this->getPosImageCourante() == 0)
+    if (getPosImageCourante() == 0)
     {
-       this->setPosImageCourante(getNombreImages() - 1);
+       setPosImageCourante(getNombreImages() - 1);
     }
     else
     {
-        this->setPosImageCourante(getPosImageCourante() - 1);
+        setPosImageCourante(getPosImageCourante() - 1);
     }
 }
 
@@ -119,9 +119,9 @@ void Diaporama::afficherImageCouranteDansDiaporamaCourant () const
 {
     cout << endl << endl;
     cout << "DIAPORAMA : " << this->getTitre() << endl << endl;
-    cout << getImageCourante().getPos() << " sur " << getNombreImages() << " / ";
+    cout << getImageCourante().getRang() << " sur " << getNombreImages() << " / ";
     cout << endl << endl;
-    getImageCourante().afficher();
+    getImageCourante().afficherImageCourante();
 }
 
 void Diaporama::triCroissantRang() {
@@ -134,9 +134,9 @@ void Diaporama::triCroissantRang() {
         // Parcourir le tableau à partir de la première image
         for (unsigned int j = 0; j < taille - i - 1; j++) {
             // Comparer le rang de l'image actuelle avec celui de l'image suivante
-            if (_localisationImages[j].getRang() > _localisationImages[j + 1].getRang()) {
+            if (this->_localisationImages[j].getRang() > this->_localisationImages[j + 1].getRang()) {
                 // Échanger les deux images si l'ordre n'est pas correct
-                swap(_localisationImages[j], _localisationImages[j + 1]);
+                swap(this->_localisationImages[j], this->_localisationImages[j + 1]);
                 estEchange = true;
             }
         }

@@ -29,10 +29,12 @@ unsigned int imageDansDiaporama::getRang() const
 {
     return _rang;
 }
+
 unsigned int imageDansDiaporama::getPos() const
 {
     return _pos;
 }
+
 const Image& imageDansDiaporama::getImage() const
 {
     return *this;
@@ -51,4 +53,10 @@ void imageDansDiaporama::setPos(unsigned int pos)
 }
 
 
+
 /*** Autres méthodes ***/
+void imageDansDiaporama::afficherImageCourante() const
+{
+    cout << getRang() << " : ";
+    afficher();
+}

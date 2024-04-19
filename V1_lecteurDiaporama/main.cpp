@@ -26,6 +26,7 @@ int main()
     //lecteurDiapos.getDiapoCourant().afficherImageCouranteDansDiaporamaCourant();
     cout << "Nombre de diapos : " << lecteurDiapos.getNombreDiapos() << endl;
 
+    /*
     for(unsigned int i = 1; i < lecteurDiapos.getNombreDiapos(); i++)
     {
         cout << "Tri numéro " << i << endl;
@@ -33,7 +34,7 @@ int main()
     }
 
     cout << "J'ai tout trié" << endl;
-
+    */
     /* ---------------------
      * Lecteur de diaporamas
      * --------------------- */
@@ -43,6 +44,18 @@ int main()
     lecteurDiapos.afficherDiapoCourant();
 
 
+    // Afficher toutes les images de tous les diapos
+    for(int i = 0; i < lecteurDiapos.getNombreDiapos(); i++)
+    {
+        cout << lecteurDiapos.getAllDiapos()[i].getTitre() << endl;
+        const auto& images = lecteurDiapos.getAllDiapos()[i].getLocalisationImages();
+        for (const auto& image : images) {
+            // Affiche les détails de chaque image
+            image.afficherImageCourante();
+        }
+    }
+
+    cin >> attente;
 
     /* Faire fonctionner le lecteur
        --------------*/
