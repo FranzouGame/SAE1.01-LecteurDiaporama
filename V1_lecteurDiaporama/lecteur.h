@@ -16,13 +16,12 @@ class Lecteur
 private:
     vector<Diaporama> _allDiapos;
     unsigned int _numDiapoCourant;
-    unsigned int _nombreDiapos;
 
 
 public:
     /*** Constructeurs ***/
     Lecteur(); // Constructeur par défaut
-    Lecteur(vector<Diaporama>, unsigned int, unsigned int);
+    Lecteur(vector<Diaporama>, unsigned int);
 
 
     /*** Getters ***/
@@ -34,7 +33,6 @@ public:
     /*** Setters ***/
     void setAllDiapos(const vector<Diaporama>&);
     void setNumDiapoCourant(unsigned int);
-    void setNombreDiapos(unsigned int);
 
     /*** Autres méthodes ***/
     void declencherAction(char);

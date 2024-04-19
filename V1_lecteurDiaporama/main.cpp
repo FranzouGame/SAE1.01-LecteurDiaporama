@@ -68,7 +68,6 @@ int main()
 
         /* Faire l'action demandée (Avancer - Reculer - Changer de Diaporama - Quitter) */
         system("cls");  // effacer l'écran
-        lecteurDiapos.declencherAction(choixAction);
     }
 
     /* Fin

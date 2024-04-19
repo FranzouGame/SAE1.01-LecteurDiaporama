@@ -10,14 +10,12 @@
 
 /*** Constructeurs ***/
 Lecteur::Lecteur():
-    _numDiapoCourant(0),
-    _nombreDiapos(0)
+    _numDiapoCourant(0)
 {}
 
-Lecteur::Lecteur(vector<Diaporama> diapos, unsigned int numDiapoCourant, unsigned int nbDiapos) :
+Lecteur::Lecteur(vector<Diaporama> diapos, unsigned int numDiapoCourant) :
     _allDiapos(diapos),
-    _numDiapoCourant(numDiapoCourant),
-    _nombreDiapos(nbDiapos)
+    _numDiapoCourant(numDiapoCourant)
 {}
 
 
@@ -39,7 +37,7 @@ unsigned int Lecteur::getNumDiapoCourant() const
 
 unsigned int Lecteur::getNombreDiapos() const
 {
-    return _nombreDiapos;
+    return _allDiapos.size();
 }
 
 
@@ -54,10 +52,7 @@ void Lecteur::setNumDiapoCourant(unsigned int numDiapoCourant)
     _numDiapoCourant = numDiapoCourant;
 }
 
-void Lecteur::setNombreDiapos(unsigned int nbDiapos)
-{
-    _nombreDiapos = nbDiapos;
-}
+
 
 
 /*** Autres méthodes ***/
@@ -74,21 +69,34 @@ void Lecteur::declencherAction(char pChoixAction)
     switch (pChoixAction)
     {
     case 'A':
+        // L'utilisateur demande à avancer dans le diaporama
         getDiapoCourant().avancer();
-        this->getDiapoCourant().getImageCourante().afficher();
+
+        cout << "Jai chnage du num d'image pour " << getDiapoCourant().getPosImageCourante() << endl;
+        cout << "La position de l'image courante est : " << getDiapoCourant().getPosImageCourante();
+
+        cin >> choixDiaporama;
+
+        getDiapoCourant().afficherImageCouranteDansDiaporamaCourant();
         break;
     case 'R':
+        // L'utilisateur demande à reculer dans le diaporama
         getDiapoCourant().reculer();
-        this->getDiapoCourant().getImageCourante().afficher();
+        getDiapoCourant().afficherImageCouranteDansDiaporamaCourant();
         break;
     case 'C':
+        // L'utilisateur demande à changer de diaporama
         cout << "Choisissez un Diaporama " << endl;
-        choixDiaporama = saisieVerifChoixDiaporama(); // Vous n'avez pas besoin de passer pDiaporamas ici
-        // Changer de diaporama
+        choixDiaporama = saisieVerifChoixDiaporama();
         setNumDiapoCourant(choixDiaporama);
+
+        cout << "Jai chnage de num de diapo courant pour " << getNumDiapoCourant() << endl;
+        cout << "La position de l'image courante est : " << getDiapoCourant().getPosImageCourante();
+
+        cin >> choixDiaporama;
+
         getDiapoCourant().setPosImageCourante(0);
         break;
-
     default:
         break;
     }
@@ -195,7 +203,6 @@ void Lecteur::chargerDiapos(Images& images)
 
     // Ajout du diaporama dans le tableau de diaporamas
     _allDiapos.push_back(diapoDefaut);
-    setNombreDiapos(getNombreDiapos() + 1);
 
     // Diaporama de Pantxika
     Diaporama diapoPantxika ("Diaporama Pantxika");
@@ -216,7 +223,6 @@ void Lecteur::chargerDiapos(Images& images)
 
     // Ajout du diaporama dans le tableau de diaporamas
     _allDiapos.push_back(diapoPantxika);
-    setNombreDiapos(getNombreDiapos() + 1);
 
 
     // Diaporama de Thierry
@@ -238,7 +244,6 @@ void Lecteur::chargerDiapos(Images& images)
 
     // Ajout du diaporama dans le tableau de diaporamas
     _allDiapos.push_back(diapoThierry);
-    setNombreDiapos(getNombreDiapos() + 1);
 
     // Diaporama de Yann
     Diaporama DiapoYann("Diaporama Yann");
@@ -259,7 +264,6 @@ void Lecteur::chargerDiapos(Images& images)
 
     // Ajout du diaporama dans le tableau de diaporamas
     _allDiapos.push_back(DiapoYann);
-    setNombreDiapos(getNombreDiapos() + 1);
 
 
     // Diaporama de Manu
@@ -281,7 +285,6 @@ void Lecteur::chargerDiapos(Images& images)
 
     // Ajout du diaporama dans le tableau de diaporamas
     _allDiapos.push_back(DiapoManu);
-    setNombreDiapos(getNombreDiapos() + 1);
 
 }
 

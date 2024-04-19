@@ -18,7 +18,7 @@ Diaporama::Diaporama(string titre, unsigned int vitesseDefilement, vector<imageD
     _titre(titre),
     _vitesseDefilement(vitesseDefilement),
     _localisationImages(_localisationImages),
-        _posImageCourante(posImgCourante){
+    _posImageCourante(posImgCourante){
 
 }
 
