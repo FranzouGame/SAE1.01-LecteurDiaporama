@@ -39,7 +39,7 @@ public:
     void saisieVerifChoixActionSurImageCourante(char&);
     unsigned int saisieVerifChoixDiaporama();
     void charger(Images&);
-    void chargerDiapos(Images&);
+    void chargerDiapos(Images);
     void afficherDiapoCourant();
 };
 

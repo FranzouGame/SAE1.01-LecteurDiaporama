@@ -172,9 +172,15 @@ void Lecteur::charger(Images& images) {
 
     imageACharger = Image("animal", "Bambi", "C:\\cartesDisney\\Disney_3.gif");
     images.push_back(imageACharger);
+
+    for(int i = 0; i < 8; i++)
+    {
+        images[i].afficher();
+    }
+
 }
 
-void Lecteur::chargerDiapos(Images& images)
+void Lecteur::chargerDiapos(Images images)
 {
     Image image;
     imageDansDiaporama imageDansDiapo;
@@ -212,7 +218,6 @@ void Lecteur::chargerDiapos(Images& images)
 
     // Ajout du diaporama dans le tableau de diaporamas
     _allDiapos.push_back(diapoPantxika);
-
 
     // Diaporama de Thierry
     Diaporama diapoThierry("Diaporama Thierry");

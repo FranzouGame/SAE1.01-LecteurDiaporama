@@ -17,8 +17,8 @@ imageDansDiaporama::imageDansDiaporama(const Image& img, unsigned int rang, unsi
     _rang(rang),
     _pos(pos){}
 
-imageDansDiaporama::imageDansDiaporama(Images& images, unsigned int rang, unsigned int pos):
-    Image(images[rang]),
+imageDansDiaporama::imageDansDiaporama(Images& images, unsigned int pos, unsigned int rang):
+    Image(images[pos]),
     _rang(rang),
     _pos(pos) {}
 
