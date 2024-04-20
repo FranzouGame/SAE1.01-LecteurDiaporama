@@ -20,13 +20,13 @@ private:
 
 public:
     /*** Constructeurs ***/
-    Lecteur(); // Constructeur par défaut
+    Lecteur();
     Lecteur(vector<Diaporama>, unsigned int);
 
 
     /*** Getters ***/
     vector<Diaporama> getAllDiapos() const;
-    Diaporama getDiapoCourant() const;
+    Diaporama& getDiapoCourant();
     unsigned int getNumDiapoCourant() const;
     unsigned int getNombreDiapos() const;
 

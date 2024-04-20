@@ -15,47 +15,27 @@ int main()
      --------------------------------------------------------------------------------------*/
     Lecteur lecteurDiapos;
     vector<Image> images;          // les images
-    int attente;
 
     // Chargement des urls des images, chargement des diaporamas
     lecteurDiapos.charger(images);
     lecteurDiapos.chargerDiapos(images);
 
-    cout << "J'ai chargé les images et diapos" << endl;
 
     //lecteurDiapos.getDiapoCourant().afficherImageCouranteDansDiaporamaCourant();
     cout << "Nombre de diapos : " << lecteurDiapos.getNombreDiapos() << endl;
 
-    /*
+    // Trier les diapos en fonction du rang des images dans celles-ci
     for(unsigned int i = 1; i < lecteurDiapos.getNombreDiapos(); i++)
     {
         cout << "Tri numéro " << i << endl;
         lecteurDiapos.getAllDiapos()[i].triCroissantRang();
     }
 
-    cout << "J'ai tout trié" << endl;
-    */
+
     /* ---------------------
      * Lecteur de diaporamas
      * --------------------- */
 
-
-    cout << "Diapo courant : "<< endl;
-    lecteurDiapos.afficherDiapoCourant();
-
-
-    // Afficher toutes les images de tous les diapos
-    for(int i = 0; i < lecteurDiapos.getNombreDiapos(); i++)
-    {
-        cout << lecteurDiapos.getAllDiapos()[i].getTitre() << endl;
-        const auto& images = lecteurDiapos.getAllDiapos()[i].getLocalisationImages();
-        for (const auto& image : images) {
-            // Affiche les détails de chaque image
-            image.afficherImageCourante();
-        }
-    }
-
-    cin >> attente;
 
     /* Faire fonctionner le lecteur
        --------------*/

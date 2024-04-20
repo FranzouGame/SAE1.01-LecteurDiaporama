@@ -25,7 +25,7 @@ vector<Diaporama> Lecteur::getAllDiapos() const
     return _allDiapos;
 }
 
-Diaporama Lecteur::getDiapoCourant() const
+Diaporama& Lecteur::getDiapoCourant()
 {
     return _allDiapos[getNumDiapoCourant()];
 }
@@ -126,7 +126,7 @@ unsigned int Lecteur::saisieVerifChoixDiaporama()
         cout << endl << endl << "CHANGEMENT DIAPORAMA : " << endl << endl;
         for (unsigned int num = 0; num < this->getNombreDiapos(); num++)
         {
-            cout << num << ": " << this->getAllDiapos()[num].getTitre() << " contenant " << getAllDiapos()[num].getNombreImages();
+            cout << num << ": " << this->getAllDiapos()[num].getTitre();
             if(num != getNombreDiapos()-1)
             {
                 cout << endl; // Faire un retour à la ligne, sauf pour le dernier diapo
@@ -172,12 +172,6 @@ void Lecteur::charger(Images& images) {
 
     imageACharger = Image("animal", "Bambi", "C:\\cartesDisney\\Disney_3.gif");
     images.push_back(imageACharger);
-
-    for(int i = 0; i < 8; i++)
-    {
-        images[i].afficher();
-    }
-
 }
 
 void Lecteur::chargerDiapos(Images images)
@@ -201,17 +195,17 @@ void Lecteur::chargerDiapos(Images images)
     diapoPantxika.setVitesseDefilement(2);
 
     // Les images du diaporama de Pantxika
-    // imageDansDiapo = imageDansDiaporama (images, 4, 3);
-    diapoPantxika.addImage(imageDansDiaporama (images, 4, 3));
+    imageDansDiapo = imageDansDiaporama (images, 4, 3);
+    diapoPantxika.addImage(imageDansDiapo);
 
-    // imageDansDiapo = imageDansDiaporama (images,1 ,2);
-    diapoPantxika.addImage(imageDansDiaporama (images,1 ,2));
+    imageDansDiapo = imageDansDiaporama (images,1 ,2);
+    diapoPantxika.addImage(imageDansDiapo);
 
-    // imageDansDiapo = imageDansDiaporama (images,2, 4);
-    diapoPantxika.addImage(imageDansDiaporama (images,2, 4));
+    imageDansDiapo = imageDansDiaporama (images,2, 4);
+    diapoPantxika.addImage(imageDansDiapo);
 
-    // imageDansDiapo = imageDansDiaporama (images,3 ,1);
-    diapoPantxika.addImage(imageDansDiaporama (images,3 ,1));
+    imageDansDiapo = imageDansDiaporama (images,3 ,1);
+    diapoPantxika.addImage(imageDansDiapo);
 
     // Tri des images par leur rang
     diapoPantxika.triCroissantRang();
@@ -224,17 +218,17 @@ void Lecteur::chargerDiapos(Images images)
     diapoThierry.setVitesseDefilement(4);
 
     // Les images du diaporama de Thierry
-    // imageDansDiapo = imageDansDiaporama(images,4 ,1);
-    diapoThierry.addImage(imageDansDiaporama(images,4 ,1));
+    imageDansDiapo = imageDansDiaporama(images,4 ,1);
+    diapoThierry.addImage(imageDansDiapo);
 
-    // imageDansDiapo = imageDansDiaporama(images,1 ,2);
-    diapoThierry.addImage(imageDansDiaporama(images,1 ,2));
+    imageDansDiapo = imageDansDiaporama(images,1 ,2);
+    diapoThierry.addImage(imageDansDiapo);
 
-    // imageDansDiapo = imageDansDiaporama(images,2 ,3);
-    diapoThierry.addImage(imageDansDiaporama(images,2 ,3));
+    imageDansDiapo = imageDansDiaporama(images,2 ,3);
+    diapoThierry.addImage(imageDansDiapo);
 
-    // imageDansDiapo = imageDansDiaporama(images,3 ,4);
-    diapoThierry.addImage(imageDansDiaporama(images,3 ,4));
+    imageDansDiapo = imageDansDiaporama(images,3 ,4);
+    diapoThierry.addImage(imageDansDiapo);
 
     // Tri des images par leur rang
     diapoThierry.triCroissantRang();
