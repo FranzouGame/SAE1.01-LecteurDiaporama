@@ -5,23 +5,24 @@
 #include "image.h"
 #include "imagedansdiaporama.h"
 
+typedef vector<imageDansDiaporama> ImagesDuDiaporama;
 
 class Diaporama {
 private:
     // Attributs
     string _titre;
     unsigned int _vitesseDefilement;
-    vector<imageDansDiaporama> _localisationImages;
+    ImagesDuDiaporama _localisationImages;
     unsigned int _posImageCourante;
 public:
     /*** Constructeurs ***/
     Diaporama();
-    Diaporama(string, unsigned int = 1, vector<imageDansDiaporama> = {}, unsigned int = 0);
+    Diaporama(string, unsigned int = 1, ImagesDuDiaporama = {}, unsigned int = 0);
     Diaporama(string, unsigned int, unsigned int);
 
     /*** Getters ***/
     string getTitre()const;
-    vector<imageDansDiaporama> getLocalisationImages() const;
+    ImagesDuDiaporama getLocalisationImages() const;
     unsigned int getVitesseDefilement() const;
     unsigned int getNombreImages() const;
     unsigned int getPosImageCourante() const;
@@ -30,7 +31,7 @@ public:
     /*** Setters ***/
     void setTitre(const string&);
     void setVitesseDefilement(unsigned int);
-    void setLocalisationImages(const vector<imageDansDiaporama>&);
+    void setLocalisationImages(const ImagesDuDiaporama&);
     void setPosImageCourante(unsigned int);
 
     /*** Autres méthodes ***/

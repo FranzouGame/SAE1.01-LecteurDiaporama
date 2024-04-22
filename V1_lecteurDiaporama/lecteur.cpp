@@ -13,14 +13,14 @@ Lecteur::Lecteur():
     _numDiapoCourant(0)
 {}
 
-Lecteur::Lecteur(vector<Diaporama> diapos, unsigned int numDiapoCourant) :
+Lecteur::Lecteur(Diaporamas diapos, unsigned int numDiapoCourant) :
     _allDiapos(diapos),
     _numDiapoCourant(numDiapoCourant)
 {}
 
 
 /*** Getters ***/
-vector<Diaporama> Lecteur::getAllDiapos() const
+Diaporamas Lecteur::getAllDiapos() const
 {
     return _allDiapos;
 }
@@ -42,7 +42,7 @@ unsigned int Lecteur::getNombreDiapos() const
 
 
 /*** Setters ***/
-void Lecteur::setAllDiapos(const vector<Diaporama>& vecteurDiapos)
+void Lecteur::setAllDiapos(const Diaporamas& vecteurDiapos)
 {
     _allDiapos = vecteurDiapos;
 }

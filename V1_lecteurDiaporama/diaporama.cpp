@@ -11,10 +11,11 @@
 Diaporama::Diaporama() :
     _titre(""),
     _vitesseDefilement(0),
+    _localisationImages({}),
     _posImageCourante(0)
     {}
 
-Diaporama::Diaporama(string titre, unsigned int vitesseDefilement, vector<imageDansDiaporama> _localisationImages, unsigned int posImgCourante) :
+Diaporama::Diaporama(string titre, unsigned int vitesseDefilement, ImagesDuDiaporama _localisationImages, unsigned int posImgCourante) :
     _titre(titre),
     _vitesseDefilement(vitesseDefilement),
     _localisationImages(_localisationImages),
@@ -31,7 +32,7 @@ string Diaporama::getTitre() const
     return _titre;
 }
 
-vector<imageDansDiaporama> Diaporama::getLocalisationImages() const
+ImagesDuDiaporama Diaporama::getLocalisationImages() const
 {
     return _localisationImages;
 }
@@ -70,7 +71,7 @@ void Diaporama::setVitesseDefilement(unsigned int vitesseDefilement)
     _vitesseDefilement = vitesseDefilement;
 }
 
-void Diaporama::setLocalisationImages(const vector<imageDansDiaporama>& localisationImages)
+void Diaporama::setLocalisationImages(const ImagesDuDiaporama& localisationImages)
 {
     _localisationImages = localisationImages;
 }

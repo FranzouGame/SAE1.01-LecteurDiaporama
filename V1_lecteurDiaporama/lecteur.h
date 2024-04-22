@@ -7,31 +7,31 @@
 using namespace std;
 
 
-
+typedef vector<Diaporama> Diaporamas;
 
 class Image;
 
 class Lecteur
 {
 private:
-    vector<Diaporama> _allDiapos;
+    Diaporamas _allDiapos;
     unsigned int _numDiapoCourant;
 
 
 public:
     /*** Constructeurs ***/
     Lecteur();
-    Lecteur(vector<Diaporama>, unsigned int);
+    Lecteur(Diaporamas, unsigned int);
 
 
     /*** Getters ***/
-    vector<Diaporama> getAllDiapos() const;
+    Diaporamas getAllDiapos() const;
     Diaporama& getDiapoCourant();
     unsigned int getNumDiapoCourant() const;
     unsigned int getNombreDiapos() const;
 
     /*** Setters ***/
-    void setAllDiapos(const vector<Diaporama>&);
+    void setAllDiapos(const Diaporamas&);
     void setNumDiapoCourant(unsigned int);
 
     /*** Autres méthodes ***/
