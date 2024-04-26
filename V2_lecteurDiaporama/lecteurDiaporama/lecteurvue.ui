@@ -23,7 +23,7 @@
       <height>131</height>
      </rect>
     </property>
-    <layout class="QHBoxLayout" name="horizontalLayout">
+    <layout class="QHBoxLayout" name="horizontalLayout" stretch="1,1,1">
      <property name="sizeConstraint">
       <enum>QLayout::SetFixedSize</enum>
      </property>
@@ -162,6 +162,7 @@
       <string>Paramètres</string>
      </property>
      <addaction name="actionCharger_Diaporama"/>
+     <addaction name="actionChanger_Vitesse_Defilement"/>
     </widget>
     <addaction name="menuParam_tres"/>
     <addaction name="actionQuitter"/>
@@ -188,6 +189,11 @@
   <action name="actionA_propos_de">
    <property name="text">
     <string>A propos de</string>
+   </property>
+  </action>
+  <action name="actionChanger_Vitesse_Defilement">
+   <property name="text">
+    <string>Changer la vitesse de défilement</string>
    </property>
   </action>
  </widget>
