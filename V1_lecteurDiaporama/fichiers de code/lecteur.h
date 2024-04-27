@@ -16,16 +16,15 @@ class Lecteur
 private:
     Diaporamas _allDiapos;
     unsigned int _numDiapoCourant;
-
+    Images _allImages;
 
 public:
     /*** Constructeurs ***/
     Lecteur();
     Lecteur(Diaporamas, unsigned int);
 
-
     /*** Getters ***/
-    Diaporamas getAllDiapos() const;
+    Diaporamas& getAllDiapos();
     Diaporama& getDiapoCourant();
     unsigned int getNumDiapoCourant() const;
     unsigned int getNombreDiapos() const;
@@ -38,8 +37,8 @@ public:
     void declencherAction(char);
     void saisieVerifChoixActionSurImageCourante(char&);
     unsigned int saisieVerifChoixDiaporama();
-    void charger(Images&);
-    void chargerDiapos(Images);
+    void charger();
+    void chargerDiapos();
     void afficherDiapoCourant();
 };
 
