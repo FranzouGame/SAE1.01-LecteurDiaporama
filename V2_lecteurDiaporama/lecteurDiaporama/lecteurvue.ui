@@ -173,8 +173,16 @@
       <addaction name="actionX1_75"/>
       <addaction name="actionX2"/>
      </widget>
+     <widget class="QMenu" name="menuMode">
+      <property name="title">
+       <string>Mode</string>
+      </property>
+      <addaction name="actionModeAuto"/>
+      <addaction name="actionModeManuel"/>
+     </widget>
      <addaction name="actionCharger_Diaporama"/>
      <addaction name="menuChanger_la_vitesse_de_d_filement"/>
+     <addaction name="menuMode"/>
     </widget>
     <addaction name="menuParam_tres"/>
     <addaction name="actionQuitter"/>
@@ -236,6 +244,16 @@
   <action name="actionX2">
    <property name="text">
     <string>X2</string>
+   </property>
+  </action>
+  <action name="actionModeAuto">
+   <property name="text">
+    <string>Automatique</string>
+   </property>
+  </action>
+  <action name="actionModeManuel">
+   <property name="text">
+    <string>Manuel</string>
    </property>
   </action>
  </widget>

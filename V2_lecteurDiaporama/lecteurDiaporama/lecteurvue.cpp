@@ -28,6 +28,8 @@ lecteurvue::lecteurvue(QWidget *parent)
     QObject::connect(ui->actionX1_5, SIGNAL(triggered()), this, SLOT(demanderChangementVitesseDefilementX1_5()));
     QObject::connect(ui->actionX1_75, SIGNAL(triggered()), this, SLOT(demanderChangementVitesseDefilementX1_75()));
     QObject::connect(ui->actionX2, SIGNAL(triggered()), this, SLOT(demanderChangementVitesseDefilementX2()));
+    QObject::connect(ui->actionModeAuto, SIGNAL(triggered()), this, SLOT(demanderChangementModeAuto()));
+    QObject::connect(ui->actionModeManuel, SIGNAL(triggered()), this, SLOT(demanderChangementModeManuel()));
 }
 
 lecteurvue::~lecteurvue()
@@ -93,3 +95,10 @@ void lecteurvue::demanderChangementVitesseDefilementX2() {
     qDebug() << "Demande de changement de vitesse de défilement du diaporama à 2";
 }
 
+void lecteurvue::demanderChangementModeAuto() {
+    qDebug() << "Demande de passage en mode automatique";
+}
+
+void lecteurvue::demanderChangementModeManuel() {
+    qDebug() << "Demande de passage en mode manuel";
+}

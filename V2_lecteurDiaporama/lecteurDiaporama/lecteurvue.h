@@ -33,7 +33,10 @@ public slots:
     void demanderLancementDiapo();
     void demanderFermetureLecteur();
     void demanderInformations();
-    //Pour chnager la vitesse de défilement
+    void demanderChangementModeAuto();
+    void demanderChangementModeManuel();
+
+    //Pour changer la vitesse de défilement
     void demanderChangementVitesseDefilementX0_5();
     void demanderChangementVitesseDefilementX0_75();
     void demanderChangementVitesseDefilementX1();
