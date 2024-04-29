@@ -26,7 +26,8 @@ Exemple d'utilisation : Images mesImages;
 
 #### Attributs
 Diaporamas _allDiapos : Un vecteur contenant tous les diaporamas gérés par le lecteur.1
-unsigned int _numDiapoCourant : Le numéro du diapo courant.
+unsigned int _numDiapoCourant : Le numéro du diapo courant. 
+
 Images _allImages : Un vecteur contenant toutes les images gérées par le lecteur.
 
 
