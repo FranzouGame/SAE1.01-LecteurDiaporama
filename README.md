@@ -27,7 +27,6 @@ Exemple d'utilisation : Images mesImages;
 #### Attributs
 Diaporamas _allDiapos : Un vecteur contenant tous les diaporamas gérés par le lecteur.1
 unsigned int _numDiapoCourant : Le numéro du diapo courant. 
-
 Images _allImages : Un vecteur contenant toutes les images gérées par le lecteur.
 
 
@@ -96,8 +95,6 @@ void triCroissantRang() : Trie les images du diaporama par leur rang dans l'ordr
 
 
 
-
-
 ### Classe ImageDansDiaporama
 
 #### Héritage
@@ -111,7 +108,7 @@ unsigned int _pos : Le rang de l'image dans le diaporama.
 
 ##### Constructeurs
 imageDansDiaporama() : Constructeur par défaut de la classe imageDansDiaporama.
-imageDansDiaporama(const Image&, unsigned int, unsigned int) : Constructeur permettant d'initialiser les attributs de l'image dans le diaporama en utilisant une instance de la classe Image.
+ImageDansDiaporama(const Image&, unsigned int, unsigned int) : Constructeur permettant d'initialiser les attributs de l'image dans le diaporama en utilisant une instance de la classe Image.
 imageDansDiaporama(Images&, unsigned int, unsigned int) : Constructeur permettant d'initialiser les attributs de l'image dans le diaporama en utilisant un vecteur d'images.
 
 ##### Getters
@@ -125,9 +122,6 @@ void setPos(unsigned int) : Définit le rang de l'image dans le diaporama.
 
 ##### Autres méthodes
 void afficherImageCourante() const : Affiche les informations de l'image courante dans le diaporama.
-
-
-
 
 
 
