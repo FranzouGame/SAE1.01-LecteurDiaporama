@@ -55,6 +55,7 @@ void chargerDiapos(Images images) : Charge les diaporamas à partir d'un ensembl
 
 
 
+
 ### Classe Diaporama
 
 #### Attributs
@@ -92,6 +93,10 @@ void triCroissantRang() : Trie les images du diaporama par leur rang dans l'ordr
 
 
 
+
+
+
+
 ### Classe ImageDansDiaporama
 
 #### Héritage
@@ -119,6 +124,10 @@ void setPos(unsigned int) : Définit le rang de l'image dans le diaporama.
 
 ##### Autres méthodes
 void afficherImageCourante() const : Affiche les informations de l'image courante dans le diaporama.
+
+
+
+
 
 
 
