@@ -20,7 +20,7 @@ Lecteur::Lecteur(Diaporamas diapos, unsigned int numDiapoCourant) :
 
 
 /*** Getters ***/
-Diaporamas Lecteur::getAllDiapos() const
+Diaporamas& Lecteur::getAllDiapos()
 {
     return _allDiapos;
 }
@@ -148,33 +148,33 @@ unsigned int Lecteur::saisieVerifChoixDiaporama()
     return choixDiaporama;
 }
 
-void Lecteur::charger(Images& images) {
+void Lecteur::charger() {
     Image imageACharger("objet", "", "C:\\cartesDisney\\Disney_tapis.gif");
-    images.push_back(imageACharger);
+    _allImages.push_back(imageACharger);
 
     imageACharger = Image("personnage", "Blanche Neige", "C:\\cartesDisney\\Disney_4.gif");
-    images.push_back(imageACharger);
+    _allImages.push_back(imageACharger);
 
     imageACharger = Image("personnage", "Alice", "C:\\cartesDisney\\Disney_2.gif");
-    images.push_back(imageACharger);
+    _allImages.push_back(imageACharger);
 
     imageACharger = Image("animal", "Mickey", "C:\\cartesDisney\\Disney_19.gif");
-    images.push_back(imageACharger);
+    _allImages.push_back(imageACharger);
 
     imageACharger = Image("personnage", "Pinnochio", "C:\\cartesDisney\\Disney_29.gif");
-    images.push_back(imageACharger);
+    _allImages.push_back(imageACharger);
 
     imageACharger = Image("objet", "chateau", "C:\\cartesDisney\\Disney_0.gif");
-    images.push_back(imageACharger);
+    _allImages.push_back(imageACharger);
 
     imageACharger = Image("personnage", "Minnie", "C:\\cartesDisney\\Disney_14.gif");
-    images.push_back(imageACharger);
+    _allImages.push_back(imageACharger);
 
     imageACharger = Image("animal", "Bambi", "C:\\cartesDisney\\Disney_3.gif");
-    images.push_back(imageACharger);
+    _allImages.push_back(imageACharger);
 }
 
-void Lecteur::chargerDiapos(Images images)
+void Lecteur::chargerDiapos()
 {
     Image image;
     imageDansDiaporama imageDansDiapo;
@@ -184,7 +184,7 @@ void Lecteur::chargerDiapos(Images images)
     diapoDefaut.setVitesseDefilement(1);
 
     // Ajout de l'unique image du diaporama par défaut
-    imageDansDiapo = imageDansDiaporama(images,0,1);
+    imageDansDiapo = imageDansDiaporama(_allImages,0,1);
     diapoDefaut.addImage(imageDansDiapo);
 
     // Ajout du diaporama dans le tableau de diaporamas
@@ -195,20 +195,20 @@ void Lecteur::chargerDiapos(Images images)
     diapoPantxika.setVitesseDefilement(2);
 
     // Les images du diaporama de Pantxika
-    imageDansDiapo = imageDansDiaporama (images, 4, 3);
+    imageDansDiapo = imageDansDiaporama (_allImages, 4, 3);
     diapoPantxika.addImage(imageDansDiapo);
 
-    imageDansDiapo = imageDansDiaporama (images,1 ,2);
+    imageDansDiapo = imageDansDiaporama (_allImages,1 ,2);
     diapoPantxika.addImage(imageDansDiapo);
 
-    imageDansDiapo = imageDansDiaporama (images,2, 4);
+    imageDansDiapo = imageDansDiaporama (_allImages,2, 4);
     diapoPantxika.addImage(imageDansDiapo);
 
-    imageDansDiapo = imageDansDiaporama (images,3 ,1);
+    imageDansDiapo = imageDansDiaporama (_allImages,3 ,1);
     diapoPantxika.addImage(imageDansDiapo);
 
     // Tri des images par leur rang
-    diapoPantxika.triCroissantRang();
+    // diapoPantxika.triCroissantRang();
 
     // Ajout du diaporama dans le tableau de diaporamas
     _allDiapos.push_back(diapoPantxika);
@@ -218,20 +218,20 @@ void Lecteur::chargerDiapos(Images images)
     diapoThierry.setVitesseDefilement(4);
 
     // Les images du diaporama de Thierry
-    imageDansDiapo = imageDansDiaporama(images,4 ,1);
+    imageDansDiapo = imageDansDiaporama(_allImages,4 ,1);
     diapoThierry.addImage(imageDansDiapo);
 
-    imageDansDiapo = imageDansDiaporama(images,1 ,2);
+    imageDansDiapo = imageDansDiaporama(_allImages,1 ,2);
     diapoThierry.addImage(imageDansDiapo);
 
-    imageDansDiapo = imageDansDiaporama(images,2 ,3);
+    imageDansDiapo = imageDansDiaporama(_allImages,2 ,3);
     diapoThierry.addImage(imageDansDiapo);
 
-    imageDansDiapo = imageDansDiaporama(images,3 ,4);
+    imageDansDiapo = imageDansDiaporama(_allImages,3 ,4);
     diapoThierry.addImage(imageDansDiapo);
 
     // Tri des images par leur rang
-    diapoThierry.triCroissantRang();
+    // diapoThierry.triCroissantRang();
 
     // Ajout du diaporama dans le tableau de diaporamas
     _allDiapos.push_back(diapoThierry);
@@ -241,20 +241,20 @@ void Lecteur::chargerDiapos(Images images)
     DiapoYann.setVitesseDefilement(3);
 
     // Les images du diaporama de Yann
-    imageDansDiapo = imageDansDiaporama(images,4 ,2);
+    imageDansDiapo = imageDansDiaporama(_allImages,4 ,2);
     DiapoYann.addImage(imageDansDiapo);
 
-    imageDansDiapo = imageDansDiaporama(images,1 ,1);
+    imageDansDiapo = imageDansDiaporama(_allImages,1 ,1);
     DiapoYann.addImage(imageDansDiapo);
 
-    imageDansDiapo = imageDansDiaporama(images,2 ,4);
+    imageDansDiapo = imageDansDiaporama(_allImages,2 ,4);
     DiapoYann.addImage(imageDansDiapo);
 
-    imageDansDiapo = imageDansDiaporama(images,3 ,3);
+    imageDansDiapo = imageDansDiaporama(_allImages,3 ,3);
     DiapoYann.addImage(imageDansDiapo);
 
     // Tri des images par leur rang
-    DiapoYann.triCroissantRang();
+    // DiapoYann.triCroissantRang();
 
     // Ajout du diaporama dans le tableau de diaporamas
     _allDiapos.push_back(DiapoYann);
@@ -265,20 +265,20 @@ void Lecteur::chargerDiapos(Images images)
     DiapoManu.setVitesseDefilement(1);
 
     // Les images du diaporama de Manu
-    imageDansDiapo = imageDansDiaporama(images,4 ,4);
+    imageDansDiapo = imageDansDiaporama(_allImages,4 ,4);
     DiapoManu.addImage(imageDansDiapo);
 
-    imageDansDiapo = imageDansDiaporama(images,1 ,3);
+    imageDansDiapo = imageDansDiaporama(_allImages,1 ,3);
     DiapoManu.addImage(imageDansDiapo);
 
-    imageDansDiapo = imageDansDiaporama(images,2 ,2);
+    imageDansDiapo = imageDansDiaporama(_allImages,2 ,2);
     DiapoManu.addImage(imageDansDiapo);
 
-    imageDansDiapo = imageDansDiaporama(images,3 ,1);
+    imageDansDiapo = imageDansDiaporama(_allImages,3 ,1);
     DiapoManu.addImage(imageDansDiapo);
 
     // Tri des images par leur rang
-    DiapoManu.triCroissantRang();
+    // DiapoManu.triCroissantRang();
 
     // Ajout du diaporama dans le tableau de diaporamas
     _allDiapos.push_back(DiapoManu);

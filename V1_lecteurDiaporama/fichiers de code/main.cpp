@@ -1,5 +1,4 @@
 #include <iostream>
-#include <vector>
 #include "diaporama.h"
 #include "lecteur.h"
 using namespace std;
@@ -13,12 +12,11 @@ int main()
      * - Charger les images et diaporamas
      * Dans un second temps, ces contenus proviendront d'une base de données
      --------------------------------------------------------------------------------------*/
-    Lecteur lecteurDiapos;
-    vector<Image> images;          // les images
+    Lecteur lecteurDiapos;         // Le lecteur
 
     // Chargement des urls des images, chargement des diaporamas
-    lecteurDiapos.charger(images);
-    lecteurDiapos.chargerDiapos(images);
+    lecteurDiapos.charger();
+    lecteurDiapos.chargerDiapos();
 
 
     //lecteurDiapos.getDiapoCourant().afficherImageCouranteDansDiaporamaCourant();
@@ -37,35 +35,29 @@ int main()
      * --------------------- */
 
 
-    /* Faire fonctionner le lecteur
-       --------------*/
-    char choixAction = ' ' ;              // pour saisir le choix de l'utilisateur dans le menu d'actions possibles
+    // Faire fonctionner le lecteur
+    char choixAction = ' ' ;              // Pour saisir le choix de l'utilisateur dans le menu d'actions possibles
     while (true)
     {
 
-        /* Affichage à l'écran des infos de l'image courante dans son diaporama   */
-        system("cls");  // effacer l'écran
+        // Effacer l'écran
+        system("cls");
 
-        //unsigned int position = diaporamas[diaporamaCourant].getLocalisationImages()[imageCourante].getPos();
+        // Afficher l'image courante
         lecteurDiapos.getDiapoCourant().afficherImageCouranteDansDiaporamaCourant();
 
-        /* Menu des actions possibles (saisie choix utilisateur) :
-         * A-vancer, R-eculer, C-hanger de diaporama, Q-uitter */
-
+        // Saisie-vérification du choix de l'utilisateur
         lecteurDiapos.saisieVerifChoixActionSurImageCourante(choixAction);
 
         if (choixAction == 'Q')
         {
             break;
         }
-
-        /* Faire l'action demandée (Avancer - Reculer - Changer de Diaporama - Quitter) */
-        system("cls");  // effacer l'écran
     }
 
     /* Fin
        --------------*/
-      cout << "Au revoir " << endl;
-      return 0;
+    cout << "Au revoir " << endl;
+    return 0;
 }
 
