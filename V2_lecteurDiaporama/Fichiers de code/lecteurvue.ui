@@ -64,6 +64,7 @@
     </property>
     <layout class="QVBoxLayout" name="verticalLayout">
      <item>
+<<<<<<< HEAD
       <widget class="QLabel" name="image">
        <property name="text">
         <string/>
@@ -71,6 +72,8 @@
       </widget>
      </item>
      <item>
+=======
+>>>>>>> 4a61c008d2df54e393f53ab6cc1cfffdacd379bc
       <widget class="QLabel" name="titreImage">
        <property name="text">
         <string>Titre de l'image</string>
@@ -81,6 +84,16 @@
       </widget>
      </item>
      <item>
+<<<<<<< HEAD
+=======
+      <widget class="QLabel" name="image">
+       <property name="text">
+        <string/>
+       </property>
+      </widget>
+     </item>
+     <item>
+>>>>>>> 4a61c008d2df54e393f53ab6cc1cfffdacd379bc
       <widget class="QLabel" name="catImage">
        <property name="text">
         <string>Catégorie</string>
@@ -161,8 +174,33 @@
      <property name="title">
       <string>Paramètres</string>
      </property>
+<<<<<<< HEAD
      <addaction name="actionCharger_Diaporama"/>
      <addaction name="actionChanger_Vitesse_Defilement"/>
+=======
+     <widget class="QMenu" name="menuChanger_la_vitesse_de_d_filement">
+      <property name="title">
+       <string>Changer la vitesse de défilement</string>
+      </property>
+      <addaction name="actionX0_5"/>
+      <addaction name="actionX0_75"/>
+      <addaction name="actionX1"/>
+      <addaction name="actionX1_25"/>
+      <addaction name="actionX1_5"/>
+      <addaction name="actionX1_75"/>
+      <addaction name="actionX2"/>
+     </widget>
+     <widget class="QMenu" name="menuMode">
+      <property name="title">
+       <string>Mode</string>
+      </property>
+      <addaction name="actionModeAuto"/>
+      <addaction name="actionModeManuel"/>
+     </widget>
+     <addaction name="actionCharger_Diaporama"/>
+     <addaction name="menuChanger_la_vitesse_de_d_filement"/>
+     <addaction name="menuMode"/>
+>>>>>>> 4a61c008d2df54e393f53ab6cc1cfffdacd379bc
     </widget>
     <addaction name="menuParam_tres"/>
     <addaction name="actionQuitter"/>
@@ -191,9 +229,55 @@
     <string>A propos de</string>
    </property>
   </action>
+<<<<<<< HEAD
   <action name="actionChanger_Vitesse_Defilement">
    <property name="text">
     <string>Changer la vitesse de défilement</string>
+=======
+  <action name="actionX0_5">
+   <property name="text">
+    <string>x0.5</string>
+   </property>
+  </action>
+  <action name="actionX0_75">
+   <property name="text">
+    <string>x0.75</string>
+   </property>
+  </action>
+  <action name="actionX1">
+   <property name="text">
+    <string>X1</string>
+   </property>
+  </action>
+  <action name="actionX1_25">
+   <property name="text">
+    <string>X1.25</string>
+   </property>
+  </action>
+  <action name="actionX1_5">
+   <property name="text">
+    <string>X1.5</string>
+   </property>
+  </action>
+  <action name="actionX1_75">
+   <property name="text">
+    <string>X1.75</string>
+   </property>
+  </action>
+  <action name="actionX2">
+   <property name="text">
+    <string>X2</string>
+   </property>
+  </action>
+  <action name="actionModeAuto">
+   <property name="text">
+    <string>Automatique</string>
+   </property>
+  </action>
+  <action name="actionModeManuel">
+   <property name="text">
+    <string>Manuel</string>
+>>>>>>> 4a61c008d2df54e393f53ab6cc1cfffdacd379bc
    </property>
   </action>
  </widget>
