@@ -1,5 +1,4 @@
 #include <iostream>
-#include <vector>
 #include "diaporama.h"
 #include "lecteur.h"
 using namespace std;
@@ -37,7 +36,7 @@ int main()
 
 
     // Faire fonctionner le lecteur
-    char choixAction = ' ' ;              // pour saisir le choix de l'utilisateur dans le menu d'actions possibles
+    char choixAction = ' ' ;              // Pour saisir le choix de l'utilisateur dans le menu d'actions possibles
     while (true)
     {
 
