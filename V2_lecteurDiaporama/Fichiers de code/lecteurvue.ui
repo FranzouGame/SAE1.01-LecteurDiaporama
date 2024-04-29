@@ -64,16 +64,6 @@
     </property>
     <layout class="QVBoxLayout" name="verticalLayout">
      <item>
-<<<<<<< HEAD
-      <widget class="QLabel" name="image">
-       <property name="text">
-        <string/>
-       </property>
-      </widget>
-     </item>
-     <item>
-=======
->>>>>>> 4a61c008d2df54e393f53ab6cc1cfffdacd379bc
       <widget class="QLabel" name="titreImage">
        <property name="text">
         <string>Titre de l'image</string>
@@ -84,8 +74,6 @@
       </widget>
      </item>
      <item>
-<<<<<<< HEAD
-=======
       <widget class="QLabel" name="image">
        <property name="text">
         <string/>
@@ -93,7 +81,6 @@
       </widget>
      </item>
      <item>
->>>>>>> 4a61c008d2df54e393f53ab6cc1cfffdacd379bc
       <widget class="QLabel" name="catImage">
        <property name="text">
         <string>Catégorie</string>
@@ -174,10 +161,6 @@
      <property name="title">
       <string>Paramètres</string>
      </property>
-<<<<<<< HEAD
-     <addaction name="actionCharger_Diaporama"/>
-     <addaction name="actionChanger_Vitesse_Defilement"/>
-=======
      <widget class="QMenu" name="menuChanger_la_vitesse_de_d_filement">
       <property name="title">
        <string>Changer la vitesse de défilement</string>
@@ -200,7 +183,6 @@
      <addaction name="actionCharger_Diaporama"/>
      <addaction name="menuChanger_la_vitesse_de_d_filement"/>
      <addaction name="menuMode"/>
->>>>>>> 4a61c008d2df54e393f53ab6cc1cfffdacd379bc
     </widget>
     <addaction name="menuParam_tres"/>
     <addaction name="actionQuitter"/>
@@ -229,11 +211,6 @@
     <string>A propos de</string>
    </property>
   </action>
-<<<<<<< HEAD
-  <action name="actionChanger_Vitesse_Defilement">
-   <property name="text">
-    <string>Changer la vitesse de défilement</string>
-=======
   <action name="actionX0_5">
    <property name="text">
     <string>x0.5</string>
@@ -277,7 +254,6 @@
   <action name="actionModeManuel">
    <property name="text">
     <string>Manuel</string>
->>>>>>> 4a61c008d2df54e393f53ab6cc1cfffdacd379bc
    </property>
   </action>
  </widget>

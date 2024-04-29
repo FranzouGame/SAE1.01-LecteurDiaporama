@@ -26,7 +26,6 @@ public slots:
     // Pour faire le lien avec les diaporamas
     void demanderAvancer();
     void demanderReculer();
-    void demanderChangementVitesseDefilement();
     void demanderArreterDiapo();
 
     // Pour gérer les actions propres au lecteur
@@ -45,5 +44,6 @@ public slots:
     void demanderChangementVitesseDefilementX1_5();
     void demanderChangementVitesseDefilementX1_75();
     void demanderChangementVitesseDefilementX2();
+
 };
 #endif // LECTEURVUE_H

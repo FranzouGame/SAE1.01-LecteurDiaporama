@@ -18,11 +18,6 @@ lecteurvue::lecteurvue(QWidget *parent)
     QObject::connect(ui->btnPrec, SIGNAL(clicked()), this, SLOT(demanderReculer()));
     QObject::connect(ui->actionCharger_Diaporama, SIGNAL(triggered()), this, SLOT(demanderChangementDiaporama()));
     QObject::connect(ui->btnArreterDiapo, SIGNAL(clicked()), this, SLOT(demanderArreterDiapo()));
-<<<<<<< HEAD
-    QObject::connect(ui->actionChanger_Vitesse_Defilement, SIGNAL(triggered()), this, SLOT(demanderChangementVitesseDefilement()));
-    QObject::connect(ui->actionQuitter, SIGNAL(triggered()), this, SLOT(demanderFermetureLecteur()));
-    QObject::connect(ui->actionA_propos_de, SIGNAL(triggered()), this, SLOT(demanderInformations()));
-=======
     //QObject::connect(ui->actionChanger_Vitesse_Defilement, SIGNAL(triggered()), this, SLOT(demanderChangementVitesseDefilement()));
     QObject::connect(ui->actionQuitter, SIGNAL(triggered()), this, SLOT(demanderFermetureLecteur()));
     QObject::connect(ui->actionA_propos_de, SIGNAL(triggered()), this, SLOT(demanderInformations()));
@@ -35,7 +30,6 @@ lecteurvue::lecteurvue(QWidget *parent)
     QObject::connect(ui->actionX2, SIGNAL(triggered()), this, SLOT(demanderChangementVitesseDefilementX2()));
     QObject::connect(ui->actionModeAuto, SIGNAL(triggered()), this, SLOT(demanderChangementModeAuto()));
     QObject::connect(ui->actionModeManuel, SIGNAL(triggered()), this, SLOT(demanderChangementModeManuel()));
->>>>>>> 4a61c008d2df54e393f53ab6cc1cfffdacd379bc
 }
 
 lecteurvue::~lecteurvue()
@@ -57,13 +51,6 @@ void lecteurvue::demanderReculer() {
     qDebug() << "Demande de recul dans le diaporama";
 }
 
-<<<<<<< HEAD
-void lecteurvue::demanderChangementVitesseDefilement() {
-    qDebug() << "Demande de changement de vitesse de défilement du diaporama";
-}
-
-=======
->>>>>>> 4a61c008d2df54e393f53ab6cc1cfffdacd379bc
 void lecteurvue::demanderChangementDiaporama() {
     qDebug() << "Demande de chargement de diaporama";
 }
@@ -86,8 +73,6 @@ void lecteurvue::demanderFermetureLecteur() {
 void lecteurvue::demanderInformations() {
     qDebug() << "Demande d'informations";
 }
-<<<<<<< HEAD
-=======
 void lecteurvue::demanderChangementVitesseDefilementX0_5() {
     qDebug() << "Demande de changement de vitesse de défilement du diaporama à 0.5";
 }
@@ -117,4 +102,3 @@ void lecteurvue::demanderChangementModeAuto() {
 void lecteurvue::demanderChangementModeManuel() {
     qDebug() << "Demande de passage en mode manuel";
 }
->>>>>>> 4a61c008d2df54e393f53ab6cc1cfffdacd379bc
