@@ -1,10 +1,12 @@
 #ifndef MODELELECTEUR_H
 #define MODELELECTEUR_H
 
+// Inclusions
+#include <QObject>
 
-class ModeleLecteur
+class ModeleLecteur : public QObject
 {
-
+    Q_OBJECT
 private:
     // Type énuméré état
     enum UnEtat {Automatique, Manuel, ChoixDiaporama};

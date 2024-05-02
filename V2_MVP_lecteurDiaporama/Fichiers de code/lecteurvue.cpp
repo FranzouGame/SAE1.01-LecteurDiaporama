@@ -6,7 +6,7 @@
  ***********************/
 
 
-lecteurvue::lecteurvue(QWidget *parent)
+LecteurVue::LecteurVue(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::lecteurvue)
 {
@@ -32,7 +32,7 @@ lecteurvue::lecteurvue(QWidget *parent)
     QObject::connect(ui->actionModeManuel, SIGNAL(triggered()), this, SLOT(demanderChangementModeManuel()));
 }
 
-lecteurvue::~lecteurvue()
+LecteurVue::~lecteurvue()
 {
     delete ui;
 }
@@ -43,62 +43,63 @@ lecteurvue::~lecteurvue()
 /************************
  *        SLOTS         *
  ***********************/
-void lecteurvue::demanderAvancer() {
+void LecteurVue::demanderAvancer() {
     qDebug() << "Demande d'avancement dans le diaporama";
+    _pres->demanderAvancer();
 }
 
-void lecteurvue::demanderReculer() {
+void LecteurVue::demanderReculer() {
     qDebug() << "Demande de recul dans le diaporama";
 }
 
-void lecteurvue::demanderChangementDiaporama() {
+void LecteurVue::demanderChangementDiaporama() {
     qDebug() << "Demande de chargement de diaporama";
 }
 
-void lecteurvue::demanderArreterDiapo() {
+void LecteurVue::demanderArreterDiapo() {
     qDebug() << "Demande d'arrêt de la diapositive en cours";
 }
 
-void lecteurvue::demanderLancementDiapo() {
+void LecteurVue::demanderLancementDiapo() {
     qDebug() << "Demande de lancement d'une diapositive";
 }
 
-void lecteurvue::demanderFermetureLecteur() {
+void LecteurVue::demanderFermetureLecteur() {
     qDebug() << "Demande de fermeture du lecteur";
     /* Fermeture réelle
     close();
     */
 }
 
-void lecteurvue::demanderInformations() {
+void LecteurVue::demanderInformations() {
     qDebug() << "Demande d'informations";
 }
-void lecteurvue::demanderChangementVitesseDefilementX0_5() {
+void LecteurVue::demanderChangementVitesseDefilementX0_5() {
     qDebug() << "Demande de changement de vitesse de défilement du diaporama à 0.5";
 }
-void lecteurvue::demanderChangementVitesseDefilementX0_75() {
+void LecteurVue::demanderChangementVitesseDefilementX0_75() {
     qDebug() << "Demande de changement de vitesse de défilement du diaporama à 0.75";
 }
-void lecteurvue::demanderChangementVitesseDefilementX1() {
+void LecteurVue::demanderChangementVitesseDefilementX1() {
     qDebug() << "Demande de changement de vitesse de défilement du diaporama à 1";
 }
-void lecteurvue::demanderChangementVitesseDefilementX1_25() {
+void LecteurVue::demanderChangementVitesseDefilementX1_25() {
     qDebug() << "Demande de changement de vitesse de défilement du diaporama à 1.25";
 }
-void lecteurvue::demanderChangementVitesseDefilementX1_5() {
+void LecteurVue::demanderChangementVitesseDefilementX1_5() {
     qDebug() << "Demande de changement de vitesse de défilement du diaporama à 1.5";
 }
-void lecteurvue::demanderChangementVitesseDefilementX1_75() {
+void LecteurVue::demanderChangementVitesseDefilementX1_75() {
     qDebug() << "Demande de changement de vitesse de défilement du diaporama à 1.75";
 }
-void lecteurvue::demanderChangementVitesseDefilementX2() {
+void LecteurVue::demanderChangementVitesseDefilementX2() {
     qDebug() << "Demande de changement de vitesse de défilement du diaporama à 2";
 }
 
-void lecteurvue::demanderChangementModeAuto() {
+void LecteurVue::demanderChangementModeAuto() {
     qDebug() << "Demande de passage en mode automatique";
 }
 
-void lecteurvue::demanderChangementModeManuel() {
+void LecteurVue::demanderChangementModeManuel() {
     qDebug() << "Demande de passage en mode manuel";
 }
