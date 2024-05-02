@@ -37,13 +37,14 @@ public slots:
     void demanderChangementModeManuel();
 
     //Pour changer la vitesse de défilement
-    void demanderChangementVitesseDefilementX0_5();
+    /*void demanderChangementVitesseDefilementX0_5();
     void demanderChangementVitesseDefilementX0_75();
     void demanderChangementVitesseDefilementX1();
     void demanderChangementVitesseDefilementX1_25();
     void demanderChangementVitesseDefilementX1_5();
     void demanderChangementVitesseDefilementX1_75();
-    void demanderChangementVitesseDefilementX2();
+    void demanderChangementVitesseDefilementX2();*/
+    void demanderChangementVitesseDefilement();
 
 };
 #endif // LECTEURVUE_H
