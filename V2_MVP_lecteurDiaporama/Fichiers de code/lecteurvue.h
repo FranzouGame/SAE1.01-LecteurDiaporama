@@ -5,22 +5,37 @@
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
-class lecteurvue;
+class LecteurVue;
 }
 QT_END_NAMESPACE
 
-class lecteurvue : public QMainWindow
+// Classe nécessaire
+class PresentationLecteur;
+
+
+class LecteurVue : public QMainWindow
 {
     Q_OBJECT
 
-public:
-    // Constructeur & Destructeur
-    lecteurvue(QWidget *parent = nullptr);
-    ~lecteurvue();
 
 private:
-    // Design de la fenêtre
-    Ui::lecteurvue *ui;
+    // Design de la vue
+    Ui::LecteurVue *ui;
+    // Presentation de la vue
+    PresentationLecteur* _pres;
+
+public:
+    // Constructeur & Destructeur
+    LecteurVue(QWidget *parent = nullptr);
+    ~lecteurvue();
+
+    // Getters
+    PresentationLecteur* getPres() const;
+
+    // Setters
+    void setPres(PresentationLecteur*);
+
+
 
 public slots:
     // Pour faire le lien avec les diaporamas

@@ -10,10 +10,20 @@ CONFIG += c++17
 
 SOURCES += \
     main.cpp \
-    lecteurvue.cpp
+    lecteurvue.cpp \
+    modelelecteur.cpp \
+    presentationlecteur.cpp \
+    diaporama.cpp \
+    imagedansdiaporama.cpp \
+    image.cpp
 
 HEADERS += \
-    lecteurvue.h
+    lecteurvue.h \
+    modelelecteur.h \
+    presentationlecteur.h \
+    diaporama.h \
+    imagedansdiaporama.h \
+    image.h
 
 FORMS += \
     lecteurvue.ui
