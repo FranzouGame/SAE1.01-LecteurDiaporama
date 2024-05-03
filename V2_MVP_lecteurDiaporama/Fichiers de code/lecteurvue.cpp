@@ -74,6 +74,7 @@ void LecteurVue::demanderChangementModeAuto() {
     qDebug() << "Demande de passage en mode automatique";
 }
 
+
 void LecteurVue::demanderChangementModeManuel() {
     qDebug() << "Demande de passage en mode manuel";
 }
@@ -81,4 +82,20 @@ void LecteurVue::demanderChangementModeManuel() {
 void LecteurVue::demanderChangementVitesseDefilement()
 {
     qDebug() << "Demande de changement de vitesse de défilement";
+}
+
+/************************
+ *        GETTERS       *
+ ***********************/
+
+PresentationLecteur* LecteurVue::getPres() const {
+    return _pres;
+}
+
+/************************
+ *        SETTERS       *
+ ***********************/
+
+void LecteurVue::setPres(PresentationLecteur* pres) {
+    _pres = pres;
 }

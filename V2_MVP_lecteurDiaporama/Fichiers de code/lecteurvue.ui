@@ -150,7 +150,7 @@
      <x>0</x>
      <y>0</y>
      <width>887</width>
-     <height>21</height>
+     <height>25</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFichier">
@@ -161,18 +161,6 @@
      <property name="title">
       <string>Paramètres</string>
      </property>
-     <widget class="QMenu" name="menuChanger_la_vitesse_de_d_filement">
-      <property name="title">
-       <string>Changer la vitesse de défilement</string>
-      </property>
-      <addaction name="actionX0_5"/>
-      <addaction name="actionX0_75"/>
-      <addaction name="actionX1"/>
-      <addaction name="actionX1_25"/>
-      <addaction name="actionX1_5"/>
-      <addaction name="actionX1_75"/>
-      <addaction name="actionX2"/>
-     </widget>
      <widget class="QMenu" name="menuMode">
       <property name="title">
        <string>Mode</string>
@@ -181,8 +169,8 @@
       <addaction name="actionModeManuel"/>
      </widget>
      <addaction name="actionCharger_Diaporama"/>
-     <addaction name="menuChanger_la_vitesse_de_d_filement"/>
      <addaction name="menuMode"/>
+     <addaction name="actionChanger_Vitesse_Defilement"/>
     </widget>
     <addaction name="menuParam_tres"/>
     <addaction name="actionQuitter"/>
@@ -254,6 +242,11 @@
   <action name="actionModeManuel">
    <property name="text">
     <string>Manuel</string>
+   </property>
+  </action>
+  <action name="actionChanger_Vitesse_Defilement">
+   <property name="text">
+    <string>Changer la vitesse de défilement</string>
    </property>
   </action>
  </widget>
