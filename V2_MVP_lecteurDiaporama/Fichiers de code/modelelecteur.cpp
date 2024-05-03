@@ -5,12 +5,12 @@ ModeleLecteur::ModeleLecteur() :
 
 }
 
-void ModeleLecteur::setEtat(UnEtat e)
+void ModeleLecteur::setEtat(ModeleLecteur::UnEtat e)
 {
     _etat = e;
 }
 
-UnEtat ModeleLecteur::getEtat() const
+ModeleLecteur::UnEtat ModeleLecteur::getEtat() const
 {
     return _etat;
 }

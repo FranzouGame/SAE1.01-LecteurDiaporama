@@ -28,7 +28,7 @@ private:
 public:
     // Constructeur & Destructeur
     LecteurVue(QWidget *parent = nullptr);
-    ~lecteurvue();
+    ~LecteurVue();
 
     // Getters
     PresentationLecteur* getPres() const;
@@ -37,7 +37,7 @@ public:
     void setPres(PresentationLecteur*);
 
     // Autres méthodes
-    void majInterface(Modele::UnEtat);
+    void majInterface(ModeleLecteur::UnEtat);
 
 
 public slots:

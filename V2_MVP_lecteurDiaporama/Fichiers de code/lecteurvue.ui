@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>lecteurvue</class>
- <widget class="QMainWindow" name="lecteurvue">
+ <class>LecteurVue</class>
+ <widget class="QMainWindow" name="LecteurVue">
   <property name="geometry">
    <rect>
     <x>0</x>

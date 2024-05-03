@@ -1,4 +1,4 @@
-#include "lecteurvue.h"
+#include "LecteurVue.h"
 #include "ui_lecteurvue.h"
 
 /************************
@@ -8,7 +8,7 @@
 
 LecteurVue::LecteurVue(QWidget *parent)
     : QMainWindow(parent)
-    , ui(new Ui::lecteurvue)
+    , ui(new Ui::LecteurVue)
 {
     ui->setupUi(this);
 
@@ -18,21 +18,14 @@ LecteurVue::LecteurVue(QWidget *parent)
     QObject::connect(ui->btnPrec, SIGNAL(clicked()), this, SLOT(demanderReculer()));
     QObject::connect(ui->actionCharger_Diaporama, SIGNAL(triggered()), this, SLOT(demanderChangementDiaporama()));
     QObject::connect(ui->btnArreterDiapo, SIGNAL(clicked()), this, SLOT(demanderArreterDiapo()));
-    //QObject::connect(ui->actionChanger_Vitesse_Defilement, SIGNAL(triggered()), this, SLOT(demanderChangementVitesseDefilement()));
+    QObject::connect(ui->actionChanger_Vitesse_Defilement, SIGNAL(triggered()), this, SLOT(demanderChangementVitesseDefilement()));
     QObject::connect(ui->actionQuitter, SIGNAL(triggered()), this, SLOT(demanderFermetureLecteur()));
     QObject::connect(ui->actionA_propos_de, SIGNAL(triggered()), this, SLOT(demanderInformations()));
-    QObject::connect(ui->actionX0_5, SIGNAL(triggered()), this, SLOT(demanderChangementVitesseDefilementX0_5()));
-    QObject::connect(ui->actionX0_75, SIGNAL(triggered()), this, SLOT(demanderChangementVitesseDefilementX0_75()));
-    QObject::connect(ui->actionX1, SIGNAL(triggered()), this, SLOT(demanderChangementVitesseDefilementX1()));
-    QObject::connect(ui->actionX1_25, SIGNAL(triggered()), this, SLOT(demanderChangementVitesseDefilementX1_25()));
-    QObject::connect(ui->actionX1_5, SIGNAL(triggered()), this, SLOT(demanderChangementVitesseDefilementX1_5()));
-    QObject::connect(ui->actionX1_75, SIGNAL(triggered()), this, SLOT(demanderChangementVitesseDefilementX1_75()));
-    QObject::connect(ui->actionX2, SIGNAL(triggered()), this, SLOT(demanderChangementVitesseDefilementX2()));
     QObject::connect(ui->actionModeAuto, SIGNAL(triggered()), this, SLOT(demanderChangementModeAuto()));
     QObject::connect(ui->actionModeManuel, SIGNAL(triggered()), this, SLOT(demanderChangementModeManuel()));
 }
 
-LecteurVue::~lecteurvue()
+LecteurVue::~LecteurVue()
 {
     delete ui;
 }
@@ -45,7 +38,7 @@ LecteurVue::~lecteurvue()
  ***********************/
 void LecteurVue::demanderAvancer() {
     qDebug() << "Demande d'avancement dans le diaporama";
-    _pres->demanderAvancer();
+    getPres()->demanderAvancer();
 }
 
 void LecteurVue::demanderReculer() {

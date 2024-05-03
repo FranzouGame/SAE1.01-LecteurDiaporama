@@ -7,7 +7,7 @@
 class ModeleLecteur : public QObject
 {
     Q_OBJECT
-private:
+public:
     // Type énuméré état
     enum UnEtat {Automatique, Manuel, ChoixDiaporama, Initial, ChoixVitesseDefilement};
 private:
