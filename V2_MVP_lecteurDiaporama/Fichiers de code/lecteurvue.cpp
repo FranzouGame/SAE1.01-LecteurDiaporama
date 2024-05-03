@@ -74,27 +74,7 @@ void LecteurVue::demanderFermetureLecteur() {
 void LecteurVue::demanderInformations() {
     qDebug() << "Demande d'informations";
 }
-void LecteurVue::demanderChangementVitesseDefilementX0_5() {
-    qDebug() << "Demande de changement de vitesse de défilement du diaporama à 0.5";
-}
-void LecteurVue::demanderChangementVitesseDefilementX0_75() {
-    qDebug() << "Demande de changement de vitesse de défilement du diaporama à 0.75";
-}
-void LecteurVue::demanderChangementVitesseDefilementX1() {
-    qDebug() << "Demande de changement de vitesse de défilement du diaporama à 1";
-}
-void LecteurVue::demanderChangementVitesseDefilementX1_25() {
-    qDebug() << "Demande de changement de vitesse de défilement du diaporama à 1.25";
-}
-void LecteurVue::demanderChangementVitesseDefilementX1_5() {
-    qDebug() << "Demande de changement de vitesse de défilement du diaporama à 1.5";
-}
-void LecteurVue::demanderChangementVitesseDefilementX1_75() {
-    qDebug() << "Demande de changement de vitesse de défilement du diaporama à 1.75";
-}
-void LecteurVue::demanderChangementVitesseDefilementX2() {
-    qDebug() << "Demande de changement de vitesse de défilement du diaporama à 2";
-}
+
 
 void LecteurVue::demanderChangementModeAuto() {
     qDebug() << "Demande de passage en mode automatique";
@@ -106,5 +86,5 @@ void LecteurVue::demanderChangementModeManuel() {
 
 void LecteurVue::demanderChangementVitesseDefilement()
 {
-
+    qDebug() << "Demande de changement de vitesse de défilement";
 }
