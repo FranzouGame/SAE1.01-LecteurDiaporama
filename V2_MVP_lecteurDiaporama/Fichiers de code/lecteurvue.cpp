@@ -1,5 +1,6 @@
 #include "LecteurVue.h"
 #include "ui_lecteurvue.h"
+#include "presentationlecteur.h"
 
 /************************
  * CORPS DE LA CLASSE
