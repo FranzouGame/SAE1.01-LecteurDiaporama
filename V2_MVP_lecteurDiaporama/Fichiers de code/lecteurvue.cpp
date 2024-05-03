@@ -103,3 +103,8 @@ void LecteurVue::demanderChangementModeAuto() {
 void LecteurVue::demanderChangementModeManuel() {
     qDebug() << "Demande de passage en mode manuel";
 }
+
+void LecteurVue::demanderChangementVitesseDefilement()
+{
+
+}
