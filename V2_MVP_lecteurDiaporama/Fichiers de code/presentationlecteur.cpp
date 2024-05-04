@@ -1,12 +1,16 @@
 #include "presentationlecteur.h"
+#include "modelelecteur.h"
+#include "lecteurvue.h"
 
 /*** Implémentations ***/
 
 // Constructeur
 PresentationLecteur::PresentationLecteur() :
     _vue(nullptr),
-    _modele(nullptr),
-    _diapoCourant(nullptr) {}
+    _modele(nullptr){
+    _lecteur = new Lecteur();
+    _modele->setEtat(ModeleLecteur::Initial);
+}
 
 // Getter pour LecteurVue
 LecteurVue* PresentationLecteur::getVue() const {
@@ -19,8 +23,8 @@ ModeleLecteur* PresentationLecteur::getModele() const {
 }
 
 // Getter pour Diaporama
-Diaporama* PresentationLecteur::getDiaporama() {
-    return _diapoCourant;
+Lecteur* PresentationLecteur::getLecteur() {
+    return _lecteur;
 }
 
 // Setter pour LecteurVue
@@ -34,39 +38,49 @@ void PresentationLecteur::setModele(ModeleLecteur* modele) {
 }
 
 // Setter pour Diaporama
-void PresentationLecteur::setDiaporama(Diaporama* diaporama) {
-    _diapoCourant = diaporama;
+void PresentationLecteur::setLecteur(Lecteur* diaporama) {
+    _lecteur = diaporama;
 }
 
 // Implémentation des slots
 void PresentationLecteur::demanderAvancer() {
-    // Implémentation à faire
+    _lecteur->getDiapoCourant().avancer();
 }
 
 void PresentationLecteur::demanderReculer() {
-    // Implémentation à faire
+    _lecteur->getDiapoCourant().reculer();
 }
 
 void PresentationLecteur::demanderArretDiapo() {
-    // Implémentation à faire
+    _lecteur->setNumDiapoCourant(0);
+    _lecteur->getDiapoCourant().afficherImageCouranteDansDiaporamaCourant();
 }
 
 void PresentationLecteur::demanderChangerVitesse() {
-    // Implémentation à faire
+    _modele->setEtat(ModeleLecteur::ChoixVitesseDefilement);
+    _vue->majInterface(ModeleLecteur::ChoixVitesseDefilement);
 }
 
 void PresentationLecteur::demanderChargement() {
     // Implémentation à faire
+    // Ouvrir la pop-up de choix des diaporamas
+    _modele->setEtat(ModeleLecteur::ChoixDiaporama);
+    _vue->majInterface(ModeleLecteur::ChoixDiaporama);
 }
 
 void PresentationLecteur::demanderLancement() {
     // Implémentation à faire
+    // A réfléchir
 }
 
 void PresentationLecteur::demanderChangementModeVersManuel() {
     // Implémentation à faire
+    _modele->setEtat(ModeleLecteur::Manuel);
+    _vue->majInterface(_modele->getEtat());
 }
 
 void PresentationLecteur::demanderChangementModeVersAUtomatique() {
     // Implémentation à faire
+    _modele->setEtat(ModeleLecteur::Automatique);
+    _vue->majInterface(_modele->getEtat());
 }

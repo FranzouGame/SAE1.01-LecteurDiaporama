@@ -99,3 +99,38 @@ PresentationLecteur* LecteurVue::getPres() const {
 void LecteurVue::setPres(PresentationLecteur* pres) {
     _pres = pres;
 }
+
+
+
+/************************
+ *    MAJ INTERFACE     *
+ ***********************/
+
+
+void LecteurVue::majInterface(ModeleLecteur::UnEtat e)
+{
+    switch(e)
+    {
+    case ModeleLecteur::Initial:
+        // Implémentation à faire
+        break;
+    case ModeleLecteur::Manuel:
+        // Implémentation à faire
+        break;
+    case ModeleLecteur::Automatique:
+        // Implémentation à faire
+        break;
+    case ModeleLecteur::ChoixDiaporama:
+        // Implémentation à faire
+        break;
+    case ModeleLecteur::ChoixVitesseDefilement:
+        // Implémentation à faire
+        break;
+    default:
+        break;
+    }
+}
+
+
+
+

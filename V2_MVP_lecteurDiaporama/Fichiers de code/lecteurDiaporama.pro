@@ -13,6 +13,7 @@ SOURCES += \
     lecteurvue.cpp \
     modelelecteur.cpp \
     presentationlecteur.cpp \
+    lecteur.cpp \
     diaporama.cpp \
     imagedansdiaporama.cpp \
     image.cpp
@@ -21,6 +22,7 @@ HEADERS += \
     lecteurvue.h \
     modelelecteur.h \
     presentationlecteur.h \
+    lecteur.h \
     diaporama.h \
     imagedansdiaporama.h \
     image.h
