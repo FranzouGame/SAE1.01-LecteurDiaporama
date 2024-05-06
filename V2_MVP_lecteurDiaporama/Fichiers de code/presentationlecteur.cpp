@@ -7,9 +7,8 @@
 // Constructeur
 PresentationLecteur::PresentationLecteur() :
     _vue(nullptr),
-    _modele(nullptr){
-    _lecteur = new Lecteur();
-    _modele->setEtat(ModeleLecteur::Initial);
+    _modele(nullptr),
+    _lecteur(nullptr){
 }
 
 // Getter pour LecteurVue
@@ -38,8 +37,10 @@ void PresentationLecteur::setModele(ModeleLecteur* modele) {
 }
 
 // Setter pour Diaporama
-void PresentationLecteur::setLecteur(Lecteur* diaporama) {
-    _lecteur = diaporama;
+void PresentationLecteur::setLecteur(Lecteur* pLecteur) {
+    _lecteur = pLecteur;
+    _lecteur->charger();
+    _lecteur->chargerDiapos();
 }
 
 // Implémentation des slots
