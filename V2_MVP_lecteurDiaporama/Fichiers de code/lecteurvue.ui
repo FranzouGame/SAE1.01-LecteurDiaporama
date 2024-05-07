@@ -14,123 +14,153 @@
    <string>lecteurvue</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QWidget" name="horizontalLayoutWidget">
-    <property name="geometry">
-     <rect>
-      <x>10</x>
-      <y>10</y>
-      <width>861</width>
-      <height>131</height>
-     </rect>
-    </property>
-    <layout class="QHBoxLayout" name="horizontalLayout" stretch="1,1,1">
-     <property name="sizeConstraint">
-      <enum>QLayout::SetFixedSize</enum>
-     </property>
-     <item>
-      <widget class="QPushButton" name="btnLancerDiapo">
-       <property name="text">
-        <string>Lancer Diaporama</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QLabel" name="titreDiapo">
-       <property name="text">
-        <string>Titre du diaporama</string>
-       </property>
-       <property name="alignment">
-        <set>Qt::AlignCenter</set>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QPushButton" name="btnArreterDiapo">
-       <property name="text">
-        <string>Arrêter le diaporama</string>
-       </property>
-      </widget>
-     </item>
-    </layout>
-   </widget>
-   <widget class="QWidget" name="verticalLayoutWidget">
-    <property name="geometry">
-     <rect>
-      <x>10</x>
-      <y>150</y>
-      <width>861</width>
-      <height>151</height>
-     </rect>
-    </property>
-    <layout class="QVBoxLayout" name="verticalLayout">
-     <item>
-      <widget class="QLabel" name="titreImage">
-       <property name="text">
-        <string>Titre de l'image</string>
-       </property>
-       <property name="alignment">
-        <set>Qt::AlignCenter</set>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QLabel" name="image">
-       <property name="text">
-        <string/>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QLabel" name="catImage">
-       <property name="text">
-        <string>Catégorie</string>
-       </property>
-       <property name="alignment">
-        <set>Qt::AlignCenter</set>
-       </property>
-      </widget>
-     </item>
-    </layout>
-   </widget>
-   <widget class="QWidget" name="horizontalLayoutWidget_2">
-    <property name="geometry">
-     <rect>
-      <x>9</x>
-      <y>309</y>
-      <width>861</width>
-      <height>161</height>
-     </rect>
-    </property>
-    <layout class="QHBoxLayout" name="horizontalLayout_2">
-     <item>
-      <widget class="QPushButton" name="btnPrec">
-       <property name="text">
-        <string>Précédent</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <spacer name="horizontalSpacerEntrePrecEtSuiv">
-       <property name="orientation">
-        <enum>Qt::Horizontal</enum>
-       </property>
-       <property name="sizeHint" stdset="0">
-        <size>
-         <width>40</width>
-         <height>20</height>
-        </size>
-       </property>
-      </spacer>
-     </item>
-     <item>
-      <widget class="QPushButton" name="btnSuiv">
-       <property name="text">
-        <string>Suivant</string>
-       </property>
-      </widget>
-     </item>
-    </layout>
-   </widget>
+   <layout class="QVBoxLayout" name="verticalLayout_2" stretch="0,1,0,1,0">
+    <item>
+     <layout class="QHBoxLayout" name="horizontalLayout" stretch="1,1,1,1,1">
+      <property name="sizeConstraint">
+       <enum>QLayout::SetFixedSize</enum>
+      </property>
+      <item>
+       <widget class="QPushButton" name="btnLancerDiapo">
+        <property name="text">
+         <string>Lancer Diaporama</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <spacer name="horizontalSpacer">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>40</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item>
+       <widget class="QLabel" name="titreDiapo">
+        <property name="text">
+         <string>Titre du diaporama</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <spacer name="horizontalSpacer_2">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>40</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item>
+       <widget class="QPushButton" name="btnArreterDiapo">
+        <property name="text">
+         <string>Arrêter le diaporama</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+    <item>
+     <spacer name="verticalSpacer">
+      <property name="orientation">
+       <enum>Qt::Vertical</enum>
+      </property>
+      <property name="sizeHint" stdset="0">
+       <size>
+        <width>20</width>
+        <height>40</height>
+       </size>
+      </property>
+     </spacer>
+    </item>
+    <item>
+     <layout class="QVBoxLayout" name="verticalLayout">
+      <item>
+       <widget class="QLabel" name="titreImage">
+        <property name="text">
+         <string>Titre de l'image</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="image">
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="catImage">
+        <property name="text">
+         <string>Catégorie</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+    <item>
+     <spacer name="verticalSpacer_2">
+      <property name="orientation">
+       <enum>Qt::Vertical</enum>
+      </property>
+      <property name="sizeHint" stdset="0">
+       <size>
+        <width>20</width>
+        <height>40</height>
+       </size>
+      </property>
+     </spacer>
+    </item>
+    <item>
+     <layout class="QHBoxLayout" name="horizontalLayout_2">
+      <item>
+       <widget class="QPushButton" name="btnPrec">
+        <property name="text">
+         <string>Précédent</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <spacer name="horizontalSpacerEntrePrecEtSuiv">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>40</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item>
+       <widget class="QPushButton" name="btnSuiv">
+        <property name="text">
+         <string>Suivant</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+   </layout>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
   <widget class="QToolBar" name="toolBar">
@@ -161,18 +191,6 @@
      <property name="title">
       <string>Paramètres</string>
      </property>
-     <widget class="QMenu" name="menuChanger_la_vitesse_de_d_filement">
-      <property name="title">
-       <string>Changer la vitesse de défilement</string>
-      </property>
-      <addaction name="actionX0_5"/>
-      <addaction name="actionX0_75"/>
-      <addaction name="actionX1"/>
-      <addaction name="actionX1_25"/>
-      <addaction name="actionX1_5"/>
-      <addaction name="actionX1_75"/>
-      <addaction name="actionX2"/>
-     </widget>
      <widget class="QMenu" name="menuMode">
       <property name="title">
        <string>Mode</string>
@@ -181,8 +199,8 @@
       <addaction name="actionModeManuel"/>
      </widget>
      <addaction name="actionCharger_Diaporama"/>
-     <addaction name="menuChanger_la_vitesse_de_d_filement"/>
      <addaction name="menuMode"/>
+     <addaction name="actionChangerVitesseDefilement"/>
     </widget>
     <addaction name="menuParam_tres"/>
     <addaction name="actionQuitter"/>
@@ -254,6 +272,11 @@
   <action name="actionModeManuel">
    <property name="text">
     <string>Manuel</string>
+   </property>
+  </action>
+  <action name="actionChangerVitesseDefilement">
+   <property name="text">
+    <string>Changer la vitesse de défilement du diaporama</string>
    </property>
   </action>
  </widget>
