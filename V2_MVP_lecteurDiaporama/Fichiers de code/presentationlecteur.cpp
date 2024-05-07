@@ -7,8 +7,7 @@
 // Constructeur
 PresentationLecteur::PresentationLecteur() :
     _vue(nullptr),
-    _modele(nullptr),
-    _lecteur(nullptr){
+    _modele(nullptr){
 }
 
 // Getter pour LecteurVue
@@ -21,10 +20,6 @@ ModeleLecteur* PresentationLecteur::getModele() const {
     return _modele;
 }
 
-// Getter pour Diaporama
-Lecteur* PresentationLecteur::getLecteur() {
-    return _lecteur;
-}
 
 // Setter pour LecteurVue
 void PresentationLecteur::setVue(LecteurVue* vue) {
@@ -36,12 +31,7 @@ void PresentationLecteur::setModele(ModeleLecteur* modele) {
     _modele = modele;
 }
 
-// Setter pour Diaporama
-void PresentationLecteur::setLecteur(Lecteur* pLecteur) {
-    _lecteur = pLecteur;
-    _lecteur->charger();
-    _lecteur->chargerDiapos();
-}
+
 
 // Implémentation des slots
 void PresentationLecteur::demanderAvancer() {

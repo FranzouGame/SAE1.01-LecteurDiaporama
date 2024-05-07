@@ -24,12 +24,10 @@ public:
     // Getters
     LecteurVue* getVue() const;
     ModeleLecteur* getModele() const;
-    Lecteur* getLecteur();
 
     // Setters
     void setVue(LecteurVue*);
     void setModele(ModeleLecteur*);
-    void setLecteur(Lecteur*);
 
 public slots:
     // Actions relatives aux diaporamas ou à leur chargement
