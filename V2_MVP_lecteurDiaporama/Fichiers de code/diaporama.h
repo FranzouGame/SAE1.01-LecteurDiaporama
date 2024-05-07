@@ -1,49 +1,38 @@
 #ifndef DIAPORAMA_H
 #define DIAPORAMA_H
-
 #include <vector>
-#include "image.h"
-#include "imagedansdiaporama.h"
+#include "imageDansDiaporama.h"
 
-typedef vector<imageDansDiaporama> ImagesDuDiaporama;
-
-class Diaporama {
-private:
-    // Attributs
-    string _titre;
-    unsigned int _vitesseDefilement;
-    ImagesDuDiaporama _localisationImages;
-    unsigned int _posImageCourante;
+typedef vector<ImageDansDiaporama*> ImagesDiaporama; // collection de pointeurs vers les images de ce
+                                                     // diaporama (= pteurs vers objets de type ImageDansDiaporama)
+class Diaporama
+{
 public:
-    /*** Constructeurs ***/
     Diaporama();
-    Diaporama(string, unsigned int = 1, ImagesDuDiaporama = {}, unsigned int = 0);
-    Diaporama(string, unsigned int, unsigned int);
+    ~Diaporama();
+    unsigned int getId() const;
+    string getTitre() const;
+    int getVitesseDefilement() const;
+    ImagesDiaporama getImages() const;
 
-    /*** Getters ***/
-    string getTitre()const;
-    ImagesDuDiaporama getLocalisationImages() const;
-    unsigned int getVitesseDefilement() const;
-    unsigned int getNombreImages() const;
-    unsigned int getPosImageCourante() const;
-    imageDansDiaporama getImageCourante() const;
+    unsigned int nbImages() const;  // nbre de pointeurs d'images contenus dans diaporama
 
-    /*** Setters ***/
-    void setTitre(const string&);
-    void setVitesseDefilement(unsigned int);
-    void setLocalisationImages(const ImagesDuDiaporama&);
-    void setPosImageCourante(unsigned int);
+    void setId(unsigned int pId);
+    void setTitre(string pTitre);
+    void setVitesseDefilement(unsigned int pVitesseDefilement);
+    void setImages(const ImagesDiaporama& pImages);
 
-    /*** Autres méthodes ***/
-    void addImage(const imageDansDiaporama&);
-    void avancer();
-    void reculer();
-    void afficherImageCouranteDansDiaporamaCourant () const;
-    void triCroissantRang ();
+    void ajouterImageEnFin(ImageDansDiaporama* pImage);     // ajoute une image au diaporama (en fin de l'attribut images)
+    void enleverImageEnFin();   // enlève la dernière image du diaporama, et delete l'objet image enlevé
+    void vider();       // enlève toutes les images du diaporama, et delete chaque objet enlevé
+    void charger();     // chargement, dans l'attribut images, des images associées au diaporama courant (d'attribut id).
+
+private:
+    unsigned int id;                // identifiant du diaporama dans la Base de données
+    string titre ;                  // titre du diaporama
+    unsigned int vitesseDefilement; // vitesse de défilement des images du diaporama
+    ImagesDiaporama images;         // vecteur de pointeurs sur les objets ImageDansDiaporama de ce diaporama
+    void trierParRangCroissant(); // trie les images du diaporama par ordre de rang croissant
 };
-
-
-
-
 
 #endif // DIAPORAMA_H

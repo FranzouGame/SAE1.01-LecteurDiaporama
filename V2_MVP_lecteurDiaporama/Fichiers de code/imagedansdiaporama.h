@@ -1,37 +1,32 @@
-#ifndef IMAGEDANSDIAPORAMA_H
-#define IMAGEDANSDIAPORAMA_H
+#ifndef IMAGE_DANS_DIAPORAMA_H
+#define IMAGE_DANS_DIAPORAMA_H
+#include <iostream>
+using namespace std;
 
-#include "image.h"
-#include <vector>
-
-// Types et classes nécessaires
-typedef vector<Image> Images;
-
-class imageDansDiaporama : public Image
-{   
-private:
-    // Attributs
-    unsigned int _rang; // Rang de l'image dans le tableau d'images
-    unsigned int _pos; // Rang de l'image dans le diaporama
-
+class ImageDansDiaporama
+{
 public:
-    /*** Constructeurs ***/
-    imageDansDiaporama();
-    imageDansDiaporama(const Image&, unsigned int, unsigned int);
-    imageDansDiaporama(Images&, unsigned int, unsigned int);
+    ImageDansDiaporama(unsigned int pRangDansDiaporama=0,
+                       string pCategorie="", string pTitre="", string pChemin = "");
+    ~ImageDansDiaporama();
+    unsigned int getRangDansDiaporama() const;
+    string getCategorie() const;
+    string getTitre() const;
+    string getChemin() const;
 
-    /*** Getters ***/
-    unsigned int getRang() const;
-    unsigned int getPos() const;
-    const Image& getImage() const;
+    void afficher();    // affiche tous les champs de l'image
 
-    /*** Setters ***/
-    void setRang(unsigned int);
-    void setPos(unsigned int);
+    void setRangDansDiaporama (unsigned int pRangDansDiaporama);
+    void setTitre (string pTitre);
+    void setCategorie (string pCategorie);
+    void setChemin (string pChemin);
 
-    /*** Autres méthodes ***/
-    void afficherImageCourante() const;
-
+private:
+    unsigned int rangDansDiaporama;         /* rang de l'image au sein du diaporama
+                                   auquel l'image est associée */
+    string titre;              // intitulé de l'image
+    string categorie;          // catégorie de l'image (personne, animal, objet)
+    string chemin;             // chemin complet vers le dossier où se trouve l'image
 };
 
-#endif // IMAGEDANSDIAPORAMA_H
+#endif // IMAGE_DANS_DIAPORAMA_H
