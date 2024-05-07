@@ -1,4 +1,4 @@
-/*** Inclusions requises ***/
+    /*** Inclusions requises ***/
 // Fichiers
 #include "lecteurvue.h"
 #include "modelelecteur.h"
