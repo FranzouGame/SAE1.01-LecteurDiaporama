@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 #include "modelelecteur.h"
+#include "lecteur.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -24,6 +25,8 @@ private:
     Ui::LecteurVue *ui;
     // Presentation de la vue
     PresentationLecteur* _pres;
+    // Lecteur de la V1
+    Lecteur* _lecteur;
 
 public:
     // Constructeur & Destructeur
@@ -32,9 +35,11 @@ public:
 
     // Getters
     PresentationLecteur* getPres() const;
+    Lecteur* getLecteur() const;
 
     // Setters
     void setPres(PresentationLecteur*);
+    void setLecteur(Lecteur*);
 
     // Autres méthodes
     void majInterface(ModeleLecteur::UnEtat);

@@ -24,6 +24,9 @@ LecteurVue::LecteurVue(QWidget *parent)
     QObject::connect(ui->actionA_propos_de, SIGNAL(triggered()), this, SLOT(demanderInformations()));
     QObject::connect(ui->actionModeAuto, SIGNAL(triggered()), this, SLOT(demanderChangementModeAuto()));
     QObject::connect(ui->actionModeManuel, SIGNAL(triggered()), this, SLOT(demanderChangementModeManuel()));
+
+    // Mise à jour de l'interface
+    majInterface(ModeleLecteur::Initial);
 }
 
 LecteurVue::~LecteurVue()
@@ -112,7 +115,9 @@ void LecteurVue::majInterface(ModeleLecteur::UnEtat e)
     switch(e)
     {
     case ModeleLecteur::Initial:
-        // Implémentation à faire
+        ui->catImage->setText("Veuillez choisir un diaporama... ");
+        ui->titreImage->setText("Aucun diaporama choisi !");
+        ui->titreDiapo->setText("");
         break;
     case ModeleLecteur::Manuel:
         // Implémentation à faire
