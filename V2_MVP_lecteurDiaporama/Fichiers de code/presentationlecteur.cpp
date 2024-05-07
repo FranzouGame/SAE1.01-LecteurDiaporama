@@ -45,43 +45,33 @@ void PresentationLecteur::setLecteur(Lecteur* pLecteur) {
 
 // Implémentation des slots
 void PresentationLecteur::demanderAvancer() {
-    _lecteur->getDiapoCourant().avancer();
+    qDebug() << "Présentation : réception demande d'avancement";
 }
 
 void PresentationLecteur::demanderReculer() {
-    _lecteur->getDiapoCourant().reculer();
+    qDebug() << "Présentation : réception demande de reculement";
 }
 
 void PresentationLecteur::demanderArretDiapo() {
-    _lecteur->setNumDiapoCourant(0);
-    _lecteur->getDiapoCourant().afficherImageCouranteDansDiaporamaCourant();
+    qDebug() << "Présentation : réception demande d'arret diapo";
 }
 
 void PresentationLecteur::demanderChangerVitesse() {
-    _modele->setEtat(ModeleLecteur::ChoixVitesseDefilement);
-    _vue->majInterface(ModeleLecteur::ChoixVitesseDefilement);
+    qDebug() << "Présentation : réception demande de changement de vitesse";
 }
 
 void PresentationLecteur::demanderChargement() {
-    // Implémentation à faire
-    // Ouvrir la pop-up de choix des diaporamas
-    _modele->setEtat(ModeleLecteur::ChoixDiaporama);
-    _vue->majInterface(ModeleLecteur::ChoixDiaporama);
+    qDebug() << "Présentation : réception demande de chargement";
 }
 
 void PresentationLecteur::demanderLancement() {
-    // Implémentation à faire
-    // A réfléchir
+    qDebug() << "Présentation : réception demande de lancement";
 }
 
 void PresentationLecteur::demanderChangementModeVersManuel() {
-    // Implémentation à faire
-    _modele->setEtat(ModeleLecteur::Manuel);
-    _vue->majInterface(_modele->getEtat());
+    qDebug() << "Présentation : réception demande de passage mode manuel";
 }
 
 void PresentationLecteur::demanderChangementModeVersAUtomatique() {
-    // Implémentation à faire
-    _modele->setEtat(ModeleLecteur::Automatique);
-    _vue->majInterface(_modele->getEtat());
+    qDebug() << "Présentation : réception demande de passage mode automatique";
 }

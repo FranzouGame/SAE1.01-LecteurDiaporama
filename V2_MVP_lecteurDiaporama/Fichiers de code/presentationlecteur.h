@@ -8,7 +8,6 @@ class Diaporama;
 
 // Inclusions nécessaires
 #include <QObject>
-#include "lecteur.h"
 
 class PresentationLecteur : public QObject
 {
@@ -17,7 +16,6 @@ private:
     // Attributs
     LecteurVue* _vue;         // Connexion de la vue
     ModeleLecteur* _modele;   // Connexion du modèle
-    Lecteur* _lecteur; // Pour interragir avec le diapo courant
 
 public:
     /*** Méthodes ***/

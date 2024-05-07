@@ -25,8 +25,6 @@ LecteurVue::LecteurVue(QWidget *parent)
     QObject::connect(ui->actionModeAuto, SIGNAL(triggered()), this, SLOT(demanderChangementModeAuto()));
     QObject::connect(ui->actionModeManuel, SIGNAL(triggered()), this, SLOT(demanderChangementModeManuel()));
 
-    // Mise à jour de l'interface
-    majInterface(ModeleLecteur::Initial);
 }
 
 LecteurVue::~LecteurVue()
@@ -47,14 +45,17 @@ void LecteurVue::demanderAvancer() {
 
 void LecteurVue::demanderReculer() {
     qDebug() << "Demande de recul dans le diaporama";
+    getPres()->demanderReculer();
 }
 
 void LecteurVue::demanderChangementDiaporama() {
     qDebug() << "Demande de chargement de diaporama";
+    getPres()->demanderChargement();
 }
 
 void LecteurVue::demanderArreterDiapo() {
     qDebug() << "Demande d'arrêt de la diapositive en cours";
+    getPres()->demanderArretDiapo();
 }
 
 void LecteurVue::demanderLancementDiapo() {
@@ -70,21 +71,25 @@ void LecteurVue::demanderFermetureLecteur() {
 
 void LecteurVue::demanderInformations() {
     qDebug() << "Demande d'informations";
+
 }
 
 
 void LecteurVue::demanderChangementModeAuto() {
     qDebug() << "Demande de passage en mode automatique";
+    getPres()->demanderChangementModeVersAUtomatique();
 }
 
 
 void LecteurVue::demanderChangementModeManuel() {
     qDebug() << "Demande de passage en mode manuel";
+    getPres()->demanderChangementModeVersManuel();
 }
 
 void LecteurVue::demanderChangementVitesseDefilement()
 {
     qDebug() << "Demande de changement de vitesse de défilement";
+    getPres()->demanderChangerVitesse();
 }
 
 /************************
@@ -115,9 +120,6 @@ void LecteurVue::majInterface(ModeleLecteur::UnEtat e)
     switch(e)
     {
     case ModeleLecteur::Initial:
-        ui->catImage->setText("Veuillez choisir un diaporama... ");
-        ui->titreImage->setText("Aucun diaporama choisi !");
-        ui->titreDiapo->setText("");
         break;
     case ModeleLecteur::Manuel:
         // Implémentation à faire
