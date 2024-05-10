@@ -10,6 +10,7 @@ CONFIG += c++17
 
 SOURCES += \
     main.cpp \
+    main2.cpp \
     lecteurvue.cpp \
     modelelecteur.cpp \
     presentationlecteur.cpp \

@@ -1,145 +1,171 @@
 #include "diaporama.h"
 
-
-/***********************
- *      METHODES
- **********************/
-
-
-/*** Constructeurs ***/
-
-Diaporama::Diaporama() :
-    _titre(""),
-    _vitesseDefilement(0),
-    _localisationImages({}),
-    _posImageCourante(0)
-    {}
-
-Diaporama::Diaporama(string titre, unsigned int vitesseDefilement, ImagesDuDiaporama _localisationImages, unsigned int posImgCourante) :
-    _titre(titre),
-    _vitesseDefilement(vitesseDefilement),
-    _localisationImages(_localisationImages),
-    _posImageCourante(posImgCourante){
-
+Diaporama::Diaporama():id(0), titre(""), vitesseDefilement(0) {
+    images.clear();
 }
 
+Diaporama::~Diaporama()
+{
+    vider();
+}
 
-
-/*** Getters ***/
+unsigned int Diaporama::getId() const
+{
+    return id;
+}
 
 string Diaporama::getTitre() const
 {
-    return _titre;
+    return titre;
 }
 
-ImagesDuDiaporama Diaporama::getLocalisationImages() const
+int Diaporama::getVitesseDefilement() const
 {
-    return _localisationImages;
+    return vitesseDefilement;
 }
 
-unsigned int Diaporama::getVitesseDefilement() const
+ImagesDiaporama Diaporama::getImages() const
 {
-    return _vitesseDefilement;
-}
-
-unsigned int Diaporama::getNombreImages() const
-{
-    return _localisationImages.size();
-}
-
-unsigned int Diaporama::getPosImageCourante() const
-{
-    return _posImageCourante;
-}
-
-imageDansDiaporama Diaporama::getImageCourante() const
-{
-    return getLocalisationImages()[getPosImageCourante()];
+    return images;
 }
 
 
-
-/*** Setters ***/
-
-void Diaporama::setTitre(const string& titre)
+unsigned int Diaporama::nbImages() const
 {
-    _titre = titre;
+    return images.size();
 }
 
-void Diaporama::setVitesseDefilement(unsigned int vitesseDefilement)
+void Diaporama::setId(unsigned int pId)
 {
-    _vitesseDefilement = vitesseDefilement;
+    id = pId;
 }
 
-void Diaporama::setLocalisationImages(const ImagesDuDiaporama& localisationImages)
+void Diaporama::setTitre(string pTitre)
 {
-    _localisationImages = localisationImages;
+    titre = pTitre;
 }
 
-void Diaporama::setPosImageCourante(unsigned int pPosCourante)
+void Diaporama::setVitesseDefilement(unsigned int pVitesseDefilement)
 {
-    _posImageCourante = pPosCourante;
+    vitesseDefilement = pVitesseDefilement;
 }
 
-
-
-/*** Autres méthodes ***/
-
-
-void Diaporama::addImage(const imageDansDiaporama& imgDuDiapo)
+void Diaporama::setImages(const ImagesDiaporama& pImages)
 {
-    _localisationImages.push_back(imgDuDiapo);
+    images = pImages;
 }
 
-void Diaporama::avancer()
+void Diaporama::ajouterImageEnFin(ImageDansDiaporama* pImage)
 {
-    // Vérifier la postion actuelle, si on est à la dernière image du diaporama, on passe à 0 , sinon on avance d'une image
-    if (getPosImageCourante() == getNombreImages() - 1)
+    images.push_back(pImage);
+
+    // post-condition : nbImages() > 0
+}
+
+void Diaporama::enleverImageEnFin()
+{
+    if (nbImages() != 0)
     {
-        setPosImageCourante(0);
+        images.pop_back();
     }
-    else {
-        setPosImageCourante(getPosImageCourante() + 1);
-    }
+
+    // post-condition : nbImages() >= 0
 }
 
-void Diaporama::reculer()
+void Diaporama::vider()
 {
-    // Vérifier la postion actuelle, si on est à 0, on passe à la dernière image du diaporama, sinon on recule d'une image
-    if (getPosImageCourante() == 0)
+    unsigned int taille = nbImages();
+    for (unsigned int i = 0; i < taille ; i++)
     {
-       setPosImageCourante(getNombreImages() - 1);
+        enleverImageEnFin(); /* Removes the last element in the vector,
+                              effectively reducing the container size by one.
+                              AND deletes the removed element */
     }
-    else
-    {
-        setPosImageCourante(getPosImageCourante() - 1);
-    }
+    // post-condition : nbImages() == 0
 }
 
-void Diaporama::afficherImageCouranteDansDiaporamaCourant () const
+void Diaporama::charger()
 {
-    cout << endl << endl;
-    cout << "DIAPORAMA : " << this->getTitre() << endl << endl;
-    cout << getImageCourante().getRang() << " sur " << getNombreImages() << " / ";
-    cout << endl << endl;
-    getImageCourante().afficherImageCourante();
-}
+    /* Chargement des images associées au diaporama id.
+       Crée un objet Image pour chaque image de ce diaporama, puis stocke son adresse dans l'attribut images.
+       La collection  est ensuite triée par ordre croissant de rang des images.
 
-void Diaporama::triCroissantRang() {
-    bool estEchange = true;
-    unsigned int taille = _localisationImages.size();
+       Dans la version actuelle, les images sont créées 'en dur'.
+       Dans une version ultérieure, les images proviendront de la Base de Données */
 
-    // Parcourir le tableau jusqu'à ce qu'il n'y ait plus d'échanges à effectuer
-    for (unsigned int i = 0; i < taille - 1 && estEchange; i++) {
-        estEchange = false;
-        // Parcourir le tableau à partir de la première image
-        for (unsigned int j = 0; j < taille - i - 1; j++) {
-            // Comparer le rang de l'image actuelle avec celui de l'image suivante
-            if (this->_localisationImages[j].getRang() > this->_localisationImages[j + 1].getRang()) {
-                // Échanger les deux images si l'ordre n'est pas correct
-                swap(this->_localisationImages[j], this->_localisationImages[j + 1]);
-                estEchange = true;
+
+    ImageDansDiaporama* imageACharger;
+    switch(id) {
+      case 0 : // diaporama par défaut
+        imageACharger = new ImageDansDiaporama(1, "objet", "", "C:\\cartesDisney\\Disney_tapis.gif");
+        ajouterImageEnFin(imageACharger);
+        break ;//
+      case 1 : // diaporama de Pantxika
+          imageACharger = new ImageDansDiaporama(3, "personnage", "Pinnochio", "C:\\cartesDisney\\Disney_29.gif");
+          ajouterImageEnFin(imageACharger);
+          imageACharger = new ImageDansDiaporama(2, "Blanche Neige", "C:\\cartesDisney\\Disney_4.gif");
+          ajouterImageEnFin(imageACharger);
+          imageACharger = new ImageDansDiaporama(4, "personnage", "Alice", "C:\\cartesDisney\\Disney_2.gif");
+          ajouterImageEnFin(imageACharger);
+          imageACharger = new ImageDansDiaporama(1, "animal", "Mickey", "C:\\cartesDisney\\Disney_19.gif");
+          ajouterImageEnFin(imageACharger);
+          break ;//
+      case 2 : // diaporama de Thierry
+          imageACharger = new ImageDansDiaporama(1, "personnage", "Pinnochio", "C:\\cartesDisney\\Disney_29.gif");
+          ajouterImageEnFin(imageACharger);
+          imageACharger = new ImageDansDiaporama(2, "personnage", "Blanche Neige", "C:\\cartesDisney\\Disney_4.gif");
+          ajouterImageEnFin(imageACharger);
+          imageACharger = new ImageDansDiaporama(3, "personnage", "Alice", "C:\\cartesDisney\\Disney_2.gif");
+          ajouterImageEnFin(imageACharger);
+          imageACharger = new ImageDansDiaporama(4, "animal", "Mickey", "C:\\cartesDisney\\Disney_19.gif");
+          ajouterImageEnFin(imageACharger);
+          break ;//
+      case 3 : // diaporama de Yann
+          imageACharger = new ImageDansDiaporama(2, "personnage", "Pinnochio", "C:\\cartesDisney\\Disney_29.gif");
+          ajouterImageEnFin(imageACharger);
+          imageACharger = new ImageDansDiaporama(1, "personnage", "Blanche Neige", "C:\\cartesDisney\\Disney_4.gif");
+          ajouterImageEnFin(imageACharger);
+          imageACharger = new ImageDansDiaporama(4, "personnage", "Alice", "C:\\cartesDisney\\Disney_2.gif");
+          ajouterImageEnFin(imageACharger);
+          imageACharger = new ImageDansDiaporama(3, "animal", "Mickey", "C:\\cartesDisney\\Disney_19.gif");
+          ajouterImageEnFin(imageACharger);
+          break ;//
+      case 4 : // diaporama de Manu
+          imageACharger = new ImageDansDiaporama(4, "personnage", "Pinnochio", "C:\\cartesDisney\\Disney_29.gif");
+          ajouterImageEnFin(imageACharger);
+          imageACharger = new ImageDansDiaporama(3, "personnage", "Blanche Neige", "C:\\cartesDisney\\Disney_4.gif");
+          ajouterImageEnFin(imageACharger);
+          imageACharger = new ImageDansDiaporama(2, "personnage", "Alice", "C:\\cartesDisney\\Disney_2.gif");
+          ajouterImageEnFin(imageACharger);
+          imageACharger = new ImageDansDiaporama(1, "animal", "Mickey", "C:\\cartesDisney\\Disney_19.gif");
+          ajouterImageEnFin(imageACharger);
+          break ;//
+      default : break;
+    }
+
+    trierParRangCroissant();  // selon le rang de l'image dans le diaporama
+
+    // post-condition : nbImages() >= 0
+ }
+
+void Diaporama::trierParRangCroissant()
+{
+    ImageDansDiaporama* pteurImage;
+    unsigned int taille = nbImages();
+    for (unsigned int ici = taille-1; ici >=1 ; ici--)
+    {
+        // faire monter la bulle ici = déplacer l'élément de rang le plus grand en position ici
+        // par échanges successifs
+        for (unsigned int i = 0; i < ici; i++)
+        {
+            if (images[i]->getRangDansDiaporama() > images[i+1]->getRangDansDiaporama())
+            {
+                // echanger les 2 éléments
+                pteurImage = images[i];
+                images[i] = images[i+1];
+                images[i+1] = pteurImage;
             }
         }
     }
 }
+
