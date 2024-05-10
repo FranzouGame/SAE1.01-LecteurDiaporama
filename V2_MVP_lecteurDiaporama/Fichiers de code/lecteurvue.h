@@ -4,6 +4,7 @@
 #include <QMainWindow>
 #include "modelelecteur.h"
 
+
 QT_BEGIN_NAMESPACE
 namespace Ui {
 class LecteurVue;
