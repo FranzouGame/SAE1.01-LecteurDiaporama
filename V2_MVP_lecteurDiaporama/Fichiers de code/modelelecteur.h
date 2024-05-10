@@ -3,6 +3,8 @@
 
 // Inclusions
 #include <QObject>
+#include "lecteur.h"
+class imageDansDiaporama;
 
 class ModeleLecteur : public QObject
 {
@@ -13,19 +15,29 @@ public:
 private:
     // Attributs
     UnEtat _etat;
+    Lecteur* _lecteur;
 
 public:
     /*** Méthodes ***/
 
     // Constructeur
+    explicit ModeleLecteur(Lecteur*, UnEtat = UnEtat::Initial);
     ModeleLecteur();
 
     // Getters
     UnEtat getEtat() const;
+    Lecteur* getLecteur() const;
 
     // Setters
     void setEtat(ModeleLecteur::UnEtat);
+    void setLecteur(Lecteur*);
 
+signals:
+    void envoyerInfosMajInterface(ImageDansDiaporama* image);
+
+public slots:
+    void demandeAvancement();
+    void demandeReculement();
 };
 
 #endif // MODELELECTEUR_H

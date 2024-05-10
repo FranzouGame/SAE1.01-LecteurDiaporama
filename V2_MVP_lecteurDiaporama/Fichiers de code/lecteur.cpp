@@ -1,6 +1,6 @@
 #include "lecteur.h"
 
-Lecteur::Lecteur() : idDiaporama(0), diaporama(nullptr)
+Lecteur::Lecteur() : idDiaporama(2), diaporama(nullptr)
 {
     // posImageCourante indéfini
 }

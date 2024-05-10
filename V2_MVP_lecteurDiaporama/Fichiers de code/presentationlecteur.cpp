@@ -8,6 +8,13 @@
 PresentationLecteur::PresentationLecteur() :
     _vue(nullptr),
     _modele(nullptr){
+
+    // Connexion vers le modele
+    QObject::connect(this, SIGNAL(faireAvancer()), this->getModele(), SLOT(demandeAvancement()));
+    QObject::connect(this, SIGNAL(faireReculer()),this->getModele(), SLOT(demandeReculement()));
+
+    // Connexions depuis le modele
+    QObject::connect(this->getModele(), SIGNAL(envoyerInfosMajInterface(ImageDansDiaporama*)), this->getVue(), SLOT(majInterface(ImageDansDiaporama*)));
 }
 
 // Getter pour LecteurVue

@@ -7,6 +7,18 @@
 // Bibliothèques
 #include <QApplication>
 
+
+struct InfosDiaporama {
+    unsigned int id;    // identifiant du diaporama dans la BD
+    string titre;       // titre du diaporama
+    unsigned int vitesseDefilement;
+};
+
+// Type nécessaire
+typedef vector<InfosDiaporama> Diaporamas;
+
+
+
 int main(int argc, char *argv[])
 {
     // Gestion des fenêtre

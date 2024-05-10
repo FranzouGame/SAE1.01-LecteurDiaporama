@@ -41,6 +41,7 @@ public:
     void majInterface(ModeleLecteur::UnEtat);
 
 
+
 public slots:
     // Pour faire le lien avec les diaporamas
     void demanderAvancer();
@@ -58,5 +59,7 @@ public slots:
     //Pour changer la vitesse de défilement
     void demanderChangementVitesseDefilement();
 
+    // Réception de l'image à afficher
+    void majInterface(ImageDansDiaporama*);
 };
 #endif // LECTEURVUE_H

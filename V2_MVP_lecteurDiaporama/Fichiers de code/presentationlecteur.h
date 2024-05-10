@@ -29,6 +29,10 @@ public:
     void setVue(LecteurVue*);
     void setModele(ModeleLecteur*);
 
+signals:
+    void faireAvancer();
+    void faireReculer();
+
 public slots:
     // Actions relatives aux diaporamas ou à leur chargement
     void demanderAvancer();
