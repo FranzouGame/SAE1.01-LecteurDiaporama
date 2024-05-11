@@ -1,5 +1,6 @@
 #include "modelelecteur.h"
 #include "imagedansdiaporama.h"
+#include "qdebug.h"
 
 ModeleLecteur::ModeleLecteur(Lecteur* l, UnEtat e) :
     _etat(e),
@@ -15,37 +16,9 @@ ModeleLecteur::ModeleLecteur()
     _lecteur = new Lecteur();
 }
 
-void ModeleLecteur::setEtat(ModeleLecteur::UnEtat e)
-{
-    _etat = e;
-}
-
-void ModeleLecteur::setLecteur(Lecteur *l)
-{
-    _lecteur = l;
-}
-
-void ModeleLecteur::demandeAvancement()
-{
-    ImageDansDiaporama* imageCourante = _lecteur->getImageCourante();
-    if (imageCourante) {
-        _lecteur->reculer();
-        emit envoyerInfosMajInterface(imageCourante);
-    }
-}
-
-void ModeleLecteur::demandeReculement()
-{
-    ImageDansDiaporama* imageCourante = _lecteur->getImageCourante();
-    if (imageCourante) {
-        _lecteur->reculer();
-        emit envoyerInfosMajInterface(imageCourante);
-    }
-}
-
-
-
-
+/***********************
+ *      Getters        *
+***********************/
 
 ModeleLecteur::UnEtat ModeleLecteur::getEtat() const
 {
@@ -56,6 +29,39 @@ Lecteur *ModeleLecteur::getLecteur() const
 {
     return _lecteur;
 }
+
+
+
+/***********************
+ *      Setters        *
+***********************/
+
+void ModeleLecteur::setEtat(ModeleLecteur::UnEtat e)
+{
+    _etat = e;
+}
+
+void ModeleLecteur::setLecteur(Lecteur *l)
+{
+    _lecteur = l;
+}
+
+
+
+/***********************
+ *       Slots         *
+***********************/
+
+void ModeleLecteur::demandeAvancement()
+{
+    qDebug() << "Modele : On me demande d'avancer";
+}
+
+void ModeleLecteur::demandeReculement()
+{
+    qDebug() << "Modele : On me demande de reculer";
+}
+
 
 
 

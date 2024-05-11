@@ -10,18 +10,20 @@ class Diaporama
 public:
     Diaporama();
     ~Diaporama();
+    // Getters
     unsigned int getId() const;
     string getTitre() const;
     int getVitesseDefilement() const;
     ImagesDiaporama getImages() const;
-
     unsigned int nbImages() const;  // nbre de pointeurs d'images contenus dans diaporama
 
+    // Setters
     void setId(unsigned int pId);
     void setTitre(string pTitre);
     void setVitesseDefilement(unsigned int pVitesseDefilement);
     void setImages(const ImagesDiaporama& pImages);
 
+    // Autres méthodes
     void ajouterImageEnFin(ImageDansDiaporama* pImage);     // ajoute une image au diaporama (en fin de l'attribut images)
     void enleverImageEnFin();   // enlève la dernière image du diaporama, et delete l'objet image enlevé
     void vider();       // enlève toutes les images du diaporama, et delete chaque objet enlevé

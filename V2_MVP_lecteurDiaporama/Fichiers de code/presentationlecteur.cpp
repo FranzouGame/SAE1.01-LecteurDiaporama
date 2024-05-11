@@ -8,13 +8,6 @@
 PresentationLecteur::PresentationLecteur() :
     _vue(nullptr),
     _modele(nullptr){
-
-    // Connexion vers le modele
-    QObject::connect(this, SIGNAL(faireAvancer()), this->getModele(), SLOT(demandeAvancement()));
-    QObject::connect(this, SIGNAL(faireReculer()),this->getModele(), SLOT(demandeReculement()));
-
-    // Connexions depuis le modele
-    QObject::connect(this->getModele(), SIGNAL(envoyerInfosMajInterface(ImageDansDiaporama*)), this->getVue(), SLOT(majInterface(ImageDansDiaporama*)));
 }
 
 // Getter pour LecteurVue
@@ -43,10 +36,11 @@ void PresentationLecteur::setModele(ModeleLecteur* modele) {
 // Implémentation des slots
 void PresentationLecteur::demanderAvancer() {
     qDebug() << "Présentation : réception demande d'avancement";
+    emit faireAvancer(); // Émission du signal faireAvancer()
 }
-
 void PresentationLecteur::demanderReculer() {
     qDebug() << "Présentation : réception demande de reculement";
+    emit faireReculer();
 }
 
 void PresentationLecteur::demanderArretDiapo() {

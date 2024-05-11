@@ -17,6 +17,7 @@ public:
     Lecteur();
     ~Lecteur();
 
+    // Getters
     unsigned int getIdDiaporama() const;
     Diaporama* getDiaporama() const;
     unsigned int getPosImageCourante() const;
@@ -24,11 +25,13 @@ public:
     ImageDansDiaporama* getImageCourante() const;     // retourne le pointeur vers l'image courante
     unsigned int nbImages() const;                    // taille de la collection pointée par diaporama
 
-    void afficher();            // affiche les informations sur lecteur + éventuellement diaporama et image courante
-
+    // Setters
     void setIdDiaporama(unsigned int pIdDiaporama);
     void setDiaporama (Diaporama* pDiaporama);
     void setPosImageCourante(unsigned int pPosImageCourante);
+
+    // Autres méthodes
+    void afficher();            // affiche les informations sur lecteur + éventuellement diaporama et image courant
 
     void changerDiaporama(unsigned int pId, string pTitre="", unsigned int pVitesse=0);
         /* Permet de choisir un diaporama, 0 si aucun souhaité.

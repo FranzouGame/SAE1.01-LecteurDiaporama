@@ -4,7 +4,6 @@
 // Inclusions
 #include <QObject>
 #include "lecteur.h"
-class imageDansDiaporama;
 
 class ModeleLecteur : public QObject
 {
@@ -31,9 +30,6 @@ public:
     // Setters
     void setEtat(ModeleLecteur::UnEtat);
     void setLecteur(Lecteur*);
-
-signals:
-    void envoyerInfosMajInterface(ImageDansDiaporama* image);
 
 public slots:
     void demandeAvancement();

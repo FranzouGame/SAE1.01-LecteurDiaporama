@@ -25,16 +25,22 @@ int main(int argc, char *argv[])
     QApplication a(argc, argv);
 
     // Création des variables
-    LecteurVue vueLecteur;
     ModeleLecteur* modele = new ModeleLecteur();
     PresentationLecteur* presentation = new PresentationLecteur();
+    LecteurVue vueLecteur;
 
     // Association des différents éléments entre eux
     vueLecteur.setPres(presentation);
     presentation->setModele(modele);
+    modele->setEtat(ModeleLecteur::Initial);
     presentation->setVue(&vueLecteur);
 
     // Affichage de la fenetre
     vueLecteur.show();
+
+    // Connexion des signaux et des slots
+    QObject::connect(presentation, SIGNAL(faireAvancer()), modele, SLOT(demandeAvancement()));
+    QObject::connect(presentation, SIGNAL(faireReculer()), modele, SLOT(demandeReculement()));
+
     return a.exec();
 }

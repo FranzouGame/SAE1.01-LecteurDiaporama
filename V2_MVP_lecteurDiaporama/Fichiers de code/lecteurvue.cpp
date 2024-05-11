@@ -92,13 +92,7 @@ void LecteurVue::demanderChangementVitesseDefilement()
     getPres()->demanderChangerVitesse();
 }
 
-void LecteurVue::majInterface(ImageDansDiaporama * img)
-{
-    // Mise à jour des labels
-    ui->catImage->setText(QString::fromStdString(img->getCategorie()));
-    ui->titreImage->setText(QString::fromStdString(img->getTitre()));
-    ui->image->setText(QString::fromStdString(img->getChemin()));
-}
+
 
 /************************
  *        GETTERS       *
