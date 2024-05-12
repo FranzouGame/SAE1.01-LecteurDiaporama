@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Dialog</string>
+   <string>A propos</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
@@ -127,6 +127,9 @@
       <widget class="QPushButton" name="btnOk">
        <property name="text">
         <string>Terminer</string>
+       </property>
+       <property name="autoDefault">
+        <bool>false</bool>
        </property>
       </widget>
      </item>
