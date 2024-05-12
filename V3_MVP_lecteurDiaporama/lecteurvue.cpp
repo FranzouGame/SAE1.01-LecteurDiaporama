@@ -156,8 +156,16 @@ void LecteurVue::majInterface(ModeleLecteur::UnEtat e)
 
 void LecteurVue::updateImageInfo(const QString& chemin, const QString& titre, const QString& categorie)
 {
-    // Mettre à jour l'interface avec les nouvelles informations de l'image
-    ui->image->setText(chemin);
+    // Mettre à jour l'interface avec les nouvelles informations de l'image// Création d'un QPixmap à partir de votre image
+    QPixmap pixmap(chemin);
+
+    // Vérification que l'image a été chargée correctement
+    if (!pixmap.isNull()) {
+        // Affichage de l'image dans le QLabel
+        ui->image->setPixmap(pixmap);
+    } else {
+        qDebug() << "Erreur : Impossible de charger l'image.";
+    }
     ui->titreImage->setText(titre);
     ui->catImage->setText(categorie);
 }
