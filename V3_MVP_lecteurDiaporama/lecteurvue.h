@@ -60,5 +60,7 @@ public slots:
 
     // Affichage
     void afficherInformations();
+
+    void updateImageInfo(const QString& chemin, const QString& titre, const QString& categorie);
 };
 #endif // LECTEURVUE_H

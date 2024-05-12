@@ -5,6 +5,18 @@
 #include <QObject>
 #include "lecteur.h"
 
+
+struct InfosDiaporama {
+    unsigned int id;    // identifiant du diaporama dans la BD
+    string titre;       // titre du diaporama
+    unsigned int vitesseDefilement;
+};
+
+// Type nécessaire
+typedef vector<InfosDiaporama> Diaporamas;
+
+
+
 class ModeleLecteur : public QObject
 {
     Q_OBJECT
@@ -34,6 +46,9 @@ public:
 public slots:
     void demandeAvancement();
     void demandeReculement();
+
+signals:
+    void imageChanged(const QString& chemin, const QString& titre, const QString& categorie);
 };
 
 #endif // MODELELECTEUR_H

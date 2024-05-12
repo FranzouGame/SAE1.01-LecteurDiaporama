@@ -148,4 +148,15 @@ void LecteurVue::majInterface(ModeleLecteur::UnEtat e)
 
 
 
+void LecteurVue::updateImageInfo(const QString& chemin, const QString& titre, const QString& categorie)
+{
+    // Mettre à jour l'interface avec les nouvelles informations de l'image
+    ui->image->setText(chemin);
+    ui->titreImage->setText(titre);
+    ui->catImage->setText(categorie);
+}
+
+
+
+
 
