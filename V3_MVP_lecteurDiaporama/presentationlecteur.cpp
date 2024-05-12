@@ -45,14 +45,25 @@ void PresentationLecteur::demanderReculer() {
 
 void PresentationLecteur::demanderArretDiapo() {
     qDebug() << "Présentation : réception demande d'arret diapo";
+    ModeleLecteur::UnEtat etatPrécédent = _modele->getEtat();
+    _modele->setEtat(ModeleLecteur::Initial);
+    _vue->majInterface(_modele->getEtat());
+    _modele->setEtat(etatPrécédent);
 }
 
 void PresentationLecteur::demanderChangerVitesse() {
     qDebug() << "Présentation : réception demande de changement de vitesse";
+    ModeleLecteur::UnEtat etatPrécédent = _modele->getEtat();
+    _modele->setEtat(ModeleLecteur::ChoixVitesseDefilement);
+    _vue->majInterface(_modele->getEtat());
+    _modele->setEtat(etatPrécédent);
 }
 
 void PresentationLecteur::demanderChargement() {
-    qDebug() << "Présentation : réception demande de chargement";
+    ModeleLecteur::UnEtat etatPrécédent = _modele->getEtat();
+    _modele->setEtat(ModeleLecteur::ChoixDiaporama);
+    _vue->majInterface(_modele->getEtat());
+    _modele->setEtat(etatPrécédent);
 }
 
 void PresentationLecteur::demanderLancement() {
@@ -61,10 +72,14 @@ void PresentationLecteur::demanderLancement() {
 
 void PresentationLecteur::demanderChangementModeVersManuel() {
     qDebug() << "Présentation : réception demande de passage mode manuel";
+    _modele->setEtat(ModeleLecteur::Manuel);
+    _vue->majInterface(_modele->getEtat());
 }
 
 void PresentationLecteur::demanderChangementModeVersAUtomatique() {
     qDebug() << "Présentation : réception demande de passage mode automatique";
+    _modele->setEtat(ModeleLecteur::Automatique);
+    _vue->majInterface(_modele->getEtat());
 }
 
 void PresentationLecteur::demanderAffichageInformations()

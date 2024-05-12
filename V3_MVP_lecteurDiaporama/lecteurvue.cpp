@@ -2,6 +2,7 @@
 #include "ui_lecteurvue.h"
 #include "presentationlecteur.h"
 #include "fenetreapropos.h"
+#include "choixdiaporama.h"
 
 /************************
  * CORPS DE LA CLASSE
@@ -50,7 +51,6 @@ void LecteurVue::demanderReculer() {
 }
 
 void LecteurVue::demanderChangementDiaporama() {
-    qDebug() << "Demande de chargement de diaporama";
     getPres()->demanderChargement();
 }
 
@@ -136,7 +136,12 @@ void LecteurVue::majInterface(ModeleLecteur::UnEtat e)
         // Implémentation à faire
         break;
     case ModeleLecteur::ChoixDiaporama:
-        // Implémentation à faire
+        {
+            ChoixDiaporama fenetreChoix;
+
+            // Afficher la fenêtre
+            fenetreChoix.exec();
+        }
         break;
     case ModeleLecteur::ChoixVitesseDefilement:
         // Implémentation à faire
@@ -145,6 +150,7 @@ void LecteurVue::majInterface(ModeleLecteur::UnEtat e)
         break;
     }
 }
+
 
 
 
