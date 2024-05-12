@@ -17,6 +17,9 @@ public:
 
 private:
     Ui::fenetreAPropos *ui;
+
+private slots:
+    void fermeture();
 };
 
 #endif // FENETREAPROPOS_H

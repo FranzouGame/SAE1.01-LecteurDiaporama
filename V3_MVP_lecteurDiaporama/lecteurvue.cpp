@@ -1,6 +1,7 @@
 #include "LecteurVue.h"
 #include "ui_lecteurvue.h"
 #include "presentationlecteur.h"
+#include "fenetreapropos.h"
 
 /************************
  * CORPS DE LA CLASSE
@@ -67,7 +68,11 @@ void LecteurVue::demanderFermetureLecteur() {
 }
 
 void LecteurVue::demanderInformations() {
-    qDebug() << "Demande d'informations";
+    fenetreAPropos infosApp;
+
+    // Afficher la fenetre
+    infosApp.exec();
+
 
 }
 
