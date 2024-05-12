@@ -55,9 +55,12 @@ void ModeleLecteur::setLecteur(Lecteur *l)
 void ModeleLecteur::demandeAvancement()
 {
 
-    // Lorsque vous changez l'image courante, émettez le signal avec les nouvelles informations
+    // Vérifier qu'on ait un lecteur et un diapo
     if (_lecteur && _lecteur->getDiaporama()) {
+        // Avancer et récupérer la nouvelle image
+        _lecteur->avancer();
         ImageDansDiaporama* imageCourante = _lecteur->getImageCourante();
+        // Si l'image existe, l'envoyer à la vue
         if (imageCourante) {
             emit imageChanged(QString::fromStdString(imageCourante->getChemin()),
                               QString::fromStdString(imageCourante->getTitre()),
@@ -69,7 +72,18 @@ void ModeleLecteur::demandeAvancement()
 
 void ModeleLecteur::demandeReculement()
 {
-    qDebug() << "Modele : On me demande de reculer";
+    // Vérifier qu'on ait un lecteur et un diapo
+    if (_lecteur && _lecteur->getDiaporama()) {
+        // Avancer et récupérer la nouvelle image
+        _lecteur->reculer();
+        ImageDansDiaporama* imageCourante = _lecteur->getImageCourante();
+        // Si l'image existe, l'envoyer à la vue
+        if (imageCourante) {
+            emit imageChanged(QString::fromStdString(imageCourante->getChemin()),
+                              QString::fromStdString(imageCourante->getTitre()),
+                              QString::fromStdString(imageCourante->getCategorie()));
+        }
+    }
 }
 
 
