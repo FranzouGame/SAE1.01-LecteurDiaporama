@@ -21,7 +21,7 @@ int main(int argc, char *argv[])
     ModeleLecteur* modele = new ModeleLecteur();
     PresentationLecteur* presentation = new PresentationLecteur();
     LecteurVue vueLecteur;
-    Lecteur* lecteur = nullptr;
+    Lecteur* lecteur = new Lecteur();
 
     // Association des différents éléments entre eux
     vueLecteur.setPres(presentation);
