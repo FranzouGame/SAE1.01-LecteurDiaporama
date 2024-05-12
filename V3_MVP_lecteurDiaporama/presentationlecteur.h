@@ -32,6 +32,7 @@ public:
 signals:
     void faireAvancer();
     void faireReculer();
+    void faireOuvrirAPropos();
 
 public slots:
     // Actions relatives aux diaporamas ou à leur chargement
@@ -45,6 +46,9 @@ public slots:
     void demanderLancement();
     void demanderChangementModeVersManuel();
     void demanderChangementModeVersAUtomatique();
+
+    // Actions liées au fenetres externes
+    void demanderAffichageInformations();
 };
 
 #endif // PRESENTATIONLECTEUR_H

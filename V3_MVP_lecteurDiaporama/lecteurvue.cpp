@@ -68,12 +68,7 @@ void LecteurVue::demanderFermetureLecteur() {
 }
 
 void LecteurVue::demanderInformations() {
-    fenetreAPropos infosApp;
-
-    // Afficher la fenetre
-    infosApp.exec();
-
-
+    _pres->demanderAffichageInformations();
 }
 
 
@@ -92,6 +87,15 @@ void LecteurVue::demanderChangementVitesseDefilement()
 {
     qDebug() << "Demande de changement de vitesse de défilement";
     getPres()->demanderChangerVitesse();
+}
+
+void LecteurVue::afficherInformations()
+{
+    // Instanciation de la fenêtre demandée
+    fenetreAPropos infosApp;
+
+    // Afficher la fenetre
+    infosApp.exec();
 }
 
 

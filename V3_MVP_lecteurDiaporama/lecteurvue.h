@@ -56,5 +56,9 @@ public slots:
 
     //Pour changer la vitesse de défilement
     void demanderChangementVitesseDefilement();
+
+
+    // Affichage
+    void afficherInformations();
 };
 #endif // LECTEURVUE_H

@@ -41,6 +41,7 @@ int main(int argc, char *argv[])
     // Connexion des signaux et des slots
     QObject::connect(presentation, SIGNAL(faireAvancer()), modele, SLOT(demandeAvancement()));
     QObject::connect(presentation, SIGNAL(faireReculer()), modele, SLOT(demandeReculement()));
+    QObject::connect(presentation, SIGNAL(faireOuvrirAPropos()), &vueLecteur, SLOT(afficherInformations()));
 
     return a.exec();
 }

@@ -66,3 +66,9 @@ void PresentationLecteur::demanderChangementModeVersManuel() {
 void PresentationLecteur::demanderChangementModeVersAUtomatique() {
     qDebug() << "Présentation : réception demande de passage mode automatique";
 }
+
+void PresentationLecteur::demanderAffichageInformations()
+{
+
+    emit faireOuvrirAPropos();
+}
