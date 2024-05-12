@@ -9,6 +9,7 @@ CONFIG += c++17
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    fenetreapropos.cpp \
     main.cpp \
     lecteurvue.cpp \
     modelelecteur.cpp \
@@ -18,6 +19,7 @@ SOURCES += \
     imagedansdiaporama.cpp
 
 HEADERS += \
+    fenetreapropos.h \
     lecteurvue.h \
     modelelecteur.h \
     presentationlecteur.h \
@@ -26,6 +28,7 @@ HEADERS += \
     imagedansdiaporama.h
 
 FORMS += \
+    fenetreapropos.ui \
     lecteurvue.ui
 
 # Default rules for deployment.
