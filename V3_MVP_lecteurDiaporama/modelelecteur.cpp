@@ -1,5 +1,5 @@
 #include "modelelecteur.h"
-#include "imagedansdiaporama.h"
+#include "imageDansDiaporama.h"
 #include "qdebug.h"
 
 ModeleLecteur::ModeleLecteur(Lecteur* l, UnEtat e) :
@@ -62,6 +62,7 @@ void ModeleLecteur::demandeAvancement()
         ImageDansDiaporama* imageCourante = _lecteur->getImageCourante();
         // Si l'image existe, l'envoyer à la vue
         if (imageCourante) {
+            qDebug() << "J'emet || " << imageCourante->getChemin() << "  " << imageCourante->getTitre() << "  " << imageCourante->getCategorie();
             emit imageChanged(QString::fromStdString(imageCourante->getChemin()),
                               QString::fromStdString(imageCourante->getTitre()),
                               QString::fromStdString(imageCourante->getCategorie()));
@@ -83,7 +84,10 @@ void ModeleLecteur::demandeReculement()
                               QString::fromStdString(imageCourante->getTitre()),
                               QString::fromStdString(imageCourante->getCategorie()));
         }
+
     }
+
+
 }
 
 

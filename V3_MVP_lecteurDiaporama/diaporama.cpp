@@ -115,7 +115,7 @@ void Diaporama::charger()
           ajouterImageEnFin(imageACharger);
           imageACharger = new ImageDansDiaporama(2, "personnage", "Blanche Neige", ":/imagesDur/cartesDisney/Disney_4.gif");
           ajouterImageEnFin(imageACharger);
-          imageACharger = new ImageDansDiaporama(3, "personnage", ":/imagesDur/cartesDisney/Disney_2.gif");
+          imageACharger = new ImageDansDiaporama(3, "personnage", "Alice",":/imagesDur/cartesDisney/Disney_2.gif");
           ajouterImageEnFin(imageACharger);
           imageACharger = new ImageDansDiaporama(4, "animal", "Mickey", ":/imagesDur/cartesDisney/Disney_19.gif");
           ajouterImageEnFin(imageACharger);
@@ -125,7 +125,7 @@ void Diaporama::charger()
           ajouterImageEnFin(imageACharger);
           imageACharger = new ImageDansDiaporama(1, "personnage", "Blanche Neige", ":/imagesDur/cartesDisney/Disney_4.gif");
           ajouterImageEnFin(imageACharger);
-          imageACharger = new ImageDansDiaporama(4, "personnage", "Alice", ":/imagesDur/cartesDisney/Disney_2.gif");
+          imageACharger = new ImageDansDiaporama(4, "personnage", "Alice",":/imagesDur/cartesDisney/Disney_2.gif"); //
           ajouterImageEnFin(imageACharger);
           imageACharger = new ImageDansDiaporama(3, "animal", "Mickey", ":/imagesDur/cartesDisney/Disney_19.gif");
           ajouterImageEnFin(imageACharger);

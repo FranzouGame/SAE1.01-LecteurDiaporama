@@ -31,7 +31,7 @@ int main(int argc, char *argv[])
     modele->setLecteur(lecteur);
 
     // Choix diaporama pour tests
-    lecteur->changerDiaporama(2);
+    lecteur->changerDiaporama(3);
 
     // Affichage de la fenetre
     vueLecteur.show();

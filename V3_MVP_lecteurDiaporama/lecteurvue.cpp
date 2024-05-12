@@ -163,7 +163,8 @@ void LecteurVue::updateImageInfo(const QString& chemin, const QString& titre, co
     if (!pixmap.isNull()) {
         // Affichage de l'image dans le QLabel
         ui->image->setPixmap(pixmap);
-    } else {
+    }
+    else {
         qDebug() << "Erreur : Impossible de charger l'image.";
     }
     ui->titreImage->setText(titre);
