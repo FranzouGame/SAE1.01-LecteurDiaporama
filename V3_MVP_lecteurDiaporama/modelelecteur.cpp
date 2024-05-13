@@ -91,6 +91,7 @@ void ModeleLecteur::demandeReculement()
 
 void ModeleLecteur::demanderAffichage1erDiapo()
 {
+    qDebug() << "Modele : reception demande image 1";
     ImageDansDiaporama* imageCourante = _lecteur->getImageCourante();
     // Si l'image existe, l'envoyer à la vue
     if (imageCourante) {
@@ -99,6 +100,7 @@ void ModeleLecteur::demanderAffichage1erDiapo()
                           QString::fromStdString(imageCourante->getCategorie()));
     }
 }
+
 
 
 

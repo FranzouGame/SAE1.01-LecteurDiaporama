@@ -28,7 +28,8 @@ LecteurVue::LecteurVue(QWidget *parent)
     QObject::connect(ui->actionModeManuel, SIGNAL(triggered()), this, SLOT(demanderChangementModeManuel()));
 
     // Faire l'affichage de la premiere image
-    getPres()->demanderAffichageDiapo1();
+    demanderAvancer();
+    demanderReculer();
 }
 
 LecteurVue::~LecteurVue()
@@ -155,7 +156,8 @@ void LecteurVue::majInterface(ModeleLecteur::UnEtat e)
 
 void LecteurVue::demanderAffichage1ereImage()
 {
-
+    qDebug() << "Vue : Affichage image 1";
+    getPres()->demanderAffichageDiapo1();
 }
 
 

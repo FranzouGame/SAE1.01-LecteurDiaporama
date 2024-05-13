@@ -46,8 +46,11 @@ void PresentationLecteur::demanderReculer() {
 void PresentationLecteur::demanderAffichageDiapo1()
 {
     qDebug() << "Demande de l'affichage de la 1ere diapo";
-    emit faireAfficherPremiere();
+
+    // Émettre le signal uniquement si nécessaire
+        emit demanderAffichageDiapo1();
 }
+
 
 void PresentationLecteur::demanderArretDiapo() {
     qDebug() << "Présentation : réception demande d'arret diapo";
