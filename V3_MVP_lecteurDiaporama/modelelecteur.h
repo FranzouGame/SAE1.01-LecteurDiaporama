@@ -46,6 +46,7 @@ public:
 public slots:
     void demandeAvancement();
     void demandeReculement();
+    void demandeAffichageImageDebut();
 
 signals:
     void imageChanged(const QString& chemin, const QString& titre, const QString& categorie);

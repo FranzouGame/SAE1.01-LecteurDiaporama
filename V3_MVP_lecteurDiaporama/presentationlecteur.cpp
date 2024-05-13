@@ -43,6 +43,12 @@ void PresentationLecteur::demanderReculer() {
     emit faireReculer();
 }
 
+void PresentationLecteur::demanderAffichageDiapoDebut()
+{
+    qDebug() << "Présentation : affichage image 1";
+    emit faireAfficherImageDepart();
+}
+
 void PresentationLecteur::demanderArretDiapo() {
     qDebug() << "Présentation : réception demande d'arret diapo";
     ModeleLecteur::UnEtat etatPrécédent = _modele->getEtat();
@@ -84,6 +90,5 @@ void PresentationLecteur::demanderChangementModeVersAUtomatique() {
 
 void PresentationLecteur::demanderAffichageInformations()
 {
-
     emit faireOuvrirAPropos();
 }

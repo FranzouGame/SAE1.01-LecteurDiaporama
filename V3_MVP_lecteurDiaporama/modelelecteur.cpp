@@ -74,7 +74,7 @@ void ModeleLecteur::demandeReculement()
 {
     // Vérifier qu'on ait un lecteur et un diapo
     if (_lecteur && _lecteur->getDiaporama()) {
-        // Avancer et récupérer la nouvelle image
+        // Reculer et récupérer la nouvelle image
         _lecteur->reculer();
         ImageDansDiaporama* imageCourante = _lecteur->getImageCourante();
         // Si l'image existe, l'envoyer à la vue
@@ -87,6 +87,22 @@ void ModeleLecteur::demandeReculement()
     }
 
 
+}
+
+void ModeleLecteur::demandeAffichageImageDebut()
+{
+    qDebug() << "Debug";
+    // Vérifier qu'on ait un lecteur et un diapo
+    if (_lecteur && _lecteur->getDiaporama()) {
+        ImageDansDiaporama* imageCourante = _lecteur->getImageCourante();
+        // Si l'image existe, l'envoyer à la vue
+        if (imageCourante) {
+            emit imageChanged(QString::fromStdString(imageCourante->getChemin()),
+                              QString::fromStdString(imageCourante->getTitre()),
+                              QString::fromStdString(imageCourante->getCategorie()));
+        }
+
+    }
 }
 
 

@@ -40,10 +40,13 @@ public:
     // Autres méthodes
     void majInterface(ModeleLecteur::UnEtat);
 
+
+
 public slots:
     // Pour faire le lien avec les diaporamas
     void demanderAvancer();
     void demanderReculer();
+    void demanderAffichageImage1();
     void demanderArreterDiapo();
 
     // Pour gérer les actions propres au lecteur
@@ -59,8 +62,7 @@ public slots:
 
 
     // Affichage
-    void afficherInformations();
-
-    void updateImageInfo(const QString& chemin, const QString& titre, const QString& categorie);
+    void afficherInformations(); // Fenetre A propos
+    void updateImageInfo(const QString& chemin, const QString& titre, const QString& categorie); // Image mise à jour
 };
 #endif // LECTEURVUE_H

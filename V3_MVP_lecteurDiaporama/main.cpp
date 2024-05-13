@@ -33,15 +33,24 @@ int main(int argc, char *argv[])
     // Choix diaporama pour tests
     lecteur->changerDiaporama(3);
 
+
+    // Connexion des signaux et des slots
+
+    // Présentation -> Modele
+    QObject::connect(presentation, SIGNAL(faireAvancer()), modele, SLOT(demandeAvancement()));
+    QObject::connect(presentation, SIGNAL(faireReculer()), modele, SLOT(demandeReculement()));
+    QObject::connect(presentation, SIGNAL(faireAfficherImageDepart()), modele, SLOT(demandeAffichageImageDebut()));
+
+    // Présentation -> vue
+    QObject::connect(presentation, SIGNAL(faireOuvrirAPropos()), &vueLecteur, SLOT(afficherInformations()));
+
+    // Modèle -> vue
+    QObject::connect(modele, SIGNAL(imageChanged(QString, QString, QString)), &vueLecteur, SLOT(updateImageInfo(QString, QString, QString)));
+
+    vueLecteur.demanderAffichageImage1();
     // Affichage de la fenetre
     vueLecteur.show();
 
-    // Connexion des signaux et des slots
-    QObject::connect(presentation, SIGNAL(faireAvancer()), modele, SLOT(demandeAvancement()));
-    QObject::connect(presentation, SIGNAL(faireReculer()), modele, SLOT(demandeReculement()));
-    QObject::connect(presentation, SIGNAL(faireOuvrirAPropos()), &vueLecteur, SLOT(afficherInformations()));
-    QObject::connect(modele, SIGNAL(imageChanged(QString, QString, QString)), &vueLecteur, SLOT(updateImageInfo(QString, QString, QString)));
-    QObject::connect(modele, SIGNAL(diaporamasChanged(QList<Diaporama*>)), &vueLecteur, SLOT(updateDiaporamasList(QList<Diaporama*>)));
 
 
     return a.exec();
