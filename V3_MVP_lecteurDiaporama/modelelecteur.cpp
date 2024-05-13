@@ -106,6 +106,21 @@ void ModeleLecteur::demandeAffichageImageDebut()
 }
 
 
+void ModeleLecteur::demanderAffichage1erDiapo()
+{
+    qDebug() << "Modele : reception demande image 1";
+    ImageDansDiaporama* imageCourante = _lecteur->getImageCourante();
+    // Si l'image existe, l'envoyer à la vue
+    if (imageCourante) {
+        emit imageChanged(QString::fromStdString(imageCourante->getChemin()),
+                          QString::fromStdString(imageCourante->getTitre()),
+                          QString::fromStdString(imageCourante->getCategorie()));
+    }
+}
+
+
+
+
 
 
 

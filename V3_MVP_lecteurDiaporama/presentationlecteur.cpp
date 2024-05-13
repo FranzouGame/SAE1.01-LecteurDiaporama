@@ -43,11 +43,22 @@ void PresentationLecteur::demanderReculer() {
     emit faireReculer();
 }
 
+
 void PresentationLecteur::demanderAffichageDiapoDebut()
 {
     qDebug() << "Présentation : affichage image 1";
     emit faireAfficherImageDepart();
 }
+
+
+void PresentationLecteur::demanderAffichageDiapo1()
+{
+    qDebug() << "Demande de l'affichage de la 1ere diapo";
+
+    // Émettre le signal uniquement si nécessaire
+        emit demanderAffichageDiapo1();
+}
+
 
 void PresentationLecteur::demanderArretDiapo() {
     qDebug() << "Présentation : réception demande d'arret diapo";

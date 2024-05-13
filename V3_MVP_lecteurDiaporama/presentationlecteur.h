@@ -32,6 +32,7 @@ public:
 signals:
     void faireAvancer();
     void faireReculer();
+    void faireAfficherPremiere();
     void faireOuvrirAPropos();
 
 signals:
@@ -43,6 +44,7 @@ public slots:
     void demanderAvancer();
     void demanderReculer();
     void demanderAffichageDiapoDebut();
+    void demanderAffichageDiapo1();
     void demanderArretDiapo();
     void demanderChangerVitesse();
 

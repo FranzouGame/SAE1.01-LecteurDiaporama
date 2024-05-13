@@ -51,7 +51,5 @@ int main(int argc, char *argv[])
     // Affichage de la fenetre
     vueLecteur.show();
 
-
-
     return a.exec();
 }

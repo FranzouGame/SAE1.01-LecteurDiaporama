@@ -26,10 +26,6 @@ LecteurVue::LecteurVue(QWidget *parent)
     QObject::connect(ui->actionA_propos_de, SIGNAL(triggered()), this, SLOT(demanderInformations()));
     QObject::connect(ui->actionModeAuto, SIGNAL(triggered()), this, SLOT(demanderChangementModeAuto()));
     QObject::connect(ui->actionModeManuel, SIGNAL(triggered()), this, SLOT(demanderChangementModeManuel()));
-
-    // Envoyer le signal de lancement
-    emit lecteurVueLancee();
-
 }
 
 LecteurVue::~LecteurVue()
@@ -154,9 +150,16 @@ void LecteurVue::majInterface(ModeleLecteur::UnEtat e)
     }
 }
 
+
 void LecteurVue::demanderAffichageImage1()
 {
     getPres()->demanderAffichageDiapoDebut();
+}
+
+void LecteurVue::demanderAffichage1ereImage()
+{
+    qDebug() << "Vue : Affichage image 1";
+    getPres()->demanderAffichageDiapo1();
 }
 
 
