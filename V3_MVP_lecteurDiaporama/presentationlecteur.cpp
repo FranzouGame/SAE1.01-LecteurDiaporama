@@ -43,6 +43,12 @@ void PresentationLecteur::demanderReculer() {
     emit faireReculer();
 }
 
+void PresentationLecteur::demanderAffichageDiapo1()
+{
+    qDebug() << "Demande de l'affichage de la 1ere diapo";
+    emit faireAfficherPremiere();
+}
+
 void PresentationLecteur::demanderArretDiapo() {
     qDebug() << "Présentation : réception demande d'arret diapo";
     ModeleLecteur::UnEtat etatPrécédent = _modele->getEtat();

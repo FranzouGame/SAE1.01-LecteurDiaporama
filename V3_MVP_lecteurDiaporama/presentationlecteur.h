@@ -32,12 +32,14 @@ public:
 signals:
     void faireAvancer();
     void faireReculer();
+    void faireAfficherPremiere();
     void faireOuvrirAPropos();
 
 public slots:
     // Actions relatives aux diaporamas ou à leur chargement
     void demanderAvancer();
     void demanderReculer();
+    void demanderAffichageDiapo1();
     void demanderArretDiapo();
     void demanderChangerVitesse();
 

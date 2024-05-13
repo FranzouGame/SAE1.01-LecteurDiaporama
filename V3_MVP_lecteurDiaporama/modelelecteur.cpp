@@ -89,6 +89,17 @@ void ModeleLecteur::demandeReculement()
 
 }
 
+void ModeleLecteur::demanderAffichage1erDiapo()
+{
+    ImageDansDiaporama* imageCourante = _lecteur->getImageCourante();
+    // Si l'image existe, l'envoyer à la vue
+    if (imageCourante) {
+        emit imageChanged(QString::fromStdString(imageCourante->getChemin()),
+                          QString::fromStdString(imageCourante->getTitre()),
+                          QString::fromStdString(imageCourante->getCategorie()));
+    }
+}
+
 
 
 

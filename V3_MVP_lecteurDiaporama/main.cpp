@@ -42,7 +42,7 @@ int main(int argc, char *argv[])
     QObject::connect(presentation, SIGNAL(faireOuvrirAPropos()), &vueLecteur, SLOT(afficherInformations()));
     QObject::connect(modele, SIGNAL(imageChanged(QString, QString, QString)), &vueLecteur, SLOT(updateImageInfo(QString, QString, QString)));
     QObject::connect(modele, SIGNAL(diaporamasChanged(QList<Diaporama*>)), &vueLecteur, SLOT(updateDiaporamasList(QList<Diaporama*>)));
-
+    QObject::connect(presentation, SIGNAL(faireAfficherPremiere()), modele, SLOT(demanderAffichage1erDiapo()));
 
     return a.exec();
 }
