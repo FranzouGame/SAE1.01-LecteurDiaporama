@@ -28,10 +28,16 @@ int main(int argc, char *argv[])
     presentation->setModele(modele);
     modele->setEtat(ModeleLecteur::Initial);
     presentation->setVue(&vueLecteur);
-    modele->setLecteur(lecteur);
+
+    // Connection pour le changement du nom de diapo (Temporaire)
+    QObject::connect(modele, SIGNAL(diapoChanged(QString)), &vueLecteur, SLOT(updateDiapoTitle(QString)));
 
     // Choix diaporama pour tests
-    lecteur->changerDiaporama(3);
+    lecteur->changerDiaporama(3, "Diapo de test", 2);
+
+    modele->setLecteur(lecteur);
+
+
 
 
     // Connexion des signaux et des slots
@@ -46,6 +52,7 @@ int main(int argc, char *argv[])
 
     // Modèle -> vue
     QObject::connect(modele, SIGNAL(imageChanged(QString, QString, QString)), &vueLecteur, SLOT(updateImageInfo(QString, QString, QString)));
+
 
     vueLecteur.demanderAffichageImage1();
     // Affichage de la fenetre

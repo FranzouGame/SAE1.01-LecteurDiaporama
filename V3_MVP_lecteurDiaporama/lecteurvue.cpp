@@ -182,6 +182,11 @@ void LecteurVue::updateImageInfo(const QString& chemin, const QString& titre, co
     ui->catImage->setText(categorie);
 }
 
+void LecteurVue::updateDiapoTitle(const QString &titreDiapo)
+{
+    ui->titreDiapo->setText(titreDiapo);
+}
+
 
 
 

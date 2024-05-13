@@ -14,6 +14,7 @@ ModeleLecteur::ModeleLecteur()
 
     // Lecteur par défaut
     _lecteur = new Lecteur();
+
 }
 
 /***********************
@@ -44,6 +45,12 @@ void ModeleLecteur::setEtat(ModeleLecteur::UnEtat e)
 void ModeleLecteur::setLecteur(Lecteur *l)
 {
     _lecteur = l;
+
+    // Envoyer le signal
+    QString titreDiapo = QString::fromStdString(_lecteur->getDiaporama()->getTitre());
+    emit diapoChanged(titreDiapo);
+
+
 }
 
 

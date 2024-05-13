@@ -65,5 +65,6 @@ public slots:
     // Affichage
     void afficherInformations(); // Fenetre A propos
     void updateImageInfo(const QString& chemin, const QString& titre, const QString& categorie); // Image mise à jour
+    void updateDiapoTitle(const QString& titreDiapo);
 };
 #endif // LECTEURVUE_H

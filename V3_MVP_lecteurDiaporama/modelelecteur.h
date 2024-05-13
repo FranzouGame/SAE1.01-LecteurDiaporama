@@ -51,6 +51,7 @@ public slots:
 
 signals:
     void imageChanged(const QString& chemin, const QString& titre, const QString& categorie);
+    void diapoChanged(const QString& titreDiapo);
 };
 
 #endif // MODELELECTEUR_H
