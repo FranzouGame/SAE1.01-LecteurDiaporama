@@ -9,7 +9,7 @@
 
 
 
-
+void chargerDiapos(Diaporamas& diapos);
 
 
 int main(int argc, char *argv[])
@@ -17,13 +17,20 @@ int main(int argc, char *argv[])
     // Gestion des fenêtre
     QApplication a(argc, argv);
 
+
     // Création des variables
     ModeleLecteur* modele = new ModeleLecteur();
     PresentationLecteur* presentation = new PresentationLecteur();
     LecteurVue vueLecteur;
     Lecteur* lecteur = new Lecteur();
+    Diaporamas mesDiapos;
+    /*chargerDiapos(mesDiapos);
+    int taille = mesDiapos.size();
+    qDebug() << "Taille du vecteur : " << taille << "  ";*/
 
     // Association des différents éléments entre eux
+    // modele->setInfosDiapos(mesDiapos);
+    //modele->chargerDiapos();
     vueLecteur.setPres(presentation);
     presentation->setModele(modele);
     modele->setEtat(ModeleLecteur::Initial);
@@ -52,11 +59,44 @@ int main(int argc, char *argv[])
 
     // Modèle -> vue
     QObject::connect(modele, SIGNAL(imageChanged(QString, QString, QString)), &vueLecteur, SLOT(updateImageInfo(QString, QString, QString)));
-
+    QObject::connect(modele, SIGNAL(sendDiapoInfos(Diaporamas)), &vueLecteur, SLOT(receptionDiapos(Diaporamas)));
 
     vueLecteur.demanderAffichageImage1();
     // Affichage de la fenetre
     vueLecteur.show();
 
     return a.exec();
+}
+
+
+
+void chargerDiapos(Diaporamas& diapos)
+{
+    InfosDiaporama infosACharger;
+    // Diaporama de Pantxika
+    infosACharger.id = 1;
+    infosACharger.titre = "Diaporama Pantxika";
+    infosACharger.vitesseDefilement = 2;
+    diapos.push_back(infosACharger);
+
+    // Diaporama de Thierry
+    infosACharger.id = 2;
+    infosACharger.titre = "Diaporama Thierry";
+    infosACharger.vitesseDefilement = 4;
+    diapos.push_back(infosACharger);
+
+    // Diaporama de Yann
+    infosACharger.id = 3;
+    infosACharger.titre = "Diaporama Yann";
+    infosACharger.vitesseDefilement = 2;
+    diapos.push_back(infosACharger);
+
+    // Diaporama de Manu
+    infosACharger.id = 4;
+    infosACharger.titre = "Diaporama Manu";
+    infosACharger.vitesseDefilement = 1;
+    diapos.push_back(infosACharger);
+
+    qDebug() << "Chargement terminé";
+
 }

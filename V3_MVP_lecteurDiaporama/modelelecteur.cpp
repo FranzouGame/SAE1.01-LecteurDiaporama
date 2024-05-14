@@ -2,9 +2,10 @@
 #include "imageDansDiaporama.h"
 #include "qdebug.h"
 
-ModeleLecteur::ModeleLecteur(Lecteur* l, UnEtat e) :
+ModeleLecteur::ModeleLecteur(Lecteur* l, UnEtat e, Diaporamas d) :
     _etat(e),
-    _lecteur(l){
+    _lecteur(l),
+    _infosDiapos(d){
 }
 
 ModeleLecteur::ModeleLecteur()
@@ -15,6 +16,12 @@ ModeleLecteur::ModeleLecteur()
     // Lecteur par défaut
     _lecteur = new Lecteur();
 
+    // Chargement des diaporamas
+
+}
+
+ModeleLecteur::~ModeleLecteur()
+{
 }
 
 /***********************
@@ -29,6 +36,11 @@ ModeleLecteur::UnEtat ModeleLecteur::getEtat() const
 Lecteur *ModeleLecteur::getLecteur() const
 {
     return _lecteur;
+}
+
+Diaporamas ModeleLecteur::getInfosDiapos()const
+{
+    return _infosDiapos;
 }
 
 
@@ -51,6 +63,13 @@ void ModeleLecteur::setLecteur(Lecteur *l)
     emit diapoChanged(titreDiapo);
 
 
+}
+
+void ModeleLecteur::setInfosDiapos(Diaporamas d)
+{
+    _infosDiapos = d;
+
+    qDebug() << 'Taille modele : ' << d.size();
 }
 
 
@@ -90,10 +109,7 @@ void ModeleLecteur::demandeReculement()
                               QString::fromStdString(imageCourante->getTitre()),
                               QString::fromStdString(imageCourante->getCategorie()));
         }
-
     }
-
-
 }
 
 void ModeleLecteur::demandeAffichageImageDebut()
@@ -125,6 +141,13 @@ void ModeleLecteur::demanderAffichage1erDiapo()
     }
 }
 
+void ModeleLecteur::demanderInfosDiapos()
+{
+    chargerDiapos();
+    emit sendDiapoInfos(_infosDiapos);
+    qDebug() << "J'ai envoyé le vector";
+}
+
 void ModeleLecteur::chargerDiapos()
 {
 
@@ -153,7 +176,7 @@ void ModeleLecteur::chargerDiapos()
         infosACharger.vitesseDefilement = 1;
         _infosDiapos.push_back(infosACharger);
 
-
+        qDebug() << "Jai chargé les diapos, taille : " << _infosDiapos.size();
 }
 
 

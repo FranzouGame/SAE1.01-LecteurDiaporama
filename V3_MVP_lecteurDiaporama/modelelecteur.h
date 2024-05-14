@@ -27,24 +27,25 @@ private:
     // Attributs
     UnEtat _etat;
     Lecteur* _lecteur;
-    Diaporamas* _infosDiapos;
+    Diaporamas _infosDiapos;
 
 public:
     /*** Méthodes ***/
 
     // Constructeur
-    explicit ModeleLecteur(Lecteur*, UnEtat = UnEtat::Initial);
+    explicit ModeleLecteur(Lecteur*, UnEtat = UnEtat::Initial, Diaporamas = {});
     ModeleLecteur();
+    ~ModeleLecteur();
 
     // Getters
     UnEtat getEtat() const;
     Lecteur* getLecteur() const;
-    Diaporamas* getInfosDiapos() const;
+    Diaporamas getInfosDiapos() const;
 
     // Setters
     void setEtat(ModeleLecteur::UnEtat);
     void setLecteur(Lecteur*);
-    void setDiapos(Diaporamas*);
+    void setInfosDiapos(Diaporamas);
 
     // Autres méthodes
     void chargerDiapos();
@@ -59,7 +60,7 @@ public slots:
 signals:
     void imageChanged(const QString& chemin, const QString& titre, const QString& categorie);
     void diapoChanged(const QString& titreDiapo);
-    void sendDiapoInfos(Diaporamas*);
+    void sendDiapoInfos(Diaporamas);
 };
 
 #endif // MODELELECTEUR_H

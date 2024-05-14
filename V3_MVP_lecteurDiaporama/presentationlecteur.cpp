@@ -56,7 +56,7 @@ void PresentationLecteur::demanderAffichageDiapo1()
     qDebug() << "Demande de l'affichage de la 1ere diapo";
 
     // Émettre le signal uniquement si nécessaire
-        emit demanderAffichageDiapo1();
+    emit demanderAffichageDiapo1();
 }
 
 
@@ -79,6 +79,7 @@ void PresentationLecteur::demanderChangerVitesse() {
 void PresentationLecteur::demanderChargement() {
     ModeleLecteur::UnEtat etatPrécédent = _modele->getEtat();
     _modele->setEtat(ModeleLecteur::ChoixDiaporama);
+    _modele->demanderInfosDiapos();
     _vue->majInterface(_modele->getEtat());
     _modele->setEtat(etatPrécédent);
 }
