@@ -2,9 +2,10 @@
 #include "imageDansDiaporama.h"
 #include "qdebug.h"
 
-ModeleLecteur::ModeleLecteur(Lecteur* l, UnEtat e) :
+ModeleLecteur::ModeleLecteur(Lecteur* l, UnEtat e, Diaporamas* d) :
     _etat(e),
-    _lecteur(l){
+    _lecteur(l),
+    _infosDiapos(d){
 }
 
 ModeleLecteur::ModeleLecteur()
@@ -14,6 +15,8 @@ ModeleLecteur::ModeleLecteur()
 
     // Lecteur par défaut
     _lecteur = new Lecteur();
+
+    // Chargement des diaporamas
 
 }
 
@@ -29,6 +32,11 @@ ModeleLecteur::UnEtat ModeleLecteur::getEtat() const
 Lecteur *ModeleLecteur::getLecteur() const
 {
     return _lecteur;
+}
+
+Diaporamas* ModeleLecteur::getInfosDiapos()const
+{
+    return _infosDiapos;
 }
 
 
@@ -51,6 +59,11 @@ void ModeleLecteur::setLecteur(Lecteur *l)
     emit diapoChanged(titreDiapo);
 
 
+}
+
+void ModeleLecteur::setInfosDiapos(Diaporamas* d)
+{
+    _infosDiapos = d;
 }
 
 
@@ -125,6 +138,12 @@ void ModeleLecteur::demanderAffichage1erDiapo()
     }
 }
 
+void ModeleLecteur::demanderInfosDiapos()
+{
+    chargerDiapos();
+    emit sendDiapoInfos(_infosDiapos);
+}
+
 void ModeleLecteur::chargerDiapos()
 {
 
@@ -133,27 +152,27 @@ void ModeleLecteur::chargerDiapos()
         infosACharger.id = 1;
         infosACharger.titre = "Diaporama Pantxika";
         infosACharger.vitesseDefilement = 2;
-        _infosDiapos.push_back(infosACharger);
+        _infosDiapos->push_back(infosACharger);
 
          // Diaporama de Thierry
         infosACharger.id = 2;
         infosACharger.titre = "Diaporama Thierry";
         infosACharger.vitesseDefilement = 4;
-        _infosDiapos.push_back(infosACharger);
+        _infosDiapos->push_back(infosACharger);
 
          // Diaporama de Yann
         infosACharger.id = 3;
         infosACharger.titre = "Diaporama Yann";
         infosACharger.vitesseDefilement = 2;
-        _infosDiapos.push_back(infosACharger);
+        _infosDiapos->push_back(infosACharger);
 
          // Diaporama de Manu
         infosACharger.id = 4;
         infosACharger.titre = "Diaporama Manu";
         infosACharger.vitesseDefilement = 1;
-        _infosDiapos.push_back(infosACharger);
+        _infosDiapos->push_back(infosACharger);
 
-
+        qDebug() << "Diapos chargés";
 }
 
 

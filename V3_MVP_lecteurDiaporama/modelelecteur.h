@@ -33,7 +33,7 @@ public:
     /*** Méthodes ***/
 
     // Constructeur
-    explicit ModeleLecteur(Lecteur*, UnEtat = UnEtat::Initial);
+    explicit ModeleLecteur(Lecteur*, UnEtat = UnEtat::Initial, Diaporamas* = {});
     ModeleLecteur();
 
     // Getters
@@ -44,7 +44,7 @@ public:
     // Setters
     void setEtat(ModeleLecteur::UnEtat);
     void setLecteur(Lecteur*);
-    void setDiapos(Diaporamas*);
+    void setInfosDiapos(Diaporamas* d);
 
     // Autres méthodes
     void chargerDiapos();

@@ -32,7 +32,6 @@ public:
 signals:
     void faireAvancer();
     void faireReculer();
-    void faireAfficherPremiere();
     void faireOuvrirAPropos();
 
 signals:

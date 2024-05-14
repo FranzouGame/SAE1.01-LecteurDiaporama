@@ -12,6 +12,7 @@
 LecteurVue::LecteurVue(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::LecteurVue)
+    , _infosDiapos({})
 {
     ui->setupUi(this);
 
@@ -136,7 +137,7 @@ void LecteurVue::majInterface(ModeleLecteur::UnEtat e)
         break;
     case ModeleLecteur::ChoixDiaporama:
         {
-            ChoixDiaporama fenetreChoix;
+            ChoixDiaporama fenetreChoix(_infosDiapos);
 
             // Afficher la fenêtre
             fenetreChoix.exec();
@@ -185,6 +186,11 @@ void LecteurVue::updateImageInfo(const QString& chemin, const QString& titre, co
 void LecteurVue::updateDiapoTitle(const QString &titreDiapo)
 {
     ui->titreDiapo->setText(titreDiapo);
+}
+
+void LecteurVue::receptionDiapos(Diaporamas *d)
+{
+    _infosDiapos = d;
 }
 
 
