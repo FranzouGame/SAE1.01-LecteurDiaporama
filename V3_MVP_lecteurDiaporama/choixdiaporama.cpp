@@ -1,6 +1,6 @@
 #include "choixdiaporama.h"
 #include "ui_choixdiaporama.h"
-#include "modelelecteur.h".h"
+#include "modelelecteur.h"
 
 ChoixDiaporama::ChoixDiaporama(QWidget *parent)
     : QDialog(parent)

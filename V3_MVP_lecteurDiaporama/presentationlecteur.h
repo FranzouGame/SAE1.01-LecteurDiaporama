@@ -9,6 +9,7 @@ class Diaporama;
 // Inclusions nécessaires
 #include <QObject>
 #include <QTimer>
+#include <QEventLoop>
 class PresentationLecteur : public QObject
 {
     Q_OBJECT

@@ -92,9 +92,12 @@ void PresentationLecteur::demanderLancement() {
         }
 
         while (_modele->getLecteur()->getImageCourante()->getRangDansDiaporama()!= _modele->getLecteur()->nbImages()-1) {
-            qDebug() << "je suis dans la boucle";
-            QTimer::singleShot((_modele->getLecteur()->getDiaporama()->getVitesseDefilement())*5000, this, SLOT(demanderAvancer()));
-
+            QTimer timer;
+            QEventLoop loop;
+            connect(&timer, &QTimer::timeout, &loop, &QEventLoop::quit);
+            timer.start(5000); // 5000 ms = 5 secondes
+            loop.exec(); // Bloque jusqu'à ce que le timer émette le signal timeout
+            emit faireAvancer();
         }
     }
     else {
