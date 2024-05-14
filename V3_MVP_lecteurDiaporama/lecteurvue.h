@@ -3,7 +3,7 @@
 
 #include <QMainWindow>
 #include "modelelecteur.h"
-
+#include <QPushbutton>
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -27,6 +27,8 @@ private:
     PresentationLecteur* _pres;
 
 public:
+    QPushButton *btnSuiv;
+    QPushButton *btnPrec;
     // Constructeur & Destructeur
     LecteurVue(QWidget *parent = nullptr);
     ~LecteurVue();

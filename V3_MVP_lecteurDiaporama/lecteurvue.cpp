@@ -14,7 +14,8 @@ LecteurVue::LecteurVue(QWidget *parent)
     , ui(new Ui::LecteurVue)
 {
     ui->setupUi(this);
-
+    btnSuiv = ui->btnSuiv;
+    btnPrec = ui->btnPrec;
     // Connections
     QObject::connect(ui->btnLancerDiapo, SIGNAL(clicked()), this, SLOT(demanderLancementDiapo()));
     QObject::connect(ui->btnSuiv, SIGNAL(clicked()), this, SLOT(demanderAvancer()));

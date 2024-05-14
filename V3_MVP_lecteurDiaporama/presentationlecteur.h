@@ -17,6 +17,8 @@ private:
     // Attributs
     LecteurVue* _vue;         // Connexion de la vue
     ModeleLecteur* _modele;   // Connexion du modèle
+    bool btnSuivClicked;
+    bool btnPredClicked;
 
 public:
     /*** Méthodes ***/
@@ -57,6 +59,8 @@ public slots:
 
     // Actions liées au fenetres externes
     void demanderAffichageInformations();
+    void onBtnSuivClicked();
+    void onBtnPredClicked();
 };
 
 #endif // PRESENTATIONLECTEUR_H

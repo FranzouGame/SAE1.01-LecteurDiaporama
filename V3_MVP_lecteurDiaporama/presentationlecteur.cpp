@@ -95,10 +95,16 @@ void PresentationLecteur::demanderLancement() {
             timer.start(5000); // 5000 ms = 5 secondes
             loop.exec(); // Bloque jusqu'à ce que le timer émette le signal timeout
             emit faireAvancer();
+            if (btnSuivClicked) {
+                btnSuivClicked = false; // Réinitialiser la variable pour la prochaine boucle
+                _modele->setEtat(ModeleLecteur::Manuel);
+                break;}
+            else if (btnPredClicked) {
+                btnPredClicked = false; // Réinitialiser la variable pour la prochaine boucle
+                _modele->setEtat(ModeleLecteur::Manuel);
+                break;}
         }
     }
-    else {
-        emit faireAfficherImageDepart();}
 }
 
 void PresentationLecteur::demanderChangementModeVersManuel() {
@@ -116,4 +122,10 @@ void PresentationLecteur::demanderChangementModeVersAUtomatique() {
 void PresentationLecteur::demanderAffichageInformations()
 {
     emit faireOuvrirAPropos();
+}
+void PresentationLecteur::onBtnSuivClicked() {
+    btnSuivClicked = true; // Mettre à jour la variable d'état lorsque le bouton est cliqué
+}
+void PresentationLecteur::onBtnPredClicked() {
+    btnPredClicked = true; // Mettre à jour la variable d'état lorsque le bouton est cliqué
 }
