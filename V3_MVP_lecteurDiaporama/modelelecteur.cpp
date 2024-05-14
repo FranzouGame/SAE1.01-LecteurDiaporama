@@ -20,6 +20,10 @@ ModeleLecteur::ModeleLecteur()
 
 }
 
+ModeleLecteur::~ModeleLecteur()
+{
+}
+
 /***********************
  *      Getters        *
 ***********************/
@@ -61,7 +65,7 @@ void ModeleLecteur::setLecteur(Lecteur *l)
 
 }
 
-void ModeleLecteur::setInfosDiapos(Diaporamas& d)
+void ModeleLecteur::setInfosDiapos(Diaporamas d)
 {
     _infosDiapos = d;
 
@@ -105,10 +109,7 @@ void ModeleLecteur::demandeReculement()
                               QString::fromStdString(imageCourante->getTitre()),
                               QString::fromStdString(imageCourante->getCategorie()));
         }
-
     }
-
-
 }
 
 void ModeleLecteur::demandeAffichageImageDebut()
@@ -144,6 +145,7 @@ void ModeleLecteur::demanderInfosDiapos()
 {
     chargerDiapos();
     emit sendDiapoInfos(_infosDiapos);
+    qDebug() << "J'ai envoyé le vector";
 }
 
 void ModeleLecteur::chargerDiapos()
@@ -174,6 +176,7 @@ void ModeleLecteur::chargerDiapos()
         infosACharger.vitesseDefilement = 1;
         _infosDiapos.push_back(infosACharger);
 
+        qDebug() << "Jai chargé les diapos, taille : " << _infosDiapos.size();
 }
 
 

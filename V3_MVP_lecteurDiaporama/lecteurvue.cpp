@@ -188,7 +188,7 @@ void LecteurVue::updateDiapoTitle(const QString &titreDiapo)
     ui->titreDiapo->setText(titreDiapo);
 }
 
-void LecteurVue::receptionDiapos(const Diaporamas& d)
+void LecteurVue::receptionDiapos(Diaporamas d)
 {
     _infosDiapos = d;
 

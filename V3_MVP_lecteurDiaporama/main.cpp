@@ -24,13 +24,13 @@ int main(int argc, char *argv[])
     LecteurVue vueLecteur;
     Lecteur* lecteur = new Lecteur();
     Diaporamas mesDiapos;
-    chargerDiapos(mesDiapos);
+    /*chargerDiapos(mesDiapos);
     int taille = mesDiapos.size();
-    qDebug() << "Taille du vecteur : " << taille << "  ";
+    qDebug() << "Taille du vecteur : " << taille << "  ";*/
 
     // Association des différents éléments entre eux
     // modele->setInfosDiapos(mesDiapos);
-    modele->chargerDiapos();
+    //modele->chargerDiapos();
     vueLecteur.setPres(presentation);
     presentation->setModele(modele);
     modele->setEtat(ModeleLecteur::Initial);
@@ -59,7 +59,7 @@ int main(int argc, char *argv[])
 
     // Modèle -> vue
     QObject::connect(modele, SIGNAL(imageChanged(QString, QString, QString)), &vueLecteur, SLOT(updateImageInfo(QString, QString, QString)));
-    QObject::connect(modele, SIGNAL(sendDiapoInfos(Diaporamas&)), &vueLecteur, SLOT(receptionDiapos(Diaporamas&)));
+    QObject::connect(modele, SIGNAL(sendDiapoInfos(Diaporamas)), &vueLecteur, SLOT(receptionDiapos(Diaporamas)));
 
     vueLecteur.demanderAffichageImage1();
     // Affichage de la fenetre
