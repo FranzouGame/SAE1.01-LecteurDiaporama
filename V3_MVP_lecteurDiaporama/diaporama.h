@@ -37,4 +37,5 @@ private:
     void trierParRangCroissant(); // trie les images du diaporama par ordre de rang croissant
 };
 
+
 #endif // DIAPORAMA_H
