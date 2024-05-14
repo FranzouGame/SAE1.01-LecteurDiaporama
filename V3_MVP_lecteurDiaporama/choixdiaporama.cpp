@@ -21,7 +21,6 @@ ChoixDiaporama::ChoixDiaporama(Diaporamas& d, QWidget *parent)
 
     qDebug() << "Tu n'es pas le probleme";
 
-
 }
 
 ChoixDiaporama::ChoixDiaporama(QWidget *parent)
