@@ -85,12 +85,9 @@ void PresentationLecteur::demanderChargement() {
 void PresentationLecteur::demanderLancement() {
     qDebug() << "Présentation : réception demande de lancement";
     if (_modele->getEtat() == ModeleLecteur::Automatique) {
-        qDebug() << "je suis dan sle premier if";
         if (_modele->getLecteur()->getDiaporama()->getVitesseDefilement() == 0) {
             _modele->getLecteur()->getDiaporama()->setVitesseDefilement(1);
-            qDebug() << "je change de vitesse";
         }
-
         while (_modele->getLecteur()->getImageCourante()->getRangDansDiaporama()!= _modele->getLecteur()->nbImages()-1) {
             QTimer timer;
             QEventLoop loop;
