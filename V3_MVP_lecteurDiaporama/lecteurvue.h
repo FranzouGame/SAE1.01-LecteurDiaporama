@@ -26,7 +26,7 @@ private:
     // Presentation de la vue
     PresentationLecteur* _pres;
     // Informations des diaporamas
-    Diaporamas* _infosDiapos;
+    Diaporamas _infosDiapos;
 
 public:
     // Constructeur & Destructeur
@@ -68,6 +68,6 @@ public slots:
     void afficherInformations(); // Fenetre A propos
     void updateImageInfo(const QString& chemin, const QString& titre, const QString& categorie); // Image mise à jour
     void updateDiapoTitle(const QString& titreDiapo);
-    void receptionDiapos(Diaporamas*);
+    void receptionDiapos(const Diaporamas&);
 };
 #endif // LECTEURVUE_H

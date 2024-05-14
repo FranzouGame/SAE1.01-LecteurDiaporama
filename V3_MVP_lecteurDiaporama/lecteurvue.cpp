@@ -188,9 +188,11 @@ void LecteurVue::updateDiapoTitle(const QString &titreDiapo)
     ui->titreDiapo->setText(titreDiapo);
 }
 
-void LecteurVue::receptionDiapos(Diaporamas *d)
+void LecteurVue::receptionDiapos(const Diaporamas& d)
 {
     _infosDiapos = d;
+
+    qDebug() << "Vue taille : " << d.size();
 }
 
 

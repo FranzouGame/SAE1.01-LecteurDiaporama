@@ -2,7 +2,7 @@
 #include "imageDansDiaporama.h"
 #include "qdebug.h"
 
-ModeleLecteur::ModeleLecteur(Lecteur* l, UnEtat e, Diaporamas* d) :
+ModeleLecteur::ModeleLecteur(Lecteur* l, UnEtat e, Diaporamas d) :
     _etat(e),
     _lecteur(l),
     _infosDiapos(d){
@@ -34,7 +34,7 @@ Lecteur *ModeleLecteur::getLecteur() const
     return _lecteur;
 }
 
-Diaporamas* ModeleLecteur::getInfosDiapos()const
+Diaporamas ModeleLecteur::getInfosDiapos()const
 {
     return _infosDiapos;
 }
@@ -61,9 +61,11 @@ void ModeleLecteur::setLecteur(Lecteur *l)
 
 }
 
-void ModeleLecteur::setInfosDiapos(Diaporamas* d)
+void ModeleLecteur::setInfosDiapos(Diaporamas& d)
 {
     _infosDiapos = d;
+
+    qDebug() << 'Taille modele : ' << d.size();
 }
 
 
@@ -152,27 +154,26 @@ void ModeleLecteur::chargerDiapos()
         infosACharger.id = 1;
         infosACharger.titre = "Diaporama Pantxika";
         infosACharger.vitesseDefilement = 2;
-        _infosDiapos->push_back(infosACharger);
+        _infosDiapos.push_back(infosACharger);
 
          // Diaporama de Thierry
         infosACharger.id = 2;
         infosACharger.titre = "Diaporama Thierry";
         infosACharger.vitesseDefilement = 4;
-        _infosDiapos->push_back(infosACharger);
+        _infosDiapos.push_back(infosACharger);
 
          // Diaporama de Yann
         infosACharger.id = 3;
         infosACharger.titre = "Diaporama Yann";
         infosACharger.vitesseDefilement = 2;
-        _infosDiapos->push_back(infosACharger);
+        _infosDiapos.push_back(infosACharger);
 
          // Diaporama de Manu
         infosACharger.id = 4;
         infosACharger.titre = "Diaporama Manu";
         infosACharger.vitesseDefilement = 1;
-        _infosDiapos->push_back(infosACharger);
+        _infosDiapos.push_back(infosACharger);
 
-        qDebug() << "Diapos chargés";
 }
 
 

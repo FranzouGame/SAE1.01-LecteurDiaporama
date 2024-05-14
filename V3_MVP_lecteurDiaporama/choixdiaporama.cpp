@@ -2,19 +2,19 @@
 #include "ui_choixdiaporama.h"
 #include "modelelecteur.h"
 
-ChoixDiaporama::ChoixDiaporama(Diaporamas *d, QWidget *parent)
+ChoixDiaporama::ChoixDiaporama(Diaporamas& d, QWidget *parent)
     : QDialog(parent)
     , ui(new Ui::ChoixDiaporama)
 {
     ui->setupUi(this);
 
-    qDebug() << "Tu es peut etre le probleme // taille : " << d->size();
+    qDebug() << "Tu es peut etre le probleme // taille : " << d.size();
 
     // Ajout des informations
-    for (unsigned int i = 0 ; i < d->size(); i++)
+    for (unsigned int i = 0 ; i < d.size(); i++)
     {
-        QString id = QString::number((*d)[i].id);
-        QString titre = QString::fromStdString((*d)[i].titre);
+        QString id = QString::number(d[i].id);
+        QString titre = QString::fromStdString(d[i].titre);
         QString chainePourAffichage = id + " - " + titre;
         ui->comboBoxDiaporamas->addItem(chainePourAffichage);
     }

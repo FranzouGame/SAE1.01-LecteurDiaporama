@@ -13,7 +13,7 @@ class ChoixDiaporama : public QDialog
     Q_OBJECT
 
 public:
-    ChoixDiaporama(Diaporamas*, QWidget *parent=nullptr);
+    ChoixDiaporama(Diaporamas&, QWidget *parent=nullptr);
     explicit ChoixDiaporama(QWidget *parent = nullptr);
     ~ChoixDiaporama();
 
