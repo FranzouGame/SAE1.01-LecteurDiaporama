@@ -8,7 +8,7 @@ class Diaporama;
 
 // Inclusions nécessaires
 #include <QObject>
-
+#include <QTimer>
 class PresentationLecteur : public QObject
 {
     Q_OBJECT

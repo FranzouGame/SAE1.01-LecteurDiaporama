@@ -60,6 +60,7 @@ void LecteurVue::demanderArreterDiapo() {
 
 void LecteurVue::demanderLancementDiapo() {
     qDebug() << "Demande de lancement d'une diapositive";
+    getPres()->demanderLancement();
 }
 
 void LecteurVue::demanderFermetureLecteur() {
@@ -133,6 +134,7 @@ void LecteurVue::majInterface(ModeleLecteur::UnEtat e)
         break;
     case ModeleLecteur::Automatique:
         // Implémentation à faire
+
         break;
     case ModeleLecteur::ChoixDiaporama:
         {
