@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>639</width>
-    <height>424</height>
+    <width>1257</width>
+    <height>684</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -36,7 +36,7 @@
      <item>
       <widget class="QLabel" name="desc1">
        <property name="text">
-        <string>Veuillez entrer une valeur comprise entre 0,2 et 5 secondes.</string>
+        <string>Veuillez entrer une valeur comprise entre 0.2 et 5 secondes.</string>
        </property>
        <property name="alignment">
         <set>Qt::AlignCenter</set>
@@ -47,6 +47,16 @@
       <widget class="QLabel" name="desc2">
        <property name="text">
         <string> Ce sera la durée d'une diapositive en secondes en mode Automatique</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="label">
+       <property name="text">
+        <string>(une durée non entière doit être écrite avec un &quot;.&quot; et non une virgule)</string>
        </property>
        <property name="alignment">
         <set>Qt::AlignCenter</set>
@@ -69,7 +79,7 @@
      <item>
       <layout class="QFormLayout" name="formLayout">
        <item row="0" column="0">
-        <widget class="QLabel" name="label">
+        <widget class="QLabel" name="titreSaisie">
          <property name="font">
           <font>
            <bold>true</bold>
@@ -81,7 +91,7 @@
         </widget>
        </item>
        <item row="0" column="1">
-        <widget class="QLineEdit" name="lineEdit"/>
+        <widget class="QLineEdit" name="choixUtilisateur"/>
        </item>
       </layout>
      </item>
@@ -127,22 +137,6 @@
  <connections>
   <connection>
    <sender>buttonBox</sender>
-   <signal>accepted()</signal>
-   <receiver>choixVitesseDefilement</receiver>
-   <slot>accept()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>248</x>
-     <y>254</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>157</x>
-     <y>274</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>buttonBox</sender>
    <signal>rejected()</signal>
    <receiver>choixVitesseDefilement</receiver>
    <slot>reject()</slot>
@@ -153,6 +147,22 @@
     </hint>
     <hint type="destinationlabel">
      <x>286</x>
+     <y>274</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>buttonBox</sender>
+   <signal>accepted()</signal>
+   <receiver>choixVitesseDefilement</receiver>
+   <slot>accept()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>248</x>
+     <y>254</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>157</x>
      <y>274</y>
     </hint>
    </hints>

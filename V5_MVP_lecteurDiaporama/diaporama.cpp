@@ -19,7 +19,7 @@ string Diaporama::getTitre() const
     return titre;
 }
 
-int Diaporama::getVitesseDefilement() const
+float Diaporama::getVitesseDefilement() const
 {
     return vitesseDefilement;
 }
@@ -45,7 +45,7 @@ void Diaporama::setTitre(string pTitre)
     titre = pTitre;
 }
 
-void Diaporama::setVitesseDefilement(unsigned int pVitesseDefilement)
+void Diaporama::setVitesseDefilement(float pVitesseDefilement)
 {
     vitesseDefilement = pVitesseDefilement;
 }

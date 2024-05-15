@@ -57,12 +57,6 @@ void ModeleLecteur::setEtat(ModeleLecteur::UnEtat e)
 void ModeleLecteur::setLecteur(Lecteur *l)
 {
     _lecteur = l;
-
-    // Envoyer le signal
-    QString titreDiapo = QString::fromStdString(_lecteur->getDiaporama()->getTitre());
-    emit diapoChanged(titreDiapo);
-
-
 }
 
 void ModeleLecteur::setInfosDiapos(Diaporamas d)
@@ -128,26 +122,18 @@ void ModeleLecteur::demandeAffichageImageDebut()
 }
 
 
-void ModeleLecteur::demanderAffichage1erDiapo()
-{
-    qDebug() << "Modele : reception demande image 1";
-    ImageDansDiaporama* imageCourante = _lecteur->getImageCourante();
-    // Si l'image existe, l'envoyer à la vue
-    if (imageCourante) {
-        emit imageChanged(QString::fromStdString(imageCourante->getChemin()),
-                          QString::fromStdString(imageCourante->getTitre()),
-                          QString::fromStdString(imageCourante->getCategorie()));
-    }
-}
+
 
 void ModeleLecteur::demanderInfosDiapos()
 {
-
     emit sendDiapoInfos(_infosDiapos);
 }
 
-void ModeleLecteur::recptionDemandeChangementDiaporama(InfosDiaporama d)
+void ModeleLecteur::receptionDemandeChangementDiaporama(InfosDiaporama d)
 {
+    qDebug() << "zeqsqeq";
+
+
     _lecteur->changerDiaporama(d.id, d.titre, d.vitesseDefilement);
 
     // Envoyer le titre du diaporama
@@ -163,6 +149,18 @@ void ModeleLecteur::recptionDemandeChangementDiaporama(InfosDiaporama d)
                           QString::fromStdString(imageCourante->getTitre()),
                           QString::fromStdString(imageCourante->getCategorie()));
     }
+
+    // Mettre à jour la vitesse de défilement du diaporama
+    _lecteur->getDiaporama()->setVitesseDefilement(d.vitesseDefilement);
+}
+
+void ModeleLecteur::receptionDemandeChangementVitesse(float pVitesse)
+{
+    if(getEtat() != Initial)
+    {
+        _lecteur->getDiaporama()->setVitesseDefilement(pVitesse);
+    }
+
 }
 
 void ModeleLecteur::chargerDiapos()
@@ -193,7 +191,6 @@ void ModeleLecteur::chargerDiapos()
         infosACharger.vitesseDefilement = 1;
         _infosDiapos.push_back(infosACharger);
 
-        qDebug() << "Jai chargé les diapos, taille : " << _infosDiapos.size();
 }
 
 

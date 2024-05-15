@@ -17,6 +17,13 @@ public:
 
 private:
     Ui::choixVitesseDefilement *ui;
+
+private slots:
+    void enableButton();
+    void demanderEnvoiValeur();
+
+signals:
+    void envoyerVitesseDfl(float);
 };
 
 #endif // CHOIXVITESSEDEFILEMENT_H

@@ -42,12 +42,10 @@ LecteurVue::~LecteurVue()
  *        SLOTS         *
  ***********************/
 void LecteurVue::demanderAvancer() {
-    qDebug() << "Demande d'avancement dans le diaporama";
     getPres()->demanderAvancer();
 }
 
 void LecteurVue::demanderReculer() {
-    qDebug() << "Demande de recul dans le diaporama";
     getPres()->demanderReculer();
 }
 
@@ -86,7 +84,6 @@ void LecteurVue::demanderChangementModeManuel() {
 
 void LecteurVue::demanderChangementVitesseDefilement()
 {
-    qDebug() << "Demande de changement de vitesse de défilement";
     getPres()->demanderChangerVitesse();
 }
 
@@ -138,22 +135,26 @@ void LecteurVue::majInterface(ModeleLecteur::UnEtat e)
         break;
     case ModeleLecteur::ChoixDiaporama:
         {
-            ChoixDiaporama fenetreChoix(_infosDiapos, this);
+            ChoixDiaporama* fenetreChoix = new ChoixDiaporama(_infosDiapos, this);
 
             // Connexion pour la récupération d'informaitons
-            QObject::connect(&fenetreChoix, SIGNAL(transmettreInfos(int,QString)), this, SLOT(recupereInfosDiapoChoisi(int,QString)));
+            QObject::connect(fenetreChoix, SIGNAL(transmettreInfos(InfosDiaporama)), this, SLOT(recupereInfosDiapoChoisi(InfosDiaporama)));
 
             // Afficher la fenêtre
-            fenetreChoix.exec();
+            fenetreChoix->exec();
         }
         break;
     case ModeleLecteur::ChoixVitesseDefilement:
         {
             // Création de la fenêtre
-            choixVitesseDefilement* fenetreChoix = new choixVitesseDefilement();
+            choixVitesseDefilement fenetreChoix(this);
 
+            // Connexion pour la récupération d'informations
+            QObject::connect(&fenetreChoix, SIGNAL(envoyerVitesseDfl(float)), this, SLOT(recupereVitesseDefilement(float)));
+
+            qDebug() << "Vue majI";
             // Ouvrir la fenêtre de choix
-            fenetreChoix->exec();
+            fenetreChoix.exec();
         }
         break;
     default:
@@ -167,11 +168,7 @@ void LecteurVue::demanderAffichageImage1()
     getPres()->demanderAffichageDiapoDebut();
 }
 
-void LecteurVue::demanderAffichage1ereImage()
-{
-    qDebug() << "Vue : Affichage image 1";
-    getPres()->demanderAffichageDiapo1();
-}
+
 
 
 
@@ -201,14 +198,17 @@ void LecteurVue::updateDiapoTitle(const QString &titreDiapo)
 void LecteurVue::receptionDiapos(Diaporamas d)
 {
     _infosDiapos = d;
-
-    qDebug() << "Vue taille : " << d.size();
 }
 
 void LecteurVue::recupereInfosDiapoChoisi(InfosDiaporama d)
 {
-
     getPres()->demanderChangementDIapo(d);
+}
+
+void LecteurVue::recupereVitesseDefilement(float pVitesse)
+{
+    qDebug() << "vue";
+    getPres()->demanderChangementVitesseDfl(pVitesse);
 }
 
 

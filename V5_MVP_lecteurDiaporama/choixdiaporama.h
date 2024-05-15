@@ -16,13 +16,17 @@ public:
     ChoixDiaporama(Diaporamas&, QWidget *parent=nullptr);
     explicit ChoixDiaporama(QWidget *parent = nullptr);
     ~ChoixDiaporama();
+    // Getters
+    InfosDiaporama getInfosDiapoCourant() const;
+    Diaporamas getInfosDiaporamas() const;
 
 private:
     Ui::ChoixDiaporama *ui;
-    InfosDiaporama diapoCourant;
+    InfosDiaporama _diapoCourant;
+    Diaporamas _infosDiapos;
 
 private slots:
-    void transmettreInformations(InfosDiaporama);
+    void transmettreInformations();
 
 signals:
     void transmettreInfos(InfosDiaporama);

@@ -1,4 +1,6 @@
 #include "lecteur.h"
+#include "qdebug.h"
+#include "qlogging.h"
 
 Lecteur::Lecteur() : idDiaporama(2), diaporama(nullptr)
 {
@@ -19,7 +21,7 @@ unsigned int Lecteur::getIdDiaporama() const
     return idDiaporama; // valeur >= 0
 }
 
-Diaporama* Lecteur::getDiaporama() const
+Diaporama* Lecteur::getDiaporama()
 {
     return diaporama;   // peut être nullptr
 }
@@ -36,7 +38,7 @@ unsigned int Lecteur::getPosImageCourante() const
 
 bool Lecteur::lecteurVide() const
 {
-    return (getDiaporama() == nullptr);
+    return(diaporama == nullptr);
 }
 
 ImageDansDiaporama *Lecteur::getImageCourante() const
@@ -112,7 +114,7 @@ void Lecteur::setPosImageCourante(unsigned int pPosImageCourante)
     posImageCourante = pPosImageCourante;
 }
 
-void Lecteur::changerDiaporama(unsigned int pId, string pTitre, unsigned int pVitesse)
+void Lecteur::changerDiaporama(unsigned int pId, string pTitre, float pVitesse)
 {
     /* Chargement des informations et images images associées au diaporama courant
        Dans une version ultérieure, le seul paramètre sera le numéro ou identifiant du diaporama choisi,
@@ -120,25 +122,45 @@ void Lecteur::changerDiaporama(unsigned int pId, string pTitre, unsigned int pVi
 
     if (pId != 0)
     {
+
+        // Si le diaporama n'est pas vide, le vider
         if (!lecteurVide())
         {
-            diaporama->vider();
+            if (diaporama != nullptr)
+            {
+
+                diaporama->vider();
+            }
+            else
+            {
+                // Créer un nouveau diaporama s'il n'existe pas
+                diaporama = new Diaporama();
+
+            }
         }
         else
         {
+            // Créer un nouveau diaporama si le lecteur est vide
             diaporama = new Diaporama();
         }
+
+        // Assigner les valeurs à l'objet diaporama
         setIdDiaporama(pId);
         diaporama->setId(pId);
         diaporama->setTitre(pTitre);
         diaporama->setVitesseDefilement(pVitesse);
-        chargerDiaporamaCourant(); // charge les images et la position de l'image courante
+
+        // Charger les informations du diaporama
+        chargerDiaporamaCourant();
     }
     else
+    {
+        // Vider le lecteur s'il est déjà initialisé
         if (!lecteurVide())
         {
             viderLecteur();
         }
+    }
 }
 
 void Lecteur::avancer()

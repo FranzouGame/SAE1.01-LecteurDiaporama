@@ -9,7 +9,7 @@
 struct InfosDiaporama {
     unsigned int id;    // identifiant du diaporama dans la BD
     string titre;       // titre du diaporama
-    unsigned int vitesseDefilement;
+    float vitesseDefilement;
 };
 
 // Type nécessaire
@@ -54,9 +54,10 @@ public slots:
     void demandeAvancement();
     void demandeReculement();
     void demandeAffichageImageDebut();
-    void demanderAffichage1erDiapo();
+    //void demanderAffichage1erDiapo();
     void demanderInfosDiapos();
-    void recptionDemandeChangementDiaporama(InfosDiaporama);
+    void receptionDemandeChangementDiaporama(InfosDiaporama);
+    void receptionDemandeChangementVitesse(float);
 
 signals:
     void imageChanged(const QString& chemin, const QString& titre, const QString& categorie);

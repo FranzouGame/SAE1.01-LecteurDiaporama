@@ -5,6 +5,7 @@
 ChoixDiaporama::ChoixDiaporama(Diaporamas& d, QWidget *parent)
     : QDialog(parent)
     , ui(new Ui::ChoixDiaporama)
+    , _infosDiapos(d)
 {
     ui->setupUi(this);
 
@@ -18,7 +19,7 @@ ChoixDiaporama::ChoixDiaporama(Diaporamas& d, QWidget *parent)
     }
 
     // Connexion de l'acceptation avec la procédure de récupération
-    QObject::connect(ui->buttonBox, &QDialogButtonBox::accepted, this, SLOT(transmettreInformations(InfosDiaporama)));
+    QObject::connect(ui->buttonBox, &QDialogButtonBox::accepted, this, &ChoixDiaporama::transmettreInformations);
 }
 
 ChoixDiaporama::ChoixDiaporama(QWidget *parent)
@@ -35,29 +36,28 @@ ChoixDiaporama::~ChoixDiaporama()
     delete ui;
 }
 
-void ChoixDiaporama::transmettreInformations(InfosDiaporama d)
+InfosDiaporama ChoixDiaporama::getInfosDiapoCourant() const
 {
-    /*// Récupérer le contenu de la comboBox
-    QString choix = ui->comboBoxDiaporamas->currentText();
+    return _diapoCourant;
+}
 
-    // Extraire le premier caractère de la chaîne et le convertir en entier
-    int choixInt = choix.left(1).toInt();
+Diaporamas ChoixDiaporama::getInfosDiaporamas() const
+{
+    return _infosDiapos;
+}
 
-    // Trouver la position du premier tiret
-    int positionTiret = choix.indexOf('-');
 
-    // Extraire la partie après le tiret (nom du diaporama)
-    QString nomDiaporama = choix.mid(positionTiret + 1).trimmed();
-
-    qDebug() << "Chaine récupérée : " << nomDiaporama;*/
-    int selectedIndex = ui->comboBoxDiaporamas->currentIndex();
+void ChoixDiaporama::transmettreInformations()
+{
+    // récupérer le n° de la ligne choisie
+    int index = ui->comboBoxDiaporamas->currentIndex();
 
     // Vérifier si l'indice est valide
-    if (selectedIndex >= 0 && selectedIndex < .size()) {
+    if (index >= 0 && index < static_cast<int>(_infosDiapos.size())) {
         // Récupérer l'objet InfosDiaporama correspondant à l'élément sélectionné
-        InfosDiaporama diaporamaSelectionne = d[selectedIndex];
+        InfosDiaporama diaporamaSelectionne = _infosDiapos[index];
 
-        // Faire ce que vous devez avec les informations du diaporama sélectionné
+        // Émettre un signal avec les informations du diaporama sélectionné
         emit transmettreInfos(diaporamaSelectionne);
     }
 

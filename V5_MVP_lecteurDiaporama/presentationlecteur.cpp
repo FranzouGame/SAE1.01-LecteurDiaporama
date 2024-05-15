@@ -35,28 +35,16 @@ void PresentationLecteur::setModele(ModeleLecteur* modele) {
 
 // Implémentation des slots
 void PresentationLecteur::demanderAvancer() {
-    qDebug() << "Présentation : réception demande d'avancement";
-    emit faireAvancer(); // Émission du signal faireAvancer()
+    emit faireAvancer();
 }
 void PresentationLecteur::demanderReculer() {
-    qDebug() << "Présentation : réception demande de reculement";
     emit faireReculer();
 }
 
 
 void PresentationLecteur::demanderAffichageDiapoDebut()
 {
-    qDebug() << "Présentation : affichage image 1";
     emit faireAfficherImageDepart();
-}
-
-
-void PresentationLecteur::demanderAffichageDiapo1()
-{
-    qDebug() << "Demande de l'affichage de la 1ere diapo";
-
-    // Émettre le signal uniquement si nécessaire
-    emit demanderAffichageDiapo1();
 }
 
 
@@ -69,7 +57,6 @@ void PresentationLecteur::demanderArretDiapo() {
 }
 
 void PresentationLecteur::demanderChangerVitesse() {
-    qDebug() << "Présentation : réception demande de changement de vitesse";
     ModeleLecteur::UnEtat etatPrécédent = _modele->getEtat();
     _modele->setEtat(ModeleLecteur::ChoixVitesseDefilement);
     _vue->majInterface(_modele->getEtat());
@@ -108,4 +95,9 @@ void PresentationLecteur::demanderAffichageInformations()
 void PresentationLecteur::demanderChangementDIapo(InfosDiaporama d)
 {
     emit faireChangerDiapo(d);
+}
+
+void PresentationLecteur::demanderChangementVitesseDfl(float pVitesse)
+{
+    emit faireChangerVitesse(pVitesse);
 }

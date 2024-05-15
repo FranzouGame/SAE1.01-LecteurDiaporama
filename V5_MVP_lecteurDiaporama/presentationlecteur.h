@@ -34,6 +34,7 @@ signals:
     void faireReculer();
     void faireOuvrirAPropos();
     void faireChangerDiapo(InfosDiaporama);
+    void faireChangerVitesse(float);
 
 signals:
     void faireAfficherImageDepart();
@@ -44,7 +45,6 @@ public slots:
     void demanderAvancer();
     void demanderReculer();
     void demanderAffichageDiapoDebut();
-    void demanderAffichageDiapo1();
     void demanderArretDiapo();
     void demanderChangerVitesse();
 
@@ -59,6 +59,7 @@ public slots:
 
     // Actions liées aux choix utilisateur
     void demanderChangementDIapo(InfosDiaporama);
+    void demanderChangementVitesseDfl(float);
 };
 
 #endif // PRESENTATIONLECTEUR_H

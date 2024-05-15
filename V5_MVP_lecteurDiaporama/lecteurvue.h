@@ -46,7 +46,6 @@ public:
 
 public slots:
     // Pour faire le lien avec les diaporamas
-    void demanderAffichage1ereImage();
     void demanderAvancer();
     void demanderReculer();
     void demanderAffichageImage1();
@@ -72,5 +71,6 @@ public slots:
 
     // RéceptionInfos
     void recupereInfosDiapoChoisi(InfosDiaporama);
+    void recupereVitesseDefilement(float);
 };
 #endif // LECTEURVUE_H
