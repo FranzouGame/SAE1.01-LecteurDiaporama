@@ -53,7 +53,7 @@ int main(int argc, char *argv[])
     QObject::connect(presentation, SIGNAL(faireAvancer()), modele, SLOT(demandeAvancement()));
     QObject::connect(presentation, SIGNAL(faireReculer()), modele, SLOT(demandeReculement()));
     QObject::connect(presentation, SIGNAL(faireAfficherImageDepart()), modele, SLOT(demandeAffichageImageDebut()));
-    QObject::connect(presentation, SIGNAL(faireChangerDiapo(int)), modele, SLOT(reecptionDemandeChangementDiaporama(int)));
+    QObject::connect(presentation, SIGNAL(faireChangerDiapo(int, QString)), modele, SLOT(reecptionDemandeChangementDiaporama(int, QString)));
 
     // Présentation -> vue
     QObject::connect(presentation, SIGNAL(faireOuvrirAPropos()), &vueLecteur, SLOT(afficherInformations()));
@@ -61,6 +61,7 @@ int main(int argc, char *argv[])
     // Modèle -> vue
     QObject::connect(modele, SIGNAL(imageChanged(QString, QString, QString)), &vueLecteur, SLOT(updateImageInfo(QString, QString, QString)));
     QObject::connect(modele, SIGNAL(sendDiapoInfos(Diaporamas)), &vueLecteur, SLOT(receptionDiapos(Diaporamas)));
+    QObject::connect(modele, SIGNAL(diapoChanged(QString)), &vueLecteur, SLOT(updateDiapoTitle(QString)));
 
     vueLecteur.demanderAffichageImage1();
     // Affichage de la fenetre

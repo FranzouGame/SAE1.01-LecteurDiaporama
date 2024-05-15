@@ -17,7 +17,7 @@ ModeleLecteur::ModeleLecteur()
     _lecteur = new Lecteur();
 
     // Chargement des diaporamas
-
+    chargerDiapos();
 }
 
 ModeleLecteur::~ModeleLecteur()
@@ -142,13 +142,13 @@ void ModeleLecteur::demanderAffichage1erDiapo()
 
 void ModeleLecteur::demanderInfosDiapos()
 {
-    chargerDiapos();
+
     emit sendDiapoInfos(_infosDiapos);
 }
 
-void ModeleLecteur::reecptionDemandeChangementDiaporama(int num)
+void ModeleLecteur::reecptionDemandeChangementDiaporama(int num, QString titreDiapoRecu)
 {
-    _lecteur->changerDiaporama(num);
+    _lecteur->changerDiaporama(num, titreDiapoRecu.toStdString());
 
     // Envoyer le titre du diaporama
     QString titreDiapo = QString::fromStdString(_lecteur->getDiaporama()->getTitre());

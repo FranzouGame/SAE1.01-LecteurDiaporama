@@ -43,6 +43,14 @@ void ChoixDiaporama::transmettreInformations()
     // Extraire le premier caractère de la chaîne et le convertir en entier
     int choixInt = choix.left(1).toInt();
 
+    // Trouver la position du premier tiret
+    int positionTiret = choix.indexOf('-');
+
+    // Extraire la partie après le tiret (nom du diaporama)
+    QString nomDiaporama = choix.mid(positionTiret + 1).trimmed();
+
+    qDebug() << "Chaine récupérée : " << nomDiaporama;
+
     // Envoyer l'information
-    emit transmettreInfos(choixInt);
+    emit transmettreInfos(choixInt, nomDiaporama);
 }

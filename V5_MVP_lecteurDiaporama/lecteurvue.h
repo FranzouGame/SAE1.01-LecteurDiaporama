@@ -71,6 +71,6 @@ public slots:
     void receptionDiapos(Diaporamas);
 
     // RéceptionInfos
-    void recupereInfosDiapoChoisi(int);
+    void recupereInfosDiapoChoisi(int,QString);
 };
 #endif // LECTEURVUE_H

@@ -24,7 +24,7 @@ private slots:
     void transmettreInformations();
 
 signals:
-    void transmettreInfos(int);
+    void transmettreInfos(int, QString);
 
 };
 

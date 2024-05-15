@@ -33,7 +33,7 @@ signals:
     void faireAvancer();
     void faireReculer();
     void faireOuvrirAPropos();
-    void faireChangerDiapo(int);
+    void faireChangerDiapo(int, QString);
 
 signals:
     void faireAfficherImageDepart();
@@ -58,7 +58,7 @@ public slots:
     void demanderAffichageInformations();
 
     // Actions liées aux choix utilisateur
-    void demanderChangementDIapo(int);
+    void demanderChangementDIapo(int, QString);
 };
 
 #endif // PRESENTATIONLECTEUR_H

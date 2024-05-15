@@ -140,9 +140,7 @@ void LecteurVue::majInterface(ModeleLecteur::UnEtat e)
             ChoixDiaporama fenetreChoix(_infosDiapos, this);
 
             // Connexion pour la récupération d'informaitons
-            QObject::connect(&fenetreChoix, SIGNAL(transmettreInfos(int)), this, SLOT(recupereInfosDiapoChoisi(int)));
-
-
+            QObject::connect(&fenetreChoix, SIGNAL(transmettreInfos(int,QString)), this, SLOT(recupereInfosDiapoChoisi(int,QString)));
 
             // Afficher la fenêtre
             fenetreChoix.exec();
@@ -200,11 +198,11 @@ void LecteurVue::receptionDiapos(Diaporamas d)
     qDebug() << "Vue taille : " << d.size();
 }
 
-void LecteurVue::recupereInfosDiapoChoisi(int num)
+void LecteurVue::recupereInfosDiapoChoisi(int num, QString titreDiapo)
 {
-    qDebug() << "Linfoe récupérée est : " << num;
+    qDebug() << "Linfoe récupérée est : " << num << titreDiapo;
 
-    getPres()->demanderChangementDIapo(num);
+    getPres()->demanderChangementDIapo(num, titreDiapo);
 }
 
 

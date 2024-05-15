@@ -56,7 +56,7 @@ public slots:
     void demandeAffichageImageDebut();
     void demanderAffichage1erDiapo();
     void demanderInfosDiapos();
-    void reecptionDemandeChangementDiaporama(int);
+    void reecptionDemandeChangementDiaporama(int,QString);
 
 signals:
     void imageChanged(const QString& chemin, const QString& titre, const QString& categorie);
