@@ -2,7 +2,7 @@
 #define PRESENTATIONLECTEUR_H
 
 // Types / classes nécessaires
-class ModeleLecteur;
+#include "modelelecteur.h"
 class LecteurVue;
 class Diaporama;
 
@@ -33,7 +33,7 @@ signals:
     void faireAvancer();
     void faireReculer();
     void faireOuvrirAPropos();
-    void faireChangerDiapo(int, QString);
+    void faireChangerDiapo(InfosDiaporama);
 
 signals:
     void faireAfficherImageDepart();
@@ -58,7 +58,7 @@ public slots:
     void demanderAffichageInformations();
 
     // Actions liées aux choix utilisateur
-    void demanderChangementDIapo(int, QString);
+    void demanderChangementDIapo(InfosDiaporama);
 };
 
 #endif // PRESENTATIONLECTEUR_H

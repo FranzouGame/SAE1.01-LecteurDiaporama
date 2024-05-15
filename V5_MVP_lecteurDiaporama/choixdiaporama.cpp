@@ -18,7 +18,7 @@ ChoixDiaporama::ChoixDiaporama(Diaporamas& d, QWidget *parent)
     }
 
     // Connexion de l'acceptation avec la procédure de récupération
-    QObject::connect(ui->buttonBox, &QDialogButtonBox::accepted, this, &ChoixDiaporama::transmettreInformations);
+    QObject::connect(ui->buttonBox, &QDialogButtonBox::accepted, this, SLOT(transmettreInformations(InfosDiaporama)));
 }
 
 ChoixDiaporama::ChoixDiaporama(QWidget *parent)
@@ -35,9 +35,9 @@ ChoixDiaporama::~ChoixDiaporama()
     delete ui;
 }
 
-void ChoixDiaporama::transmettreInformations()
+void ChoixDiaporama::transmettreInformations(InfosDiaporama d)
 {
-    // Récupérer le contenu de la comboBox
+    /*// Récupérer le contenu de la comboBox
     QString choix = ui->comboBoxDiaporamas->currentText();
 
     // Extraire le premier caractère de la chaîne et le convertir en entier
@@ -49,8 +49,18 @@ void ChoixDiaporama::transmettreInformations()
     // Extraire la partie après le tiret (nom du diaporama)
     QString nomDiaporama = choix.mid(positionTiret + 1).trimmed();
 
-    qDebug() << "Chaine récupérée : " << nomDiaporama;
+    qDebug() << "Chaine récupérée : " << nomDiaporama;*/
+    int selectedIndex = ui->comboBoxDiaporamas->currentIndex();
+
+    // Vérifier si l'indice est valide
+    if (selectedIndex >= 0 && selectedIndex < .size()) {
+        // Récupérer l'objet InfosDiaporama correspondant à l'élément sélectionné
+        InfosDiaporama diaporamaSelectionne = d[selectedIndex];
+
+        // Faire ce que vous devez avec les informations du diaporama sélectionné
+        emit transmettreInfos(diaporamaSelectionne);
+    }
 
     // Envoyer l'information
-    emit transmettreInfos(choixInt, nomDiaporama);
+
 }

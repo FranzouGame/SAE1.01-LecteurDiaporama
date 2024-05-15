@@ -3,6 +3,7 @@
 #include "presentationlecteur.h"
 #include "fenetreapropos.h"
 #include "choixdiaporama.h"
+#include "choixvitessedefilement.h"
 
 /************************
  * CORPS DE LA CLASSE
@@ -147,7 +148,13 @@ void LecteurVue::majInterface(ModeleLecteur::UnEtat e)
         }
         break;
     case ModeleLecteur::ChoixVitesseDefilement:
-        // Implémentation à faire
+        {
+            // Création de la fenêtre
+            choixVitesseDefilement* fenetreChoix = new choixVitesseDefilement();
+
+            // Ouvrir la fenêtre de choix
+            fenetreChoix->exec();
+        }
         break;
     default:
         break;
@@ -198,11 +205,10 @@ void LecteurVue::receptionDiapos(Diaporamas d)
     qDebug() << "Vue taille : " << d.size();
 }
 
-void LecteurVue::recupereInfosDiapoChoisi(int num, QString titreDiapo)
+void LecteurVue::recupereInfosDiapoChoisi(InfosDiaporama d)
 {
-    qDebug() << "Linfoe récupérée est : " << num << titreDiapo;
 
-    getPres()->demanderChangementDIapo(num, titreDiapo);
+    getPres()->demanderChangementDIapo(d);
 }
 
 

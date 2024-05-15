@@ -146,9 +146,9 @@ void ModeleLecteur::demanderInfosDiapos()
     emit sendDiapoInfos(_infosDiapos);
 }
 
-void ModeleLecteur::reecptionDemandeChangementDiaporama(int num, QString titreDiapoRecu)
+void ModeleLecteur::recptionDemandeChangementDiaporama(InfosDiaporama d)
 {
-    _lecteur->changerDiaporama(num, titreDiapoRecu.toStdString());
+    _lecteur->changerDiaporama(d.id, d.titre, d.vitesseDefilement);
 
     // Envoyer le titre du diaporama
     QString titreDiapo = QString::fromStdString(_lecteur->getDiaporama()->getTitre());

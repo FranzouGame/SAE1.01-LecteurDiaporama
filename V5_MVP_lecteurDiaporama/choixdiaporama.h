@@ -19,12 +19,13 @@ public:
 
 private:
     Ui::ChoixDiaporama *ui;
+    InfosDiaporama diapoCourant;
 
 private slots:
-    void transmettreInformations();
+    void transmettreInformations(InfosDiaporama);
 
 signals:
-    void transmettreInfos(int, QString);
+    void transmettreInfos(InfosDiaporama);
 
 };
 

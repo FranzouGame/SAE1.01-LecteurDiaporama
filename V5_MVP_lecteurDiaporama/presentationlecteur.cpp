@@ -105,7 +105,7 @@ void PresentationLecteur::demanderAffichageInformations()
     emit faireOuvrirAPropos();
 }
 
-void PresentationLecteur::demanderChangementDIapo(int num, QString titreDiapo)
+void PresentationLecteur::demanderChangementDIapo(InfosDiaporama d)
 {
-    emit faireChangerDiapo(num, titreDiapo);
+    emit faireChangerDiapo(d);
 }
