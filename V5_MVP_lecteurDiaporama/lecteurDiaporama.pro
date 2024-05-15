@@ -10,6 +10,7 @@ CONFIG += c++17
 
 SOURCES += \
     choixdiaporama.cpp \
+    choixvitessedefilement.cpp \
     fenetreapropos.cpp \
     main.cpp \
     lecteurvue.cpp \
@@ -21,6 +22,7 @@ SOURCES += \
 
 HEADERS += \
     choixdiaporama.h \
+    choixvitessedefilement.h \
     fenetreapropos.h \
     lecteurvue.h \
     modelelecteur.h \
@@ -31,6 +33,7 @@ HEADERS += \
 
 FORMS += \
     choixdiaporama.ui \
+    choixvitessedefilement.ui \
     fenetreapropos.ui \
     lecteurvue.ui
 
