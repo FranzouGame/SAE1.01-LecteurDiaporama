@@ -45,7 +45,6 @@ public slots:
     // Actions relatives aux diaporamas ou à leur chargement
     void demanderAvancer();
     void demanderReculer();
-    void demanderAffichageDiapoDebut();
     void demanderArretDiapo();
     void demanderEnleverDiaporama();
     void demanderChangerVitesse();

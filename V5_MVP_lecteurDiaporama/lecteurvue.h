@@ -48,7 +48,6 @@ public slots:
     // Pour faire le lien avec les diaporamas
     void demanderAvancer();
     void demanderReculer();
-    void demanderAffichageImage1();
     void demanderArreterDiapo();
 
     // Pour gérer les actions propres au lecteur

@@ -184,11 +184,6 @@ void LecteurVue::majInterface(ModeleLecteur::UnEtat e)
 }
 
 
-void LecteurVue::demanderAffichageImage1()
-{
-    getPres()->demanderAffichageDiapoDebut();
-}
-
 void LecteurVue::updateImageInfo(const QString& chemin, const QString& titre, const QString& categorie)
 {
     // Mettre à jour l'interface avec les nouvelles informations de l'image// Création d'un QPixmap à partir de votre image

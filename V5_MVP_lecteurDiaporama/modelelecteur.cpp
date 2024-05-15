@@ -105,21 +105,7 @@ void ModeleLecteur::demandeReculement()
     }
 }
 
-void ModeleLecteur::demandeAffichageImageDebut()
-{
-    qDebug() << "Debug";
-    // Vérifier qu'on ait un lecteur et un diapo
-    if (_lecteur && _lecteur->getDiaporama()) {
-        ImageDansDiaporama* imageCourante = _lecteur->getImageCourante();
-        // Si l'image existe, l'envoyer à la vue
-        if (imageCourante) {
-            emit imageChanged(QString::fromStdString(imageCourante->getChemin()),
-                              QString::fromStdString(imageCourante->getTitre()),
-                              QString::fromStdString(imageCourante->getCategorie()));
-        }
 
-    }
-}
 
 void ModeleLecteur::demandeEnleverDiapo()
 {
@@ -136,9 +122,6 @@ void ModeleLecteur::demanderInfosDiapos()
 
 void ModeleLecteur::receptionDemandeChangementDiaporama(InfosDiaporama d)
 {
-    qDebug() << "zeqsqeq";
-
-
     _lecteur->changerDiaporama(d.id, d.titre, d.vitesseDefilement);
 
     // Envoyer le titre du diaporama
@@ -155,8 +138,6 @@ void ModeleLecteur::receptionDemandeChangementDiaporama(InfosDiaporama d)
                           QString::fromStdString(imageCourante->getCategorie()));
     }
 
-    // Mettre à jour la vitesse de défilement du diaporama
-    _lecteur->getDiaporama()->setVitesseDefilement(d.vitesseDefilement);
 }
 
 void ModeleLecteur::receptionDemandeChangementVitesse(float pVitesse)

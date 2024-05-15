@@ -42,10 +42,7 @@ void PresentationLecteur::demanderReculer() {
 }
 
 
-void PresentationLecteur::demanderAffichageDiapoDebut()
-{
-    emit faireAfficherImageDepart();
-}
+
 
 
 void PresentationLecteur::demanderArretDiapo() {
