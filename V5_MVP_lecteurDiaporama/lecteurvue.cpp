@@ -18,16 +18,21 @@ LecteurVue::LecteurVue(QWidget *parent)
     ui->setupUi(this);
 
     // Connections
+
+    // Boutons
     QObject::connect(ui->btnLancerDiapo, SIGNAL(clicked()), this, SLOT(demanderLancementDiapo()));
     QObject::connect(ui->btnSuiv, SIGNAL(clicked()), this, SLOT(demanderAvancer()));
     QObject::connect(ui->btnPrec, SIGNAL(clicked()), this, SLOT(demanderReculer()));
-    QObject::connect(ui->actionCharger_Diaporama, SIGNAL(triggered()), this, SLOT(demanderChangementDiaporama()));
     QObject::connect(ui->btnArreterDiapo, SIGNAL(clicked()), this, SLOT(demanderArreterDiapo()));
+
+    // Actions des menus
     QObject::connect(ui->actionChangerVitesseDefilement, SIGNAL(triggered()), this, SLOT(demanderChangementVitesseDefilement()));
     QObject::connect(ui->actionQuitter, SIGNAL(triggered()), this, SLOT(demanderFermetureLecteur()));
     QObject::connect(ui->actionA_propos_de, SIGNAL(triggered()), this, SLOT(demanderInformations()));
     QObject::connect(ui->actionModeAuto, SIGNAL(triggered()), this, SLOT(demanderChangementModeAuto()));
+    QObject::connect(ui->actionCharger_Diaporama, SIGNAL(triggered()), this, SLOT(demanderChangementDiaporama()));
     QObject::connect(ui->actionModeManuel, SIGNAL(triggered()), this, SLOT(demanderChangementModeManuel()));
+    QObject::connect(ui->actionEnleverDiaporama, SIGNAL(triggered(bool)), this ,SLOT(demanderEnleverDiaporama()));
 }
 
 LecteurVue::~LecteurVue()
@@ -87,6 +92,11 @@ void LecteurVue::demanderChangementVitesseDefilement()
     getPres()->demanderChangerVitesse();
 }
 
+void LecteurVue::demanderEnleverDiaporama()
+{
+    getPres()->demanderEnleverDiaporama();
+}
+
 void LecteurVue::afficherInformations()
 {
     // Instanciation de la fenêtre demandée
@@ -126,9 +136,20 @@ void LecteurVue::majInterface(ModeleLecteur::UnEtat e)
     switch(e)
     {
     case ModeleLecteur::Initial:
+
+        // Réinitialiser les valeurs des labels
+        ui->titreDiapo->setText(QString("Titre du diaporama"));
+        ui->titreImage->setText(QString("Titre de l'image"));
+        ui->catImage->setText(QString("Catégorie de l'image"));
+        ui->image->setText(QString(" "));
+        ui->btnArreterDiapo->setEnabled(false);
+        ui->btnLancerDiapo->setEnabled(false);
+        ui->actionChangerVitesseDefilement->setEnabled(false);
+
         break;
     case ModeleLecteur::Manuel:
-        // Implémentation à faire
+
+
         break;
     case ModeleLecteur::Automatique:
         // Implémentation à faire
@@ -167,11 +188,6 @@ void LecteurVue::demanderAffichageImage1()
 {
     getPres()->demanderAffichageDiapoDebut();
 }
-
-
-
-
-
 
 void LecteurVue::updateImageInfo(const QString& chemin, const QString& titre, const QString& categorie)
 {

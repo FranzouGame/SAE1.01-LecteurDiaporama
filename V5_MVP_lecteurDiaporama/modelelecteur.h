@@ -54,7 +54,7 @@ public slots:
     void demandeAvancement();
     void demandeReculement();
     void demandeAffichageImageDebut();
-    //void demanderAffichage1erDiapo();
+    void demandeEnleverDiapo();
     void demanderInfosDiapos();
     void receptionDemandeChangementDiaporama(InfosDiaporama);
     void receptionDemandeChangementVitesse(float);

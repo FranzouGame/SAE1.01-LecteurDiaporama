@@ -33,6 +33,7 @@ signals:
     void faireAvancer();
     void faireReculer();
     void faireOuvrirAPropos();
+    void faireEnleverDiapo();
     void faireChangerDiapo(InfosDiaporama);
     void faireChangerVitesse(float);
 
@@ -46,6 +47,7 @@ public slots:
     void demanderReculer();
     void demanderAffichageDiapoDebut();
     void demanderArretDiapo();
+    void demanderEnleverDiaporama();
     void demanderChangerVitesse();
 
     // Actions liées au lecteur

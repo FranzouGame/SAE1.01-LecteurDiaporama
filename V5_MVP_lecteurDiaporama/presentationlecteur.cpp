@@ -56,6 +56,14 @@ void PresentationLecteur::demanderArretDiapo() {
     _modele->setEtat(etatPrécédent);
 }
 
+void PresentationLecteur::demanderEnleverDiaporama()
+{
+    emit faireEnleverDiapo();
+    _modele->setEtat(ModeleLecteur::Initial);
+    _vue->majInterface(_modele->getEtat());
+
+}
+
 void PresentationLecteur::demanderChangerVitesse() {
     ModeleLecteur::UnEtat etatPrécédent = _modele->getEtat();
     _modele->setEtat(ModeleLecteur::ChoixVitesseDefilement);

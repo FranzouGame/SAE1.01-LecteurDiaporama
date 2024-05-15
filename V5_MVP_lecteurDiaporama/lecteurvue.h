@@ -61,7 +61,7 @@ public slots:
 
     //Pour changer la vitesse de défilement
     void demanderChangementVitesseDefilement();
-
+    void demanderEnleverDiaporama();
 
     // Affichage
     void afficherInformations(); // Fenetre A propos

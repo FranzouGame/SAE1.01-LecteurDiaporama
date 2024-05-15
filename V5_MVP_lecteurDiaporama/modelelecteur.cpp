@@ -121,6 +121,11 @@ void ModeleLecteur::demandeAffichageImageDebut()
     }
 }
 
+void ModeleLecteur::demandeEnleverDiapo()
+{
+    _lecteur->viderLecteur();
+}
+
 
 
 
