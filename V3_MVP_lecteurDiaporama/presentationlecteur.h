@@ -17,8 +17,8 @@ private:
     // Attributs
     LecteurVue* _vue;         // Connexion de la vue
     ModeleLecteur* _modele;   // Connexion du modèle
-    bool btnSuivClicked;
-    bool btnPredClicked;
+    bool btnSuivClicked = false;
+    bool btnPredClicked = false;
 
 public:
     /*** Méthodes ***/

@@ -85,24 +85,33 @@ void PresentationLecteur::demanderChargement() {
 void PresentationLecteur::demanderLancement() {
     qDebug() << "Présentation : réception demande de lancement";
     if (_modele->getEtat() == ModeleLecteur::Automatique) {
+        qDebug() << "je rentre dans le premier if";
         if (_modele->getLecteur()->getDiaporama()->getVitesseDefilement() == 0) {
             _modele->getLecteur()->getDiaporama()->setVitesseDefilement(1);
         }
-        while (_modele->getLecteur()->getImageCourante()->getRangDansDiaporama()!= _modele->getLecteur()->nbImages()-1) {
+        while (true) {
+            qDebug() <<" je rentre dan sla boucle";
             QTimer timer;
             QEventLoop loop;
             connect(&timer, &QTimer::timeout, &loop, &QEventLoop::quit);
-            timer.start(5000); // 5000 ms = 5 secondes
+            timer.start(2500); // 5000 ms = 5 secondes
             loop.exec(); // Bloque jusqu'à ce que le timer émette le signal timeout
-            emit faireAvancer();
-            if (btnSuivClicked) {
+
+            if (btnSuivClicked==true) {
                 btnSuivClicked = false; // Réinitialiser la variable pour la prochaine boucle
                 _modele->setEtat(ModeleLecteur::Manuel);
+                qDebug() << "je sors de la boucle avec Suivant ";
                 break;}
-            else if (btnPredClicked) {
+            else if (btnPredClicked==true) {
                 btnPredClicked = false; // Réinitialiser la variable pour la prochaine boucle
                 _modele->setEtat(ModeleLecteur::Manuel);
+                qDebug() << "je sors de la boucle avec Precédent ";
                 break;}
+            else if (_modele->getLecteur()->getImageCourante()->getRangDansDiaporama() == _modele->getLecteur()->nbImages())
+            {
+                qDebug() << "je sors de la boucle avec fin de diapo";
+                break;}
+            emit faireAvancer();
         }
     }
 }
@@ -124,8 +133,10 @@ void PresentationLecteur::demanderAffichageInformations()
     emit faireOuvrirAPropos();
 }
 void PresentationLecteur::onBtnSuivClicked() {
+    qDebug()<<"Mais NONNNNNNN";
     btnSuivClicked = true; // Mettre à jour la variable d'état lorsque le bouton est cliqué
 }
 void PresentationLecteur::onBtnPredClicked() {
+    qDebug()<<"Mais NONNNNNNN";
     btnPredClicked = true; // Mettre à jour la variable d'état lorsque le bouton est cliqué
 }

@@ -12,6 +12,7 @@
 LecteurVue::LecteurVue(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::LecteurVue)
+    , _pres(new PresentationLecteur())
 {
     ui->setupUi(this);
     btnSuiv = ui->btnSuiv;
@@ -27,10 +28,14 @@ LecteurVue::LecteurVue(QWidget *parent)
     QObject::connect(ui->actionA_propos_de, SIGNAL(triggered()), this, SLOT(demanderInformations()));
     QObject::connect(ui->actionModeAuto, SIGNAL(triggered()), this, SLOT(demanderChangementModeAuto()));
     QObject::connect(ui->actionModeManuel, SIGNAL(triggered()), this, SLOT(demanderChangementModeManuel()));
+
+    QObject::connect(ui->btnSuiv, SIGNAL(clicked()), _pres, SLOT(onBtnSuivClicked()));
+    QObject::connect(ui->btnPrec, SIGNAL(clicked()), _pres, SLOT(onBtnPredClicked()));
 }
 
 LecteurVue::~LecteurVue()
 {
+    delete _pres;
     delete ui;
 }
 

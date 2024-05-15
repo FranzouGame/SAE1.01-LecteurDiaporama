@@ -4,6 +4,7 @@
 #include <QMainWindow>
 #include "modelelecteur.h"
 #include <QPushbutton>
+#include "presentationlecteur.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -42,7 +43,9 @@ public:
     // Autres méthodes
     void majInterface(ModeleLecteur::UnEtat);
 
-
+signals:
+    void btnSuivClicked();
+    void btnPrecClicked();
 
 public slots:
     // Pour faire le lien avec les diaporamas
