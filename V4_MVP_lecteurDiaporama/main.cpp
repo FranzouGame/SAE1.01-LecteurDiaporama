@@ -37,10 +37,10 @@ int main(int argc, char *argv[])
 
     modele->setLecteur(lecteur);
 
-
-
-
     // Connexion des signaux et des slots
+
+    // Vue -> Présentation
+    QObject::connect(&vueLecteur, SIGNAL(signalArreterLancementAutomatique()), presentation, SLOT(demanderArretDiapo()));
 
     // Présentation -> Modele
     QObject::connect(presentation, SIGNAL(faireAvancer()), modele, SLOT(demandeAvancement()));

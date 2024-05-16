@@ -26,6 +26,7 @@ LecteurVue::LecteurVue(QWidget *parent)
     QObject::connect(ui->actionA_propos_de, SIGNAL(triggered()), this, SLOT(demanderInformations()));
     QObject::connect(ui->actionModeAuto, SIGNAL(triggered()), this, SLOT(demanderChangementModeAuto()));
     QObject::connect(ui->actionModeManuel, SIGNAL(triggered()), this, SLOT(demanderChangementModeManuel()));
+
 }
 
 LecteurVue::~LecteurVue()
@@ -40,12 +41,12 @@ LecteurVue::~LecteurVue()
  *        SLOTS         *
  ***********************/
 void LecteurVue::demanderAvancer() {
-    qDebug() << "Demande d'avancement dans le diaporama";
+    emit signalArreterLancementAutomatique();
     getPres()->demanderAvancer();
 }
 
 void LecteurVue::demanderReculer() {
-    qDebug() << "Demande de recul dans le diaporama";
+    emit signalArreterLancementAutomatique();
     getPres()->demanderReculer();
 }
 
@@ -158,11 +159,6 @@ void LecteurVue::demanderAffichageImage1()
     getPres()->demanderAffichageDiapoDebut();
 }
 
-void LecteurVue::demanderAffichage1ereImage()
-{
-    qDebug() << "Vue : Affichage image 1";
-    getPres()->demanderAffichageDiapo1();
-}
 
 
 

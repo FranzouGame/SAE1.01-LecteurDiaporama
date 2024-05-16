@@ -7,6 +7,10 @@
 PresentationLecteur::PresentationLecteur() :
     _vue(nullptr),
     _modele(nullptr){
+
+    _timer = new QTimer(this);
+    connect(_timer, &QTimer::timeout, this, &PresentationLecteur::demanderAvancer);
+
 }
 
 // Getter pour LecteurVue
@@ -34,11 +38,9 @@ void PresentationLecteur::setModele(ModeleLecteur* modele) {
 
 // Implémentation des slots
 void PresentationLecteur::demanderAvancer() {
-    qDebug() << "Présentation : réception demande d'avancement";
     emit faireAvancer(); // Émission du signal faireAvancer()
 }
 void PresentationLecteur::demanderReculer() {
-    qDebug() << "Présentation : réception demande de reculement";
     emit faireReculer();
 }
 
@@ -49,22 +51,11 @@ void PresentationLecteur::demanderAffichageDiapoDebut()
     emit faireAfficherImageDepart();
 }
 
-
-void PresentationLecteur::demanderAffichageDiapo1()
-{
-    qDebug() << "Demande de l'affichage de la 1ere diapo";
-
-    // Émettre le signal uniquement si nécessaire
-        emit demanderAffichageDiapo1();
-}
-
-
 void PresentationLecteur::demanderArretDiapo() {
-    qDebug() << "Présentation : réception demande d'arret diapo";
-    ModeleLecteur::UnEtat etatPrécédent = _modele->getEtat();
-    _modele->setEtat(ModeleLecteur::Initial);
-    _vue->majInterface(_modele->getEtat());
-    _modele->setEtat(etatPrécédent);
+
+    if (_timer->isActive()) {
+        _timer->stop();
+    }
 }
 
 void PresentationLecteur::demanderChangerVitesse() {
@@ -73,6 +64,7 @@ void PresentationLecteur::demanderChangerVitesse() {
     _modele->setEtat(ModeleLecteur::ChoixVitesseDefilement);
     _vue->majInterface(_modele->getEtat());
     _modele->setEtat(etatPrécédent);
+    _vue->majInterface(_modele->getEtat());
 }
 
 void PresentationLecteur::demanderChargement() {
@@ -80,27 +72,35 @@ void PresentationLecteur::demanderChargement() {
     _modele->setEtat(ModeleLecteur::ChoixDiaporama);
     _vue->majInterface(_modele->getEtat());
     _modele->setEtat(etatPrécédent);
+    _vue->majInterface(_modele->getEtat());
 }
 
 void PresentationLecteur::demanderLancement() {
-    qDebug() << "Présentation : réception demande de lancement";
-    if (_modele->getEtat() == ModeleLecteur::Automatique) {
-        if (_modele->getLecteur()->getDiaporama()->getVitesseDefilement() == 0) {
+
+    // Récupérer la vitesse de défilement du diapo (sera utile quand les diapos seront entièrement chargés, ce qui n'est pas encore le cas)
+    unsigned int vitesse = _modele->recupereVitesseDfl();
+
+    if (_modele->getEtat() == ModeleLecteur::Automatique)
+    {
+        if (vitesse == 0) {
             _modele->getLecteur()->getDiaporama()->setVitesseDefilement(1);
         }
-        while (true) {
-            QTimer timer;
-            QEventLoop loop;
-            connect(&timer, &QTimer::timeout, &loop, &QEventLoop::quit);
-            timer.start(5000); // 5000 ms = 5 secondes
-            loop.exec();
-            emit faireAvancer();
-            if (_modele->getLecteur()->getImageCourante()->getRangDansDiaporama() == _modele->getLecteur()->nbImages()){
-                break;}
+
+        if(_modele->getLecteur()->getImageCourante()->getRangDansDiaporama() <= _modele->getLecteur()->nbImages() - 1)
+        {
+            _timer->start(1000); // Lancement du timer
+            emit faireAfficherImageDepart();
         }
+        else
+        {
+            _modele->demanderRetourImage1();
+            demanderArretDiapo();
+            demanderChangementModeVersManuel();
+            qDebug() << "edzd";
+        }
+
     }
-    else {
-        emit faireAfficherImageDepart();}
+
 }
 
 void PresentationLecteur::demanderChangementModeVersManuel() {

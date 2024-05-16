@@ -40,11 +40,11 @@ public:
     // Autres méthodes
     void majInterface(ModeleLecteur::UnEtat);
 
-
+signals:
+    void signalArreterLancementAutomatique();
 
 public slots:
     // Pour faire le lien avec les diaporamas
-    void demanderAffichage1ereImage();
     void demanderAvancer();
     void demanderReculer();
     void demanderAffichageImage1();

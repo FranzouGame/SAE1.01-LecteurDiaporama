@@ -53,6 +53,16 @@ void ModeleLecteur::setLecteur(Lecteur *l)
 
 }
 
+unsigned int ModeleLecteur::recupereVitesseDfl()
+{
+    return _lecteur->getDiaporama()->getVitesseDefilement();
+}
+
+void ModeleLecteur::demanderRetourImage1(int pos)
+{
+    _lecteur->setPosImageCourante(pos);
+}
+
 
 
 /***********************

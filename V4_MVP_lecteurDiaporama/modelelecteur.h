@@ -43,6 +43,10 @@ public:
     void setEtat(ModeleLecteur::UnEtat);
     void setLecteur(Lecteur*);
 
+    // Autres méthodes
+    unsigned int recupereVitesseDfl();
+    void demanderRetourImage1(int = 0);
+
 public slots:
     void demandeAvancement();
     void demandeReculement();
