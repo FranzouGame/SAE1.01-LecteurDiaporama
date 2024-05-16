@@ -24,6 +24,7 @@ ModeleLecteur* PresentationLecteur::getModele() const {
 // Setter pour LecteurVue
 void PresentationLecteur::setVue(LecteurVue* vue) {
     _vue = vue;
+    _vue->majInterface(_modele->getEtat());
 }
 
 // Setter pour ModeleLecteur
