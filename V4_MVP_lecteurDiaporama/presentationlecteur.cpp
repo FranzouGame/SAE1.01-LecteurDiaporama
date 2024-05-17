@@ -76,7 +76,11 @@ void PresentationLecteur::demanderChargement() {
 }
 
 void PresentationLecteur::demanderLancement() {
-
+    if (_modele->getEtat() == ModeleLecteur::Manuel)
+    {
+        _modele->setEtat(ModeleLecteur::Automatique);
+        _vue->majInterface(_modele->getEtat());
+    }
     // Récupérer la vitesse de défilement du diapo (sera utile quand les diapos seront entièrement chargés, ce qui n'est pas encore le cas)
     unsigned int vitesse = _modele->recupereVitesseDfl();
 
@@ -100,6 +104,7 @@ void PresentationLecteur::demanderLancement() {
         }
 
     }
+
 
 }
 
