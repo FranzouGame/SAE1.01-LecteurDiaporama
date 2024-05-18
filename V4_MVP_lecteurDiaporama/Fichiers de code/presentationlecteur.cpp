@@ -88,7 +88,7 @@ void PresentationLecteur::demanderLancement() {
     //remettre l'image de départ si on appuie sur le btn Lancer diapo alors que l'image actuelle n'est pas la premiere
     if(_modele->getLecteur()->getImageCourante()->getRangDansDiaporama() != _modele->getLecteur()->nbImages() - _modele->getLecteur()->nbImages()+1)
     {
-       emit faireAfficherImageDepart();
+        _modele->demanderRetourImage1();
     }
     if (_modele->getEtat() == ModeleLecteur::Automatique)
     {
@@ -106,7 +106,6 @@ void PresentationLecteur::demanderLancement() {
             _modele->demanderRetourImage1();
             demanderArretDiapo();
             demanderChangementModeVersManuel();
-            qDebug() << "edzd";
         }
 
     }
