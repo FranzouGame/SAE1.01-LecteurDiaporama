@@ -7,6 +7,9 @@ fenetreAPropos::fenetreAPropos(QWidget *parent)
 {
     ui->setupUi(this);
 
+    // Mise à jour de la version de l'application dans la fenetre
+    ui->version->setText(QString("V4_MVP"));
+
     // Connexion
     QObject::connect(ui->btnOk, SIGNAL(clicked()), this, SLOT(fermeture()));
 }

@@ -55,6 +55,7 @@ int main(int argc, char *argv[])
 
 
     vueLecteur.demanderAffichageImage1();
+    vueLecteur.majInterface(modele->getEtat());
     // Affichage de la fenetre
     vueLecteur.show();
 
