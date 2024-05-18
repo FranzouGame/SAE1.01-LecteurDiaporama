@@ -81,8 +81,10 @@ void PresentationLecteur::demanderLancement() {
         _modele->setEtat(ModeleLecteur::Automatique);
         _vue->majInterface(_modele->getEtat());
     }
+
     // Récupérer la vitesse de défilement du diapo (sera utile quand les diapos seront entièrement chargés, ce qui n'est pas encore le cas)
     unsigned int vitesse = _modele->recupereVitesseDfl();
+
     //remettre l'image de départ si on appuie sur le btn Lancer diapo alors que l'image actuelle n'est pas la premiere
     if(_modele->getLecteur()->getImageCourante()->getRangDansDiaporama() != _modele->getLecteur()->nbImages() - _modele->getLecteur()->nbImages()+1)
     {

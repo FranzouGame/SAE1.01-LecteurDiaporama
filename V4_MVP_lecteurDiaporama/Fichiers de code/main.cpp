@@ -26,7 +26,7 @@ int main(int argc, char *argv[])
     // Association des différents éléments entre eux
     vueLecteur.setPres(presentation);
     presentation->setModele(modele);
-    modele->setEtat(ModeleLecteur::Initial);
+    modele->setEtat(ModeleLecteur::Manuel);
     presentation->setVue(&vueLecteur);
 
     // Connection pour le changement du nom de diapo (Temporaire)

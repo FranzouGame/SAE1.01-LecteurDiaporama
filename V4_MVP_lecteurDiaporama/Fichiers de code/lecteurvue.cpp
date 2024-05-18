@@ -131,7 +131,7 @@ void LecteurVue::majInterface(ModeleLecteur::UnEtat e)
     case ModeleLecteur::Initial:
         break;
     case ModeleLecteur::Manuel:
-        // Implémentation à faire
+        ui->btnArreterDiapo->setEnabled(false);
         break;
     case ModeleLecteur::Automatique:
         // Implémentation à faire
