@@ -17,8 +17,7 @@ private:
     // Attributs
     LecteurVue* _vue;         // Connexion de la vue
     ModeleLecteur* _modele;   // Connexion du modèle
-    bool btnSuivClicked = false;
-    bool btnPredClicked = false;
+    QTimer* _timer;           // Timer pour le mode Automatique
 
 public:
     /*** Méthodes ***/
@@ -35,6 +34,7 @@ public:
 signals:
     void faireAvancer();
     void faireReculer();
+    void faireAfficherPremiere();
     void faireOuvrirAPropos();
 
 signals:
@@ -46,7 +46,6 @@ public slots:
     void demanderAvancer();
     void demanderReculer();
     void demanderAffichageDiapoDebut();
-    void demanderAffichageDiapo1();
     void demanderArretDiapo();
     void demanderChangerVitesse();
 
@@ -58,8 +57,6 @@ public slots:
 
     // Actions liées au fenetres externes
     void demanderAffichageInformations();
-    void onBtnSuivClicked();
-    void onBtnPredClicked();
 };
 
 #endif // PRESENTATIONLECTEUR_H

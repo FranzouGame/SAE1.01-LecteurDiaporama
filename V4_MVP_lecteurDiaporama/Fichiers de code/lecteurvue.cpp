@@ -2,7 +2,6 @@
 #include "ui_lecteurvue.h"
 #include "presentationlecteur.h"
 #include "fenetreapropos.h"
-#include "choixdiaporama.h"
 
 /************************
  * CORPS DE LA CLASSE
@@ -12,15 +11,9 @@
 LecteurVue::LecteurVue(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::LecteurVue)
-<<<<<<< HEAD
-    , _infosDiapos({})
-=======
-    , _pres(new PresentationLecteur())
->>>>>>> V4
 {
     ui->setupUi(this);
-    btnSuiv = ui->btnSuiv;
-    btnPrec = ui->btnPrec;
+
     // Connections
     QObject::connect(ui->btnLancerDiapo, SIGNAL(clicked()), this, SLOT(demanderLancementDiapo()));
     QObject::connect(ui->btnSuiv, SIGNAL(clicked()), this, SLOT(demanderAvancer()));
@@ -33,13 +26,10 @@ LecteurVue::LecteurVue(QWidget *parent)
     QObject::connect(ui->actionModeAuto, SIGNAL(triggered()), this, SLOT(demanderChangementModeAuto()));
     QObject::connect(ui->actionModeManuel, SIGNAL(triggered()), this, SLOT(demanderChangementModeManuel()));
 
-    QObject::connect(ui->btnSuiv, SIGNAL(clicked()), _pres, SLOT(onBtnSuivClicked()));
-    QObject::connect(ui->btnPrec, SIGNAL(clicked()), _pres, SLOT(onBtnPredClicked()));
 }
 
 LecteurVue::~LecteurVue()
 {
-    delete _pres;
     delete ui;
 }
 
@@ -50,17 +40,18 @@ LecteurVue::~LecteurVue()
  *        SLOTS         *
  ***********************/
 void LecteurVue::demanderAvancer() {
-    qDebug() << "Demande d'avancement dans le diaporama";
+    emit signalArreterLancementAutomatique();
     getPres()->demanderAvancer();
 }
 
 void LecteurVue::demanderReculer() {
-    qDebug() << "Demande de recul dans le diaporama";
+    emit signalArreterLancementAutomatique();
     getPres()->demanderReculer();
 }
 
 void LecteurVue::demanderChangementDiaporama() {
-    getPres()->demanderChargement();
+    qDebug() << "Demande de chargement de diaporama";
+    // getPres()->demanderChargement(); Sera décommenté en V5
 }
 
 void LecteurVue::demanderArreterDiapo() {
@@ -138,24 +129,19 @@ void LecteurVue::majInterface(ModeleLecteur::UnEtat e)
     switch(e)
     {
     case ModeleLecteur::Initial:
+        // Implémentation en V5
         break;
     case ModeleLecteur::Manuel:
-        // Implémentation à faire
+        ui->btnArreterDiapo->setEnabled(false);
         break;
     case ModeleLecteur::Automatique:
-        // Implémentation à faire
-
+        ui->btnArreterDiapo->setEnabled(true);
         break;
     case ModeleLecteur::ChoixDiaporama:
-        {
-            ChoixDiaporama fenetreChoix(_infosDiapos);
-
-            // Afficher la fenêtre
-            fenetreChoix.exec();
-        }
+        // Implémentation en V5
         break;
     case ModeleLecteur::ChoixVitesseDefilement:
-        // Implémentation à faire
+        // Implémentation en V5
         break;
     default:
         break;
@@ -168,11 +154,6 @@ void LecteurVue::demanderAffichageImage1()
     getPres()->demanderAffichageDiapoDebut();
 }
 
-void LecteurVue::demanderAffichage1ereImage()
-{
-    qDebug() << "Vue : Affichage image 1";
-    getPres()->demanderAffichageDiapo1();
-}
 
 
 
@@ -197,13 +178,6 @@ void LecteurVue::updateImageInfo(const QString& chemin, const QString& titre, co
 void LecteurVue::updateDiapoTitle(const QString &titreDiapo)
 {
     ui->titreDiapo->setText(titreDiapo);
-}
-
-void LecteurVue::receptionDiapos(Diaporamas d)
-{
-    _infosDiapos = d;
-
-    qDebug() << "Vue taille : " << d.size();
 }
 
 

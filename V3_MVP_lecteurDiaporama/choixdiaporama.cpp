@@ -1,6 +1,7 @@
 #include "choixdiaporama.h"
 #include "ui_choixdiaporama.h"
 #include "modelelecteur.h"
+<<<<<<< HEAD
 
 ChoixDiaporama::ChoixDiaporama(Diaporamas& d, QWidget *parent)
     : QDialog(parent)
@@ -22,6 +23,8 @@ ChoixDiaporama::ChoixDiaporama(Diaporamas& d, QWidget *parent)
     qDebug() << "Tu n'es pas le probleme";
 
 }
+=======
+>>>>>>> V4
 
 ChoixDiaporama::ChoixDiaporama(QWidget *parent)
     : QDialog(parent)

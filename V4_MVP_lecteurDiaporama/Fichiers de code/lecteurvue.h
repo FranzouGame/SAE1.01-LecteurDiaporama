@@ -3,8 +3,7 @@
 
 #include <QMainWindow>
 #include "modelelecteur.h"
-#include <QPushbutton>
-#include "presentationlecteur.h"
+
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -26,12 +25,8 @@ private:
     Ui::LecteurVue *ui;
     // Presentation de la vue
     PresentationLecteur* _pres;
-    // Informations des diaporamas
-    Diaporamas _infosDiapos;
 
 public:
-    QPushButton *btnSuiv;
-    QPushButton *btnPrec;
     // Constructeur & Destructeur
     LecteurVue(QWidget *parent = nullptr);
     ~LecteurVue();
@@ -46,12 +41,10 @@ public:
     void majInterface(ModeleLecteur::UnEtat);
 
 signals:
-    void btnSuivClicked();
-    void btnPrecClicked();
+    void signalArreterLancementAutomatique();
 
 public slots:
     // Pour faire le lien avec les diaporamas
-    void demanderAffichage1ereImage();
     void demanderAvancer();
     void demanderReculer();
     void demanderAffichageImage1();
@@ -73,6 +66,5 @@ public slots:
     void afficherInformations(); // Fenetre A propos
     void updateImageInfo(const QString& chemin, const QString& titre, const QString& categorie); // Image mise à jour
     void updateDiapoTitle(const QString& titreDiapo);
-    void receptionDiapos(Diaporamas);
 };
 #endif // LECTEURVUE_H
