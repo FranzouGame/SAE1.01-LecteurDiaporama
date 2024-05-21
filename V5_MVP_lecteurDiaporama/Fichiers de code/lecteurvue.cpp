@@ -59,10 +59,12 @@ LecteurVue::~LecteurVue()
  *        SLOTS         *
  ***********************/
 void LecteurVue::demanderAvancer() {
+    getPres()->demanderArretDiapo();
     getPres()->demanderAvancer();
 }
 
 void LecteurVue::demanderReculer() {
+    getPres()->demanderArretDiapo();
     getPres()->demanderReculer();
 }
 
@@ -71,12 +73,10 @@ void LecteurVue::demanderChangementDiaporama() {
 }
 
 void LecteurVue::demanderArreterDiapo() {
-    qDebug() << "Demande d'arrêt de la diapositive en cours";
     getPres()->demanderArretDiapo();
 }
 
 void LecteurVue::demanderLancementDiapo() {
-    qDebug() << "Demande de lancement d'une diapositive";
     getPres()->demanderLancement();
 }
 
@@ -90,13 +90,11 @@ void LecteurVue::demanderInformations() {
 
 
 void LecteurVue::demanderChangementModeAuto() {
-    qDebug() << "Demande de passage en mode automatique";
     getPres()->demanderChangementModeVersAUtomatique();
 }
 
 
 void LecteurVue::demanderChangementModeManuel() {
-    qDebug() << "Demande de passage en mode manuel";
     getPres()->demanderChangementModeVersManuel();
 }
 
@@ -155,19 +153,27 @@ void LecteurVue::majInterface(ModeleLecteur::UnEtat e)
         ui->titreImage->setText(QString("Titre de l'image"));
         ui->catImage->setText(QString("Catégorie de l'image"));
         ui->image->setText(QString(" "));
+        // Mettre à jour la disponibilité des boutons & actions
         ui->btnArreterDiapo->setEnabled(false);
         ui->btnLancerDiapo->setEnabled(false);
         ui->actionChangerVitesseDefilement->setEnabled(false);
+        // Mise à jour du statut
         _labelEtat->setText(QString("Mode : Initial"));
         break;
     case ModeleLecteur::Manuel:
+        // Mettre à jour la disponibilité des boutons & actions
         ui->btnLancerDiapo->setEnabled(true);
+        ui->actionModeManuel->setEnabled(false);
+        // Mise à jour du statut
         _labelEtat->setText(QString("Mode : Manuel"));
         break;
     case ModeleLecteur::Automatique:
+        // Mettre à jour la disponibilité des boutons & actions
         ui->btnArreterDiapo->setEnabled(true);
         ui->btnLancerDiapo->setEnabled(true);
         ui->actionChangerVitesseDefilement->setEnabled(true);
+        ui->actionModeAuto->setEnabled(false);
+        // Mise à jour du statut
         _labelEtat->setText(QString("Mode : Automatique"));
         break;
     case ModeleLecteur::ChoixDiaporama:
@@ -187,9 +193,8 @@ void LecteurVue::majInterface(ModeleLecteur::UnEtat e)
             choixVitesseDefilement fenetreChoix(this);
 
             // Connexion pour la récupération d'informations
-            QObject::connect(&fenetreChoix, SIGNAL(envoyerVitesseDfl(float)), this, SLOT(recupereVitesseDefilement(float)));
+            QObject::connect(&fenetreChoix, SIGNAL(envoyerVitesseDfl(unsigned int)), this, SLOT(recupereVitesseDefilement(unsigned int)));
 
-            qDebug() << "Vue majI";
             // Ouvrir la fenêtre de choix
             fenetreChoix.exec();
         }
@@ -234,7 +239,6 @@ void LecteurVue::recupereInfosDiapoChoisi(InfosDiaporama d)
 
 void LecteurVue::recupereVitesseDefilement(unsigned int pVitesse)
 {
-    qDebug() << "vue";
     getPres()->demanderChangementVitesseDfl(pVitesse);
 }
 
