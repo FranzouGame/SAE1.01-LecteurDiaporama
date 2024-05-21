@@ -12,11 +12,15 @@
 LecteurVue::LecteurVue(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::LecteurVue)
+<<<<<<< HEAD:V3_MVP_lecteurDiaporama/Fichiers de code/lecteurvue.cpp
 <<<<<<< HEAD
     , _infosDiapos({})
 =======
     , _pres(new PresentationLecteur())
 >>>>>>> V4
+=======
+    , _pres(new PresentationLecteur())
+>>>>>>> V4:V3_MVP_lecteurDiaporama/lecteurvue.cpp
 {
     ui->setupUi(this);
     btnSuiv = ui->btnSuiv;

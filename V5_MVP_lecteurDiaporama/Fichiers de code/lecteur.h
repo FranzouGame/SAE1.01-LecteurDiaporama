@@ -19,7 +19,11 @@ public:
 
     // Getters
     unsigned int getIdDiaporama() const;
+<<<<<<< HEAD
     Diaporama* getDiaporama();
+=======
+    Diaporama* getDiaporama() const;
+>>>>>>> V4
     unsigned int getPosImageCourante() const;
     bool lecteurVide() const;                         // = vrai si aucun diaporama ssocié au lecteur, faux Sinon
     ImageDansDiaporama* getImageCourante() const;     // retourne le pointeur vers l'image courante
@@ -33,7 +37,11 @@ public:
     // Autres méthodes
     void afficher();            // affiche les informations sur lecteur + éventuellement diaporama et image courant
 
+<<<<<<< HEAD
     void changerDiaporama(unsigned int pId, string pTitre="", float pVitesse=0);
+=======
+    void changerDiaporama(unsigned int pId, string pTitre="", unsigned int pVitesse=0);
+>>>>>>> V4
         /* Permet de choisir un diaporama, 0 si aucun souhaité.
          * 2 formes d'appels :
          * - 1 appel signifiant la demande de chargement d'1 diaporama : utiliser les 3 paramètres, avec pId !=0

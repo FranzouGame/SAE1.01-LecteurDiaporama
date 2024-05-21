@@ -1,6 +1,9 @@
 #include "lecteur.h"
+<<<<<<< HEAD
 #include "qdebug.h"
 #include "qlogging.h"
+=======
+>>>>>>> V4
 
 Lecteur::Lecteur() : idDiaporama(2), diaporama(nullptr)
 {
@@ -21,7 +24,11 @@ unsigned int Lecteur::getIdDiaporama() const
     return idDiaporama; // valeur >= 0
 }
 
+<<<<<<< HEAD
 Diaporama* Lecteur::getDiaporama()
+=======
+Diaporama* Lecteur::getDiaporama() const
+>>>>>>> V4
 {
     return diaporama;   // peut être nullptr
 }
@@ -38,7 +45,11 @@ unsigned int Lecteur::getPosImageCourante() const
 
 bool Lecteur::lecteurVide() const
 {
+<<<<<<< HEAD
     return(diaporama == nullptr);
+=======
+    return (getDiaporama() == nullptr);
+>>>>>>> V4
 }
 
 ImageDansDiaporama *Lecteur::getImageCourante() const
@@ -114,7 +125,11 @@ void Lecteur::setPosImageCourante(unsigned int pPosImageCourante)
     posImageCourante = pPosImageCourante;
 }
 
+<<<<<<< HEAD
 void Lecteur::changerDiaporama(unsigned int pId, string pTitre, float pVitesse)
+=======
+void Lecteur::changerDiaporama(unsigned int pId, string pTitre, unsigned int pVitesse)
+>>>>>>> V4
 {
     /* Chargement des informations et images images associées au diaporama courant
        Dans une version ultérieure, le seul paramètre sera le numéro ou identifiant du diaporama choisi,
@@ -122,6 +137,7 @@ void Lecteur::changerDiaporama(unsigned int pId, string pTitre, float pVitesse)
 
     if (pId != 0)
     {
+<<<<<<< HEAD
 
         // Si le diaporama n'est pas vide, le vider
         if (!lecteurVide())
@@ -145,10 +161,21 @@ void Lecteur::changerDiaporama(unsigned int pId, string pTitre, float pVitesse)
         }
 
         // Assigner les valeurs à l'objet diaporama
+=======
+        if (!lecteurVide())
+        {
+            diaporama->vider();
+        }
+        else
+        {
+            diaporama = new Diaporama();
+        }
+>>>>>>> V4
         setIdDiaporama(pId);
         diaporama->setId(pId);
         diaporama->setTitre(pTitre);
         diaporama->setVitesseDefilement(pVitesse);
+<<<<<<< HEAD
 
         // Charger les informations du diaporama
         chargerDiaporamaCourant();
@@ -156,11 +183,19 @@ void Lecteur::changerDiaporama(unsigned int pId, string pTitre, float pVitesse)
     else
     {
         // Vider le lecteur s'il est déjà initialisé
+=======
+        chargerDiaporamaCourant(); // charge les images et la position de l'image courante
+    }
+    else
+>>>>>>> V4
         if (!lecteurVide())
         {
             viderLecteur();
         }
+<<<<<<< HEAD
     }
+=======
+>>>>>>> V4
 }
 
 void Lecteur::avancer()

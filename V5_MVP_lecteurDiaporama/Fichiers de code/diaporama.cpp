@@ -19,7 +19,11 @@ string Diaporama::getTitre() const
     return titre;
 }
 
+<<<<<<< HEAD
 unsigned int Diaporama::getVitesseDefilement() const
+=======
+int Diaporama::getVitesseDefilement() const
+>>>>>>> V4
 {
     return vitesseDefilement;
 }

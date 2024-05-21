@@ -13,7 +13,11 @@ public:
     // Getters
     unsigned int getId() const;
     string getTitre() const;
+<<<<<<< HEAD
     unsigned int getVitesseDefilement() const;
+=======
+    int getVitesseDefilement() const;
+>>>>>>> V4
     ImagesDiaporama getImages() const;
     unsigned int nbImages() const;  // nbre de pointeurs d'images contenus dans diaporama
 
@@ -32,10 +36,17 @@ public:
 private:
     unsigned int id;                // identifiant du diaporama dans la Base de données
     string titre ;                  // titre du diaporama
+<<<<<<< HEAD
     float vitesseDefilement;       // vitesse de défilement des images du diaporama
+=======
+    unsigned int vitesseDefilement; // vitesse de défilement des images du diaporama
+>>>>>>> V4
     ImagesDiaporama images;         // vecteur de pointeurs sur les objets ImageDansDiaporama de ce diaporama
     void trierParRangCroissant(); // trie les images du diaporama par ordre de rang croissant
 };
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> V4
 #endif // DIAPORAMA_H

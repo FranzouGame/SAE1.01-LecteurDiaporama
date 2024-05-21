@@ -1,14 +1,24 @@
 #include "presentationlecteur.h"
 #include "modelelecteur.h"
 #include "lecteurvue.h"
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> V4
 /*** Implémentations ***/
 
 // Constructeur
 PresentationLecteur::PresentationLecteur() :
     _vue(nullptr),
     _modele(nullptr){
+<<<<<<< HEAD
+=======
+
+    _timer = new QTimer(this);
+    connect(_timer, &QTimer::timeout, this, &PresentationLecteur::demanderAvancer);
+
+>>>>>>> V4
 }
 
 // Getter pour LecteurVue
@@ -25,7 +35,10 @@ ModeleLecteur* PresentationLecteur::getModele() const {
 // Setter pour LecteurVue
 void PresentationLecteur::setVue(LecteurVue* vue) {
     _vue = vue;
+<<<<<<< HEAD
     _vue->majInterface(_modele->getEtat());
+=======
+>>>>>>> V4
 }
 
 // Setter pour ModeleLecteur
@@ -37,13 +50,18 @@ void PresentationLecteur::setModele(ModeleLecteur* modele) {
 
 // Implémentation des slots
 void PresentationLecteur::demanderAvancer() {
+<<<<<<< HEAD
     emit faireAvancer();
+=======
+    emit faireAvancer(); // Émission du signal faireAvancer()
+>>>>>>> V4
 }
 void PresentationLecteur::demanderReculer() {
     emit faireReculer();
 }
 
 
+<<<<<<< HEAD
 
 
 
@@ -64,15 +82,37 @@ void PresentationLecteur::demanderEnleverDiaporama()
 }
 
 void PresentationLecteur::demanderChangerVitesse() {
+=======
+void PresentationLecteur::demanderAffichageDiapoDebut()
+{
+    qDebug() << "Présentation : affichage image 1";
+    emit faireAfficherImageDepart();
+}
+
+void PresentationLecteur::demanderArretDiapo() {
+
+    if (_timer->isActive()) {
+        _timer->stop();
+    }
+}
+
+void PresentationLecteur::demanderChangerVitesse() {
+    qDebug() << "Présentation : réception demande de changement de vitesse";
+>>>>>>> V4
     ModeleLecteur::UnEtat etatPrécédent = _modele->getEtat();
     _modele->setEtat(ModeleLecteur::ChoixVitesseDefilement);
     _vue->majInterface(_modele->getEtat());
     _modele->setEtat(etatPrécédent);
+<<<<<<< HEAD
+=======
+    _vue->majInterface(_modele->getEtat());
+>>>>>>> V4
 }
 
 void PresentationLecteur::demanderChargement() {
     ModeleLecteur::UnEtat etatPrécédent = _modele->getEtat();
     _modele->setEtat(ModeleLecteur::ChoixDiaporama);
+<<<<<<< HEAD
     _modele->demanderInfosDiapos();
     _vue->majInterface(_modele->getEtat());
     if(etatPrécédent == ModeleLecteur::Automatique || etatPrécédent == ModeleLecteur::Manuel)
@@ -85,6 +125,11 @@ void PresentationLecteur::demanderChargement() {
         _vue->majInterface(_modele->getEtat());
     }
 
+=======
+    _vue->majInterface(_modele->getEtat());
+    _modele->setEtat(etatPrécédent);
+    _vue->majInterface(_modele->getEtat());
+>>>>>>> V4
 }
 
 void PresentationLecteur::demanderLancement() {
@@ -122,6 +167,10 @@ void PresentationLecteur::demanderLancement() {
 
     }
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> V4
 }
 
 void PresentationLecteur::demanderChangementModeVersManuel() {
@@ -140,6 +189,7 @@ void PresentationLecteur::demanderAffichageInformations()
 {
     emit faireOuvrirAPropos();
 }
+<<<<<<< HEAD
 
 void PresentationLecteur::demanderChangementDIapo(InfosDiaporama d)
 {
@@ -150,3 +200,5 @@ void PresentationLecteur::demanderChangementVitesseDfl(unsigned int pVitesse)
 {
     emit faireChangerVitesse(pVitesse);
 }
+=======
+>>>>>>> V4

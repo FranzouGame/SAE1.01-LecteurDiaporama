@@ -2,8 +2,11 @@
 #include "ui_lecteurvue.h"
 #include "presentationlecteur.h"
 #include "fenetreapropos.h"
+<<<<<<< HEAD
 #include "choixdiaporama.h"
 #include "choixvitessedefilement.h"
+=======
+>>>>>>> V4
 
 /************************
  * CORPS DE LA CLASSE
@@ -13,6 +16,7 @@
 LecteurVue::LecteurVue(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::LecteurVue)
+<<<<<<< HEAD
     , _infosDiapos({})
     ,_labelEtat(new QLabel(this))
 {
@@ -30,10 +34,22 @@ LecteurVue::LecteurVue(QWidget *parent)
     QObject::connect(ui->btnArreterDiapo, SIGNAL(clicked()), this, SLOT(demanderArreterDiapo()));
 
     // Actions des menus
+=======
+{
+    ui->setupUi(this);
+
+    // Connections
+    QObject::connect(ui->btnLancerDiapo, SIGNAL(clicked()), this, SLOT(demanderLancementDiapo()));
+    QObject::connect(ui->btnSuiv, SIGNAL(clicked()), this, SLOT(demanderAvancer()));
+    QObject::connect(ui->btnPrec, SIGNAL(clicked()), this, SLOT(demanderReculer()));
+    QObject::connect(ui->actionCharger_Diaporama, SIGNAL(triggered()), this, SLOT(demanderChangementDiaporama()));
+    QObject::connect(ui->btnArreterDiapo, SIGNAL(clicked()), this, SLOT(demanderArreterDiapo()));
+>>>>>>> V4
     QObject::connect(ui->actionChangerVitesseDefilement, SIGNAL(triggered()), this, SLOT(demanderChangementVitesseDefilement()));
     QObject::connect(ui->actionQuitter, SIGNAL(triggered()), this, SLOT(demanderFermetureLecteur()));
     QObject::connect(ui->actionA_propos_de, SIGNAL(triggered()), this, SLOT(demanderInformations()));
     QObject::connect(ui->actionModeAuto, SIGNAL(triggered()), this, SLOT(demanderChangementModeAuto()));
+<<<<<<< HEAD
     QObject::connect(ui->actionCharger_Diaporama, SIGNAL(triggered()), this, SLOT(demanderChangementDiaporama()));
     QObject::connect(ui->actionModeManuel, SIGNAL(triggered()), this, SLOT(demanderChangementModeManuel()));
     QObject::connect(ui->actionEnleverDiaporama, SIGNAL(triggered(bool)), this ,SLOT(demanderEnleverDiaporama()));
@@ -44,6 +60,9 @@ LecteurVue::LecteurVue(QWidget *parent)
 
     // Appliquer un stylesheet pour rendre la barre de statut grisée
     statusBar()->setStyleSheet("QStatusBar { background-color: lightgray; }");
+=======
+    QObject::connect(ui->actionModeManuel, SIGNAL(triggered()), this, SLOT(demanderChangementModeManuel()));
+>>>>>>> V4
 
 }
 
@@ -59,15 +78,28 @@ LecteurVue::~LecteurVue()
  *        SLOTS         *
  ***********************/
 void LecteurVue::demanderAvancer() {
+<<<<<<< HEAD
+=======
+    emit signalArreterLancementAutomatique();
+>>>>>>> V4
     getPres()->demanderAvancer();
 }
 
 void LecteurVue::demanderReculer() {
+<<<<<<< HEAD
+=======
+    emit signalArreterLancementAutomatique();
+>>>>>>> V4
     getPres()->demanderReculer();
 }
 
 void LecteurVue::demanderChangementDiaporama() {
+<<<<<<< HEAD
     getPres()->demanderChargement();
+=======
+    qDebug() << "Demande de chargement de diaporama";
+    // getPres()->demanderChargement(); Sera décommenté en V5
+>>>>>>> V4
 }
 
 void LecteurVue::demanderArreterDiapo() {
@@ -102,6 +134,7 @@ void LecteurVue::demanderChangementModeManuel() {
 
 void LecteurVue::demanderChangementVitesseDefilement()
 {
+<<<<<<< HEAD
     getPres()->demanderChangerVitesse();
 }
 
@@ -110,6 +143,12 @@ void LecteurVue::demanderEnleverDiaporama()
     getPres()->demanderEnleverDiaporama();
 }
 
+=======
+    qDebug() << "Demande de changement de vitesse de défilement";
+    getPres()->demanderChangerVitesse();
+}
+
+>>>>>>> V4
 void LecteurVue::afficherInformations()
 {
     // Instanciation de la fenêtre demandée
@@ -149,6 +188,7 @@ void LecteurVue::majInterface(ModeleLecteur::UnEtat e)
     switch(e)
     {
     case ModeleLecteur::Initial:
+<<<<<<< HEAD
 
         // Réinitialiser les valeurs des labels
         ui->titreDiapo->setText(QString("Titre du diaporama"));
@@ -193,6 +233,21 @@ void LecteurVue::majInterface(ModeleLecteur::UnEtat e)
             // Ouvrir la fenêtre de choix
             fenetreChoix.exec();
         }
+=======
+        // Implémentation en V5
+        break;
+    case ModeleLecteur::Manuel:
+        ui->btnArreterDiapo->setEnabled(false);
+        break;
+    case ModeleLecteur::Automatique:
+        ui->btnArreterDiapo->setEnabled(true);
+        break;
+    case ModeleLecteur::ChoixDiaporama:
+        // Implémentation en V5
+        break;
+    case ModeleLecteur::ChoixVitesseDefilement:
+        // Implémentation en V5
+>>>>>>> V4
         break;
     default:
         break;
@@ -200,6 +255,18 @@ void LecteurVue::majInterface(ModeleLecteur::UnEtat e)
 }
 
 
+<<<<<<< HEAD
+=======
+void LecteurVue::demanderAffichageImage1()
+{
+    getPres()->demanderAffichageDiapoDebut();
+}
+
+
+
+
+
+>>>>>>> V4
 void LecteurVue::updateImageInfo(const QString& chemin, const QString& titre, const QString& categorie)
 {
     // Mettre à jour l'interface avec les nouvelles informations de l'image// Création d'un QPixmap à partir de votre image
@@ -222,6 +289,7 @@ void LecteurVue::updateDiapoTitle(const QString &titreDiapo)
     ui->titreDiapo->setText(titreDiapo);
 }
 
+<<<<<<< HEAD
 void LecteurVue::receptionDiapos(Diaporamas d)
 {
     _infosDiapos = d;
@@ -238,6 +306,8 @@ void LecteurVue::recupereVitesseDefilement(unsigned int pVitesse)
     getPres()->demanderChangementVitesseDfl(pVitesse);
 }
 
+=======
+>>>>>>> V4
 
 
 

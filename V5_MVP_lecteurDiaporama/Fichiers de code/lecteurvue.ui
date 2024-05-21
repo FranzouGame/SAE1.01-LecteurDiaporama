@@ -6,8 +6,13 @@
    <rect>
     <x>0</x>
     <y>0</y>
+<<<<<<< HEAD
     <width>507</width>
     <height>335</height>
+=======
+    <width>1382</width>
+    <height>1013</height>
+>>>>>>> V4
    </rect>
   </property>
   <property name="windowTitle">
@@ -192,6 +197,10 @@
     </item>
    </layout>
   </widget>
+<<<<<<< HEAD
+=======
+  <widget class="QStatusBar" name="statusbar"/>
+>>>>>>> V4
   <widget class="QToolBar" name="toolBar">
    <property name="windowTitle">
     <string>toolBar</string>
@@ -208,7 +217,11 @@
     <rect>
      <x>0</x>
      <y>0</y>
+<<<<<<< HEAD
      <width>507</width>
+=======
+     <width>1382</width>
+>>>>>>> V4
      <height>21</height>
     </rect>
    </property>
@@ -230,7 +243,10 @@
      <addaction name="actionCharger_Diaporama"/>
      <addaction name="menuMode"/>
      <addaction name="actionChangerVitesseDefilement"/>
+<<<<<<< HEAD
      <addaction name="actionEnleverDiaporama"/>
+=======
+>>>>>>> V4
     </widget>
     <addaction name="menuParam_tres"/>
     <addaction name="actionQuitter"/>
@@ -244,7 +260,10 @@
    <addaction name="menuFichier"/>
    <addaction name="menuAide"/>
   </widget>
+<<<<<<< HEAD
   <widget class="QStatusBar" name="statusBar"/>
+=======
+>>>>>>> V4
   <action name="actionCharger_Diaporama">
    <property name="text">
     <string>Charger Diaporama</string>
@@ -310,11 +329,14 @@
     <string>Changer la vitesse de défilement du diaporama</string>
    </property>
   </action>
+<<<<<<< HEAD
   <action name="actionEnleverDiaporama">
    <property name="text">
     <string>Enlever le diaporama en cours</string>
    </property>
   </action>
+=======
+>>>>>>> V4
  </widget>
  <resources/>
  <connections/>

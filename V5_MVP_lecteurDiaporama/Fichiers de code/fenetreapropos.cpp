@@ -7,6 +7,7 @@ fenetreAPropos::fenetreAPropos(QWidget *parent)
 {
     ui->setupUi(this);
 
+<<<<<<< HEAD
     // Changer le nom de la fenêtre
     setWindowTitle("A propos du lecteur de diaporamas");
 
@@ -15,6 +16,13 @@ fenetreAPropos::fenetreAPropos(QWidget *parent)
 
     // Changer le nom de la version
     ui->version->setText(QString("V5_MVP"));
+=======
+    // Mise à jour de la version de l'application dans la fenetre
+    ui->version->setText(QString("V4_MVP"));
+
+    // Connexion
+    QObject::connect(ui->btnOk, SIGNAL(clicked()), this, SLOT(fermeture()));
+>>>>>>> V4
 }
 
 fenetreAPropos::~fenetreAPropos()
