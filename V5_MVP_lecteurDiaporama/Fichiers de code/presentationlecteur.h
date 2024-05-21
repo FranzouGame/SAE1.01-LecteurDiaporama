@@ -37,7 +37,7 @@ signals:
     void faireOuvrirAPropos();
     void faireEnleverDiapo();
     void faireChangerDiapo(InfosDiaporama);
-    void faireChangerVitesse(float);
+    void faireChangerVitesse(unsigned int);
 
 signals:
     void faireAfficherImageDepart();
@@ -62,7 +62,7 @@ public slots:
 
     // Actions liées aux choix utilisateur
     void demanderChangementDIapo(InfosDiaporama);
-    void demanderChangementVitesseDfl(float);
+    void demanderChangementVitesseDfl(unsigned int);
 };
 
 #endif // PRESENTATIONLECTEUR_H

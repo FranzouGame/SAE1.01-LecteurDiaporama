@@ -58,7 +58,7 @@ public slots:
     void demandeEnleverDiapo();
     void demanderInfosDiapos();
     void receptionDemandeChangementDiaporama(InfosDiaporama);
-    void receptionDemandeChangementVitesse(float);
+    void receptionDemandeChangementVitesse(unsigned int);
 
 signals:
     void imageChanged(const QString& chemin, const QString& titre, const QString& categorie);

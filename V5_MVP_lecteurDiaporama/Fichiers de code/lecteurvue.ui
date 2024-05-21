@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1382</width>
-    <height>1013</height>
+    <width>507</width>
+    <height>335</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -192,7 +192,6 @@
     </item>
    </layout>
   </widget>
-  <widget class="QStatusBar" name="statusbar"/>
   <widget class="QToolBar" name="toolBar">
    <property name="windowTitle">
     <string>toolBar</string>
@@ -209,7 +208,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1382</width>
+     <width>507</width>
      <height>21</height>
     </rect>
    </property>
@@ -245,6 +244,7 @@
    <addaction name="menuFichier"/>
    <addaction name="menuAide"/>
   </widget>
+  <widget class="QStatusBar" name="statusBar"/>
   <action name="actionCharger_Diaporama">
    <property name="text">
     <string>Charger Diaporama</string>

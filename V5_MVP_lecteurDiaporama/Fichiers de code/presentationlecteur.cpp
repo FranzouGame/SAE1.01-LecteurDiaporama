@@ -75,7 +75,16 @@ void PresentationLecteur::demanderChargement() {
     _modele->setEtat(ModeleLecteur::ChoixDiaporama);
     _modele->demanderInfosDiapos();
     _vue->majInterface(_modele->getEtat());
-    _modele->setEtat(etatPrécédent);
+    if(etatPrécédent == ModeleLecteur::Automatique || etatPrécédent == ModeleLecteur::Manuel)
+    {
+        _modele->setEtat(etatPrécédent);
+    }
+    else
+    {
+        _modele->setEtat(ModeleLecteur::Manuel);
+        _vue->majInterface(_modele->getEtat());
+    }
+
 }
 
 void PresentationLecteur::demanderLancement() {
@@ -137,7 +146,7 @@ void PresentationLecteur::demanderChangementDIapo(InfosDiaporama d)
     emit faireChangerDiapo(d);
 }
 
-void PresentationLecteur::demanderChangementVitesseDfl(float pVitesse)
+void PresentationLecteur::demanderChangementVitesseDfl(unsigned int pVitesse)
 {
     emit faireChangerVitesse(pVitesse);
 }

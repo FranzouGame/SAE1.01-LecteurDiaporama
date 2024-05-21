@@ -147,7 +147,7 @@ void ModeleLecteur::receptionDemandeChangementDiaporama(InfosDiaporama d)
 
 }
 
-void ModeleLecteur::receptionDemandeChangementVitesse(float pVitesse)
+void ModeleLecteur::receptionDemandeChangementVitesse(unsigned int pVitesse)
 {
     if(getEtat() != Initial)
     {
