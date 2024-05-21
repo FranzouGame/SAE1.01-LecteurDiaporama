@@ -9,6 +9,8 @@
 PresentationLecteur::PresentationLecteur() :
     _vue(nullptr),
     _modele(nullptr){
+    _timer = new QTimer(this);
+    connect(_timer, &QTimer::timeout, this, &PresentationLecteur::demanderAvancer);
 }
 
 // Getter pour LecteurVue
