@@ -231,7 +231,6 @@
      <addaction name="actionCharger_Diaporama"/>
      <addaction name="menuMode"/>
      <addaction name="actionChangerVitesseDefilement"/>
-     <addaction name="actionEnleverDiaporama"/>
     </widget>
     <addaction name="menuParam_tres"/>
     <addaction name="actionQuitter"/>
@@ -308,11 +307,6 @@
   <action name="actionChangerVitesseDefilement">
    <property name="text">
     <string>Changer la vitesse de défilement du diaporama</string>
-   </property>
-  </action>
-  <action name="actionEnleverDiaporama">
-   <property name="text">
-    <string>Enlever le diaporama en cours</string>
    </property>
   </action>
  </widget>

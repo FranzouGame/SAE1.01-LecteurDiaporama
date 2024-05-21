@@ -83,7 +83,7 @@
      <item row="0" column="1">
       <widget class="QLabel" name="version">
        <property name="text">
-        <string>V3 MVP</string>
+        <string>V4 MVP</string>
        </property>
       </widget>
      </item>

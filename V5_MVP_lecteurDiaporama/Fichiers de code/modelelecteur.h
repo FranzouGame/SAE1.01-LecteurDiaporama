@@ -9,7 +9,7 @@
 struct InfosDiaporama {
     unsigned int id;    // identifiant du diaporama dans la BD
     string titre;       // titre du diaporama
-    float vitesseDefilement;
+    unsigned int vitesseDefilement;
 };
 
 // Type nécessaire
@@ -27,43 +27,35 @@ private:
     // Attributs
     UnEtat _etat;
     Lecteur* _lecteur;
-    Diaporamas _infosDiapos;
 
 public:
     /*** Méthodes ***/
 
     // Constructeur
-    explicit ModeleLecteur(Lecteur*, UnEtat = UnEtat::Initial, Diaporamas = {});
+    explicit ModeleLecteur(Lecteur*, UnEtat = UnEtat::Initial);
     ModeleLecteur();
-    ~ModeleLecteur();
 
     // Getters
     UnEtat getEtat() const;
     Lecteur* getLecteur() const;
-    Diaporamas getInfosDiapos() const;
 
     // Setters
     void setEtat(ModeleLecteur::UnEtat);
     void setLecteur(Lecteur*);
-    void setInfosDiapos(Diaporamas);
 
     // Autres méthodes
-    void chargerDiapos();
     unsigned int recupereVitesseDfl();
     void demanderRetourImage1(int = 0);
 
 public slots:
     void demandeAvancement();
     void demandeReculement();
-    void demandeEnleverDiapo();
-    void demanderInfosDiapos();
-    void receptionDemandeChangementDiaporama(InfosDiaporama);
-    void receptionDemandeChangementVitesse(float);
+    void demandeAffichageImageDebut();
+    void demanderAffichage1erDiapo();
 
 signals:
     void imageChanged(const QString& chemin, const QString& titre, const QString& categorie);
     void diapoChanged(const QString& titreDiapo);
-    void sendDiapoInfos(Diaporamas);
 };
 
 #endif // MODELELECTEUR_H

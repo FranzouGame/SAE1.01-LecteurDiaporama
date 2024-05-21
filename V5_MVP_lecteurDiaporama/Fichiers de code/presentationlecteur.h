@@ -2,7 +2,7 @@
 #define PRESENTATIONLECTEUR_H
 
 // Types / classes nécessaires
-#include "modelelecteur.h"
+class ModeleLecteur;
 class LecteurVue;
 class Diaporama;
 
@@ -17,7 +17,7 @@ private:
     // Attributs
     LecteurVue* _vue;         // Connexion de la vue
     ModeleLecteur* _modele;   // Connexion du modèle
-    QTimer* _timer;
+    QTimer* _timer;           // Timer pour le mode Automatique
 
 public:
     /*** Méthodes ***/
@@ -34,10 +34,8 @@ public:
 signals:
     void faireAvancer();
     void faireReculer();
+    void faireAfficherPremiere();
     void faireOuvrirAPropos();
-    void faireEnleverDiapo();
-    void faireChangerDiapo(InfosDiaporama);
-    void faireChangerVitesse(float);
 
 signals:
     void faireAfficherImageDepart();
@@ -47,8 +45,8 @@ public slots:
     // Actions relatives aux diaporamas ou à leur chargement
     void demanderAvancer();
     void demanderReculer();
+    void demanderAffichageDiapoDebut();
     void demanderArretDiapo();
-    void demanderEnleverDiaporama();
     void demanderChangerVitesse();
 
     // Actions liées au lecteur
@@ -59,10 +57,6 @@ public slots:
 
     // Actions liées au fenetres externes
     void demanderAffichageInformations();
-
-    // Actions liées aux choix utilisateur
-    void demanderChangementDIapo(InfosDiaporama);
-    void demanderChangementVitesseDfl(float);
 };
 
 #endif // PRESENTATIONLECTEUR_H

@@ -25,8 +25,6 @@ private:
     Ui::LecteurVue *ui;
     // Presentation de la vue
     PresentationLecteur* _pres;
-    // Informations des diaporamas
-    Diaporamas _infosDiapos;
 
 public:
     // Constructeur & Destructeur
@@ -42,12 +40,14 @@ public:
     // Autres méthodes
     void majInterface(ModeleLecteur::UnEtat);
 
-
+signals:
+    void signalArreterLancementAutomatique();
 
 public slots:
     // Pour faire le lien avec les diaporamas
     void demanderAvancer();
     void demanderReculer();
+    void demanderAffichageImage1();
     void demanderArreterDiapo();
 
     // Pour gérer les actions propres au lecteur
@@ -60,16 +60,11 @@ public slots:
 
     //Pour changer la vitesse de défilement
     void demanderChangementVitesseDefilement();
-    void demanderEnleverDiaporama();
+
 
     // Affichage
     void afficherInformations(); // Fenetre A propos
     void updateImageInfo(const QString& chemin, const QString& titre, const QString& categorie); // Image mise à jour
     void updateDiapoTitle(const QString& titreDiapo);
-    void receptionDiapos(Diaporamas);
-
-    // RéceptionInfos
-    void recupereInfosDiapoChoisi(InfosDiaporama);
-    void recupereVitesseDefilement(float);
 };
 #endif // LECTEURVUE_H
