@@ -49,6 +49,8 @@ public:
 
     // Autres méthodes
     void chargerDiapos();
+    unsigned int recupereVitesseDfl();
+    void demanderRetourImage1(int = 0);
 
 public slots:
     void demandeAvancement();

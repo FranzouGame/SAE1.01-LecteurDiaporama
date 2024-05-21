@@ -8,7 +8,8 @@ class Diaporama;
 
 // Inclusions nécessaires
 #include <QObject>
-
+#include <QTimer>
+#include <QEventLoop>
 class PresentationLecteur : public QObject
 {
     Q_OBJECT
@@ -16,6 +17,7 @@ private:
     // Attributs
     LecteurVue* _vue;         // Connexion de la vue
     ModeleLecteur* _modele;   // Connexion du modèle
+    QTimer* _timer;
 
 public:
     /*** Méthodes ***/
