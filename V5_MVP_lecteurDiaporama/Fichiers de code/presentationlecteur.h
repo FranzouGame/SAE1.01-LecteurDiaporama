@@ -17,7 +17,7 @@ private:
     // Attributs
     LecteurVue* _vue;         // Connexion de la vue
     ModeleLecteur* _modele;   // Connexion du modèle
-    QTimer* _timer;
+    QTimer* _timer;           // Timer pour le mode auto
 
 public:
     /*** Méthodes ***/
@@ -48,6 +48,7 @@ public slots:
     void demanderAvancer();
     void demanderReculer();
     void demanderArretDiapo();
+    void demanderAffichageDiapoDebut();
     void demanderEnleverDiaporama();
     void demanderChangerVitesse();
 

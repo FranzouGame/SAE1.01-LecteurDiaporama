@@ -8,7 +8,9 @@
 // Constructeur
 PresentationLecteur::PresentationLecteur() :
     _vue(nullptr),
-    _modele(nullptr){
+    _modele(nullptr)
+{
+    // Création et connection du timer
     _timer = new QTimer(this);
     connect(_timer, &QTimer::timeout, this, &PresentationLecteur::demanderAvancer);
 }
@@ -46,15 +48,15 @@ void PresentationLecteur::demanderReculer() {
 }
 
 
-
-
+void PresentationLecteur::demanderAffichageDiapoDebut()
+{
+    emit faireAfficherImageDepart();
+}
 
 void PresentationLecteur::demanderArretDiapo() {
-    qDebug() << "Présentation : réception demande d'arret diapo";
-    ModeleLecteur::UnEtat etatPrécédent = _modele->getEtat();
-    _modele->setEtat(ModeleLecteur::Initial);
-    _vue->majInterface(_modele->getEtat());
-    _modele->setEtat(etatPrécédent);
+    if (_timer->isActive()) {
+        _timer->stop();
+    }
 }
 
 void PresentationLecteur::demanderEnleverDiaporama()
@@ -69,7 +71,13 @@ void PresentationLecteur::demanderChangerVitesse() {
     ModeleLecteur::UnEtat etatPrécédent = _modele->getEtat();
     _modele->setEtat(ModeleLecteur::ChoixVitesseDefilement);
     _vue->majInterface(_modele->getEtat());
+
+    // Remise en place de l'ancien état
+    if(!(etatPrécédent == ModeleLecteur::Automatique || etatPrécédent == ModeleLecteur::Manuel)){
+        etatPrécédent = ModeleLecteur::Manuel;
+    }
     _modele->setEtat(etatPrécédent);
+    _vue->majInterface(_modele->getEtat());
 }
 
 void PresentationLecteur::demanderChargement() {
@@ -77,6 +85,8 @@ void PresentationLecteur::demanderChargement() {
     _modele->setEtat(ModeleLecteur::ChoixDiaporama);
     _modele->demanderInfosDiapos();
     _vue->majInterface(_modele->getEtat());
+
+    // Rétablir le mode si il était valide
     if(etatPrécédent == ModeleLecteur::Automatique || etatPrécédent == ModeleLecteur::Manuel)
     {
         _modele->setEtat(etatPrécédent);
@@ -96,7 +106,7 @@ void PresentationLecteur::demanderLancement() {
         _vue->majInterface(_modele->getEtat());
     }
 
-    // Récupérer la vitesse de défilement du diapo (sera utile quand les diapos seront entièrement chargés, ce qui n'est pas encore le cas)
+    // Récupérer la vitesse de défilement du diapo
     unsigned int vitesse = _modele->recupereVitesseDfl();
 
     //remettre l'image de départ si on appuie sur le btn Lancer diapo alors que l'image actuelle n'est pas la premiere
@@ -112,14 +122,12 @@ void PresentationLecteur::demanderLancement() {
 
         if(_modele->getLecteur()->getImageCourante()->getRangDansDiaporama() <= _modele->getLecteur()->nbImages() - 1)
         {
-            _timer->start(2000); // Lancement du timer
-            emit faireAfficherImageDepart();
+            _timer->start(vitesse * 1000); // Lancement du timer
         }
         else
         {
             _modele->demanderRetourImage1();
             demanderArretDiapo();
-            demanderChangementModeVersManuel();
         }
 
     }
@@ -127,13 +135,11 @@ void PresentationLecteur::demanderLancement() {
 }
 
 void PresentationLecteur::demanderChangementModeVersManuel() {
-    qDebug() << "Présentation : réception demande de passage mode manuel";
     _modele->setEtat(ModeleLecteur::Manuel);
     _vue->majInterface(_modele->getEtat());
 }
 
 void PresentationLecteur::demanderChangementModeVersAUtomatique() {
-    qDebug() << "Présentation : réception demande de passage mode automatique";
     _modele->setEtat(ModeleLecteur::Automatique);
     _vue->majInterface(_modele->getEtat());
 }
