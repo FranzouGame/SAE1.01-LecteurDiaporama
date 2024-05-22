@@ -46,11 +46,16 @@ unsigned int ModeleLecteur::recupereVitesseDfl()
 {
     return _lecteur->getDiaporama()->getVitesseDefilement();
 }
+
 void ModeleLecteur::demanderRetourImage1(int pos)
 {
     _lecteur->setPosImageCourante(pos);
 }
 
+ModeleLecteur::EtatLecteur ModeleLecteur::getEtatlecteur() const
+{
+    return _etatLecteur;
+}
 
 /***********************
  *      Setters        *
@@ -70,6 +75,11 @@ void ModeleLecteur::setInfosDiapos(Diaporamas d)
 {
     _infosDiapos = d;
 
+}
+
+void ModeleLecteur::setEtatLecteur(EtatLecteur e)
+{
+    _etatLecteur = e;
 }
 
 

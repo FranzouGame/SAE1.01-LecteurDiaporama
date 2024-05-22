@@ -23,9 +23,11 @@ class ModeleLecteur : public QObject
 public:
     // Type énuméré état
     enum UnEtat {Automatique, Manuel, ChoixDiaporama, Initial, ChoixVitesseDefilement};
+    enum EtatLecteur { boucle, bouclePas };
 private:
     // Attributs
     UnEtat _etat;
+    EtatLecteur _etatLecteur;
     Lecteur* _lecteur;
     Diaporamas _infosDiapos;
 
@@ -41,11 +43,13 @@ public:
     UnEtat getEtat() const;
     Lecteur* getLecteur() const;
     Diaporamas getInfosDiapos() const;
+    EtatLecteur getEtatlecteur() const;
 
     // Setters
     void setEtat(ModeleLecteur::UnEtat);
     void setLecteur(Lecteur*);
     void setInfosDiapos(Diaporamas);
+    void setEtatLecteur(EtatLecteur);
 
     // Autres méthodes
     void chargerDiapos();

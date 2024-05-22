@@ -23,6 +23,10 @@ public:
     // Méthodes de manipulation de la BD
     bool openDatabase();
     bool closeDatabase();
+    /*
+    // Méthodes pour les différentes requêtes
+    void recupereDiapos();
+    void recupereImageDiapo(unsigned int);*/
 
 private:
     QSqlDatabase _mydb;

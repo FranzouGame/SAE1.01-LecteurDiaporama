@@ -59,12 +59,12 @@ LecteurVue::~LecteurVue()
  *        SLOTS         *
  ***********************/
 void LecteurVue::demanderAvancer() {
-    getPres()->demanderArretDiapo();
+    demanderArreterDiapo();
     getPres()->demanderAvancer();
 }
 
 void LecteurVue::demanderReculer() {
-    getPres()->demanderArretDiapo();
+    demanderArreterDiapo();
     getPres()->demanderReculer();
 }
 
@@ -153,6 +153,7 @@ void LecteurVue::majInterface(ModeleLecteur::UnEtat e)
         ui->titreImage->setText(QString("Titre de l'image"));
         ui->catImage->setText(QString("Catégorie de l'image"));
         ui->image->setText(QString(" "));
+
         // Mettre à jour la disponibilité des boutons & actions
         ui->btnArreterDiapo->setEnabled(false);
         ui->btnLancerDiapo->setEnabled(false);
@@ -160,22 +161,32 @@ void LecteurVue::majInterface(ModeleLecteur::UnEtat e)
         // Mise à jour du statut
         _labelEtat->setText(QString("Mode : Initial"));
         break;
+
+
     case ModeleLecteur::Manuel:
+
         // Mettre à jour la disponibilité des boutons & actions
         ui->btnLancerDiapo->setEnabled(true);
         ui->actionModeManuel->setEnabled(false);
+
         // Mise à jour du statut
         _labelEtat->setText(QString("Mode : Manuel"));
         break;
+
+
     case ModeleLecteur::Automatique:
+
         // Mettre à jour la disponibilité des boutons & actions
         ui->btnArreterDiapo->setEnabled(true);
         ui->btnLancerDiapo->setEnabled(true);
         ui->actionChangerVitesseDefilement->setEnabled(true);
         ui->actionModeAuto->setEnabled(false);
+
         // Mise à jour du statut
         _labelEtat->setText(QString("Mode : Automatique"));
         break;
+
+
     case ModeleLecteur::ChoixDiaporama:
         {
             ChoixDiaporama* fenetreChoix = new ChoixDiaporama(_infosDiapos, this);
@@ -187,6 +198,8 @@ void LecteurVue::majInterface(ModeleLecteur::UnEtat e)
             fenetreChoix->exec();
         }
         break;
+
+
     case ModeleLecteur::ChoixVitesseDefilement:
         {
             // Création de la fenêtre
@@ -199,6 +212,8 @@ void LecteurVue::majInterface(ModeleLecteur::UnEtat e)
             fenetreChoix.exec();
         }
         break;
+
+
     default:
         break;
     }
