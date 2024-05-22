@@ -1,36 +1,41 @@
 #include "database.h"
 
 
-database::database() {}
+Database::Database() {
+    openDatabase();
+}
 
-QSqlDatabase *database::getDataBase() const
+QSqlDatabase Database::getDataBase() const
 {
     return _mydb;
 }
 
-void database::setDatabase(QSqlDatabase * pBd)
+void Database::setDatabase(QSqlDatabase pBd)
 {
-    _mydb = new QSqlDatabase(pBd);
+    _mydb = pBd;
 }
 
-bool database::openDatabase()
+bool Database::openDatabase()
 {
 
-    _mydb::addDatabase("QMYSQL");
+    _mydb = QSqlDatabase::addDatabase("QODBC");
 
     // Configurer les paramètres de connexion
-    db.setHostName("localhost");
-    db.setDatabaseName("nodenot_bd9");
-    db.setUserName("root");
-    db.setPassword("");
+    _mydb.setHostName("localhost");
+    _mydb.setDatabaseName("nodenot_bd9");
+    _mydb.setUserName("root");
+    _mydb.setPassword("");
 
-    if(_mybd->open())
+    if(_mydb.open())
     {
-
+        qDebug() << "Database ouverte";
+        return true;
     }
+
 }
 
-bool database::closeDatabase()
+bool Database::closeDatabase()
 {
-
+    _mydb.close();
+    return false;
 }

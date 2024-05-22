@@ -3,7 +3,7 @@
 #include "lecteurvue.h"
 #include "modelelecteur.h"
 #include "presentationlecteur.h"
-
+#include "database.h"
 // Bibliothèques
 #include <QApplication>
 
@@ -22,6 +22,7 @@ int main(int argc, char *argv[])
     LecteurVue vueLecteur;
     Lecteur* lecteur = new Lecteur();
     Diaporamas mesDiapos;
+    Database _mydb;
 
 
 

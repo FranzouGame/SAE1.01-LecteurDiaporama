@@ -3,28 +3,29 @@
 
 
 #include <QSqlDatabase>
-
+#include <QDebug>
 
 #define DATABASE_NAME "localhost"
-#define CONNECT_TYPE "QMYSQL"
+#define CONNECT_TYPE "QODBC"
 
 
-class database
+class Database
 {
 public:
-    database();
+    //constructeur
+    Database();
     // Getters
-    QSqlDatabase* getDataBase() const;
+    QSqlDatabase getDataBase() const;
 
     // Setters
-    void setDatabase(QSqlDatabase*);
+    void setDatabase(QSqlDatabase pBd);
 
     // Méthodes de manipulation de la BD
     bool openDatabase();
     bool closeDatabase();
 
 private:
-    QSqlDatabase* _mydb;
+    QSqlDatabase _mydb;
 
 };
 
