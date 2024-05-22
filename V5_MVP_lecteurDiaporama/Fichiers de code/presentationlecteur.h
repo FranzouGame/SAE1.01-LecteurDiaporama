@@ -31,6 +31,8 @@ public:
     void setVue(LecteurVue*);
     void setModele(ModeleLecteur*);
 
+
+
 signals:
     void faireAvancer();
     void faireReculer();
@@ -46,6 +48,8 @@ signals:
 public slots:
     // Actions relatives aux diaporamas ou à leur chargement
     void demanderAvancer();
+    // Avancer
+    void avancerAutomatique();
     void demanderReculer();
     void demanderArretDiapo();
     void demanderAffichageDiapoDebut();

@@ -41,7 +41,6 @@ public:
     UnEtat getEtat() const;
     Lecteur* getLecteur() const;
     Diaporamas getInfosDiapos() const;
-
     // Setters
     void setEtat(ModeleLecteur::UnEtat);
     void setLecteur(Lecteur*);
