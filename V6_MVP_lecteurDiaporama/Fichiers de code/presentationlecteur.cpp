@@ -41,10 +41,11 @@ void PresentationLecteur::setModele(ModeleLecteur* modele) {
 
 // Implémentation des slots
 void PresentationLecteur::demanderAvancer() {
-    if(getModele()->getEtatlecteur() == ModeleLecteur::boucle)
+    if(getModele()->getEtatlecteur() == ModeleLecteur::boucle && getModele()->getEtat() == ModeleLecteur::Automatique)
     {
         getModele()->setEtatLecteur(ModeleLecteur::bouclePas);
         getModele()->setEtat(ModeleLecteur::Manuel);
+        getVue()->majInterface(getModele()->getEtat());
     }
     else
     {
@@ -52,10 +53,11 @@ void PresentationLecteur::demanderAvancer() {
     }
 }
 void PresentationLecteur::demanderReculer() {
-    if(getModele()->getEtatlecteur() == ModeleLecteur::boucle)
+    if(getModele()->getEtatlecteur() == ModeleLecteur::boucle && getModele()->getEtat() == ModeleLecteur::Automatique)
     {
         getModele()->setEtatLecteur(ModeleLecteur::bouclePas);
         getModele()->setEtat(ModeleLecteur::Manuel);
+        getVue()->majInterface(getModele()->getEtat());
     }
     else
     {
