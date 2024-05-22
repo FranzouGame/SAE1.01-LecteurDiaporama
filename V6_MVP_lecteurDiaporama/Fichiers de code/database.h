@@ -1,20 +1,18 @@
 #ifndef DATABASE_H
 #define DATABASE_H
 
-
 #include <QSqlDatabase>
+#include <QSqlError>
+#include <QDebug>
 
-
-#define DATABASE_NAME "localhost"
-#define CONNECT_TYPE "QMYSQL"
-
-
-class database
+class Database
 {
 public:
-    database();
+    Database();
+    ~Database();
+
     // Getters
-    QSqlDatabase* getDataBase() const;
+    QSqlDatabase* getDatabase() const;
 
     // Setters
     void setDatabase(QSqlDatabase*);
@@ -25,7 +23,6 @@ public:
 
 private:
     QSqlDatabase* _mydb;
-
 };
 
 #endif // DATABASE_H

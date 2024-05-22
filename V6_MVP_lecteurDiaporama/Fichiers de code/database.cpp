@@ -1,36 +1,58 @@
 #include "database.h"
 
+Database::Database()
+    : _mydb(new QSqlDatabase(QSqlDatabase::addDatabase("QMYSQL", "mycntr")))
+{
+    // Initialisation de la base de données
+    if (openDatabase()) {
+        qDebug() << "Ouverture de la BD réussie";
+    } else {
+        qDebug() << "Ouverture ratée";
+    }
+}
 
-database::database() {}
+Database::~Database()
+{
+    // Fermer la base de données et supprimer le pointeur dans le destructeur
+    closeDatabase();
+    delete _mydb;
+}
 
-QSqlDatabase *database::getDataBase() const
+QSqlDatabase* Database::getDatabase() const
 {
     return _mydb;
 }
 
-void database::setDatabase(QSqlDatabase * pBd)
+void Database::setDatabase(QSqlDatabase* db)
 {
-    _mydb = new QSqlDatabase(pBd);
-}
-
-bool database::openDatabase()
-{
-
-    _mydb::addDatabase("QMYSQL");
-
-    // Configurer les paramètres de connexion
-    db.setHostName("localhost");
-    db.setDatabaseName("nodenot_bd9");
-    db.setUserName("root");
-    db.setPassword("");
-
-    if(_mybd->open())
-    {
-
+    if (_mydb != db) {
+        delete _mydb;
+        _mydb = db;
     }
 }
 
-bool database::closeDatabase()
+bool Database::openDatabase()
 {
+    // Configurer les paramètres de connexion
+    _mydb->setHostName("localhost");
+    _mydb->setDatabaseName("bd sae");
+    _mydb->setUserName("root");
+    _mydb->setPassword("");
 
+    if (_mydb->open()) {
+        return true;
+    } else {
+        qDebug() << "Ouverture ratée : " << _mydb->lastError().text();
+        return false;
+    }
+}
+
+bool Database::closeDatabase()
+{
+    if (_mydb->isOpen()) {
+        _mydb->close();
+        QSqlDatabase::removeDatabase("mycntr");
+        return true;
+    }
+    return false;
 }
