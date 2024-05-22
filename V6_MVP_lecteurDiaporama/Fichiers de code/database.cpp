@@ -53,6 +53,38 @@ bool Database::closeDatabase()
     return false;
 }
 
+Diaporamas Database::recupereDiapos()
+{
+    QSqlQuery query(_mydb);
+    QString queryString = "SELECT * FROM Diaporamas";
+    query.prepare(queryString);
+
+    if (!query.exec()) {
+        qDebug() << "Erreur lors de l'exécution de la requête :" << query.lastError().text();
+    }
+    else
+    {
+        Diaporamas diaporamasInfos;
+        while(query.next())
+        {
+            // Instanciations nécessaires
+
+            InfosDiaporama infosDiapoCourant;
+
+            // Créer le diaporama
+            infosDiapoCourant.id = query.value(0).toInt();
+            infosDiapoCourant.titre = (query.value(1).toString()).toStdString(); // Conversion directe
+            infosDiapoCourant.vitesseDefilement = query.value(2).toInt();
+
+            // Ajouter les infos dans le vecteur
+            diaporamasInfos.push_back(infosDiapoCourant);
+        }
+
+        // Retourner les informations des diaporamas
+        return diaporamasInfos;
+    }
+}
+
 void Database::recupereImageDiapo(unsigned int numDiapo)
 {
     QSqlQuery query(_mydb);
@@ -70,19 +102,16 @@ void Database::recupereImageDiapo(unsigned int numDiapo)
         qDebug() << "Erreur lors de l'exécution de la requête :" << query.lastError().text();
     } else {
         Diaporama* diapoCharge = new Diaporama();
+        diapoCharge->setVitesseDefilement(query.value(4).toInt()); // Mettre la vitese de défilement au diapo
         while (query.next()) {
             QString uriPhoto = query.value(0).toString();
             QString titrePhoto = query.value(1).toString();
             QString nomFamille = query.value(2).toString();
             int rang = query.value(3).toInt();
 
+
             ImageDansDiaporama* imageEnCharge = new ImageDansDiaporama(rang, nomFamille.toStdString(), titrePhoto.toStdString(), uriPhoto.toStdString());
             diapoCharge->ajouterImageEnFin(imageEnCharge);
-            /*
-            qDebug() << "URI Photo :" << uriPhoto;
-            qDebug() << "Titre Photo :" << titrePhoto;
-            qDebug() << "Famille :" << nomFamille;
-            qDebug() << "Rang :" << rang;*/
         }
     }
 }

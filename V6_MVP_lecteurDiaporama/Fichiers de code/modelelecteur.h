@@ -5,10 +5,13 @@
 #include <QObject>
 #include "lecteur.h"
 
+// Classe nécessaires
+class Database;
+
 
 struct InfosDiaporama {
     unsigned int id;    // identifiant du diaporama dans la BD
-    string titre;       // titre du diaporama
+    std::string titre;       // titre du diaporama
     float vitesseDefilement;
 };
 
@@ -27,13 +30,16 @@ private:
     // Attributs
     UnEtat _etat;
     Lecteur* _lecteur;
-    Diaporamas _infosDiapos;
+    Database* _database;
+
+    // Méthode d'envoie de l'image courante
+    void envoieImageCourante();
 
 public:
     /*** Méthodes ***/
 
     // Constructeur
-    explicit ModeleLecteur(Lecteur*, UnEtat = UnEtat::Initial, Diaporamas = {});
+    explicit ModeleLecteur(Lecteur*, UnEtat = UnEtat::Initial);
     ModeleLecteur();
     ~ModeleLecteur();
 
@@ -62,6 +68,10 @@ signals:
     void imageChanged(const QString& chemin, const QString& titre, const QString& categorie);
     void diapoChanged(const QString& titreDiapo);
     void sendDiapoInfos(Diaporamas);
+
+private slots:
+    // void recupereDiaposDepuisBD(Diaporamas);
+    void recupereImagesDiapoDepuisBD(Diaporama);
 };
 
 #endif // MODELELECTEUR_H

@@ -1,11 +1,17 @@
-#include "modelelecteur.h"
+
 #include "imageDansDiaporama.h"
 #include "qdebug.h"
+#include "database.h"
 
-ModeleLecteur::ModeleLecteur(Lecteur* l, UnEtat e, Diaporamas d) :
+
+
+ModeleLecteur::ModeleLecteur(Lecteur* l, UnEtat e) :
     _etat(e),
     _lecteur(l),
-    _infosDiapos(d){
+    _database(new Database())
+{
+    // Ouvrir la BD
+    _database->openDatabase();
 }
 
 ModeleLecteur::ModeleLecteur()
@@ -17,7 +23,11 @@ ModeleLecteur::ModeleLecteur()
     _lecteur = new Lecteur();
 
     // Chargement des diaporamas
-    chargerDiapos();
+    // chargerDiapos();
+
+    // Initialisation & ouverture de la BD
+    _database = new Database();
+    _database->openDatabase();
 }
 
 ModeleLecteur::~ModeleLecteur()
@@ -25,7 +35,7 @@ ModeleLecteur::~ModeleLecteur()
 }
 
 /***********************
- *      Getters        *
+*       Getters        *
 ***********************/
 
 ModeleLecteur::UnEtat ModeleLecteur::getEtat() const
@@ -36,11 +46,6 @@ ModeleLecteur::UnEtat ModeleLecteur::getEtat() const
 Lecteur *ModeleLecteur::getLecteur() const
 {
     return _lecteur;
-}
-
-Diaporamas ModeleLecteur::getInfosDiapos()const
-{
-    return _infosDiapos;
 }
 
 
@@ -59,11 +64,7 @@ void ModeleLecteur::setLecteur(Lecteur *l)
     _lecteur = l;
 }
 
-void ModeleLecteur::setInfosDiapos(Diaporamas d)
-{
-    _infosDiapos = d;
 
-}
 
 
 
@@ -78,15 +79,8 @@ void ModeleLecteur::demandeAvancement()
     if (_lecteur && _lecteur->getDiaporama()) {
         // Avancer et récupérer la nouvelle image
         _lecteur->avancer();
-        ImageDansDiaporama* imageCourante = _lecteur->getImageCourante();
-        // Si l'image existe, l'envoyer à la vue
-        if (imageCourante) {
-            emit imageChanged(QString::fromStdString(imageCourante->getChemin()),
-                              QString::fromStdString(imageCourante->getTitre()),
-                              QString::fromStdString(imageCourante->getCategorie()));
-        }
+        envoieImageCourante();
     }
-
 }
 
 void ModeleLecteur::demandeReculement()
@@ -95,13 +89,7 @@ void ModeleLecteur::demandeReculement()
     if (_lecteur && _lecteur->getDiaporama()) {
         // Reculer et récupérer la nouvelle image
         _lecteur->reculer();
-        ImageDansDiaporama* imageCourante = _lecteur->getImageCourante();
-        // Si l'image existe, l'envoyer à la vue
-        if (imageCourante) {
-            emit imageChanged(QString::fromStdString(imageCourante->getChemin()),
-                              QString::fromStdString(imageCourante->getTitre()),
-                              QString::fromStdString(imageCourante->getCategorie()));
-        }
+        envoieImageCourante();
     }
 }
 
@@ -112,14 +100,12 @@ void ModeleLecteur::demandeEnleverDiapo()
     _lecteur->viderLecteur();
 }
 
-
-
-
 void ModeleLecteur::demanderInfosDiapos()
 {
-    emit sendDiapoInfos(_infosDiapos);
+    _database->recupereImageDiapo(_lecteur->getIdDiaporama());
 }
 
+// Réception du retour utilisateur (fait depuis la vue)
 void ModeleLecteur::receptionDemandeChangementDiaporama(InfosDiaporama d)
 {
     _lecteur->changerDiaporama(d.id, d.titre, d.vitesseDefilement);
@@ -130,15 +116,21 @@ void ModeleLecteur::receptionDemandeChangementDiaporama(InfosDiaporama d)
 
     // Mettre à jour l'image
     _lecteur->setPosImageCourante(0);
+    envoieImageCourante();
+}
+
+
+void ModeleLecteur::envoieImageCourante()
+{
     ImageDansDiaporama* imageCourante = _lecteur->getImageCourante();
-    if(imageCourante)
-    {
+    // Si l'image existe, l'envoyer à la vue
+    if (imageCourante) {
         emit imageChanged(QString::fromStdString(imageCourante->getChemin()),
                           QString::fromStdString(imageCourante->getTitre()),
                           QString::fromStdString(imageCourante->getCategorie()));
     }
-
 }
+
 
 void ModeleLecteur::receptionDemandeChangementVitesse(float pVitesse)
 {
@@ -149,34 +141,24 @@ void ModeleLecteur::receptionDemandeChangementVitesse(float pVitesse)
 
 }
 
+void ModeleLecteur::recupereImagesDiapoDepuisBD(Diaporama pDiapo)
+{
+    _lecteur->setDiaporama(&pDiapo);
+    _lecteur->setPosImageCourante(0);
+    envoieImageCourante();
+}
+
+// Envoyer les diapos pour que la vue puisse les afficher
 void ModeleLecteur::chargerDiapos()
 {
-
-        InfosDiaporama infosACharger;
-        // Diaporama de Pantxika
-        infosACharger.id = 1;
-        infosACharger.titre = "Diaporama Pantxika";
-        infosACharger.vitesseDefilement = 2;
-        _infosDiapos.push_back(infosACharger);
-
-         // Diaporama de Thierry
-        infosACharger.id = 2;
-        infosACharger.titre = "Diaporama Thierry";
-        infosACharger.vitesseDefilement = 4;
-        _infosDiapos.push_back(infosACharger);
-
-         // Diaporama de Yann
-        infosACharger.id = 3;
-        infosACharger.titre = "Diaporama Yann";
-        infosACharger.vitesseDefilement = 2;
-        _infosDiapos.push_back(infosACharger);
-
-         // Diaporama de Manu
-        infosACharger.id = 4;
-        infosACharger.titre = "Diaporama Manu";
-        infosACharger.vitesseDefilement = 1;
-        _infosDiapos.push_back(infosACharger);
-
+    Diaporamas diapos = _database->recupereDiapos();
+    // Demander les infos à la BD
+    if(diapos.size() == 0)
+    {
+        diapos = _database->recupereDiapos();
+    }
+    // Envoyer les infos à la vue
+    emit sendDiapoInfos(diapos);
 }
 
 
