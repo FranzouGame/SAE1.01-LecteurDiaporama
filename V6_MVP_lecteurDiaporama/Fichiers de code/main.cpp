@@ -3,7 +3,6 @@
 #include "lecteurvue.h"
 #include "modelelecteur.h"
 #include "presentationlecteur.h"
-#include "database.h"
 
 // Bibliothèques
 #include <QApplication>
@@ -23,7 +22,6 @@ int main(int argc, char *argv[])
     LecteurVue vueLecteur;
     Lecteur* lecteur = new Lecteur();
     Diaporamas mesDiapos;
-    Database* mybd = new Database();
 
 
 
@@ -34,15 +32,12 @@ int main(int argc, char *argv[])
     presentation->setVue(&vueLecteur);
     modele->setLecteur(lecteur);
 
-
-
-
     // Connexion des signaux et des slots
 
     // Présentation -> Modele
     QObject::connect(presentation, SIGNAL(faireAvancer()), modele, SLOT(demandeAvancement()));
     QObject::connect(presentation, SIGNAL(faireReculer()), modele, SLOT(demandeReculement()));
-    QObject::connect(presentation, SIGNAL(faireChangerVitesse(float)), modele, SLOT(receptionDemandeChangementVitesse(float)));
+    QObject::connect(presentation, SIGNAL(faireChangerVitesse(unsigned int)), modele, SLOT(receptionDemandeChangementVitesse(unsigned int)));
     QObject::connect(presentation, SIGNAL(faireChangerDiapo(InfosDiaporama)), modele, SLOT(receptionDemandeChangementDiaporama(InfosDiaporama)));
 
     // Présentation -> vue

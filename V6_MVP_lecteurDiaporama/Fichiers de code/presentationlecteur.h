@@ -8,7 +8,8 @@ class Diaporama;
 
 // Inclusions nécessaires
 #include <QObject>
-
+#include <QTimer>
+#include <QEventLoop>
 class PresentationLecteur : public QObject
 {
     Q_OBJECT
@@ -16,6 +17,7 @@ private:
     // Attributs
     LecteurVue* _vue;         // Connexion de la vue
     ModeleLecteur* _modele;   // Connexion du modèle
+    QTimer* _timer;           // Timer pour le mode auto
 
 public:
     /*** Méthodes ***/
@@ -35,7 +37,7 @@ signals:
     void faireOuvrirAPropos();
     void faireEnleverDiapo();
     void faireChangerDiapo(InfosDiaporama);
-    void faireChangerVitesse(float);
+    void faireChangerVitesse(unsigned int);
 
 signals:
     void faireAfficherImageDepart();
@@ -46,6 +48,7 @@ public slots:
     void demanderAvancer();
     void demanderReculer();
     void demanderArretDiapo();
+    void demanderAffichageDiapoDebut();
     void demanderEnleverDiaporama();
     void demanderChangerVitesse();
 
@@ -60,7 +63,7 @@ public slots:
 
     // Actions liées aux choix utilisateur
     void demanderChangementDIapo(InfosDiaporama);
-    void demanderChangementVitesseDfl(float);
+    void demanderChangementVitesseDfl(unsigned int);
 };
 
 #endif // PRESENTATIONLECTEUR_H

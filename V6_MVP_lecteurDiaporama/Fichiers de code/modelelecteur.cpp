@@ -42,7 +42,14 @@ Diaporamas ModeleLecteur::getInfosDiapos()const
 {
     return _infosDiapos;
 }
-
+unsigned int ModeleLecteur::recupereVitesseDfl()
+{
+    return _lecteur->getDiaporama()->getVitesseDefilement();
+}
+void ModeleLecteur::demanderRetourImage1(int pos)
+{
+    _lecteur->setPosImageCourante(pos);
+}
 
 
 /***********************
@@ -140,7 +147,7 @@ void ModeleLecteur::receptionDemandeChangementDiaporama(InfosDiaporama d)
 
 }
 
-void ModeleLecteur::receptionDemandeChangementVitesse(float pVitesse)
+void ModeleLecteur::receptionDemandeChangementVitesse(unsigned int pVitesse)
 {
     if(getEtat() != Initial)
     {

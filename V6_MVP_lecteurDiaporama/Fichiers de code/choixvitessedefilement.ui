@@ -36,7 +36,7 @@
      <item>
       <widget class="QLabel" name="desc1">
        <property name="text">
-        <string>Veuillez entrer une valeur comprise entre 0.2 et 5 secondes.</string>
+        <string>Veuillez entrer une valeur comprise entre 1 et 5 secondes (inclus).</string>
        </property>
        <property name="alignment">
         <set>Qt::AlignCenter</set>
@@ -56,7 +56,7 @@
      <item>
       <widget class="QLabel" name="label">
        <property name="text">
-        <string>(une durée non entière doit être écrite avec un &quot;.&quot; et non une virgule)</string>
+        <string>Une durée doit être un nombre entier de secondes.</string>
        </property>
        <property name="alignment">
         <set>Qt::AlignCenter</set>

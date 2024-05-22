@@ -5,6 +5,9 @@
 #include <QSqlError>
 #include <QDebug>
 
+#define DATABASE_NAME "mbourciez_bd"
+#define CONNECT_TYPE "QODBC"
+
 class Database
 {
 public:
@@ -12,17 +15,17 @@ public:
     ~Database();
 
     // Getters
-    QSqlDatabase* getDatabase() const;
+    QSqlDatabase getDatabase() const;
 
     // Setters
-    void setDatabase(QSqlDatabase*);
+    void setDatabase(QSqlDatabase);
 
     // Méthodes de manipulation de la BD
     bool openDatabase();
     bool closeDatabase();
 
 private:
-    QSqlDatabase* _mydb;
+    QSqlDatabase _mydb;
 };
 
 #endif // DATABASE_H

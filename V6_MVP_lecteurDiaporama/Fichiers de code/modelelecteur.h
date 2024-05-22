@@ -49,6 +49,8 @@ public:
 
     // Autres méthodes
     void chargerDiapos();
+    unsigned int recupereVitesseDfl();
+    void demanderRetourImage1(int = 0);
 
 public slots:
     void demandeAvancement();
@@ -56,7 +58,7 @@ public slots:
     void demandeEnleverDiapo();
     void demanderInfosDiapos();
     void receptionDemandeChangementDiaporama(InfosDiaporama);
-    void receptionDemandeChangementVitesse(float);
+    void receptionDemandeChangementVitesse(unsigned int);
 
 signals:
     void imageChanged(const QString& chemin, const QString& titre, const QString& categorie);

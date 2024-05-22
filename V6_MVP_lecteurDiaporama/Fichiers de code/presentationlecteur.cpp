@@ -2,12 +2,17 @@
 #include "modelelecteur.h"
 #include "lecteurvue.h"
 
+
 /*** Implémentations ***/
 
 // Constructeur
 PresentationLecteur::PresentationLecteur() :
     _vue(nullptr),
-    _modele(nullptr){
+    _modele(nullptr)
+{
+    // Création et connection du timer
+    _timer = new QTimer(this);
+    connect(_timer, &QTimer::timeout, this, &PresentationLecteur::demanderAvancer);
 }
 
 // Getter pour LecteurVue
@@ -43,15 +48,15 @@ void PresentationLecteur::demanderReculer() {
 }
 
 
-
-
+void PresentationLecteur::demanderAffichageDiapoDebut()
+{
+    emit faireAfficherImageDepart();
+}
 
 void PresentationLecteur::demanderArretDiapo() {
-    qDebug() << "Présentation : réception demande d'arret diapo";
-    ModeleLecteur::UnEtat etatPrécédent = _modele->getEtat();
-    _modele->setEtat(ModeleLecteur::Initial);
-    _vue->majInterface(_modele->getEtat());
-    _modele->setEtat(etatPrécédent);
+    if (_timer->isActive()) {
+        _timer->stop();
+    }
 }
 
 void PresentationLecteur::demanderEnleverDiaporama()
@@ -66,7 +71,13 @@ void PresentationLecteur::demanderChangerVitesse() {
     ModeleLecteur::UnEtat etatPrécédent = _modele->getEtat();
     _modele->setEtat(ModeleLecteur::ChoixVitesseDefilement);
     _vue->majInterface(_modele->getEtat());
+
+    // Remise en place de l'ancien état
+    if(!(etatPrécédent == ModeleLecteur::Automatique || etatPrécédent == ModeleLecteur::Manuel)){
+        etatPrécédent = ModeleLecteur::Manuel;
+    }
     _modele->setEtat(etatPrécédent);
+    _vue->majInterface(_modele->getEtat());
 }
 
 void PresentationLecteur::demanderChargement() {
@@ -74,21 +85,61 @@ void PresentationLecteur::demanderChargement() {
     _modele->setEtat(ModeleLecteur::ChoixDiaporama);
     _modele->demanderInfosDiapos();
     _vue->majInterface(_modele->getEtat());
-    _modele->setEtat(etatPrécédent);
+
+    // Rétablir le mode si il était valide
+    if(etatPrécédent == ModeleLecteur::Automatique || etatPrécédent == ModeleLecteur::Manuel)
+    {
+        _modele->setEtat(etatPrécédent);
+    }
+    else
+    {
+        _modele->setEtat(ModeleLecteur::Manuel);
+        _vue->majInterface(_modele->getEtat());
+    }
+
 }
 
 void PresentationLecteur::demanderLancement() {
-    qDebug() << "Présentation : réception demande de lancement";
+    if (_modele->getEtat() == ModeleLecteur::Manuel)
+    {
+        _modele->setEtat(ModeleLecteur::Automatique);
+        _vue->majInterface(_modele->getEtat());
+    }
+
+    // Récupérer la vitesse de défilement du diapo
+    unsigned int vitesse = _modele->recupereVitesseDfl();
+
+    //remettre l'image de départ si on appuie sur le btn Lancer diapo alors que l'image actuelle n'est pas la premiere
+    if(_modele->getLecteur()->getImageCourante()->getRangDansDiaporama() != _modele->getLecteur()->nbImages() - _modele->getLecteur()->nbImages()+1)
+    {
+        _modele->demanderRetourImage1();
+    }
+    if (_modele->getEtat() == ModeleLecteur::Automatique)
+    {
+        if (vitesse == 0) {
+            _modele->getLecteur()->getDiaporama()->setVitesseDefilement(1);
+        }
+
+        if(_modele->getLecteur()->getImageCourante()->getRangDansDiaporama() <= _modele->getLecteur()->nbImages() - 1)
+        {
+            _timer->start(vitesse * 1000); // Lancement du timer
+        }
+        else
+        {
+            _modele->demanderRetourImage1();
+            demanderArretDiapo();
+        }
+
+    }
+
 }
 
 void PresentationLecteur::demanderChangementModeVersManuel() {
-    qDebug() << "Présentation : réception demande de passage mode manuel";
     _modele->setEtat(ModeleLecteur::Manuel);
     _vue->majInterface(_modele->getEtat());
 }
 
 void PresentationLecteur::demanderChangementModeVersAUtomatique() {
-    qDebug() << "Présentation : réception demande de passage mode automatique";
     _modele->setEtat(ModeleLecteur::Automatique);
     _vue->majInterface(_modele->getEtat());
 }
@@ -103,7 +154,7 @@ void PresentationLecteur::demanderChangementDIapo(InfosDiaporama d)
     emit faireChangerDiapo(d);
 }
 
-void PresentationLecteur::demanderChangementVitesseDfl(float pVitesse)
+void PresentationLecteur::demanderChangementVitesseDfl(unsigned int pVitesse)
 {
     emit faireChangerVitesse(pVitesse);
 }
