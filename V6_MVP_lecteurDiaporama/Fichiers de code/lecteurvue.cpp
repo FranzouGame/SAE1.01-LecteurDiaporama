@@ -59,12 +59,10 @@ LecteurVue::~LecteurVue()
  *        SLOTS         *
  ***********************/
 void LecteurVue::demanderAvancer() {
-    demanderArreterDiapo();
     getPres()->demanderAvancer();
 }
 
 void LecteurVue::demanderReculer() {
-    demanderArreterDiapo();
     getPres()->demanderReculer();
 }
 

@@ -12,7 +12,7 @@ PresentationLecteur::PresentationLecteur() :
 {
     // Création et connection du timer
     _timer = new QTimer(this);
-    connect(_timer, &QTimer::timeout, this, &PresentationLecteur::demanderAvancer);
+    connect(_timer, &QTimer::timeout, this, &PresentationLecteur::avancerAutomatique);
 }
 
 // Getter pour LecteurVue
@@ -37,31 +37,36 @@ void PresentationLecteur::setModele(ModeleLecteur* modele) {
     _modele = modele;
 }
 
+void PresentationLecteur::avancerAutomatique()
+{
+    emit faireAvancer();
+}
+
 
 
 // Implémentation des slots
 void PresentationLecteur::demanderAvancer() {
-    if(getModele()->getEtatlecteur() == ModeleLecteur::boucle && getModele()->getEtat() == ModeleLecteur::Automatique)
-    {
-        getModele()->setEtatLecteur(ModeleLecteur::bouclePas);
-        getModele()->setEtat(ModeleLecteur::Manuel);
-        getVue()->majInterface(getModele()->getEtat());
-    }
-    else
+    if(getModele()->getEtat() != ModeleLecteur::Automatique)
     {
         emit faireAvancer();
     }
+    else
+    {
+        getModele()->setEtat(ModeleLecteur::Manuel);
+        demanderArretDiapo();
+        getVue()->majInterface(getModele()->getEtat());
+    }
 }
 void PresentationLecteur::demanderReculer() {
-    if(getModele()->getEtatlecteur() == ModeleLecteur::boucle && getModele()->getEtat() == ModeleLecteur::Automatique)
+    if(getModele()->getEtat() != ModeleLecteur::Automatique)
     {
-        getModele()->setEtatLecteur(ModeleLecteur::bouclePas);
-        getModele()->setEtat(ModeleLecteur::Manuel);
-        getVue()->majInterface(getModele()->getEtat());
+        emit faireReculer();
     }
     else
     {
-        emit faireReculer();
+        getModele()->setEtat(ModeleLecteur::Manuel);
+        demanderArretDiapo();
+        getVue()->majInterface(getModele()->getEtat());
     }
 }
 
@@ -80,7 +85,6 @@ void PresentationLecteur::demanderArretDiapo() {
 
     // Mettre à jour l'état
     getModele()->setEtat(ModeleLecteur::Manuel);
-    getModele()->setEtatLecteur(ModeleLecteur::bouclePas);
     getVue()->majInterface(getModele()->getEtat());
 }
 
@@ -136,15 +140,15 @@ void PresentationLecteur::demanderLancement() {
 
     // Récupérer la vitesse de défilement du diapo
     unsigned int vitesse = getModele()->recupereVitesseDfl();
-    /*+
+
     //remettre l'image de départ si on appuie sur le btn Lancer diapo alors que l'image actuelle n'est pas la premiere
     if(_modele->getLecteur()->getImageCourante()->getRangDansDiaporama() != _modele->getLecteur()->nbImages() - _modele->getLecteur()->nbImages()+1)
     {
         _modele->demanderRetourImage1();
-    }*/
+    }
     if (_modele->getEtat() == ModeleLecteur::Automatique)
     {
-        getModele()->setEtatLecteur(ModeleLecteur::boucle);
+
         if (vitesse == 0) {
             _modele->getLecteur()->getDiaporama()->setVitesseDefilement(1);
         }
