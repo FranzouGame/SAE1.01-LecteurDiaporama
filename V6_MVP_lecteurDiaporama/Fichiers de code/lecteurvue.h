@@ -2,6 +2,7 @@
 #define LECTEURVUE_H
 
 #include <QMainWindow>
+#include <QLabel>
 #include "modelelecteur.h"
 
 
@@ -27,6 +28,8 @@ private:
     PresentationLecteur* _pres;
     // Informations des diaporamas
     Diaporamas _infosDiapos;
+    // Label d'état
+    QLabel* _labelEtat;
 
 public:
     // Constructeur & Destructeur
@@ -70,6 +73,6 @@ public slots:
 
     // RéceptionInfos
     void recupereInfosDiapoChoisi(InfosDiaporama);
-    void recupereVitesseDefilement(float);
+    void recupereVitesseDefilement(unsigned int);
 };
 #endif // LECTEURVUE_H

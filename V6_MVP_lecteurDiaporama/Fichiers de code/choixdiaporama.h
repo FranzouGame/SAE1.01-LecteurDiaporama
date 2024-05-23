@@ -4,7 +4,6 @@
 #include <QDialog>
 #include "modelelecteur.h"
 
-
 namespace Ui {
 class ChoixDiaporama;
 }

@@ -88,10 +88,6 @@ Diaporamas Database::recupereDiapos() {
         infosDiapoCourant.titre = query.value(1).toString().toStdString();
         infosDiapoCourant.vitesseDefilement = query.value(2).toUInt();
 
-        qDebug() << "ID:" << infosDiapoCourant.id;
-        qDebug() << "Titre:" << QString::fromStdString(infosDiapoCourant.titre);
-        qDebug() << "Vitesse Defilement:" << infosDiapoCourant.vitesseDefilement;
-
         diaporamasInfos.push_back(infosDiapoCourant);
     }
 
@@ -133,7 +129,7 @@ Diaporama* Database::recupereImageDiapo(unsigned int numDiapo)
     diapoCharge->setVitesseDefilement(vitesseDefilement);
 
     while (query.next()) {
-        QString uriPhoto = query.value(0).toString();
+        QString uriPhoto = QString(":/imagesDur") + query.value(0).toString();
         QString titrePhoto = query.value(1).toString();
         QString nomFamille = query.value(2).toString();
         int rang = query.value(3).toInt();

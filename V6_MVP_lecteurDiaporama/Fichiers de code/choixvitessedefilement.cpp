@@ -8,6 +8,9 @@ choixVitesseDefilement::choixVitesseDefilement(QWidget *parent)
 {
     ui->setupUi(this);
 
+    // Changer le nom de la fenêtre
+    setWindowTitle("Changement de la vitesse de défilement");
+
     // Mise à jour de l'interface pour empêcher une mauvaise saisie
     ui->buttonBox->button(QDialogButtonBox::Ok)->setEnabled(false);
 
@@ -57,7 +60,7 @@ void choixVitesseDefilement::enableButton()
 
 void choixVitesseDefilement::demanderEnvoiValeur()
 {
-    float userInput = ui->choixUtilisateur->text().toFloat();
+    unsigned int userInput = static_cast<int>(ui->choixUtilisateur->text().toFloat());
 
     // Vérifier la valeur saisie
     emit envoyerVitesseDfl(userInput);

@@ -12,7 +12,6 @@ CONFIG += c++17
 SOURCES += \
     choixdiaporama.cpp \
     choixvitessedefilement.cpp \
-    database.cpp \
     fenetreapropos.cpp \
     main.cpp \
     lecteurvue.cpp \
@@ -20,19 +19,20 @@ SOURCES += \
     presentationlecteur.cpp \
     lecteur.cpp \
     diaporama.cpp \
-    imagedansdiaporama.cpp
+    imagedansdiaporama.cpp \
+    database.cpp
 
 HEADERS += \
     choixdiaporama.h \
     choixvitessedefilement.h \
-    database.h \
     fenetreapropos.h \
     lecteurvue.h \
     modelelecteur.h \
     presentationlecteur.h \
     lecteur.h \
     diaporama.h \
-    imagedansdiaporama.h
+    imagedansdiaporama.h \
+    database.h
 
 FORMS += \
     choixdiaporama.ui \

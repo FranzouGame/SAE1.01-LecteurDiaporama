@@ -14,8 +14,12 @@ LecteurVue::LecteurVue(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::LecteurVue)
     , _infosDiapos({})
+    ,_labelEtat(new QLabel(this))
 {
     ui->setupUi(this);
+
+    // Changer le nom de la fenêtre
+    setWindowTitle("Lecteur de diaporama - S2.01");
 
     // Connections
 
@@ -33,6 +37,14 @@ LecteurVue::LecteurVue(QWidget *parent)
     QObject::connect(ui->actionCharger_Diaporama, SIGNAL(triggered()), this, SLOT(demanderChangementDiaporama()));
     QObject::connect(ui->actionModeManuel, SIGNAL(triggered()), this, SLOT(demanderChangementModeManuel()));
     QObject::connect(ui->actionEnleverDiaporama, SIGNAL(triggered(bool)), this ,SLOT(demanderEnleverDiaporama()));
+
+    // Ajouter un label à droite de la barre de statut
+    _labelEtat->setText("Mode : Initial");
+    statusBar()->addPermanentWidget(_labelEtat);
+
+    // Appliquer un stylesheet pour rendre la barre de statut grisée
+    statusBar()->setStyleSheet("QStatusBar { background-color: lightgray; }");
+
 }
 
 LecteurVue::~LecteurVue()
@@ -59,12 +71,11 @@ void LecteurVue::demanderChangementDiaporama() {
 }
 
 void LecteurVue::demanderArreterDiapo() {
-    qDebug() << "Demande d'arrêt de la diapositive en cours";
     getPres()->demanderArretDiapo();
 }
 
 void LecteurVue::demanderLancementDiapo() {
-    qDebug() << "Demande de lancement d'une diapositive";
+    getPres()->demanderLancement();
 }
 
 void LecteurVue::demanderFermetureLecteur() {
@@ -77,13 +88,11 @@ void LecteurVue::demanderInformations() {
 
 
 void LecteurVue::demanderChangementModeAuto() {
-    qDebug() << "Demande de passage en mode automatique";
     getPres()->demanderChangementModeVersAUtomatique();
 }
 
 
 void LecteurVue::demanderChangementModeManuel() {
-    qDebug() << "Demande de passage en mode manuel";
     getPres()->demanderChangementModeVersManuel();
 }
 
@@ -142,17 +151,31 @@ void LecteurVue::majInterface(ModeleLecteur::UnEtat e)
         ui->titreImage->setText(QString("Titre de l'image"));
         ui->catImage->setText(QString("Catégorie de l'image"));
         ui->image->setText(QString(" "));
+
+        // Changer la dispo des boutons
         ui->btnArreterDiapo->setEnabled(false);
         ui->btnLancerDiapo->setEnabled(false);
         ui->actionChangerVitesseDefilement->setEnabled(false);
 
+        // Maj de la barre d'état
+        _labelEtat->setText(QString("Mode : Initial"));
         break;
     case ModeleLecteur::Manuel:
+        // Changer la dispo des boutons
+        ui->btnLancerDiapo->setEnabled(true);
 
-
+        // Maj de la barre d'état
+        _labelEtat->setText(QString("Mode : Manuel"));
         break;
     case ModeleLecteur::Automatique:
-        // Implémentation à faire
+
+        // Changer la dispo des boutons
+        ui->btnArreterDiapo->setEnabled(true);
+        ui->btnLancerDiapo->setEnabled(true);
+        ui->actionChangerVitesseDefilement->setEnabled(true);
+
+        // Maj de la barre d'état
+        _labelEtat->setText(QString("Mode : Automatique"));
         break;
     case ModeleLecteur::ChoixDiaporama:
         {
@@ -216,8 +239,9 @@ void LecteurVue::recupereInfosDiapoChoisi(InfosDiaporama d)
     getPres()->demanderChangementDIapo(d);
 }
 
-void LecteurVue::recupereVitesseDefilement(float pVitesse)
+void LecteurVue::recupereVitesseDefilement(unsigned int pVitesse)
 {
+    qDebug() << "vue";
     getPres()->demanderChangementVitesseDfl(pVitesse);
 }
 

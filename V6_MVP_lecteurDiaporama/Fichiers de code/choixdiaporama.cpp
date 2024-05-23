@@ -9,6 +9,9 @@ ChoixDiaporama::ChoixDiaporama(Diaporamas& d, QWidget *parent)
 {
     ui->setupUi(this);
 
+    // Changer le titre de la fenêtre
+    setWindowTitle("Charger un diaporama");
+
     // Ajout des informations
     for (unsigned int i = 0 ; i < d.size(); i++)
     {
@@ -61,6 +64,6 @@ void ChoixDiaporama::transmettreInformations()
         emit transmettreInfos(diaporamaSelectionne);
     }
 
-
+    // Envoyer l'information
 
 }

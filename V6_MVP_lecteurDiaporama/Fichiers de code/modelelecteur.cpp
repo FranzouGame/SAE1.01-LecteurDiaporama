@@ -1,9 +1,13 @@
-
+#include "modelelecteur.h"
 #include "imageDansDiaporama.h"
 #include "qdebug.h"
 #include "database.h"
 
+#include <QSqlQuery>
 
+/************************
+ *    CONSTRUCTEURS     *
+ ***********************/
 
 ModeleLecteur::ModeleLecteur(Lecteur* l, UnEtat e) :
     _etat(e),
@@ -22,21 +26,37 @@ ModeleLecteur::ModeleLecteur()
     // Lecteur par défaut
     _lecteur = new Lecteur();
 
-    // Chargement des diaporamas
-    // chargerDiapos();
 
     // Initialisation & ouverture de la BD
     _database = new Database();
-    // _database->openDatabase();
-
 }
 
 ModeleLecteur::~ModeleLecteur()
 {
+    _database->closeDatabase();
 }
 
+/************************
+ *   METHODES PRIVEES   *
+ ***********************/
+
+
+void ModeleLecteur::envoiImageCourante()
+{
+    ImageDansDiaporama* imageCourante = _lecteur->getImageCourante();
+    if(imageCourante)
+    {
+        emit imageChanged(QString::fromStdString(imageCourante->getChemin()),
+                          QString::fromStdString(imageCourante->getTitre()),
+                          QString::fromStdString(imageCourante->getCategorie()));
+    }
+}
+
+
+
+
 /***********************
-*       Getters        *
+ *      GETTERS        *
 ***********************/
 
 ModeleLecteur::UnEtat ModeleLecteur::getEtat() const
@@ -49,10 +69,24 @@ Lecteur *ModeleLecteur::getLecteur() const
     return _lecteur;
 }
 
+unsigned int ModeleLecteur::recupereVitesseDfl()
+{
+    return _lecteur->getDiaporama()->getVitesseDefilement();
+}
+
+void ModeleLecteur::demanderRetourImage1(int pos)
+{
+    _lecteur->setPosImageCourante(pos);
+}
+
+Database* ModeleLecteur::getDatabase()const
+{
+    return _database;
+}
 
 
 /***********************
- *      Setters        *
+ *      SETTERS        *
 ***********************/
 
 void ModeleLecteur::setEtat(ModeleLecteur::UnEtat e)
@@ -65,12 +99,16 @@ void ModeleLecteur::setLecteur(Lecteur *l)
     _lecteur = l;
 }
 
+void ModeleLecteur::setDatabase(Database* d)
+{
+    _database = d;
+}
 
 
 
 
 /***********************
- *       Slots         *
+ *       SLOTS         *
 ***********************/
 
 void ModeleLecteur::demandeAvancement()
@@ -80,8 +118,9 @@ void ModeleLecteur::demandeAvancement()
     if (_lecteur && _lecteur->getDiaporama()) {
         // Avancer et récupérer la nouvelle image
         _lecteur->avancer();
-        envoieImageCourante();
+        envoiImageCourante();
     }
+
 }
 
 void ModeleLecteur::demandeReculement()
@@ -90,7 +129,7 @@ void ModeleLecteur::demandeReculement()
     if (_lecteur && _lecteur->getDiaporama()) {
         // Reculer et récupérer la nouvelle image
         _lecteur->reculer();
-        envoieImageCourante();
+        envoiImageCourante();
     }
 }
 
@@ -101,6 +140,9 @@ void ModeleLecteur::demandeEnleverDiapo()
     _lecteur->viderLecteur();
 }
 
+
+
+
 void ModeleLecteur::demanderInfosDiapos()
 {
     // Récupérer les infos
@@ -110,7 +152,7 @@ void ModeleLecteur::demanderInfosDiapos()
     emit sendDiapoInfos(infosDiapos);
 }
 
-// Réception du retour utilisateur (fait depuis la vue)
+
 void ModeleLecteur::receptionDemandeChangementDiaporama(InfosDiaporama d)
 {
     _lecteur->changerDiaporama(d.id, d.titre, d.vitesseDefilement);
@@ -125,23 +167,11 @@ void ModeleLecteur::receptionDemandeChangementDiaporama(InfosDiaporama d)
 
     // Mettre à jour l'image
     _lecteur->setPosImageCourante(0);
-    envoieImageCourante();
+    envoiImageCourante();
+
 }
 
-
-void ModeleLecteur::envoieImageCourante()
-{
-    ImageDansDiaporama* imageCourante = _lecteur->getImageCourante();
-    // Si l'image existe, l'envoyer à la vue
-    if (imageCourante) {
-        emit imageChanged(QString::fromStdString(imageCourante->getChemin()),
-                          QString::fromStdString(imageCourante->getTitre()),
-                          QString::fromStdString(imageCourante->getCategorie()));
-    }
-}
-
-
-void ModeleLecteur::receptionDemandeChangementVitesse(float pVitesse)
+void ModeleLecteur::receptionDemandeChangementVitesse(unsigned int pVitesse)
 {
     if(getEtat() != Initial)
     {
@@ -149,7 +179,6 @@ void ModeleLecteur::receptionDemandeChangementVitesse(float pVitesse)
     }
 
 }
-
 
 
 

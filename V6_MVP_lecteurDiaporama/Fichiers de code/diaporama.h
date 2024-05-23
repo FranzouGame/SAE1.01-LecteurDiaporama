@@ -13,14 +13,14 @@ public:
     // Getters
     unsigned int getId() const;
     string getTitre() const;
-    float getVitesseDefilement() const;
+    unsigned int getVitesseDefilement() const;
     ImagesDiaporama getImages() const;
     unsigned int nbImages() const;  // nbre de pointeurs d'images contenus dans diaporama
 
     // Setters
     void setId(unsigned int pId);
     void setTitre(string pTitre);
-    void setVitesseDefilement(float pVitesseDefilement);
+    void setVitesseDefilement(unsigned int pVitesseDefilement);
     void setImages(const ImagesDiaporama& pImages);
 
     // Autres méthodes

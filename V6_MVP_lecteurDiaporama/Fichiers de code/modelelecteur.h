@@ -4,21 +4,19 @@
 // Inclusions
 #include <QObject>
 #include "lecteur.h"
+#include <QSqlDatabase>
 
-// Classe nécessaires
-class Database;
 
 
 struct InfosDiaporama {
     unsigned int id;    // identifiant du diaporama dans la BD
-    std::string titre;       // titre du diaporama
+    string titre;       // titre du diaporama
     float vitesseDefilement;
 };
 
-// Type nécessaire
+// Types nécessaires
 typedef vector<InfosDiaporama> Diaporamas;
-
-
+class Database;
 
 class ModeleLecteur : public QObject
 {
@@ -32,8 +30,8 @@ private:
     Lecteur* _lecteur;
     Database* _database;
 
-    // Méthode d'envoie de l'image courante
-    void envoieImageCourante();
+    // Méthode d'affichage d'une image, pour éviter le duplicata de code
+    void envoiImageCourante();
 
 public:
     /*** Méthodes ***/
@@ -46,15 +44,16 @@ public:
     // Getters
     UnEtat getEtat() const;
     Lecteur* getLecteur() const;
-    Diaporamas getInfosDiapos() const;
+    Database* getDatabase() const;
+    unsigned int recupereVitesseDfl(); // getter indirect
 
     // Setters
     void setEtat(ModeleLecteur::UnEtat);
     void setLecteur(Lecteur*);
-    void setInfosDiapos(Diaporamas);
+    void setDatabase(Database*);
 
     // Autres méthodes
-    void chargerDiapos();
+    void demanderRetourImage1(int = 0);
 
 public slots:
     void demandeAvancement();
@@ -62,15 +61,12 @@ public slots:
     void demandeEnleverDiapo();
     void demanderInfosDiapos();
     void receptionDemandeChangementDiaporama(InfosDiaporama);
-    void receptionDemandeChangementVitesse(float);
+    void receptionDemandeChangementVitesse(unsigned int);
 
 signals:
     void imageChanged(const QString& chemin, const QString& titre, const QString& categorie);
     void diapoChanged(const QString& titreDiapo);
     void sendDiapoInfos(Diaporamas);
-
-private slots:
-
 };
 
 #endif // MODELELECTEUR_H

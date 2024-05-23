@@ -23,7 +23,7 @@ private slots:
     void demanderEnvoiValeur();
 
 signals:
-    void envoyerVitesseDfl(float);
+    void envoyerVitesseDfl(unsigned int);
 };
 
 #endif // CHOIXVITESSEDEFILEMENT_H
