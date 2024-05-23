@@ -61,6 +61,6 @@ void ChoixDiaporama::transmettreInformations()
         emit transmettreInfos(diaporamaSelectionne);
     }
 
-    // Envoyer l'information
+
 
 }

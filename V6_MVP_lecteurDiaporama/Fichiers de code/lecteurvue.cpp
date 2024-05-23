@@ -218,7 +218,6 @@ void LecteurVue::recupereInfosDiapoChoisi(InfosDiaporama d)
 
 void LecteurVue::recupereVitesseDefilement(float pVitesse)
 {
-    qDebug() << "vue";
     getPres()->demanderChangementVitesseDfl(pVitesse);
 }
 

@@ -27,7 +27,8 @@ ModeleLecteur::ModeleLecteur()
 
     // Initialisation & ouverture de la BD
     _database = new Database();
-    _database->openDatabase();
+    // _database->openDatabase();
+
 }
 
 ModeleLecteur::~ModeleLecteur()
@@ -102,7 +103,11 @@ void ModeleLecteur::demandeEnleverDiapo()
 
 void ModeleLecteur::demanderInfosDiapos()
 {
-    _database->recupereImageDiapo(_lecteur->getIdDiaporama());
+    // Récupérer les infos
+    Diaporamas infosDiapos = _database->recupereDiapos();
+
+    // Envoyer les informations
+    emit sendDiapoInfos(infosDiapos);
 }
 
 // Réception du retour utilisateur (fait depuis la vue)
@@ -113,6 +118,10 @@ void ModeleLecteur::receptionDemandeChangementDiaporama(InfosDiaporama d)
     // Envoyer le titre du diaporama
     QString titreDiapo = QString::fromStdString(_lecteur->getDiaporama()->getTitre());
     emit diapoChanged(titreDiapo);
+
+    // Récupérer les images du diaporama
+    Diaporama * diapoChoisi = _database->recupereImageDiapo(d.id);
+    _lecteur->setDiaporama(diapoChoisi);
 
     // Mettre à jour l'image
     _lecteur->setPosImageCourante(0);
@@ -141,25 +150,7 @@ void ModeleLecteur::receptionDemandeChangementVitesse(float pVitesse)
 
 }
 
-void ModeleLecteur::recupereImagesDiapoDepuisBD(Diaporama pDiapo)
-{
-    _lecteur->setDiaporama(&pDiapo);
-    _lecteur->setPosImageCourante(0);
-    envoieImageCourante();
-}
 
-// Envoyer les diapos pour que la vue puisse les afficher
-void ModeleLecteur::chargerDiapos()
-{
-    Diaporamas diapos = _database->recupereDiapos();
-    // Demander les infos à la BD
-    if(diapos.size() == 0)
-    {
-        diapos = _database->recupereDiapos();
-    }
-    // Envoyer les infos à la vue
-    emit sendDiapoInfos(diapos);
-}
 
 
 

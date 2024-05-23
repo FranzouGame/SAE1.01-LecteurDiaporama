@@ -70,8 +70,7 @@ signals:
     void sendDiapoInfos(Diaporamas);
 
 private slots:
-    // void recupereDiaposDepuisBD(Diaporamas);
-    void recupereImagesDiapoDepuisBD(Diaporama);
+
 };
 
 #endif // MODELELECTEUR_H

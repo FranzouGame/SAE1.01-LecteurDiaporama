@@ -9,7 +9,7 @@
 #include <QSqlQuery>
 #include <QDebug>
 
-#define DATABASE_NAME "BDS2.01" // Pc Maxime fixe
+#define DATABASE_NAME "s201"
 #define CONNECT_TYPE "QODBC"
 
 class Database
@@ -28,7 +28,7 @@ public:
     bool openDatabase();
     bool closeDatabase();
     Diaporamas recupereDiapos();
-    void recupereImageDiapo(unsigned int);
+    Diaporama* recupereImageDiapo(unsigned int);
 
 signals:
     // Envoi des images du diaporama choisi
