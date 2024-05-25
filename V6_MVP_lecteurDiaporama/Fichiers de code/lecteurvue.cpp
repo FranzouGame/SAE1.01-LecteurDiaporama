@@ -163,6 +163,7 @@ void LecteurVue::majInterface(ModeleLecteur::UnEtat e)
     case ModeleLecteur::Manuel:
         // Changer la dispo des boutons
         ui->btnLancerDiapo->setEnabled(true);
+        ui->btnArreterDiapo->setEnabled(false);
 
         // Maj de la barre d'état
         _labelEtat->setText(QString("Mode : Manuel"));
@@ -196,7 +197,6 @@ void LecteurVue::majInterface(ModeleLecteur::UnEtat e)
             // Connexion pour la récupération d'informations
             QObject::connect(&fenetreChoix, SIGNAL(envoyerVitesseDfl(float)), this, SLOT(recupereVitesseDefilement(float)));
 
-            qDebug() << "Vue majI";
             // Ouvrir la fenêtre de choix
             fenetreChoix.exec();
         }
@@ -241,7 +241,6 @@ void LecteurVue::recupereInfosDiapoChoisi(InfosDiaporama d)
 
 void LecteurVue::recupereVitesseDefilement(unsigned int pVitesse)
 {
-    qDebug() << "vue";
     getPres()->demanderChangementVitesseDfl(pVitesse);
 }
 

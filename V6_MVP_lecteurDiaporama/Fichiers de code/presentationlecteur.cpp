@@ -61,6 +61,8 @@ void PresentationLecteur::setModele(ModeleLecteur* modele) {
 // Actions relatives aux diaporamas ou à leur chargement
 
 void PresentationLecteur::demanderAvancer() {
+
+    // Vérifier le mode, arrêter si automatique
     if(getModele()->getEtat() == ModeleLecteur::Automatique)
     {
         demanderArretDiapo();
@@ -72,6 +74,8 @@ void PresentationLecteur::demanderAvancer() {
 }
 
 void PresentationLecteur::demanderReculer() {
+
+    // Vérifier le mode, arrêter si automatique
     if(getModele()->getEtat() == ModeleLecteur::Automatique)
     {
         demanderArretDiapo();
@@ -108,7 +112,18 @@ void PresentationLecteur::demanderChangerVitesse() {
     ModeleLecteur::UnEtat etatPrécédent = _modele->getEtat();
     _modele->setEtat(ModeleLecteur::ChoixVitesseDefilement);
     _vue->majInterface(_modele->getEtat());
-    _modele->setEtat(etatPrécédent);
+
+    // Vérifier si l'ancien mode est valide
+    if(etatPrécédent == ModeleLecteur::Automatique || etatPrécédent == ModeleLecteur::Manuel)
+    {
+        _modele->setEtat(etatPrécédent);
+    }
+    else
+    {
+        _modele->setEtat(ModeleLecteur::Manuel);
+        _vue->majInterface(_modele->getEtat());
+    }
+
 }
 
 void PresentationLecteur::avancerEnBoucle() // Avancer mais pour le mode auto
@@ -120,10 +135,13 @@ void PresentationLecteur::avancerEnBoucle() // Avancer mais pour le mode auto
 // Actions liées au lecteur
 
 void PresentationLecteur::demanderChargement() {
+    // Récupérer puis chnager l'état et mettre à jour l'interface
     ModeleLecteur::UnEtat etatPrécédent = _modele->getEtat();
     _modele->setEtat(ModeleLecteur::ChoixDiaporama);
     _modele->demanderInfosDiapos();
     _vue->majInterface(_modele->getEtat());
+
+    // Vérifier si l'ancien mode est valide
     if(etatPrécédent == ModeleLecteur::Automatique || etatPrécédent == ModeleLecteur::Manuel)
     {
         _modele->setEtat(etatPrécédent);
@@ -143,28 +161,31 @@ void PresentationLecteur::demanderLancement() {
         _vue->majInterface(_modele->getEtat());
     }
 
-    // Récupérer la vitesse de défilement du diapo (sera utile quand les diapos seront entièrement chargés, ce qui n'est pas encore le cas)
+    // Récupérer la vitesse de défilement du diapo
     unsigned int vitesse = _modele->recupereVitesseDfl();
 
     //remettre l'image de départ si on appuie sur le btn Lancer diapo alors que l'image actuelle n'est pas la premiere
-    if(_modele->getLecteur()->getImageCourante()->getRangDansDiaporama() != _modele->getLecteur()->nbImages() - _modele->getLecteur()->nbImages()+1)
+    if(_modele->getLecteur()->getImageCourante()->getRangDansDiaporama() != 1)
     {
         _modele->demanderRetourImage1();
     }
 
     if (_modele->getEtat() == ModeleLecteur::Automatique)
     {
+        // Vérifier la vitesse de dfl pour éviter les erreurs
         if (vitesse == 0) {
             _modele->getLecteur()->getDiaporama()->setVitesseDefilement(1);
         }
 
+        // Si on n'est pas à la dernière image, lancer le timer + lancer le diapo
         if(_modele->getLecteur()->getImageCourante()->getRangDansDiaporama() <= _modele->getLecteur()->nbImages() - 1)
         {
             _timer->start(2000); // Lancement du timer
-            emit faireAfficherImageDepart();
+            _modele->demanderRetourImage1();
         }
         else
         {
+            // Si on est à la dernière image, retour à la 1ère
             _modele->demanderRetourImage1();
             demanderArretDiapo();
             demanderChangementModeVersManuel();

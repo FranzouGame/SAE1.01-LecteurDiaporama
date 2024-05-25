@@ -40,7 +40,7 @@ ModeleLecteur::~ModeleLecteur()
  *   METHODES PRIVEES   *
  ***********************/
 
-
+// Méthode d'affichage d'une image, pour éviter le duplicata de code
 void ModeleLecteur::envoiImageCourante()
 {
     ImageDansDiaporama* imageCourante = _lecteur->getImageCourante();
@@ -69,14 +69,9 @@ Lecteur *ModeleLecteur::getLecteur() const
     return _lecteur;
 }
 
-unsigned int ModeleLecteur::recupereVitesseDfl()
+unsigned int ModeleLecteur::recupereVitesseDfl() // getter indirect
 {
     return _lecteur->getDiaporama()->getVitesseDefilement();
-}
-
-void ModeleLecteur::demanderRetourImage1(int pos)
-{
-    _lecteur->setPosImageCourante(pos);
 }
 
 Database* ModeleLecteur::getDatabase()const
@@ -102,6 +97,18 @@ void ModeleLecteur::setLecteur(Lecteur *l)
 void ModeleLecteur::setDatabase(Database* d)
 {
     _database = d;
+}
+
+
+
+/**********************
+ *  AUTRES METHODES   *
+ *********************/
+
+
+void ModeleLecteur::demanderRetourImage1(int pos)
+{
+    _lecteur->setPosImageCourante(pos);
 }
 
 
@@ -173,6 +180,7 @@ void ModeleLecteur::receptionDemandeChangementDiaporama(InfosDiaporama d)
 
 void ModeleLecteur::receptionDemandeChangementVitesse(unsigned int pVitesse)
 {
+    // Vérifier si l'état est compatible et changer la vitesse de dfl
     if(getEtat() != Initial)
     {
         _lecteur->getDiaporama()->setVitesseDefilement(pVitesse);

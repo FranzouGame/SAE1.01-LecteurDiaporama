@@ -62,9 +62,10 @@ bool Database::closeDatabase()
 }
 
 Diaporamas Database::recupereDiapos() {
-    if(_mydb.isOpen())
+    if(!_mydb.isOpen())
     {
-        qDebug() << "sds";
+        qDebug() << "Ouverture de la BD qui était fermée";
+        openDatabase();
     }
 
     QSqlQuery query( "SELECT * FROM Diaporamas", _mydb);
@@ -91,7 +92,6 @@ Diaporamas Database::recupereDiapos() {
         diaporamasInfos.push_back(infosDiapoCourant);
     }
 
-    qDebug() << "Nombre de diaporamas récupérés:" << diaporamasInfos.size();
     return diaporamasInfos;
 }
 
