@@ -77,9 +77,9 @@ void Diaporama::vider()
     unsigned int taille = nbImages();
     for (unsigned int i = 0; i < taille ; i++)
     {
-        enleverImageEnFin(); /* Removes the last element in the vector,
-                              effectively reducing the container size by one.
-                              AND deletes the removed element */
+        enleverImageEnFin(); /*  Retire le dernier éléments du vecteur
+                                 et reduire la taille du vecteur de 1 et
+                                 supprime le dernier élément retiré du vecteur */
     }
     // post-condition : nbImages() == 0
 }

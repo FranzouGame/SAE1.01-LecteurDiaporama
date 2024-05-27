@@ -11,7 +11,8 @@
 
 #define DATABASE_NAME "s201"
 #define CONNECT_TYPE "QODBC"
-
+class Diaporama;
+class ModeleLecteur;
 class Database
 {
 public:
@@ -29,6 +30,7 @@ public:
     bool closeDatabase();
     Diaporamas recupereDiapos();
     Diaporama* recupereImageDiapo(unsigned int);
+    void modifierVitesseDfl(unsigned int idDIapo);
 
 signals:
     // Envoi des images du diaporama choisi

@@ -140,3 +140,15 @@ Diaporama* Database::recupereImageDiapo(unsigned int numDiapo)
 
     return diapoCharge; // Retourner le diaporama chargé
 }
+void Database::modifierVitesseDfl(unsigned int idDiapo)
+{
+
+    QSqlQuery query(_mydb);
+
+    QString queryString = "UPDATE Diaporamas SET vitesseDefilement = 10 WHERE idDiaporama = :idDiaporama";
+    query.prepare(queryString);
+
+    if (!query.exec()) {
+        qDebug() << "Erreur lors de l'exécution de la requête :" << query.lastError().text();
+    }
+}
