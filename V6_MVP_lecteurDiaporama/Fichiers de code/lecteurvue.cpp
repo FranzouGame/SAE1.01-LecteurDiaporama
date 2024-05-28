@@ -195,7 +195,7 @@ void LecteurVue::majInterface(ModeleLecteur::UnEtat e)
             choixVitesseDefilement fenetreChoix(this);
 
             // Connexion pour la récupération d'informations
-            QObject::connect(&fenetreChoix, SIGNAL(envoyerVitesseDfl(float)), this, SLOT(recupereVitesseDefilement(float)));
+            QObject::connect(&fenetreChoix, SIGNAL(envoyerVitesseDfl(unsigned int)), this, SLOT(recupereVitesseDefilement(unsigned int)));
 
             // Ouvrir la fenêtre de choix
             fenetreChoix.exec();

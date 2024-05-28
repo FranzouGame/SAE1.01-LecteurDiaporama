@@ -1,7 +1,7 @@
 #include "presentationlecteur.h"
 #include "modelelecteur.h"
 #include "lecteurvue.h"
-
+#include "database.h"
 
 
 
@@ -112,17 +112,12 @@ void PresentationLecteur::demanderChangerVitesse() {
     ModeleLecteur::UnEtat etatPrécédent = _modele->getEtat();
     _modele->setEtat(ModeleLecteur::ChoixVitesseDefilement);
     _vue->majInterface(_modele->getEtat());
-
+    demanderArretDiapo();
     // Vérifier si l'ancien mode est valide
-    if(etatPrécédent == ModeleLecteur::Automatique || etatPrécédent == ModeleLecteur::Manuel)
-    {
-        _modele->setEtat(etatPrécédent);
-    }
-    else
-    {
-        _modele->setEtat(ModeleLecteur::Manuel);
-        _vue->majInterface(_modele->getEtat());
-    }
+
+    _modele->setEtat(ModeleLecteur::Manuel);
+    _vue->majInterface(_modele->getEtat());
+    demanderLancement();
 
 }
 
@@ -155,6 +150,7 @@ void PresentationLecteur::demanderChargement() {
 }
 
 void PresentationLecteur::demanderLancement() {
+    //mettre le mode auto si le bouton lancer diapo est appuyé et que le lecteur est en manuel
     if (_modele->getEtat() == ModeleLecteur::Manuel)
     {
         _modele->setEtat(ModeleLecteur::Automatique);
@@ -169,7 +165,7 @@ void PresentationLecteur::demanderLancement() {
     {
         _modele->demanderRetourImage1();
     }
-
+    //verification que le mode est bien en automatique
     if (_modele->getEtat() == ModeleLecteur::Automatique)
     {
         // Vérifier la vitesse de dfl pour éviter les erreurs
@@ -180,7 +176,7 @@ void PresentationLecteur::demanderLancement() {
         // Si on n'est pas à la dernière image, lancer le timer + lancer le diapo
         if(_modele->getLecteur()->getImageCourante()->getRangDansDiaporama() <= _modele->getLecteur()->nbImages() - 1)
         {
-            _timer->start(2000); // Lancement du timer
+            _timer->start(1000*vitesse); // Lancement du timer
             _modele->demanderRetourImage1();
         }
         else

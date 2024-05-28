@@ -180,6 +180,7 @@ void ModeleLecteur::receptionDemandeChangementDiaporama(InfosDiaporama d)
 
 void ModeleLecteur::receptionDemandeChangementVitesse(unsigned int pVitesse)
 {
+    _database->modifierVitesseDfl(_lecteur->getIdDiaporama(), pVitesse);
     // Vérifier si l'état est compatible et changer la vitesse de dfl
     if(getEtat() != Initial)
     {

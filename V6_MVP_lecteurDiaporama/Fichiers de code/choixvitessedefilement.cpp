@@ -35,7 +35,7 @@ void choixVitesseDefilement::enableButton()
     {
         // Essayer de convertir la saisie
         bool conversionOk;
-        float vitesse = userInput.toFloat(&conversionOk);
+        float vitesse = userInput.toInt(&conversionOk);
 
         // Vérifier si la conversion s'est bien déroulée
         if (conversionOk && (vitesse >= 0.2 && vitesse <= 5.0))
@@ -60,7 +60,7 @@ void choixVitesseDefilement::enableButton()
 
 void choixVitesseDefilement::demanderEnvoiValeur()
 {
-    unsigned int userInput = static_cast<int>(ui->choixUtilisateur->text().toFloat());
+    unsigned int userInput = static_cast<int>(ui->choixUtilisateur->text().toInt());
 
     // Vérifier la valeur saisie
     emit envoyerVitesseDfl(userInput);

@@ -30,7 +30,7 @@ public:
     bool closeDatabase();
     Diaporamas recupereDiapos();
     Diaporama* recupereImageDiapo(unsigned int);
-    void modifierVitesseDfl(unsigned int idDIapo);
+    void modifierVitesseDfl(unsigned int idDIapo, unsigned int vitesseAApply);
 
 signals:
     // Envoi des images du diaporama choisi
