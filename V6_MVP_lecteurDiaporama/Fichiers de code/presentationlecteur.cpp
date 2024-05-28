@@ -138,17 +138,12 @@ void PresentationLecteur::demanderChargement() {
     _modele->setEtat(ModeleLecteur::ChoixDiaporama);
     _modele->demanderInfosDiapos();
     _vue->majInterface(_modele->getEtat());
-
+    demanderArretDiapo();
     // Vérifier si l'ancien mode est valide
-    if(etatPrécédent == ModeleLecteur::Automatique || etatPrécédent == ModeleLecteur::Manuel)
-    {
-        _modele->setEtat(etatPrécédent);
-    }
-    else
-    {
+
         _modele->setEtat(ModeleLecteur::Manuel);
         _vue->majInterface(_modele->getEtat());
-    }
+        demanderLancement();
 
 }
 
