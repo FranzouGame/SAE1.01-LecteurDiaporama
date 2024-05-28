@@ -130,8 +130,8 @@ Diaporama* Database::recupereImageDiapo(unsigned int numDiapo)
         // Mettre la vitesse de défilement au diapo
         vitesseDefilement = query.value(4).toInt();
 
-        // Vérifier le début des chemins
-        if(query.value(0).toString().startsWith(":/imagesDur/")) {
+        // Vérifier le début des chemins pour simplifier la suite
+        if(query.value(0).toString().startsWith(":/imagesDur")) {
             cheminComplet = true;
         }
 
@@ -146,7 +146,7 @@ Diaporama* Database::recupereImageDiapo(unsigned int numDiapo)
         if(cheminComplet) {
             uriPhoto = query.value(0).toString();
         } else {
-            uriPhoto = ":/imagesDur/" + query.value(0).toString();
+            uriPhoto = ":/imagesDur" + query.value(0).toString();
         }
         // Récupérer les autres données
         QString titrePhoto = query.value(1).toString();
@@ -246,7 +246,7 @@ void Database::modifTitresEtChemins()
     while (requeteRecupDonnees.next()) {
         // Récupérer les informations de l'enregistrement courant
         int id = requeteRecupDonnees.value(0).toInt();
-        QString chemin = QString(":/imagesDur/") + requeteRecupDonnees.value(3).toString();
+        QString chemin = QString(":/imagesDur") + requeteRecupDonnees.value(3).toString();
         QString titre = personnages[id % taille]; // Utiliser modulo pour éviter l'indexation hors limites
 
         // Update la BD avec ces données
