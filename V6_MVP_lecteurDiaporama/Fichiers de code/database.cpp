@@ -156,3 +156,72 @@ void Database::modifierVitesseDfl(unsigned int idDiapo, unsigned int vitesseAApp
     query.exec();
     _mydb.commit();
 }
+
+void Database::modifTitresEtChemins()
+{
+    // Tableau des noms de personnages
+    const int taille = 48;
+    QString personnages[taille] = {
+        "Donald_Duck",
+        "Chateau_Disney",
+        "Dalmatiens",
+        "Alice",
+        "Bambi",
+        "Blanche-Neige",
+        "Daisy_Duck",
+        "Lady_et_le_Clochard",
+        "Jasmine",
+        "Baloo_et_Mowgli",
+        "Mushu",
+        "Dumbo",
+        "Fievel",
+        "Figaro",
+        "Minnie_Mouse",
+        "Dingo",
+        "Donald_Duck_avec_un_globe",
+        "Porcinet",
+        "Mickey_Mouse",
+        "Dingo_avec_un_pinceau",
+        "Cendrillon",
+        "Rafiki",
+        "Mulan",
+        "Jiminy_Cricket",
+        "Scottie",
+        "Winnie_l_Ourson",
+        "Tarzan",
+        "Pinocchio",
+        "Pluto",
+        "Pumbaa",
+        "Nala",
+        "Simba",
+        "Hopper",
+        "Les_siamois",
+        "Ariel",
+        "Stitch",
+        "Belle",
+        "Tigrou",
+        "Timon",
+        "Buzz_l_Eclair_et_Woody",
+        "Alien",
+        "Mickey_Dingo_et_Donald",
+        "Belle_avec_une_robe_jaune",
+        "Cendrillon_avec_une_robe_bleue",
+        "Aurore",
+        "Blanche-Neige",
+        "Ariel",
+        "Belle"
+    };
+
+    // Requête de récup des données
+    QSqlQuery requeteRecupDonnees();
+    QString requeteRecup = "SELECT * FROM diapos";
+
+    // Parcourir ce résultat
+    for(int idCourant = 0; idCourant < taille; idCourant++)
+    {
+        // Récupérer les nouvelles valeurs
+        QString = personnages[idCourant];
+        QString NouveauChemin = ":/imagesDur";
+
+    }
+}

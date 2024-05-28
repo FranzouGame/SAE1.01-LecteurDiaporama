@@ -31,6 +31,7 @@ public:
     Diaporamas recupereDiapos();
     Diaporama* recupereImageDiapo(unsigned int);
     void modifierVitesseDfl(unsigned int idDIapo, unsigned int vitesseAApply);
+    void modifTitresEtChemins();
 
 signals:
     // Envoi des images du diaporama choisi
