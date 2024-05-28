@@ -14,7 +14,7 @@ Database::Database()
     // Initialisation de la base de données
     if (openDatabase()) {
         qDebug() << "Ouverture de la BD réussie";
-
+        modifTitresEtChemins();
     } else {
         qDebug() << "Ouverture ratée";
         qDebug() << _mydb.lastError();
@@ -213,15 +213,44 @@ void Database::modifTitresEtChemins()
     };
 
     // Requête de récup des données
-    QSqlQuery requeteRecupDonnees();
+    QSqlQuery requeteRecupDonnees(_mydb);
     QString requeteRecup = "SELECT * FROM diapos";
+    requeteRecupDonnees.prepare(requeteRecup);
 
-    // Parcourir ce résultat
-    for(int idCourant = 0; idCourant < taille; idCourant++)
-    {
-        // Récupérer les nouvelles valeurs
-        QString = personnages[idCourant];
-        QString NouveauChemin = ":/imagesDur";
+    // Exécuter la requête
+    if (!requeteRecupDonnees.exec()) {
+        qDebug() << "Erreur lors de l'exécution de la requête de récupération:" << requeteRecupDonnees.lastError().text();
+        return;
+    }
 
+    // Parcourir les résultats
+    while (requeteRecupDonnees.next()) {
+        // Récupérer les informations de l'enregistrement courant
+        int id = requeteRecupDonnees.value(0).toInt();
+        QString chemin = QString(":/imagesDur") + requeteRecupDonnees.value(1).toString();
+        QString titre = personnages[id % taille]; // Utiliser modulo pour éviter l'indexation hors limites
+
+        // Update la BD avec ces données
+        QSqlQuery requeteUpdate(_mydb);
+        QString requeteUpdateStr = "UPDATE diapos SET titrePhoto = :titre, uriPhoto = :chemin WHERE idPhoto = :id";
+        requeteUpdate.prepare(requeteUpdateStr);
+
+        // Ajouter les paramètres
+        requeteUpdate.bindValue(":titre", titre);
+        requeteUpdate.bindValue(":chemin", chemin);
+        requeteUpdate.bindValue(":id", id);
+
+        // Exécuter la requête d'update
+        if (!requeteUpdate.exec()) {
+            qDebug() << "Erreur lors de l'exécution de la requête d'update:" << requeteUpdate.lastError().text();
+        }
+    }
+
+    // Commit les changements
+    if (!_mydb.commit()) {
+        qDebug() << "Erreur lors du commit:" << _mydb.lastError().text();
+    } else {
+        qDebug() << "Commit réussi";
     }
 }
+
