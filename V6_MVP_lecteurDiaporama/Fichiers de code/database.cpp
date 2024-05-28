@@ -18,7 +18,7 @@ Database::Database()
         /*** Cette procédure est à décommenter pour la modification de la base,
          * Nous l'avons ommentée puisque notre base était déjà modifiée, et c'était donc inutile de la re-modifier.***/
 
-        // modifTitresEtChemins();
+        //modifTitresEtChemins();
     } else {
         qDebug() << "Ouverture ratée";
         qDebug() << _mydb.lastError();

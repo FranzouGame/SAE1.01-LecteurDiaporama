@@ -112,11 +112,14 @@ void PresentationLecteur::demanderChangerVitesse() {
     ModeleLecteur::UnEtat etatPrécédent = _modele->getEtat();
     _modele->setEtat(ModeleLecteur::ChoixVitesseDefilement);
     _vue->majInterface(_modele->getEtat());
+    /*arret du diaporama pour le relancer pour pouvoir changer la vitesse de défilement
+     * qui est mise à jour dans la bd puis récupérée depuis la bd pour la mettre a jour dans le lecteur*/
     demanderArretDiapo();
-    // Vérifier si l'ancien mode est valide
+
 
     _modele->setEtat(ModeleLecteur::Manuel);
     _vue->majInterface(_modele->getEtat());
+    //relancement du diaporama avec la vitesse qui a été changée dans la bd
     demanderLancement();
 
 }
