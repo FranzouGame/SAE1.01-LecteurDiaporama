@@ -14,7 +14,11 @@ Database::Database()
     // Initialisation de la base de données
     if (openDatabase()) {
         qDebug() << "Ouverture de la BD réussie";
-        modifTitresEtChemins();
+
+        /*** Cette procédure est à décommenter pour la modification de la base,
+         * Nous l'avons ommentée puisque notre base était déjà modifiée, et c'était donc inutile de la re-modifier.***/
+
+        // modifTitresEtChemins();
     } else {
         qDebug() << "Ouverture ratée";
         qDebug() << _mydb.lastError();
@@ -100,6 +104,7 @@ Diaporamas Database::recupereDiapos() {
 
 Diaporama* Database::recupereImageDiapo(unsigned int numDiapo)
 {
+    bool cheminComplet = false;
     QSqlQuery query(_mydb);
     QString queryString = "SELECT D.uriPhoto, D.titrePhoto, F.nomFamille, DDD.rang, Dia.vitesseDefilement "
                           "FROM Diapos D "
@@ -122,14 +127,28 @@ Diaporama* Database::recupereImageDiapo(unsigned int numDiapo)
     int vitesseDefilement = 0;
 
     if (query.next()) {
-        vitesseDefilement = query.value(4).toInt(); // Mettre la vitesse de défilement au diapo
+        // Mettre la vitesse de défilement au diapo
+        vitesseDefilement = query.value(4).toInt();
+
+        // Vérifier le début des chemins
+        if(query.value(0).toString().startsWith(":/imagesDur/")) {
+            cheminComplet = true;
+        }
+
         query.previous(); // Revenir à la première ligne pour le traitement suivant
     }
 
     diapoCharge->setVitesseDefilement(vitesseDefilement);
 
     while (query.next()) {
-        QString uriPhoto = QString(":/imagesDur") + query.value(0).toString();
+        QString uriPhoto;
+        // Vérifier si le début de l'url est celui du chemin absolu ou relatif
+        if(cheminComplet) {
+            uriPhoto = query.value(0).toString();
+        } else {
+            uriPhoto = ":/imagesDur/" + query.value(0).toString();
+        }
+        // Récupérer les autres données
         QString titrePhoto = query.value(1).toString();
         QString nomFamille = query.value(2).toString();
         int rang = query.value(3).toInt();
@@ -227,7 +246,7 @@ void Database::modifTitresEtChemins()
     while (requeteRecupDonnees.next()) {
         // Récupérer les informations de l'enregistrement courant
         int id = requeteRecupDonnees.value(0).toInt();
-        QString chemin = QString(":/imagesDur") + requeteRecupDonnees.value(1).toString();
+        QString chemin = QString(":/imagesDur/") + requeteRecupDonnees.value(3).toString();
         QString titre = personnages[id % taille]; // Utiliser modulo pour éviter l'indexation hors limites
 
         // Update la BD avec ces données
