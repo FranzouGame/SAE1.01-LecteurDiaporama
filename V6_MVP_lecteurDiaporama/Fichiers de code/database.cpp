@@ -18,7 +18,7 @@ Database::Database()
         /*** Cette procédure est à décommenter pour la modification de la base,
          * Nous l'avons ommentée puisque notre base était déjà modifiée, et c'était donc inutile de la re-modifier.***/
 
-        //modifTitresEtChemins();
+        modifTitresEtChemins();
     } else {
         qDebug() << "Ouverture ratée";
         qDebug() << _mydb.lastError();
@@ -179,61 +179,67 @@ void Database::modifierVitesseDfl(unsigned int idDiapo, unsigned int vitesseAApp
 void Database::modifTitresEtChemins()
 {
     // Tableau des noms de personnages
-    const int taille = 48;
+    const int taille = 54;
     QString personnages[taille] = {
-        "Donald_Duck",
-        "Chateau_Disney",
-        "Dalmatiens",
-        "Alice",
-        "Bambi",
-        "Blanche-Neige",
-        "Daisy_Duck",
-        "Lady_et_le_Clochard",
-        "Jasmine",
-        "Baloo_et_Mowgli",
-        "Mushu",
-        "Dumbo",
-        "Fievel",
-        "Figaro",
-        "Minnie_Mouse",
-        "Dingo",
-        "Donald_Duck_avec_un_globe",
-        "Porcinet",
-        "Mickey_Mouse",
-        "Dingo_avec_un_pinceau",
-        "Cendrillon",
-        "Rafiki",
-        "Mulan",
-        "Jiminy_Cricket",
-        "Scottie",
-        "Winnie_l_Ourson",
-        "Tarzan",
-        "Pinocchio",
-        "Pluto",
-        "Pumbaa",
-        "Nala",
-        "Simba",
-        "Hopper",
-        "Les_siamois",
-        "Ariel",
-        "Stitch",
-        "Belle",
-        "Tigrou",
-        "Timon",
-        "Buzz_l_Eclair_et_Woody",
-        "Alien",
-        "Mickey_Dingo_et_Donald",
-        "Belle_avec_une_robe_jaune",
-        "Cendrillon_avec_une_robe_bleue",
-        "Aurore",
-        "Blanche-Neige",
-        "Ariel",
-        "Belle"
+                                   "Chateau Disney",
+                                   "Dalmatiens",
+                                   "Alice",
+                                   "Bambi",
+                                   "Blanche Neige",
+                                   "Daisy-Duck",
+                                   "La Belle et le clochard",
+                                   "Jasmine",
+                                   "Donald",
+                                   "Angry Donald",
+                                   "Mushu",
+                                   "Dumbo",
+                                   "Fievel",
+                                   "Figaro",
+                                   "Minnie-Mouse",
+                                   "Dingo et son crayon",
+                                   "Dingo et sa peinture",
+                                   "Riri-Duck",
+                                   "Baloo et Mowgli",
+                                   "Mickey Mouse",
+                                   "Dingo en catastrophe",
+                                   "Cendrillon  dans un cadre",
+                                   "Minnie à la plage",
+                                   "Rafiki",
+                                   "Mulan",
+                                   "Jiminy Cricket",
+                                   "Jock",
+                                   "Winnie l'Ourson",
+                                   "Porcinet",
+                                   "Pinocchio",
+                                   "Pluto",
+                                   "Pumba",
+                                   "Nala",
+                                   "Simba",
+                                   "Hopper",
+                                   "Les chats siamois",
+                                   "Ariel et les poissons",
+                                   "Stitch",
+                                   "Tarzan",
+                                   "Tigrou",
+                                   "Timon",
+                                   "Buzz & Woody",
+                                   "Alien",
+                                   "Mickey, Dingo & Donald",
+                                   "La Belle en robe jaune",
+                                   "Cendrillon avec un bouquet de fleurs",
+                                   "Cendrillon",
+                                   "La Belle avec des fleurs",
+                                   "Blanche Neige et ses papillons",
+                                   "Aurore avec une rose",
+                                   "Ariel",
+                                   "Blanche Neige",
+                                   "La Belle",
+                                   "Aurore"
     };
 
     // Requête de récup des données
     QSqlQuery requeteRecupDonnees(_mydb);
-    QString requeteRecup = "SELECT * FROM diapos";
+    QString requeteRecup = "SELECT * FROM diapos ORDER BY uriPhoto";
     requeteRecupDonnees.prepare(requeteRecup);
 
     // Exécuter la requête
@@ -246,8 +252,11 @@ void Database::modifTitresEtChemins()
     while (requeteRecupDonnees.next()) {
         // Récupérer les informations de l'enregistrement courant
         int id = requeteRecupDonnees.value(0).toInt();
-        QString chemin = QString(":/imagesDur") + requeteRecupDonnees.value(3).toString();
-        QString titre = personnages[id % taille]; // Utiliser modulo pour éviter l'indexation hors limites
+        QString chemin = requeteRecupDonnees.value(3).toString();
+        if(!chemin.startsWith(":/imagesDur")){
+            chemin = QString(":/imagesDur") + requeteRecupDonnees.value(3).toString();
+        }
+        QString titre = personnages[id - 1]; // Utiliser modulo pour éviter l'indexation hors limites
 
         // Update la BD avec ces données
         QSqlQuery requeteUpdate(_mydb);
