@@ -1,4 +1,5 @@
-# SAE1.01-LecteurDiaporama
+# SAE1.01-LecteurDiaporama (Situation d'Apprentissage et d'Evaluation) qui consiste à partir d'un code donnée (V0) à créer plusieur versions suivant les fonctionnalités à mettre en place décrites par le sujet.
+
 
 
 ## Type nécessaires déclarés
