@@ -106,10 +106,12 @@ void ModeleLecteur::setDatabase(Database* d)
  *********************/
 
 
-void ModeleLecteur::demanderRetourImage1(int pos)
+void ModeleLecteur::demanderRetourImage1()
 {
-    _lecteur->setPosImageCourante(pos);
+    _lecteur->setPosImageCourante(0);
+    envoiImageCourante();
 }
+
 
 
 

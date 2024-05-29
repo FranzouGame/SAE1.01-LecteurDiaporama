@@ -143,7 +143,10 @@ void PresentationLecteur::demanderChargement() {
 
         _modele->setEtat(ModeleLecteur::Manuel);
         _vue->majInterface(_modele->getEtat());
+    if (etatPrécédent == ModeleLecteur::Automatique)
+    {
         demanderLancement();
+    }
 
 }
 

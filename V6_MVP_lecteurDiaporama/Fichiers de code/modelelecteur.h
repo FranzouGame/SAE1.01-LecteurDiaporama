@@ -53,7 +53,7 @@ public:
     void setDatabase(Database*);
 
     // Autres méthodes
-    void demanderRetourImage1(int = 0);
+    void demanderRetourImage1();
 
 public slots:
     void demandeAvancement();
