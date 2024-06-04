@@ -12,7 +12,10 @@ CONFIG += c++17
 SOURCES += \
     choixdiaporama.cpp \
     choixvitessedefilement.cpp \
+<<<<<<< HEAD
     creationdiaporama.cpp \
+=======
+>>>>>>> 677845e5397c578c4e4946ca8a9c75832ca041e8
     database.cpp \
     fenetreapropos.cpp \
     main.cpp \
@@ -26,7 +29,10 @@ SOURCES += \
 HEADERS += \
     choixdiaporama.h \
     choixvitessedefilement.h \
+<<<<<<< HEAD
     creationdiaporama.h \
+=======
+>>>>>>> 677845e5397c578c4e4946ca8a9c75832ca041e8
     database.h \
     fenetreapropos.h \
     lecteurvue.h \
@@ -39,7 +45,10 @@ HEADERS += \
 FORMS += \
     choixdiaporama.ui \
     choixvitessedefilement.ui \
+<<<<<<< HEAD
     creationdiaporama.ui \
+=======
+>>>>>>> 677845e5397c578c4e4946ca8a9c75832ca041e8
     fenetreapropos.ui \
     lecteurvue.ui
 
