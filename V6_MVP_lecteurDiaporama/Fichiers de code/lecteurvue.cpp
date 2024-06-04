@@ -21,6 +21,17 @@ LecteurVue::LecteurVue(QWidget *parent)
     // Changer le nom de la fenêtre
     setWindowTitle("Lecteur de diaporama - S2.01");
 
+    // Ajouter un label à droite de la barre de statut
+    _labelEtat->setText("Mode : Initial");
+    statusBar()->addPermanentWidget(_labelEtat);
+
+    // Appliquer un stylesheet pour rendre la barre de statut grisée
+    statusBar()->setStyleSheet("QStatusBar { background-color: lightgray; }");
+
+    // Changer l'icône de la fenêtre, qui se situe dans ressources et icones, qui est lefichier mainIcon.png
+    setWindowIcon(QIcon(":/icones/icones/mainIcon.png")); // Ca ne marche pas
+
+
     // Connections
 
     // Boutons
@@ -37,14 +48,6 @@ LecteurVue::LecteurVue(QWidget *parent)
     QObject::connect(ui->actionCharger_Diaporama, SIGNAL(triggered()), this, SLOT(demanderChangementDiaporama()));
     QObject::connect(ui->actionModeManuel, SIGNAL(triggered()), this, SLOT(demanderChangementModeManuel()));
     QObject::connect(ui->actionEnleverDiaporama, SIGNAL(triggered(bool)), this ,SLOT(demanderEnleverDiaporama()));
-
-    // Ajouter un label à droite de la barre de statut
-    _labelEtat->setText("Mode : Initial");
-    statusBar()->addPermanentWidget(_labelEtat);
-
-    // Appliquer un stylesheet pour rendre la barre de statut grisée
-    statusBar()->setStyleSheet("QStatusBar { background-color: lightgray; }");
-
 }
 
 LecteurVue::~LecteurVue()
@@ -164,6 +167,7 @@ void LecteurVue::majInterface(ModeleLecteur::UnEtat e)
         // Changer la dispo des boutons
         ui->btnLancerDiapo->setEnabled(true);
         ui->btnArreterDiapo->setEnabled(false);
+        ui->actionChangerVitesseDefilement->setEnabled(false);
 
         // Maj de la barre d'état
         _labelEtat->setText(QString("Mode : Manuel"));

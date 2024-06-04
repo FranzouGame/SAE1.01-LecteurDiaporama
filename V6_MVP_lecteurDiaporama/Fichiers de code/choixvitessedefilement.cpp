@@ -11,6 +11,9 @@ choixVitesseDefilement::choixVitesseDefilement(QWidget *parent)
     // Changer le nom de la fenêtre
     setWindowTitle("Changement de la vitesse de défilement");
 
+    // Changer l'icône de la fenêtre
+    setWindowIcon(QIcon(":/icones/icones/iconChgt.png"));
+
     // Mise à jour de l'interface pour empêcher une mauvaise saisie
     ui->buttonBox->button(QDialogButtonBox::Ok)->setEnabled(false);
 

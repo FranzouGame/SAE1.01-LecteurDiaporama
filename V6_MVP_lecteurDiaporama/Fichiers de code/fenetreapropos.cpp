@@ -14,7 +14,10 @@ fenetreAPropos::fenetreAPropos(QWidget *parent)
     QObject::connect(ui->btnOk, SIGNAL(clicked()), this, SLOT(fermeture()));
 
     // Changer le nom de la version
-    ui->version->setText(QString("V5_MVP"));
+    ui->version->setText(QString("V6_MVP"));
+
+    // Changer l'icône de la fenêtre
+    setWindowIcon(QIcon(":/icones/icones/aboutIcon.png"));
 }
 
 fenetreAPropos::~fenetreAPropos()

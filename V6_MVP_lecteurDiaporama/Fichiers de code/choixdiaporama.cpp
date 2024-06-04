@@ -12,6 +12,9 @@ ChoixDiaporama::ChoixDiaporama(Diaporamas& d, QWidget *parent)
     // Changer le titre de la fenêtre
     setWindowTitle("Charger un diaporama");
 
+    // Changer l'icone de la fenêtre
+    setWindowIcon(QIcon(":/icones/icones/iconeChoix.jpg"));
+
     // Ajout des informations
     for (unsigned int i = 0 ; i < d.size(); i++)
     {
