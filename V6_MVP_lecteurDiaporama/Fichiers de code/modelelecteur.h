@@ -4,6 +4,8 @@
 // Inclusions
 #include <QObject>
 #include "lecteur.h"
+#include <QSqlDatabase>
+
 
 
 struct InfosDiaporama {
@@ -12,10 +14,9 @@ struct InfosDiaporama {
     float vitesseDefilement;
 };
 
-// Type nécessaire
+// Types nécessaires
 typedef vector<InfosDiaporama> Diaporamas;
-
-
+class Database;
 
 class ModeleLecteur : public QObject
 {
@@ -27,29 +28,32 @@ private:
     // Attributs
     UnEtat _etat;
     Lecteur* _lecteur;
-    Diaporamas _infosDiapos;
+    Database* _database;
+
+    // Méthode d'affichage d'une image, pour éviter le duplicata de code
+    void envoiImageCourante();
 
 public:
     /*** Méthodes ***/
 
     // Constructeur
-    explicit ModeleLecteur(Lecteur*, UnEtat = UnEtat::Initial, Diaporamas = {});
+    explicit ModeleLecteur(Lecteur*, UnEtat = UnEtat::Initial);
     ModeleLecteur();
     ~ModeleLecteur();
 
     // Getters
     UnEtat getEtat() const;
     Lecteur* getLecteur() const;
-    Diaporamas getInfosDiapos() const;
+    Database* getDatabase() const;
+    unsigned int recupereVitesseDfl(); // getter indirect
+
     // Setters
     void setEtat(ModeleLecteur::UnEtat);
     void setLecteur(Lecteur*);
-    void setInfosDiapos(Diaporamas);
+    void setDatabase(Database*);
 
     // Autres méthodes
-    void chargerDiapos();
-    unsigned int recupereVitesseDfl();
-    void demanderRetourImage1(int = 0);
+    void demanderRetourImage1();
 
 public slots:
     void demandeAvancement();

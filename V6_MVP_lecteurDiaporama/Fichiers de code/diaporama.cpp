@@ -77,9 +77,9 @@ void Diaporama::vider()
     unsigned int taille = nbImages();
     for (unsigned int i = 0; i < taille ; i++)
     {
-        enleverImageEnFin(); /* Removes the last element in the vector,
-                              effectively reducing the container size by one.
-                              AND deletes the removed element */
+        enleverImageEnFin(); /*  Retire le dernier éléments du vecteur
+                                 et reduire la taille du vecteur de 1 et
+                                 supprime le dernier élément retiré du vecteur */
     }
     // post-condition : nbImages() == 0
 }
@@ -103,7 +103,7 @@ void Diaporama::charger()
       case 1 : // diaporama de Pantxika
           imageACharger = new ImageDansDiaporama(3, "personnage", "Pinnochio", ":/imagesDur/cartesDisney/Disney_29.gif");
           ajouterImageEnFin(imageACharger);
-          imageACharger = new ImageDansDiaporama(2, "personnage", "Blanche Neige", ":/imagesDur/cartesDisney/Disney_4.gif");
+          imageACharger = new ImageDansDiaporama(2, "Blanche Neige", ":/imagesDur/cartesDisney/Disney_4.gif");
           ajouterImageEnFin(imageACharger);
           imageACharger = new ImageDansDiaporama(4, "personnage", "Alice", ":/imagesDur/cartesDisney/Disney_2.gif");
           ajouterImageEnFin(imageACharger);

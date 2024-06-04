@@ -17,7 +17,7 @@ private:
     // Attributs
     LecteurVue* _vue;         // Connexion de la vue
     ModeleLecteur* _modele;   // Connexion du modèle
-    QTimer* _timer;           // Timer pour le mode auto
+    QTimer* _timer;           // Timer pour le mode automatique
 
 public:
     /*** Méthodes ***/
@@ -30,8 +30,6 @@ public:
     // Setters
     void setVue(LecteurVue*);
     void setModele(ModeleLecteur*);
-
-
 
 signals:
     void faireAvancer();
@@ -48,13 +46,11 @@ signals:
 public slots:
     // Actions relatives aux diaporamas ou à leur chargement
     void demanderAvancer();
-    // Avancer
-    void avancerAutomatique();
     void demanderReculer();
     void demanderArretDiapo();
-    void demanderAffichageDiapoDebut();
     void demanderEnleverDiaporama();
     void demanderChangerVitesse();
+    void avancerEnBoucle(); // Avancer mais pour le mode auto
 
     // Actions liées au lecteur
     void demanderChargement();

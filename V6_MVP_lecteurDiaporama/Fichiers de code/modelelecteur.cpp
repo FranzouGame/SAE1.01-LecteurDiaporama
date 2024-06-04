@@ -1,11 +1,21 @@
 #include "modelelecteur.h"
 #include "imageDansDiaporama.h"
 #include "qdebug.h"
+#include "database.h"
 
-ModeleLecteur::ModeleLecteur(Lecteur* l, UnEtat e, Diaporamas d) :
+#include <QSqlQuery>
+
+/************************
+ *    CONSTRUCTEURS     *
+ ***********************/
+
+ModeleLecteur::ModeleLecteur(Lecteur* l, UnEtat e) :
     _etat(e),
     _lecteur(l),
-    _infosDiapos(d){
+    _database(new Database())
+{
+    // Ouvrir la BD
+    _database->openDatabase();
 }
 
 ModeleLecteur::ModeleLecteur()
@@ -16,16 +26,37 @@ ModeleLecteur::ModeleLecteur()
     // Lecteur par défaut
     _lecteur = new Lecteur();
 
-    // Chargement des diaporamas
-    chargerDiapos();
+
+    // Initialisation & ouverture de la BD
+    _database = new Database();
 }
 
 ModeleLecteur::~ModeleLecteur()
 {
+    _database->closeDatabase();
 }
 
+/************************
+ *   METHODES PRIVEES   *
+ ***********************/
+
+// Méthode d'affichage d'une image, pour éviter le duplicata de code
+void ModeleLecteur::envoiImageCourante()
+{
+    ImageDansDiaporama* imageCourante = _lecteur->getImageCourante();
+    if(imageCourante)
+    {
+        emit imageChanged(QString::fromStdString(imageCourante->getChemin()),
+                          QString::fromStdString(imageCourante->getTitre()),
+                          QString::fromStdString(imageCourante->getCategorie()));
+    }
+}
+
+
+
+
 /***********************
- *      Getters        *
+ *      GETTERS        *
 ***********************/
 
 ModeleLecteur::UnEtat ModeleLecteur::getEtat() const
@@ -38,23 +69,19 @@ Lecteur *ModeleLecteur::getLecteur() const
     return _lecteur;
 }
 
-Diaporamas ModeleLecteur::getInfosDiapos()const
-{
-    return _infosDiapos;
-}
-unsigned int ModeleLecteur::recupereVitesseDfl()
+unsigned int ModeleLecteur::recupereVitesseDfl() // getter indirect
 {
     return _lecteur->getDiaporama()->getVitesseDefilement();
 }
 
-void ModeleLecteur::demanderRetourImage1(int pos)
+Database* ModeleLecteur::getDatabase()const
 {
-    _lecteur->setPosImageCourante(pos);
+    return _database;
 }
 
 
 /***********************
- *      Setters        *
+ *      SETTERS        *
 ***********************/
 
 void ModeleLecteur::setEtat(ModeleLecteur::UnEtat e)
@@ -67,17 +94,30 @@ void ModeleLecteur::setLecteur(Lecteur *l)
     _lecteur = l;
 }
 
-void ModeleLecteur::setInfosDiapos(Diaporamas d)
+void ModeleLecteur::setDatabase(Database* d)
 {
-    _infosDiapos = d;
+    _database = d;
+}
 
+
+
+/**********************
+ *  AUTRES METHODES   *
+ *********************/
+
+
+void ModeleLecteur::demanderRetourImage1()
+{
+    _lecteur->setPosImageCourante(0);
+    envoiImageCourante();
 }
 
 
 
 
+
 /***********************
- *       Slots         *
+ *       SLOTS         *
 ***********************/
 
 void ModeleLecteur::demandeAvancement()
@@ -87,13 +127,7 @@ void ModeleLecteur::demandeAvancement()
     if (_lecteur && _lecteur->getDiaporama()) {
         // Avancer et récupérer la nouvelle image
         _lecteur->avancer();
-        ImageDansDiaporama* imageCourante = _lecteur->getImageCourante();
-        // Si l'image existe, l'envoyer à la vue
-        if (imageCourante) {
-            emit imageChanged(QString::fromStdString(imageCourante->getChemin()),
-                              QString::fromStdString(imageCourante->getTitre()),
-                              QString::fromStdString(imageCourante->getCategorie()));
-        }
+        envoiImageCourante();
     }
 
 }
@@ -104,13 +138,7 @@ void ModeleLecteur::demandeReculement()
     if (_lecteur && _lecteur->getDiaporama()) {
         // Reculer et récupérer la nouvelle image
         _lecteur->reculer();
-        ImageDansDiaporama* imageCourante = _lecteur->getImageCourante();
-        // Si l'image existe, l'envoyer à la vue
-        if (imageCourante) {
-            emit imageChanged(QString::fromStdString(imageCourante->getChemin()),
-                              QString::fromStdString(imageCourante->getTitre()),
-                              QString::fromStdString(imageCourante->getCategorie()));
-        }
+        envoiImageCourante();
     }
 }
 
@@ -126,8 +154,13 @@ void ModeleLecteur::demandeEnleverDiapo()
 
 void ModeleLecteur::demanderInfosDiapos()
 {
-    emit sendDiapoInfos(_infosDiapos);
+    // Récupérer les infos
+    Diaporamas infosDiapos = _database->recupereDiapos();
+
+    // Envoyer les informations
+    emit sendDiapoInfos(infosDiapos);
 }
+
 
 void ModeleLecteur::receptionDemandeChangementDiaporama(InfosDiaporama d)
 {
@@ -137,20 +170,20 @@ void ModeleLecteur::receptionDemandeChangementDiaporama(InfosDiaporama d)
     QString titreDiapo = QString::fromStdString(_lecteur->getDiaporama()->getTitre());
     emit diapoChanged(titreDiapo);
 
+    // Récupérer les images du diaporama
+    Diaporama * diapoChoisi = _database->recupereImageDiapo(d.id);
+    _lecteur->setDiaporama(diapoChoisi);
+
     // Mettre à jour l'image
     _lecteur->setPosImageCourante(0);
-    ImageDansDiaporama* imageCourante = _lecteur->getImageCourante();
-    if(imageCourante)
-    {
-        emit imageChanged(QString::fromStdString(imageCourante->getChemin()),
-                          QString::fromStdString(imageCourante->getTitre()),
-                          QString::fromStdString(imageCourante->getCategorie()));
-    }
+    envoiImageCourante();
 
 }
 
 void ModeleLecteur::receptionDemandeChangementVitesse(unsigned int pVitesse)
 {
+    _database->modifierVitesseDfl(_lecteur->getIdDiaporama(), pVitesse);
+    // Vérifier si l'état est compatible et changer la vitesse de dfl
     if(getEtat() != Initial)
     {
         _lecteur->getDiaporama()->setVitesseDefilement(pVitesse);
@@ -158,35 +191,6 @@ void ModeleLecteur::receptionDemandeChangementVitesse(unsigned int pVitesse)
 
 }
 
-void ModeleLecteur::chargerDiapos()
-{
-
-        InfosDiaporama infosACharger;
-        // Diaporama de Pantxika
-        infosACharger.id = 1;
-        infosACharger.titre = "Diaporama Pantxika";
-        infosACharger.vitesseDefilement = 2;
-        _infosDiapos.push_back(infosACharger);
-
-         // Diaporama de Thierry
-        infosACharger.id = 2;
-        infosACharger.titre = "Diaporama Thierry";
-        infosACharger.vitesseDefilement = 4;
-        _infosDiapos.push_back(infosACharger);
-
-         // Diaporama de Yann
-        infosACharger.id = 3;
-        infosACharger.titre = "Diaporama Yann";
-        infosACharger.vitesseDefilement = 2;
-        _infosDiapos.push_back(infosACharger);
-
-         // Diaporama de Manu
-        infosACharger.id = 4;
-        infosACharger.titre = "Diaporama Manu";
-        infosACharger.vitesseDefilement = 1;
-        _infosDiapos.push_back(infosACharger);
-
-}
 
 
 

@@ -1,13 +1,18 @@
 #ifndef DATABASE_H
 #define DATABASE_H
 
+#include "diaporama.h"
+#include "modelelecteur.h"
+
 #include <QSqlDatabase>
 #include <QSqlError>
+#include <QSqlQuery>
 #include <QDebug>
 
-#define DATABASE_NAME "mbourciez_bd"
+#define DATABASE_NAME "s201"
 #define CONNECT_TYPE "QODBC"
-
+class Diaporama;
+class ModeleLecteur;
 class Database
 {
 public:
@@ -23,10 +28,17 @@ public:
     // Méthodes de manipulation de la BD
     bool openDatabase();
     bool closeDatabase();
-    /*
-    // Méthodes pour les différentes requêtes
-    void recupereDiapos();
-    void recupereImageDiapo(unsigned int);*/
+    Diaporamas recupereDiapos();
+    Diaporama* recupereImageDiapo(unsigned int);
+    void modifierVitesseDfl(unsigned int idDIapo, unsigned int vitesseAApply);
+    void modifTitresEtChemins();
+
+signals:
+    // Envoi des images du diaporama choisi
+    void sendImagesDiapo(Diaporama*);
+
+    // Envoi des informations des diaporamas
+    void sendInfosDiapos(Diaporamas*);
 
 private:
     QSqlDatabase _mydb;

@@ -1,96 +1,107 @@
 #include "presentationlecteur.h"
 #include "modelelecteur.h"
 #include "lecteurvue.h"
+#include "database.h"
 
 
-/*** Implémentations ***/
 
-// Constructeur
+/***********************
+ *   CONSTRUCTEURS     *
+***********************/
+
+
 PresentationLecteur::PresentationLecteur() :
     _vue(nullptr),
     _modele(nullptr)
 {
-    // Création et connection du timer
+    // Initialisation du timer
     _timer = new QTimer(this);
-    connect(_timer, &QTimer::timeout, this, &PresentationLecteur::avancerAutomatique);
+    connect(_timer, &QTimer::timeout, this, &PresentationLecteur::avancerEnBoucle);
 }
 
-// Getter pour LecteurVue
+
+
+/***********************
+ *      GETTERS        *
+***********************/
+
+
 LecteurVue* PresentationLecteur::getVue() const {
     return _vue;
 }
 
-// Getter pour ModeleLecteur
+
 ModeleLecteur* PresentationLecteur::getModele() const {
     return _modele;
 }
 
 
-// Setter pour LecteurVue
+/***********************
+ *      SETTERS        *
+***********************/
+
+
 void PresentationLecteur::setVue(LecteurVue* vue) {
     _vue = vue;
     _vue->majInterface(_modele->getEtat());
 }
 
-// Setter pour ModeleLecteur
+
 void PresentationLecteur::setModele(ModeleLecteur* modele) {
     _modele = modele;
 }
 
-void PresentationLecteur::avancerAutomatique()
-{
-    emit faireAvancer();
-}
 
 
+/***********************
+ *       SLOTS         *
+***********************/
 
-// Implémentation des slots
+
+// Actions relatives aux diaporamas ou à leur chargement
+
 void PresentationLecteur::demanderAvancer() {
-    if(getModele()->getEtat() != ModeleLecteur::Automatique)
+
+    // Vérifier le mode, arrêter si automatique
+    if(getModele()->getEtat() == ModeleLecteur::Automatique)
+    {
+        demanderArretDiapo();
+    }
+    else
     {
         emit faireAvancer();
     }
-    else
-    {
-        getModele()->setEtat(ModeleLecteur::Manuel);
-        demanderArretDiapo();
-        getVue()->majInterface(getModele()->getEtat());
-    }
 }
+
 void PresentationLecteur::demanderReculer() {
-    if(getModele()->getEtat() != ModeleLecteur::Automatique)
+
+    // Vérifier le mode, arrêter si automatique
+    if(getModele()->getEtat() == ModeleLecteur::Automatique)
+    {
+        demanderArretDiapo();
+    }
+    else
     {
         emit faireReculer();
     }
-    else
-    {
-        getModele()->setEtat(ModeleLecteur::Manuel);
-        demanderArretDiapo();
-        getVue()->majInterface(getModele()->getEtat());
-    }
 }
 
 
-void PresentationLecteur::demanderAffichageDiapoDebut()
-{
-    emit faireAfficherImageDepart();
-}
 
 void PresentationLecteur::demanderArretDiapo() {
 
-    // Arrêter le timer
+    // Arreter le timer
     if (_timer->isActive()) {
         _timer->stop();
     }
 
-    // Mettre à jour l'état
-    getModele()->setEtat(ModeleLecteur::Manuel);
-    getVue()->majInterface(getModele()->getEtat());
+    // Changer d'état
+    _modele->setEtat(ModeleLecteur::Manuel);
+    _vue->majInterface(_modele->getEtat());
 }
 
 void PresentationLecteur::demanderEnleverDiaporama()
 {
-    // Envoi du signal + maj de l'interface & état
     emit faireEnleverDiapo();
     _modele->setEtat(ModeleLecteur::Initial);
     _vue->majInterface(_modele->getEtat());
@@ -98,40 +109,49 @@ void PresentationLecteur::demanderEnleverDiaporama()
 }
 
 void PresentationLecteur::demanderChangerVitesse() {
-    // Récupérer l'ancien état et faire afficher la fenetre de choix
     ModeleLecteur::UnEtat etatPrécédent = _modele->getEtat();
     _modele->setEtat(ModeleLecteur::ChoixVitesseDefilement);
     _vue->majInterface(_modele->getEtat());
+    /*arret du diaporama pour le relancer pour pouvoir changer la vitesse de défilement
+     * qui est mise à jour dans la bd puis récupérée depuis la bd pour la mettre a jour dans le lecteur*/
+    demanderArretDiapo();
 
-    // Remise en place de l'ancien état
-    if(!(etatPrécédent == ModeleLecteur::Automatique || etatPrécédent == ModeleLecteur::Manuel)){
-        etatPrécédent = ModeleLecteur::Manuel;
-    }
-    _modele->setEtat(etatPrécédent);
+
+    _modele->setEtat(ModeleLecteur::Manuel);
     _vue->majInterface(_modele->getEtat());
+    //relancement du diaporama avec la vitesse qui a été changée dans la bd
+    demanderLancement();
+
 }
 
+void PresentationLecteur::avancerEnBoucle() // Avancer mais pour le mode auto
+{
+    emit faireAvancer();
+}
+
+
+// Actions liées au lecteur
+
 void PresentationLecteur::demanderChargement() {
-    // Récupérer l'ancien état et faire afficher la fenetre de choix
+    // Récupérer puis chnager l'état et mettre à jour l'interface
     ModeleLecteur::UnEtat etatPrécédent = _modele->getEtat();
     _modele->setEtat(ModeleLecteur::ChoixDiaporama);
     _modele->demanderInfosDiapos();
     _vue->majInterface(_modele->getEtat());
+    demanderArretDiapo();
+    // Vérifier si l'ancien mode est valide
 
-    // Rétablir le mode si il était valide
-    if(etatPrécédent == ModeleLecteur::Automatique || etatPrécédent == ModeleLecteur::Manuel)
-    {
-        _modele->setEtat(etatPrécédent);
-    }
-    else
-    {
         _modele->setEtat(ModeleLecteur::Manuel);
         _vue->majInterface(_modele->getEtat());
+    if (etatPrécédent == ModeleLecteur::Automatique)
+    {
+        demanderLancement();
     }
 
 }
 
 void PresentationLecteur::demanderLancement() {
+    //mettre le mode auto si le bouton lancer diapo est appuyé et que le lecteur est en manuel
     if (_modele->getEtat() == ModeleLecteur::Manuel)
     {
         _modele->setEtat(ModeleLecteur::Automatique);
@@ -139,28 +159,33 @@ void PresentationLecteur::demanderLancement() {
     }
 
     // Récupérer la vitesse de défilement du diapo
-    unsigned int vitesse = getModele()->recupereVitesseDfl();
+    unsigned int vitesse = _modele->recupereVitesseDfl();
 
     //remettre l'image de départ si on appuie sur le btn Lancer diapo alors que l'image actuelle n'est pas la premiere
-    if(_modele->getLecteur()->getImageCourante()->getRangDansDiaporama() != _modele->getLecteur()->nbImages() - _modele->getLecteur()->nbImages()+1)
+    if(_modele->getLecteur()->getImageCourante()->getRangDansDiaporama() != 1)
     {
         _modele->demanderRetourImage1();
     }
+    //verification que le mode est bien en automatique
     if (_modele->getEtat() == ModeleLecteur::Automatique)
     {
-
+        // Vérifier la vitesse de dfl pour éviter les erreurs
         if (vitesse == 0) {
             _modele->getLecteur()->getDiaporama()->setVitesseDefilement(1);
         }
 
+        // Si on n'est pas à la dernière image, lancer le timer + lancer le diapo
         if(_modele->getLecteur()->getImageCourante()->getRangDansDiaporama() <= _modele->getLecteur()->nbImages() - 1)
         {
-            _timer->start(vitesse * 1000); // Lancement du timer
+            _timer->start(1000*vitesse); // Lancement du timer
+            _modele->demanderRetourImage1();
         }
         else
         {
+            // Si on est à la dernière image, retour à la 1ère
             _modele->demanderRetourImage1();
             demanderArretDiapo();
+            demanderChangementModeVersManuel();
         }
 
     }
@@ -168,31 +193,32 @@ void PresentationLecteur::demanderLancement() {
 }
 
 void PresentationLecteur::demanderChangementModeVersManuel() {
-    // Changement d'état
     _modele->setEtat(ModeleLecteur::Manuel);
     _vue->majInterface(_modele->getEtat());
 }
 
 void PresentationLecteur::demanderChangementModeVersAUtomatique() {
-    // Changement d'état
     _modele->setEtat(ModeleLecteur::Automatique);
     _vue->majInterface(_modele->getEtat());
 }
 
+
+// Actions liées au fenetres externes
+
 void PresentationLecteur::demanderAffichageInformations()
 {
-    // Envoyer le signal au modèle
     emit faireOuvrirAPropos();
 }
 
+
+// Actions liées aux choix utilisateur
+
 void PresentationLecteur::demanderChangementDIapo(InfosDiaporama d)
 {
-    // Envoyer le signal au modèle
     emit faireChangerDiapo(d);
 }
 
 void PresentationLecteur::demanderChangementVitesseDfl(unsigned int pVitesse)
 {
-    // Envoyer le signal au modèle
     emit faireChangerVitesse(pVitesse);
 }
