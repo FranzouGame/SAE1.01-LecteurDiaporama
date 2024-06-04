@@ -111,6 +111,23 @@ void PresentationLecteur::demanderChangerVitesse() {
     _vue->majInterface(_modele->getEtat());
 }
 
+void PresentationLecteur::demanderCreerDiaporama()
+{
+    // Récupérer l'ancien état et faire afficher la fenetre de choix
+    ModeleLecteur::UnEtat etatPrécédent = _modele->getEtat();
+    _modele->setEtat(ModeleLecteur::CreationDiaporama);
+    _vue->majInterface(_modele->getEtat());
+
+    // Remise en place de l'ancien état
+    if(!(etatPrécédent == ModeleLecteur::Automatique || etatPrécédent == ModeleLecteur::Manuel)){
+        etatPrécédent = ModeleLecteur::Manuel;
+    }
+    _modele->setEtat(etatPrécédent);
+    _vue->majInterface(_modele->getEtat());
+
+
+}
+
 void PresentationLecteur::demanderChargement() {
     // Récupérer l'ancien état et faire afficher la fenetre de choix
     ModeleLecteur::UnEtat etatPrécédent = _modele->getEtat();

@@ -31,8 +31,6 @@ public:
     void setVue(LecteurVue*);
     void setModele(ModeleLecteur*);
 
-
-
 signals:
     void faireAvancer();
     void faireReculer();
@@ -55,6 +53,7 @@ public slots:
     void demanderAffichageDiapoDebut();
     void demanderEnleverDiaporama();
     void demanderChangerVitesse();
+    void demanderCreerDiaporama();
 
     // Actions liées au lecteur
     void demanderChargement();

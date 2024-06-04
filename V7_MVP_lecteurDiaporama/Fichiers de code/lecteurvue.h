@@ -61,6 +61,7 @@ public slots:
     void demanderInformations();
     void demanderChangementModeAuto();
     void demanderChangementModeManuel();
+    void demanderCreerDiaporama();
 
     //Pour changer la vitesse de défilement
     void demanderChangementVitesseDefilement();

@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>507</width>
-    <height>335</height>
+    <width>1053</width>
+    <height>767</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -208,7 +208,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>507</width>
+     <width>1053</width>
      <height>21</height>
     </rect>
    </property>
@@ -227,7 +227,6 @@
       <addaction name="actionModeAuto"/>
       <addaction name="actionModeManuel"/>
      </widget>
-     <addaction name="actionCharger_Diaporama"/>
      <addaction name="menuMode"/>
      <addaction name="actionChangerVitesseDefilement"/>
      <addaction name="actionEnleverDiaporama"/>
@@ -241,13 +240,23 @@
     </property>
     <addaction name="actionA_propos_de"/>
    </widget>
+   <widget class="QMenu" name="menuDiaporamas">
+    <property name="title">
+     <string>Diaporamas</string>
+    </property>
+    <addaction name="actionCreerDiaporama"/>
+    <addaction name="actionCharger_Diaporama"/>
+    <addaction name="actionEnleverDiaporama"/>
+    <addaction name="actionChangerVitesseDefilement"/>
+   </widget>
    <addaction name="menuFichier"/>
+   <addaction name="menuDiaporamas"/>
    <addaction name="menuAide"/>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
   <action name="actionCharger_Diaporama">
    <property name="text">
-    <string>Charger Diaporama</string>
+    <string>Charger un diaporama</string>
    </property>
   </action>
   <action name="actionQuitter">
@@ -313,6 +322,11 @@
   <action name="actionEnleverDiaporama">
    <property name="text">
     <string>Enlever le diaporama en cours</string>
+   </property>
+  </action>
+  <action name="actionCreerDiaporama">
+   <property name="text">
+    <string>Créer un diaporama</string>
    </property>
   </action>
  </widget>
