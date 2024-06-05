@@ -17,4 +17,6 @@ private:
 
 };
 
+
+
 #endif // CREATIONDIAPORAMA_H
