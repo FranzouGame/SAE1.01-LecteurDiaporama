@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>Dialog</class>
- <widget class="QDialog" name="Dialog">
+ <class>CreationDiaporama</class>
+ <widget class="QDialog" name="CreationDiaporama">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -13,7 +13,7 @@
   <property name="windowTitle">
    <string>Dialog</string>
   </property>
-  <layout class="QVBoxLayout" name="verticalLayout_5">
+  <layout class="QVBoxLayout" name="verticalLayout">
    <item>
     <layout class="QVBoxLayout" name="verticalLayout_2">
      <item>
@@ -33,7 +33,7 @@
           <enum>QLayout::SetMinAndMaxSize</enum>
          </property>
          <item>
-          <widget class="QLabel" name="label">
+          <widget class="QLabel" name="titreFenetre">
            <property name="maximumSize">
             <size>
              <width>16777215</width>
@@ -86,7 +86,7 @@
        <item>
         <layout class="QVBoxLayout" name="vLayoutWarning">
          <item>
-          <widget class="QLabel" name="label_2">
+          <widget class="QLabel" name="warning">
            <property name="font">
             <font>
              <pointsize>20</pointsize>
@@ -111,6 +111,7 @@
       </layout>
      </item>
      <item>
+<<<<<<< HEAD
       <layout class="QHBoxLayout" name="hLayoutAjout_2">
        <item>
         <layout class="QGridLayout" name="gridLayout_2">
@@ -173,8 +174,49 @@
           <widget class="QComboBox" name="comboBoxCreation"/>
          </item>
         </layout>
+=======
+      <spacer name="verticalSpacer_2">
+       <property name="orientation">
+        <enum>Qt::Vertical</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>20</width>
+         <height>40</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <layout class="QFormLayout" name="formLayout">
+       <item row="0" column="0">
+        <widget class="QLabel" name="titreNom">
+         <property name="text">
+          <string>Nom de votre diaporama</string>
+         </property>
+        </widget>
+>>>>>>> da394a13d650f02fe4a3f13d1b503cfea563293e
+       </item>
+       <item row="0" column="1">
+        <widget class="QLineEdit" name="saisieNom"/>
+       </item>
+       <item row="1" column="0">
+        <widget class="QLabel" name="titreVitesse">
+         <property name="text">
+          <string>Vitesse de défilement de votre diaporama</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="1">
+        <widget class="QLineEdit" name="saisieVitesse"/>
        </item>
       </layout>
+     </item>
+     <item>
+      <widget class="QComboBox" name="comboBox"/>
+     </item>
+     <item>
+      <layout class="QHBoxLayout" name="hLayoutAjout_2"/>
      </item>
      <item>
       <spacer name="verticalSpacer_3">
@@ -197,21 +239,25 @@
        <item>
         <layout class="QVBoxLayout" name="verticalLayout_6">
          <item>
-          <widget class="QPushButton" name="pushButton_2">
+          <widget class="QPushButton" name="btnAJouter">
            <property name="text">
+<<<<<<< HEAD
             <string>Ajouter</string>
+=======
+            <string>Ajouter l'image au diaporama</string>
+>>>>>>> da394a13d650f02fe4a3f13d1b503cfea563293e
            </property>
           </widget>
          </item>
          <item>
-          <widget class="QPushButton" name="pushButton_3">
+          <widget class="QPushButton" name="btnAnnuler">
            <property name="text">
-            <string>Annuler</string>
+            <string>Annuler la création</string>
            </property>
           </widget>
          </item>
          <item>
-          <widget class="QPushButton" name="pushButton">
+          <widget class="QPushButton" name="btnConfirmer">
            <property name="text">
             <string>Confirmer la création</string>
            </property>

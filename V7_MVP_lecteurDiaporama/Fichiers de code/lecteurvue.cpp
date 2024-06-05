@@ -4,6 +4,7 @@
 #include "fenetreapropos.h"
 #include "choixdiaporama.h"
 #include "choixvitessedefilement.h"
+#include "creationdiaporama.h"
 
 /************************
  * CORPS DE LA CLASSE
@@ -37,6 +38,7 @@ LecteurVue::LecteurVue(QWidget *parent)
     QObject::connect(ui->actionCharger_Diaporama, SIGNAL(triggered()), this, SLOT(demanderChangementDiaporama()));
     QObject::connect(ui->actionModeManuel, SIGNAL(triggered()), this, SLOT(demanderChangementModeManuel()));
     QObject::connect(ui->actionEnleverDiaporama, SIGNAL(triggered(bool)), this ,SLOT(demanderEnleverDiaporama()));
+    QObject::connect(ui->actionCreerDiaporama, SIGNAL(triggered()), this, SLOT(demanderCreerDiaporama()));
 
     // Ajouter un label à droite de la barre de statut
     _labelEtat->setText("Mode : Initial");
@@ -94,6 +96,11 @@ void LecteurVue::demanderChangementModeAuto() {
 
 void LecteurVue::demanderChangementModeManuel() {
     getPres()->demanderChangementModeVersManuel();
+}
+
+void LecteurVue::demanderCreerDiaporama()
+{
+    getPres()->demanderCreerDiaporama();
 }
 
 void LecteurVue::demanderChangementVitesseDefilement()
@@ -208,6 +215,19 @@ void LecteurVue::majInterface(ModeleLecteur::UnEtat e)
 
             // Ouvrir la fenêtre de choix
             fenetreChoix.exec();
+        }
+        break;
+
+    case ModeleLecteur::CreationDiaporama:
+        {
+            // Création de la fenêtre
+            CreationDiaporama fentreCreation(this);
+
+            // Connexion pour la récupération d'informations
+            // QObject::connect(&fentreCreation, SIGNAL(envoyerVitesseDfl(unsigned int)), this, SLOT(recupereVitesseDefilement(unsigned int)));
+
+            // Ouvrir la fenêtre de choix
+            fentreCreation.exec();
         }
         break;
 
