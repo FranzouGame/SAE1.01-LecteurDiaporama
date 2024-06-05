@@ -33,6 +33,9 @@ private:
     // Label d'état
     QLabel* _labelEtat;
 
+    // Méthode d'animation
+    void animerChangementImage(const QString& cheminImage);
+
 public:
     // Constructeur & Destructeur
     LecteurVue(QWidget *parent = nullptr);

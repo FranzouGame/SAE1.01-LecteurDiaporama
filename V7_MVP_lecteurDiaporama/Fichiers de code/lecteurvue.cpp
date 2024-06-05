@@ -5,6 +5,8 @@
 #include "choixdiaporama.h"
 #include "choixvitessedefilement.h"
 #include "creationdiaporama.h"
+#include <QPropertyAnimation>
+#include <QGraphicsOpacityEffect>
 
 /************************
  * CORPS DE LA CLASSE
@@ -230,6 +232,11 @@ void LecteurVue::majInterface(ModeleLecteur::UnEtat e)
 
 void LecteurVue::updateImageInfo(const QString& chemin, const QString& titre, const QString& categorie)
 {
+    animerChangementImage(chemin);
+
+    ui->titreImage->setText(titre);
+    ui->catImage->setText(categorie);
+
     // Mettre à jour l'interface avec les nouvelles informations de l'image// Création d'un QPixmap à partir de votre image
     QPixmap pixmap(chemin);
 
@@ -237,12 +244,33 @@ void LecteurVue::updateImageInfo(const QString& chemin, const QString& titre, co
     if (!pixmap.isNull()) {
         // Affichage de l'image dans le QLabel
         ui->image->setPixmap(pixmap);
+        ui->image->setAlignment(Qt::AlignCenter);
     }
     else {
         qDebug() << "Erreur : Impossible de charger l'image.";
     }
-    ui->titreImage->setText(titre);
-    ui->catImage->setText(categorie);
+}
+
+
+
+void LecteurVue::animerChangementImage(const QString& cheminImage)
+{
+    QGraphicsOpacityEffect* effect = new QGraphicsOpacityEffect(this);
+    ui->image->setGraphicsEffect(effect);
+
+    QPropertyAnimation* animation = new QPropertyAnimation(effect, "opacity");
+    animation->setDuration(500);
+    animation->setStartValue(0.0);
+    animation->setEndValue(1.0);
+
+    connect(animation, &QPropertyAnimation::finished, [=]() {
+        QPixmap pixmap(cheminImage);
+        ui->image->setPixmap(pixmap);
+        ui->image->setAlignment(Qt::AlignCenter);
+        ui->image->setGraphicsEffect(nullptr);
+    });
+
+    animation->start(QAbstractAnimation::DeleteWhenStopped);
 }
 
 
