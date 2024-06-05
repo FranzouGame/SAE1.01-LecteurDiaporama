@@ -6,9 +6,7 @@
 #include <QSqlError>
 #include <QVariant>
 #include <QDebug>
-#include <vector>
 #include <string>
-#include "creationdiaporama.h"
 
 Database::Database()
 {
@@ -317,6 +315,13 @@ Images Database::recupereImages(unsigned int& nbDiapos)
 
 void Database::creerDiaporama(Images img , QString titre, unsigned int vitesse)
 {
+    // Aficher le contenu du vecteur
+    qDebug() << "Création du diaporama :" << titre << "avec une vitesse de défilement de :" << vitesse;
+    for (unsigned int i = 0; i < img.size(); ++i) {
+        qDebug() << "Image" << i << " : " << img[i].getTitre();
+    }
+
+
     // récupérer l'identifiant max
     unsigned int idDiapo = recupereIdMaxDiapo();
 
@@ -338,7 +343,7 @@ void Database::creerDiaporama(Images img , QString titre, unsigned int vitesse)
 
         // Récupérer l'ID de l'image par son nom
         QSqlQuery querySelect(_mydb);
-        querySelect.prepare("SELECT idDiapo FROM Diapos WHERE titrePhoto = :titre");
+        querySelect.prepare("SELECT idphoto FROM Diapos WHERE titrePhoto = :titre");
         querySelect.bindValue(":titre", QString::fromStdString(img[i].getTitre()));
         if (!querySelect.exec()) {
             qDebug() << "Erreur lors de l'exécution de la requête SELECT Diapos :" << querySelect.lastError().text();

@@ -3,9 +3,6 @@
 
 
 #include <QDialog>
-
-
-
 #include "qdialog.h"
 #include "qobject.h"
 #include "diaporama.h"

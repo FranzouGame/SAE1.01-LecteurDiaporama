@@ -61,7 +61,7 @@ void CreationDiaporama::ajouterImage(){
     int index = ui->comboBoxCreation->currentIndex();
 
     // Ajouter l'image à la liste
-    _imagesChoisies.push_back(_imagesBD[index]);
+    _imagesChoisies.push_back(_imagesBD[index-1]);
 
     // Ré-afficher la première ligne vide
     ui->comboBoxCreation->setCurrentIndex(0);
