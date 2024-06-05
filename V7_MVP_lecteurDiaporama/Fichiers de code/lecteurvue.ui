@@ -14,7 +14,84 @@
    <string>lecteurvue</string>
   </property>
   <property name="styleSheet">
-   <string notr="true"/>
+   <string notr="true">
+/* QMainWindow */
+QMainWindow {
+    background-color: #222831;
+    font-family: 'Times New Roman', Times, serif;
+}
+
+QDialog {
+    background-color: #222831;
+    font-family: 'Times New Roman', Times, serif;
+	border: 1px solid #EEEEEE;
+    color: #EEEEEE;
+}
+
+QPushButton {
+    background-color: #4c525f;
+    color: #EEEEEE;
+    border: 1px solid #EEEEEE;
+    height: 30%;
+    border-radius: 5%;
+    position: relative;
+}
+
+QPushButton:hover {
+    background-color: #76ABAE;
+}
+
+QComboBox{
+	color:#EEEEEE;
+}
+
+QLabel {
+    color: #EEEEEE;
+}
+
+QWidget {
+    background-color: #222831;
+    color: #EEEEEE;
+}
+
+QMenuBar {
+    background-color: #76ABAE;
+    color: #EEEEEE;
+}
+
+QMenu:hover {
+    background-color: #31363F;
+}
+
+QStatusBar {
+    background-color: #76ABAE;
+    color: #EEEEEE;
+    border-top: 1px solid #31363F;
+}
+
+QToolBar {
+    background-color: #76ABAE;
+    color: #EEEEEE;
+    border-bottom: 3px solid #31363F;
+}
+
+#btnPrec {
+    width: 115%;
+}
+
+#btnSuiv {
+    width: 115%;
+}
+
+/* Dans tout les QMenu */
+QMenu{
+    border: 1px solid #EEEEEE;
+    }
+    
+    :hover{
+    background-color: #222831;
+    color:#EEEEEE;
+    }</string>
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QVBoxLayout" name="verticalLayout_2">

@@ -13,6 +13,41 @@
   <property name="windowTitle">
    <string>A propos</string>
   </property>
+  <property name="styleSheet">
+   <string notr="true">/* Dans tout les QDialog */
+    QDialog{
+        background-color: #222831;
+        font-family: 'Times New Roman', Times, serif;
+        color: #EEEEEE; 
+        border: 1px solid #EEEEEE;
+    }
+    
+    QLabel{
+        color:#EEEEEE
+    }
+    
+
+/* Dans le QDialog FenÃªtre a propos */
+    QDialog{
+        background-color: #222831;
+        font-family: 'Times New Roman', Times, serif;
+        color: #EEEEEE; 
+        border: 1px solid #EEEEEE;
+    }
+    
+    QLabel{
+        color:#EEEEEE
+    }
+    
+    QPushButton{
+        background-color: #4c525f;
+        color: #EEEEEE;
+        border-color: #EEEEEE;
+        height: 30%;
+        border-radius: 5%;
+        position: relative;
+    }</string>
+  </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
     <layout class="QHBoxLayout" name="layoutTitre">

@@ -13,9 +13,119 @@
   <property name="windowTitle">
    <string>Dialog</string>
   </property>
-  <layout class="QVBoxLayout" name="verticalLayout">
+  <property name="styleSheet">
+   <string notr="true">/* Dans tout les QDialog */
+    QDialog{
+        background-color: #222831;
+        font-family: 'Times New Roman', Times, serif;
+        color: #EEEEEE; 
+        border: 1px solid #EEEEEE;
+    }
+    
+    QLabel{
+        color:#EEEEEE
+    }
+    
+
+/* Dans le QDialog FenÃªtre a propos */
+    QDialog{
+        background-color: #222831;
+        font-family: 'Times New Roman', Times, serif;
+        color: #EEEEEE; 
+        border: 1px solid #EEEEEE;
+    }
+    
+    QLabel{
+        color:#EEEEEE
+    }
+    
+    QPushButton{
+        background-color: #4c525f;
+        color: #EEEEEE;
+        border-color: #EEEEEE;
+        height: 30%;
+		width: 70%;
+        border-radius: 5%;
+        position: relative;
+    }</string>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout_2">
+   <item>
+    <layout class="QVBoxLayout" name="verticalLayout">
+     <item>
+      <widget class="QLabel" name="label">
+       <property name="font">
+        <font>
+         <pointsize>16</pointsize>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">/* Dans tout les QDialog */
+    QDialog{
+        background-color: #222831;
+        font-family: 'Times New Roman', Times, serif;
+        color: #EEEEEE; 
+        border: 1px solid #EEEEEE;
+    }
+    
+    QLabel{
+        color:#EEEEEE
+    }</string>
+       </property>
+       <property name="text">
+        <string>Choix du diaporama à charger</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <widget class="QLabel" name="label_2">
+     <property name="font">
+      <font>
+       <pointsize>10</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string>Choisissez un des diaporamas de la liste</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <spacer name="verticalSpacer_2">
+     <property name="orientation">
+      <enum>Qt::Vertical</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>20</width>
+       <height>40</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
    <item>
     <widget class="QComboBox" name="comboBoxDiaporamas"/>
+   </item>
+   <item>
+    <spacer name="verticalSpacer">
+     <property name="orientation">
+      <enum>Qt::Vertical</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>20</width>
+       <height>40</height>
+      </size>
+     </property>
+    </spacer>
    </item>
    <item>
     <widget class="QDialogButtonBox" name="buttonBox">
