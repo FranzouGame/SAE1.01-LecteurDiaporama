@@ -24,6 +24,9 @@ LecteurVue::LecteurVue(QWidget *parent)
     // Changer le nom de la fenêtre
     setWindowTitle("Lecteur de diaporama - S2.01");
 
+    //changer l'icone de la fenetre
+    setWindowIcon(QIcon(":/icones/icones/mainIcon.png"));
+
     // Connections
 
     // Boutons

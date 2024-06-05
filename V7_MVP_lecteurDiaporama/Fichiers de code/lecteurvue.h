@@ -36,12 +36,7 @@ private:
     // Méthode d'animation
     void animerChangementImage(const QString& cheminImage);
 
-    // Réception des informations
-    void afficherInformations(); // Fenetre A propos
-    void updateImageInfo(const QString& chemin, const QString& titre, const QString& categorie); // Image mise à jour
-    void updateDiapoTitle(const QString& titreDiapo);
-    void receptionDiapos(Diaporamas);
-    void receptionImages(Images);
+
 
 
 public:
@@ -58,7 +53,12 @@ public:
     // Autres méthodes
     void majInterface(ModeleLecteur::UnEtat);
 
-
+    // Réception des informations
+    void afficherInformations(); // Fenetre A propos
+    void updateImageInfo(const QString& chemin, const QString& titre, const QString& categorie); // Image mise à jour
+    void updateDiapoTitle(const QString& titreDiapo);
+    void receptionDiapos(Diaporamas);
+    void receptionImages(Images);
 
 public slots:
     // Pour faire le lien avec les diaporamas
