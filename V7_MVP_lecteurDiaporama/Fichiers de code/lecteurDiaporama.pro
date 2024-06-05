@@ -13,6 +13,7 @@ SOURCES += \
     choixdiaporama.cpp \
     choixvitessedefilement.cpp \
     fenetreapropos.cpp \
+    creationdiaporama.cpp \
     main.cpp \
     lecteurvue.cpp \
     modelelecteur.cpp \
@@ -26,6 +27,7 @@ HEADERS += \
     choixdiaporama.h \
     choixvitessedefilement.h \
     fenetreapropos.h \
+    creationdiaporama.h \
     lecteurvue.h \
     modelelecteur.h \
     presentationlecteur.h \
@@ -38,6 +40,7 @@ FORMS += \
     choixdiaporama.ui \
     choixvitessedefilement.ui \
     fenetreapropos.ui \
+    creationdiaporama.ui \
     lecteurvue.ui
 
 # Default rules for deployment.

@@ -174,7 +174,7 @@
        <item>
         <layout class="QVBoxLayout" name="verticalLayout_6">
          <item>
-          <widget class="QPushButton" name="btnAJouter">
+          <widget class="QPushButton" name="btnAjouter">
            <property name="text">
             <string>Ajouter l'image au diaporama</string>
            </property>
