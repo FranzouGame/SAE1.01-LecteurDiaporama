@@ -2,7 +2,7 @@
 #include "ui_creationdiaporama.h"
 #include <QMessageBox>
 
-// Matching constructor
+// Constructeur
 CreationDiaporama::CreationDiaporama(Images images, QWidget* parent) :
     QDialog(parent),
     _imagesBD(images),
@@ -19,8 +19,18 @@ CreationDiaporama::CreationDiaporama(Images images, QWidget* parent) :
     ui->comboBoxCreation->addItem("");
 
     for (unsigned int i = 0; i < _imagesBD.size(); i++) {
+        bool titreDejaChoisi = false;
         QString titre = QString::fromStdString(images[i].getTitre());
-        ui->comboBoxCreation->addItem(titre);
+
+        // Parcours des images déjà choisies pour vérifier si le titre est déjà présent
+        for (unsigned int j = 0; j < _imagesChoisies.size(); j++) {
+            if(QString::fromStdString(_imagesChoisies[j].getTitre()) == titre){
+                titreDejaChoisi = true;
+            }
+        }
+
+        if(!titreDejaChoisi)
+        {ui->comboBoxCreation->addItem(titre);}
     }
 
     // Connexion des boutons avec les slots
@@ -65,6 +75,9 @@ void CreationDiaporama::ajouterImage(){
 
     // Ré-afficher la première ligne vide
     ui->comboBoxCreation->setCurrentIndex(0);
+
+    // Supprimer l'image de la liste déroulante
+    ui->comboBoxCreation->removeItem(index);
 }
 
 void CreationDiaporama::enableButton()
