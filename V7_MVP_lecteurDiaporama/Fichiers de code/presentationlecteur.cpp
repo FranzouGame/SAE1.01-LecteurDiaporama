@@ -69,7 +69,7 @@ void PresentationLecteur::demanderAvancer() {
     }
     else
     {
-        emit faireAvancer();
+        _modele->demandeAvancement();
     }
 }
 
@@ -82,7 +82,7 @@ void PresentationLecteur::demanderReculer() {
     }
     else
     {
-        emit faireReculer();
+        _modele->demandeReculement();
     }
 }
 
@@ -102,7 +102,7 @@ void PresentationLecteur::demanderArretDiapo() {
 
 void PresentationLecteur::demanderEnleverDiaporama()
 {
-    emit faireEnleverDiapo();
+    _modele->demandeEnleverDiapo();
     _modele->setEtat(ModeleLecteur::Initial);
     _vue->majInterface(_modele->getEtat());
 
@@ -145,7 +145,7 @@ void PresentationLecteur::demanderCreerDiaporama()
 
 void PresentationLecteur::avancerEnBoucle() // Avancer mais pour le mode auto
 {
-    emit faireAvancer();
+    _modele->demandeAvancement();
 }
 
 
@@ -226,7 +226,7 @@ void PresentationLecteur::demanderChangementModeVersAUtomatique() {
 
 void PresentationLecteur::demanderAffichageInformations()
 {
-    emit faireOuvrirAPropos();
+    _vue->afficherInformations();
 }
 
 
@@ -234,15 +234,36 @@ void PresentationLecteur::demanderAffichageInformations()
 
 void PresentationLecteur::demanderChangementDIapo(InfosDiaporama d)
 {
-    emit faireChangerDiapo(d);
+    _modele->receptionDemandeChangementDiaporama(d);
 }
 
 void PresentationLecteur::demanderChangementVitesseDfl(unsigned int pVitesse)
 {
-    emit faireChangerVitesse(pVitesse);
+    _modele->receptionDemandeChangementVitesse(pVitesse);
 }
 
 void PresentationLecteur::demanderCreationDiaporama(Images img, QString titre, unsigned int vitesse)
 {
     _modele->demanderCreationDiaporama(img, titre, vitesse);
 }
+
+void PresentationLecteur::transmettreInfosImage(const QString &chemin, const QString &titre, const QString &categorie)
+{
+    _vue->updateImageInfo(chemin, titre, categorie);
+}
+
+void PresentationLecteur::transmettreTitreDiapo(const QString &titre)
+{
+    _vue->updateDiapoTitle(titre);
+}
+
+void PresentationLecteur::transmettreInfosDiapos(Diaporamas d)
+{
+    _vue->receptionDiapos(d);
+}
+
+void PresentationLecteur::transmettreImages(Images img)
+{
+    _vue->receptionImages(img);
+}
+

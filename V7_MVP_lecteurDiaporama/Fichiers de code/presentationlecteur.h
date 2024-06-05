@@ -31,17 +31,6 @@ public:
     void setVue(LecteurVue*);
     void setModele(ModeleLecteur*);
 
-signals:
-    void faireAvancer();
-    void faireReculer();
-    void faireOuvrirAPropos();
-    void faireEnleverDiapo();
-    void faireChangerDiapo(InfosDiaporama);
-    void faireChangerVitesse(unsigned int);
-
-signals:
-    void faireAfficherImageDepart();
-
 
 public slots:
     // Actions relatives aux diaporamas ou à leur chargement
@@ -66,6 +55,12 @@ public slots:
     void demanderChangementDIapo(InfosDiaporama);
     void demanderChangementVitesseDfl(unsigned int);
     void demanderCreationDiaporama(Images, QString, unsigned int);
+
+    // transmission des infos à la vue
+    void transmettreInfosImage(const QString& chemin, const QString& titre, const QString& categorie);
+    void transmettreTitreDiapo(const QString& titre);
+    void transmettreInfosDiapos(Diaporamas);
+    void transmettreImages(Images);
 };
 
 #endif // PRESENTATIONLECTEUR_H
