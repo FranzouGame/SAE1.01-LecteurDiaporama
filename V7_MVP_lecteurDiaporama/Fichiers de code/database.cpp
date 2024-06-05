@@ -8,6 +8,7 @@
 #include <QDebug>
 #include <vector>
 #include <string>
+#include "creationdiaporama.h"
 
 Database::Database()
 {
@@ -281,4 +282,110 @@ void Database::modifTitresEtChemins()
         qDebug() << "Commit réussi";
     }
 }
+
+Images Database::recupereImages(unsigned int& nbDiapos)
+{
+    QSqlQuery query(_mydb);
+    QString queryString = "SELECT * FROM Diapos";
+
+    query.prepare(queryString);
+    if (!query.exec()) {
+        qDebug() << "Erreur lors de l'exécution de la requête :" << query.lastError().text();
+        return {};
+    }
+
+    // Remplir le vecteur sinon
+    Images images;
+    while (query.next()) {
+        ImageDansDiaporama imageCourante;
+        imageCourante.setTitre(query.value(1).toString().toStdString());
+        images.push_back(imageCourante);
+    }
+
+    // Récupérer l'index max de diaporamas
+    QSqlQuery queryDiapos(_mydb);
+    QString queryStringDiapos = "SELECT MAX(idDiaporama) FROM Diaporamas";
+    queryDiapos.prepare(queryStringDiapos);
+    if (!queryDiapos.exec()) {
+        qDebug() << "Erreur lors de l'exécution de la requête :" << queryDiapos.lastError().text();
+        return {};
+    }
+    queryDiapos.next();
+    nbDiapos = queryDiapos.value(0).toUInt();
+    return images;
+}
+
+void Database::creerDiaporama(Images img , QString titre, unsigned int vitesse)
+{
+    // récupérer l'identifiant max
+    unsigned int idDiapo = recupereIdMaxDiapo();
+
+    // Créer le diaporama
+    QSqlQuery query(_mydb);
+    QString queryString = "INSERT INTO Diaporamas (idDiaporama, `titre Diaporama`, vitesseDefilement) VALUES (:idDiaporama, :titre, :vitesse)";
+    query.prepare(queryString);
+    query.bindValue(":idDiaporama", idDiapo);
+    query.bindValue(":titre", titre);
+    query.bindValue(":vitesse", vitesse);
+    if (!query.exec()) {
+        qDebug() << "Erreur lors de l'exécution de la requête :" << query.lastError().text();
+        return;
+    }
+
+    // Ajouter les images au diaporama
+    for (unsigned int i = 0; i < img.size(); ++i) {
+        int rang = i + 1;
+
+        // Récupérer l'ID de l'image par son nom
+        QSqlQuery querySelect(_mydb);
+        querySelect.prepare("SELECT idDiapo FROM Diapos WHERE titrePhoto = :titre");
+        querySelect.bindValue(":titre", QString::fromStdString(img[i].getTitre()));
+        if (!querySelect.exec()) {
+            qDebug() << "Erreur lors de l'exécution de la requête SELECT Diapos :" << querySelect.lastError().text();
+            return;
+        }
+
+        // Vérifier que l'image a été trouvée
+        if (!querySelect.next()) {
+            qDebug() << "Aucune image trouvée pour le titre :" << img[i].getTitre();
+            return;
+        }
+
+        int idImage = querySelect.value(0).toInt();
+
+        // Insérer la relation diapo-diaporama
+        QSqlQuery queryInsertRelation(_mydb);
+        queryInsertRelation.prepare("INSERT INTO DiaposDansDiaporama (idDiapo, idDiaporama, rang) VALUES (:idDiapo, :idDiaporama, :rang)");
+        queryInsertRelation.bindValue(":idDiapo", idImage);
+        queryInsertRelation.bindValue(":idDiaporama", idDiapo);
+        queryInsertRelation.bindValue(":rang", rang);
+        if (!queryInsertRelation.exec()) {
+            qDebug() << "Erreur lors de l'exécution de la requête INSERT DiaposDansDiaporama :" << queryInsertRelation.lastError().text();
+            return;
+        }
+    }
+
+    qDebug() << "Diaporama créé avec succès";
+
+}
+
+unsigned int Database::recupereIdMaxDiapo()
+{
+    // Récupérer l'identifiant max pour assigner le suivant au nouveau diaporama
+    QSqlQuery recupId(_mydb);
+    QString req1 = "SELECT MAX(idDiaporama) FROM Diaporamas";
+    recupId.prepare(req1);
+    if (!recupId.exec()) {
+        qDebug() << "Erreur lors de l'exécution de la requête :" << recupId.lastError().text();
+        return 0;
+    }
+    recupId.next();
+    unsigned int idDiapo = recupId.value(0).toUInt() + 1;
+
+    return idDiapo;
+}
+
+
+
+
 

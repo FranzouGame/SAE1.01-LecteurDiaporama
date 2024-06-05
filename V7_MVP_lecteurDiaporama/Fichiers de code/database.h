@@ -13,6 +13,7 @@
 #define CONNECT_TYPE "QODBC"
 class Diaporama;
 class ModeleLecteur;
+
 class Database
 {
 public:
@@ -32,6 +33,10 @@ public:
     Diaporama* recupereImageDiapo(unsigned int);
     void modifierVitesseDfl(unsigned int idDIapo, unsigned int vitesseAApply);
     void modifTitresEtChemins();
+    Images recupereImages(unsigned int&);
+
+    // Création de diaporamas
+    void creerDiaporama(Images, QString, unsigned int);
 
 signals:
     // Envoi des images du diaporama choisi
@@ -42,6 +47,9 @@ signals:
 
 private:
     QSqlDatabase _mydb;
+
+    // Récupérer l'id max
+    unsigned int recupereIdMaxDiapo();
 };
 
 #endif // DATABASE_H

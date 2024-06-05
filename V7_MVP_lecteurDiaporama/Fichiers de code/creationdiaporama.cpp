@@ -1,11 +1,11 @@
 #include "creationdiaporama.h"
 #include "ui_creationdiaporama.h"
+#include <QMessageBox>
 
 // Matching constructor
-CreationDiaporama::CreationDiaporama(Images images, unsigned int idDiapo, QWidget* parent) :
+CreationDiaporama::CreationDiaporama(Images images, QWidget* parent) :
     QDialog(parent),
     _imagesBD(images),
-    _idDiapo(idDiapo),
     ui(new Ui::CreationDiaporama){
 
     // Setup l'ui
@@ -13,17 +13,21 @@ CreationDiaporama::CreationDiaporama(Images images, unsigned int idDiapo, QWidge
 
     // Changer le titre de la fenêtre
     setWindowTitle("Création d'un diaporama");
+    ui->btnConfirmer->setEnabled(false);
 
-    // Ajout des informations
-    for (unsigned int i = 0; i < images.size(); i++) {
+    // Ajout d'une ligne vide en premier pour la lisibilité
+    ui->comboBoxCreation->addItem("");
+
+    for (unsigned int i = 0; i < _imagesBD.size(); i++) {
         QString titre = QString::fromStdString(images[i].getTitre());
-        ui->comboBox->addItem(titre);
+        ui->comboBoxCreation->addItem(titre);
     }
 
     // Connexion des boutons avec les slots
     QObject::connect(ui->btnConfirmer, SIGNAL(clicked(bool)), this, SLOT(transmettreInformations()));
     QObject::connect(ui->btnAnnuler, SIGNAL(clicked(bool)), this, SLOT(fermerFenetre()));
     QObject::connect(ui->btnAjouter, SIGNAL(clicked(bool)), this, SLOT(ajouterImage()));
+    QObject::connect(ui->saisievitesse, SIGNAL(textEdited(QString)), this, SLOT(enableButton()));
 }
 
 // Destructeur
@@ -31,12 +35,50 @@ CreationDiaporama::~CreationDiaporama(){
     delete ui;
 }
 
+void CreationDiaporama::transmettreInformations()
+{
+    // Récupérer les infos
+    QString nom = ui->saisieNom_2->text();
+    unsigned int vitesse = ui->saisievitesse->text().toUInt();
+
+    if(!_imagesChoisies.empty()){
+        emit envoyerInformations(_imagesChoisies, nom, vitesse);
+        close();
+    }
+    else{
+        QMessageBox::warning(this, "Erreur", "Veuillez choisir au moins une image ou annuler.");
+    }
+}
+
+void CreationDiaporama::fermerFenetre()
+{
+    close();
+}
+
 // Slot pour ajouter une image
 void CreationDiaporama::ajouterImage(){
-    // Récupérer l'index de l'image à ajouter
-    unsigned int index = ui->comboBox->currentIndex();
+    // Récupérer l'index de l'image
+    int index = ui->comboBoxCreation->currentIndex();
+
     // Ajouter l'image à la liste
-    _images.push_back(_imagesBD[index]);
-    // Ajouter le titre de l'image à la liste
-    ui->listWidget->addItem(ui->comboBox->currentText());
+    _imagesChoisies.push_back(_imagesBD[index]);
+
+    // Ré-afficher la première ligne vide
+    ui->comboBoxCreation->setCurrentIndex(0);
 }
+
+void CreationDiaporama::enableButton()
+{
+    // Récupérer le nom saisi & la vitesse
+    QString nom = ui->saisievitesse->text();
+    unsigned int vitesse = ui->saisievitesse->text().toUInt();
+
+    // Vérifier qu'il est plus logn que 0
+    if(nom.length() > 0 && vitesse > 0){
+        ui->btnConfirmer->setEnabled(true);
+    }
+    else{
+        ui->btnConfirmer->setEnabled(false);
+    }
+}
+

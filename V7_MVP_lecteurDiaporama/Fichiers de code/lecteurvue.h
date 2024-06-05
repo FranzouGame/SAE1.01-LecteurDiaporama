@@ -28,6 +28,8 @@ private:
     PresentationLecteur* _pres;
     // Informations des diaporamas
     Diaporamas _infosDiapos;
+    // Informations des images
+    Images _images;
     // Label d'état
     QLabel* _labelEtat;
 
@@ -60,6 +62,7 @@ public slots:
     void demanderInformations();
     void demanderChangementModeAuto();
     void demanderChangementModeManuel();
+    void demanderCreationDiaporama();
 
     //Pour changer la vitesse de défilement
     void demanderChangementVitesseDefilement();
@@ -70,9 +73,11 @@ public slots:
     void updateImageInfo(const QString& chemin, const QString& titre, const QString& categorie); // Image mise à jour
     void updateDiapoTitle(const QString& titreDiapo);
     void receptionDiapos(Diaporamas);
+    void receptionImages(Images);
 
     // RéceptionInfos
     void recupereInfosDiapoChoisi(InfosDiaporama);
     void recupereVitesseDefilement(unsigned int);
+    void recupereImages(Images, QString, unsigned int);
 };
 #endif // LECTEURVUE_H

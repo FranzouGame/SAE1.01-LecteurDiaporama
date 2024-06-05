@@ -2,6 +2,7 @@
 #include "imageDansDiaporama.h"
 #include "qdebug.h"
 #include "database.h"
+#include "diaporama.h"
 
 #include <QSqlQuery>
 
@@ -191,6 +192,26 @@ void ModeleLecteur::receptionDemandeChangementVitesse(unsigned int pVitesse)
 
 }
 
+void ModeleLecteur::demanderImages()
+{
+    unsigned int idDiapo = _lecteur->getIdDiaporama();
+    // Récupérer les images
+    Images images = _database->recupereImages(idDiapo);
+
+    // vérfiier la taille du vecteur
+    qDebug() << images.size();
+
+    // Envoyer les images
+    emit sendImages(images);
+
+
+}
+
+void ModeleLecteur::demanderCreationDiaporama(Images img, QString titre, unsigned int vitesse)
+{
+    // Créer le diaporama dans la BD
+    _database->creerDiaporama(img, titre, vitesse);
+}
 
 
 

@@ -5,6 +5,10 @@
 
 typedef vector<ImageDansDiaporama*> ImagesDiaporama; // collection de pointeurs vers les images de ce
                                                      // diaporama (= pteurs vers objets de type ImageDansDiaporama)
+
+typedef vector<ImageDansDiaporama> Images; // collection d'images (= objets de type ImageDansDiaporama)
+
+
 class Diaporama
 {
 public:

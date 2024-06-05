@@ -50,6 +50,7 @@ public slots:
     void demanderArretDiapo();
     void demanderEnleverDiaporama();
     void demanderChangerVitesse();
+    void demanderCreerDiaporama();
     void avancerEnBoucle(); // Avancer mais pour le mode auto
 
     // Actions liées au lecteur
@@ -64,6 +65,7 @@ public slots:
     // Actions liées aux choix utilisateur
     void demanderChangementDIapo(InfosDiaporama);
     void demanderChangementVitesseDfl(unsigned int);
+    void demanderCreationDiaporama(Images, QString, unsigned int);
 };
 
 #endif // PRESENTATIONLECTEUR_H

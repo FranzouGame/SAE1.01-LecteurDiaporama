@@ -23,7 +23,7 @@ class ModeleLecteur : public QObject
     Q_OBJECT
 public:
     // Type énuméré état
-    enum UnEtat {Automatique, Manuel, ChoixDiaporama, Initial, ChoixVitesseDefilement};
+    enum UnEtat {Automatique, Manuel, ChoixDiaporama, Initial, ChoixVitesseDefilement, CreationDiaporama};
 private:
     // Attributs
     UnEtat _etat;
@@ -62,11 +62,14 @@ public slots:
     void demanderInfosDiapos();
     void receptionDemandeChangementDiaporama(InfosDiaporama);
     void receptionDemandeChangementVitesse(unsigned int);
+    void demanderImages();
+    void demanderCreationDiaporama(Images, QString, unsigned int);
 
 signals:
     void imageChanged(const QString& chemin, const QString& titre, const QString& categorie);
     void diapoChanged(const QString& titreDiapo);
     void sendDiapoInfos(Diaporamas);
+    void sendImages(Images);
 };
 
 #endif // MODELELECTEUR_H

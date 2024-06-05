@@ -4,6 +4,7 @@
 #include "fenetreapropos.h"
 #include "choixdiaporama.h"
 #include "choixvitessedefilement.h"
+#include "creationdiaporama.h"
 
 /************************
  * CORPS DE LA CLASSE
@@ -37,6 +38,7 @@ LecteurVue::LecteurVue(QWidget *parent)
     QObject::connect(ui->actionCharger_Diaporama, SIGNAL(triggered()), this, SLOT(demanderChangementDiaporama()));
     QObject::connect(ui->actionModeManuel, SIGNAL(triggered()), this, SLOT(demanderChangementModeManuel()));
     QObject::connect(ui->actionEnleverDiaporama, SIGNAL(triggered(bool)), this ,SLOT(demanderEnleverDiaporama()));
+    QObject::connect(ui->actionCreerDiaporama, SIGNAL(triggered()), this, SLOT(demanderCreationDiaporama()));
 
     // Ajouter un label à droite de la barre de statut
     _labelEtat->setText("Mode : Initial");
@@ -94,6 +96,11 @@ void LecteurVue::demanderChangementModeAuto() {
 
 void LecteurVue::demanderChangementModeManuel() {
     getPres()->demanderChangementModeVersManuel();
+}
+
+void LecteurVue::demanderCreationDiaporama()
+{
+    getPres()->demanderCreerDiaporama();
 }
 
 void LecteurVue::demanderChangementVitesseDefilement()
@@ -201,6 +208,20 @@ void LecteurVue::majInterface(ModeleLecteur::UnEtat e)
             fenetreChoix.exec();
         }
         break;
+
+    case ModeleLecteur::CreationDiaporama:
+            // Maj de la barre d'état
+            _labelEtat->setText(QString("Mode : Création"));
+        {
+            // Créer la fenetre de création de diaporama
+            CreationDiaporama* fenetreCreation = new CreationDiaporama(_images, this);
+
+            // Connecter la récupération d'informations
+            QObject::connect(fenetreCreation, SIGNAL(envoyerInformations(Images, QString, unsigned int)), this, SLOT(recupereImages(Images, QString, unsigned int)));
+
+            // Afficher la fenêtre
+            fenetreCreation->exec();
+    }
     default:
         break;
     }
@@ -224,6 +245,8 @@ void LecteurVue::updateImageInfo(const QString& chemin, const QString& titre, co
     ui->catImage->setText(categorie);
 }
 
+
+
 void LecteurVue::updateDiapoTitle(const QString &titreDiapo)
 {
     ui->titreDiapo->setText(titreDiapo);
@@ -234,6 +257,15 @@ void LecteurVue::receptionDiapos(Diaporamas d)
     _infosDiapos = d;
 }
 
+void LecteurVue::receptionImages(Images images)
+{
+    _images = images;
+}
+
+
+
+
+
 void LecteurVue::recupereInfosDiapoChoisi(InfosDiaporama d)
 {
     getPres()->demanderChangementDIapo(d);
@@ -243,6 +275,14 @@ void LecteurVue::recupereVitesseDefilement(unsigned int pVitesse)
 {
     getPres()->demanderChangementVitesseDfl(pVitesse);
 }
+
+void LecteurVue::recupereImages(Images img, QString titre, unsigned int vitesse)
+{
+    getPres()->demanderCreationDiaporama(img, titre, vitesse);
+}
+
+
+
 
 
 

@@ -47,6 +47,7 @@ int main(int argc, char *argv[])
     QObject::connect(modele, SIGNAL(imageChanged(QString,QString,QString)), &vueLecteur, SLOT(updateImageInfo(QString,QString,QString)));
     QObject::connect(modele, SIGNAL(diapoChanged(QString)), &vueLecteur, SLOT(updateDiapoTitle(QString)));
     QObject::connect(modele, SIGNAL(sendDiapoInfos(Diaporamas)), &vueLecteur, SLOT(receptionDiapos(Diaporamas)));
+    QObject::connect(modele, SIGNAL(sendImages(Images)), &vueLecteur, SLOT(receptionImages(Images)));
 
     // Affichage de la fenetre
     vueLecteur.show();

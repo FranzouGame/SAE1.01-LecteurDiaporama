@@ -117,11 +117,30 @@ void PresentationLecteur::demanderChangerVitesse() {
     demanderArretDiapo();
 
 
-    _modele->setEtat(ModeleLecteur::Manuel);
-    _vue->majInterface(_modele->getEtat());
-    //relancement du diaporama avec la vitesse qui a été changée dans la bd
-    demanderLancement();
+    if(etatPrécédent == ModeleLecteur::Automatique)
+    {
+        _vue->majInterface(_modele->getEtat());
+        demanderLancement();
+    }
+    else
+    {
+        _modele->setEtat(etatPrécédent);
+        _vue->majInterface(_modele->getEtat());
+    }
 
+}
+
+void PresentationLecteur::demanderCreerDiaporama()
+{
+    ModeleLecteur::UnEtat etatPrécédent = _modele->getEtat();
+    _modele->setEtat(ModeleLecteur::CreationDiaporama);
+    _modele->demanderImages();
+    _vue->majInterface(_modele->getEtat());
+
+    // arret du diaporama
+    demanderArretDiapo();
+    _modele->setEtat(etatPrécédent);
+    _vue->majInterface(_modele->getEtat());
 }
 
 void PresentationLecteur::avancerEnBoucle() // Avancer mais pour le mode auto
@@ -221,4 +240,9 @@ void PresentationLecteur::demanderChangementDIapo(InfosDiaporama d)
 void PresentationLecteur::demanderChangementVitesseDfl(unsigned int pVitesse)
 {
     emit faireChangerVitesse(pVitesse);
+}
+
+void PresentationLecteur::demanderCreationDiaporama(Images img, QString titre, unsigned int vitesse)
+{
+    _modele->demanderCreationDiaporama(img, titre, vitesse);
 }
