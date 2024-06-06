@@ -145,6 +145,11 @@ void LecteurVue::setPres(PresentationLecteur* pres) {
     _pres = pres;
 }
 
+void LecteurVue::setImages(Images img)
+{
+    _images = img;
+}
+
 
 
 /************************
@@ -152,11 +157,11 @@ void LecteurVue::setPres(PresentationLecteur* pres) {
  ***********************/
 
 
-void LecteurVue::majInterface(ModeleLecteur::UnEtat e)
+void LecteurVue::majInterface(PresentationLecteur::UnEtat e, Diaporamas d)
 {
     switch(e)
     {
-    case ModeleLecteur::Initial:
+    case PresentationLecteur::Initial:
 
         // Réinitialiser les valeurs des labels
         ui->titreDiapo->setText(QString("Titre du diaporama"));
@@ -172,7 +177,7 @@ void LecteurVue::majInterface(ModeleLecteur::UnEtat e)
         // Maj de la barre d'état
         _labelEtat->setText(QString("Mode : Initial"));
         break;
-    case ModeleLecteur::Manuel:
+    case PresentationLecteur::Manuel:
         // Changer la dispo des boutons
         ui->btnLancerDiapo->setEnabled(true);
         ui->btnArreterDiapo->setEnabled(false);
@@ -180,7 +185,7 @@ void LecteurVue::majInterface(ModeleLecteur::UnEtat e)
         // Maj de la barre d'état
         _labelEtat->setText(QString("Mode : Manuel"));
         break;
-    case ModeleLecteur::Automatique:
+    case PresentationLecteur::Automatique:
 
         // Changer la dispo des boutons
         ui->btnArreterDiapo->setEnabled(true);
@@ -190,7 +195,7 @@ void LecteurVue::majInterface(ModeleLecteur::UnEtat e)
         // Maj de la barre d'état
         _labelEtat->setText(QString("Mode : Automatique"));
         break;
-    case ModeleLecteur::ChoixDiaporama:
+    case PresentationLecteur::ChoixDiaporama:
         {
             ChoixDiaporama* fenetreChoix = new ChoixDiaporama(_infosDiapos, this);
 
@@ -201,7 +206,7 @@ void LecteurVue::majInterface(ModeleLecteur::UnEtat e)
             fenetreChoix->exec();
         }
         break;
-    case ModeleLecteur::ChoixVitesseDefilement:
+    case PresentationLecteur::ChoixVitesseDefilement:
         {
             // Création de la fenêtre
             choixVitesseDefilement fenetreChoix(this);
@@ -214,7 +219,7 @@ void LecteurVue::majInterface(ModeleLecteur::UnEtat e)
         }
         break;
 
-    case ModeleLecteur::CreationDiaporama:
+    case PresentationLecteur::CreationDiaporama:
             // Maj de la barre d'état
             _labelEtat->setText(QString("Mode : Création"));
         {

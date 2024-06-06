@@ -13,11 +13,28 @@ class Diaporama;
 class PresentationLecteur : public QObject
 {
     Q_OBJECT
+
+public:
+    // Type énuméré état
+    enum UnEtat {Automatique, Manuel, ChoixDiaporama, Initial, ChoixVitesseDefilement, CreationDiaporama};
+
 private:
     // Attributs
     LecteurVue* _vue;         // Connexion de la vue
     ModeleLecteur* _modele;   // Connexion du modèle
     QTimer* _timer;           // Timer pour le mode automatique
+
+    Diaporamas _infosDiaporamas;
+    UnEtat _etat;
+    Lecteur* _lecteur;
+    Database* _database;
+
+    // récupérer l'image courante
+    ImageDansDiaporama* getImageCourante() const;
+
+    // récupérer infos diaporamas
+    Diaporamas recupInfosDiaporamas();
+    Images getImages();
 
 public:
     /*** Méthodes ***/
@@ -26,10 +43,17 @@ public:
     // Getters
     LecteurVue* getVue() const;
     ModeleLecteur* getModele() const;
+    UnEtat getEtat() const;
+    Lecteur* getLecteur() const;
+    Database* getDatabase() const;
+    unsigned int recupereVitesseDfl(); // getter indirect
 
     // Setters
     void setVue(LecteurVue*);
     void setModele(ModeleLecteur*);
+    void setEtat(UnEtat);
+    void setLecteur(Lecteur*);
+    void setDatabase(Database*);
 
     // Actions relatives aux diaporamas ou à leur chargement
     void demanderAvancer();
@@ -39,6 +63,7 @@ public:
     void demanderChangerVitesse();
     void demanderCreerDiaporama();
     void avancerEnBoucle(); // Avancer mais pour le mode auto
+    void demanderRetourImage1();
 
     // Actions liées au lecteur
     void demanderChargement();

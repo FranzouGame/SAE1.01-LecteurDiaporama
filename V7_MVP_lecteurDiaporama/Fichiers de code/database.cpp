@@ -281,7 +281,7 @@ void Database::modifTitresEtChemins()
     }
 }
 
-Images Database::recupereImages(unsigned int& nbDiapos)
+Images Database::recupereImages()
 {
     QSqlQuery query(_mydb);
     QString queryString = "SELECT * FROM Diapos";
@@ -299,17 +299,6 @@ Images Database::recupereImages(unsigned int& nbDiapos)
         imageCourante.setTitre(query.value(1).toString().toStdString());
         images.push_back(imageCourante);
     }
-
-    // Récupérer l'index max de diaporamas
-    QSqlQuery queryDiapos(_mydb);
-    QString queryStringDiapos = "SELECT MAX(idDiaporama) FROM Diaporamas";
-    queryDiapos.prepare(queryStringDiapos);
-    if (!queryDiapos.exec()) {
-        qDebug() << "Erreur lors de l'exécution de la requête :" << queryDiapos.lastError().text();
-        return {};
-    }
-    queryDiapos.next();
-    nbDiapos = queryDiapos.value(0).toUInt();
     return images;
 }
 

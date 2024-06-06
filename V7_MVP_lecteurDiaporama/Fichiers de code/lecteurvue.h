@@ -4,6 +4,7 @@
 #include <QMainWindow>
 #include <QLabel>
 #include "modelelecteur.h"
+#include "presentationlecteur.h"
 
 
 QT_BEGIN_NAMESPACE
@@ -12,8 +13,7 @@ class LecteurVue;
 }
 QT_END_NAMESPACE
 
-// Classe nécessaire
-class PresentationLecteur;
+
 
 
 class LecteurVue : public QMainWindow
@@ -49,9 +49,10 @@ public:
 
     // Setters
     void setPres(PresentationLecteur*);
+    void setImages(Images);
 
     // Autres méthodes
-    void majInterface(ModeleLecteur::UnEtat);
+    void majInterface(PresentationLecteur::UnEtat, Diaporamas = {});
 
     // Réception des informations
     void afficherInformations(); // Fenetre A propos

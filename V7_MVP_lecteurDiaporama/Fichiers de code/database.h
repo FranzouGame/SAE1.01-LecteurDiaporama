@@ -33,7 +33,7 @@ public:
     Diaporama* recupereImageDiapo(unsigned int);
     void modifierVitesseDfl(unsigned int idDIapo, unsigned int vitesseAApply);
     void modifTitresEtChemins();
-    Images recupereImages(unsigned int&);
+    Images recupereImages();
 
     // Création de diaporamas
     void creerDiaporama(Images, QString, unsigned int);
