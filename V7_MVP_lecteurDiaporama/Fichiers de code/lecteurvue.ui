@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1187</width>
-    <height>874</height>
+    <width>833</width>
+    <height>515</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -94,19 +94,12 @@ QMenu{
     }</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <layout class="QVBoxLayout" name="verticalLayout_2">
+   <layout class="QVBoxLayout" name="verticalLayout_5">
     <item>
-     <layout class="QHBoxLayout" name="horizontalLayout" stretch="1,1,1,1,1">
+     <layout class="QHBoxLayout" name="horizontalLayout" stretch="1,1,1">
       <property name="sizeConstraint">
        <enum>QLayout::SetFixedSize</enum>
       </property>
-      <item>
-       <widget class="QPushButton" name="btnLancerDiapo">
-        <property name="text">
-         <string>Lancer Diaporama</string>
-        </property>
-       </widget>
-      </item>
       <item>
        <spacer name="horizontalSpacer">
         <property name="orientation">
@@ -142,13 +135,6 @@ QMenu{
          </size>
         </property>
        </spacer>
-      </item>
-      <item>
-       <widget class="QPushButton" name="btnArreterDiapo">
-        <property name="text">
-         <string>Arrêter le diaporama</string>
-        </property>
-       </widget>
       </item>
      </layout>
     </item>
@@ -242,11 +228,35 @@ QMenu{
     <item>
      <layout class="QHBoxLayout" name="horizontalLayout_2">
       <item>
-       <widget class="QPushButton" name="btnPrec">
-        <property name="text">
-         <string>Précédent</string>
+       <layout class="QVBoxLayout" name="verticalLayout_4">
+        <item>
+         <widget class="QPushButton" name="btnLancerDiapo">
+          <property name="text">
+           <string>Lancer Diaporama</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="btnArreterDiapo">
+          <property name="text">
+           <string>Arrêter le diaporama</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <spacer name="horizontalSpacer_5">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
         </property>
-       </widget>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>40</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
       </item>
       <item>
        <spacer name="horizontalSpacerEntrePrecEtSuiv">
@@ -262,13 +272,27 @@ QMenu{
        </spacer>
       </item>
       <item>
-       <widget class="QPushButton" name="btnSuiv">
-        <property name="text">
-         <string>Suivant</string>
-        </property>
-       </widget>
+       <layout class="QVBoxLayout" name="verticalLayout_3">
+        <item>
+         <widget class="QPushButton" name="btnSuiv">
+          <property name="text">
+           <string>Suivant</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="btnPrec">
+          <property name="text">
+           <string>Précédent</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
       </item>
      </layout>
+    </item>
+    <item>
+     <layout class="QVBoxLayout" name="verticalLayout_2"/>
     </item>
    </layout>
   </widget>
@@ -288,8 +312,8 @@ QMenu{
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1187</width>
-     <height>21</height>
+     <width>833</width>
+     <height>22</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFichier">

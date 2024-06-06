@@ -31,8 +31,6 @@ public:
     void setVue(LecteurVue*);
     void setModele(ModeleLecteur*);
 
-
-public slots:
     // Actions relatives aux diaporamas ou à leur chargement
     void demanderAvancer();
     void demanderReculer();
@@ -55,6 +53,9 @@ public slots:
     void demanderChangementDIapo(InfosDiaporama);
     void demanderChangementVitesseDfl(unsigned int);
     void demanderCreationDiaporama(Images, QString, unsigned int);
+
+public slots:
+
 
     // transmission des infos à la vue
     void transmettreInfosImage(const QString& chemin, const QString& titre, const QString& categorie);

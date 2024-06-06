@@ -55,7 +55,7 @@ public:
     // Autres méthodes
     void demanderRetourImage1();
 
-public slots:
+    // Méthodes de récupération des données
     void demandeAvancement();
     void demandeReculement();
     void demandeEnleverDiapo();

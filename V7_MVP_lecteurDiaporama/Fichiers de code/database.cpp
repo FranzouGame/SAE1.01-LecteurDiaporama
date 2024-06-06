@@ -238,7 +238,7 @@ void Database::modifTitresEtChemins()
 
     // Requête de récup des données
     QSqlQuery requeteRecupDonnees(_mydb);
-    QString requeteRecup = "SELECT * FROM diapos ORDER BY uriPhoto";
+    QString requeteRecup = "SELECT * FROM Diapos ORDER BY uriPhoto";
     requeteRecupDonnees.prepare(requeteRecup);
 
     // Exécuter la requête
@@ -259,7 +259,7 @@ void Database::modifTitresEtChemins()
 
         // Update la BD avec ces données
         QSqlQuery requeteUpdate(_mydb);
-        QString requeteUpdateStr = "UPDATE diapos SET titrePhoto = :titre, uriPhoto = :chemin WHERE idPhoto = :id";
+        QString requeteUpdateStr = "UPDATE Diapos SET titrePhoto = :titre, uriPhoto = :chemin WHERE idphoto = :id";
         requeteUpdate.prepare(requeteUpdateStr);
 
         // Ajouter les paramètres
@@ -318,7 +318,7 @@ void Database::creerDiaporama(Images img , QString titre, unsigned int vitesse)
     // Aficher le contenu du vecteur
     qDebug() << "Création du diaporama :" << titre << "avec une vitesse de défilement de :" << vitesse;
     for (unsigned int i = 0; i < img.size(); ++i) {
-        qDebug() << "Image" << i << " : " << img[i].getTitre();
+        qDebug() << "Image" << i << " : " << QString::fromStdString(img[i].getTitre());
     }
 
 
@@ -327,7 +327,7 @@ void Database::creerDiaporama(Images img , QString titre, unsigned int vitesse)
 
     // Créer le diaporama
     QSqlQuery query(_mydb);
-    QString queryString = "INSERT INTO Diaporamas (idDiaporama, `titre Diaporama`, vitesseDefilement) VALUES (:idDiaporama, :titre, :vitesse)";
+    QString queryString = "INSERT INTO Diaporamas (idDiaporama, `titreDiaporama`, vitesseDefilement) VALUES (:idDiaporama, :titre, :vitesse)";
     query.prepare(queryString);
     query.bindValue(":idDiaporama", idDiapo);
     query.bindValue(":titre", titre);
@@ -352,7 +352,7 @@ void Database::creerDiaporama(Images img , QString titre, unsigned int vitesse)
 
         // Vérifier que l'image a été trouvée
         if (!querySelect.next()) {
-            qDebug() << "Aucune image trouvée pour le titre :" << img[i].getTitre();
+            qDebug() << "Aucune image trouvée pour le titre :" << QString::fromStdString(img[i].getTitre());
             return;
         }
 
