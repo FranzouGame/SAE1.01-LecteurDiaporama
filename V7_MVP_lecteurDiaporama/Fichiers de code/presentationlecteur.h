@@ -21,7 +21,6 @@ public:
 private:
     // Attributs
     LecteurVue* _vue;         // Connexion de la vue
-    ModeleLecteur* _modele;   // Connexion du modèle
     QTimer* _timer;           // Timer pour le mode automatique
 
     Diaporamas _infosDiaporamas;
@@ -29,20 +28,21 @@ private:
     Lecteur* _lecteur;
     Database* _database;
 
-    // récupérer l'image courante
-    ImageDansDiaporama* getImageCourante() const;
+
 
     // récupérer infos diaporamas
     Diaporamas recupInfosDiaporamas();
     Images getImages();
 
 public:
+    // récupérer l'image courante
+    ImageDansDiaporama* getImageCourante();
+
     /*** Méthodes ***/
     PresentationLecteur();
 
     // Getters
     LecteurVue* getVue() const;
-    ModeleLecteur* getModele() const;
     UnEtat getEtat() const;
     Lecteur* getLecteur() const;
     Database* getDatabase() const;
@@ -50,7 +50,6 @@ public:
 
     // Setters
     void setVue(LecteurVue*);
-    void setModele(ModeleLecteur*);
     void setEtat(UnEtat);
     void setLecteur(Lecteur*);
     void setDatabase(Database*);
@@ -78,6 +77,13 @@ public:
     void demanderChangementDIapo(InfosDiaporama);
     void demanderChangementVitesseDfl(unsigned int);
     void demanderCreationDiaporama(Images, QString, unsigned int);
+
+    // Réception des retours utilisateur
+    void receptionDemandeChangementVitesse(unsigned int);
+    void receptionDemandeChangementDiapo(InfosDiaporama);
+    void receptionDemandeCreationDiaporama(Images, QString, unsigned int);
+
+
 
 public slots:
 

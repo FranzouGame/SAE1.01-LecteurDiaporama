@@ -1,5 +1,4 @@
 #include "presentationlecteur.h"
-#include "modelelecteur.h"
 #include "lecteurvue.h"
 #include "database.h"
 
@@ -9,21 +8,29 @@
  *   CONSTRUCTEURS     *
 ***********************/
 
+PresentationLecteur::PresentationLecteur() :
+    _vue(nullptr),
+    _etat(Initial),
+    _lecteur(new Lecteur()),
+    _database(new Database())
+{
+    // Initialisation du timer
+    _timer = new QTimer(this);
+    connect(_timer, &QTimer::timeout, this, &PresentationLecteur::avancerEnBoucle);
+}
+
+
 
 Images PresentationLecteur::getImages()
 {
     return _database->recupereImages();
 }
 
-PresentationLecteur::PresentationLecteur() :
-    _vue(nullptr),
-    _modele(nullptr),
-    _etat(Initial)
+ImageDansDiaporama *PresentationLecteur::getImageCourante()
 {
-    // Initialisation du timer
-    _timer = new QTimer(this);
-    connect(_timer, &QTimer::timeout, this, &PresentationLecteur::avancerEnBoucle);
+    return _lecteur->getImageCourante();
 }
+
 
 
 
@@ -37,9 +44,6 @@ LecteurVue* PresentationLecteur::getVue() const {
 }
 
 
-ModeleLecteur* PresentationLecteur::getModele() const {
-    return _modele;
-}
 
 PresentationLecteur::UnEtat PresentationLecteur::getEtat() const
 {
@@ -72,11 +76,6 @@ void PresentationLecteur::setVue(LecteurVue* vue) {
     _vue->majInterface(Initial);
 }
 
-
-void PresentationLecteur::setModele(ModeleLecteur* modele) {
-    _modele = modele;
-}
-
 void PresentationLecteur::setEtat(UnEtat e)
 {
     _etat = e;
@@ -95,7 +94,7 @@ void PresentationLecteur::setDatabase(Database *d)
 
 
 /***********************
- *       SLOTS         *
+ * Méthodes publiques  *
 ***********************/
 
 
@@ -104,7 +103,7 @@ void PresentationLecteur::setDatabase(Database *d)
 void PresentationLecteur::demanderAvancer() {
 
     // Vérifier le mode, arrêter si automatique
-    if(getModele()->getEtat() == ModeleLecteur::Automatique)
+    if(getEtat() == Automatique)
     {
         demanderArretDiapo();
     }
@@ -125,7 +124,7 @@ void PresentationLecteur::demanderAvancer() {
 void PresentationLecteur::demanderReculer() {
 
     // Vérifier le mode, arrêter si automatique
-    if(getModele()->getEtat() == ModeleLecteur::Automatique)
+    if(getEtat() == Automatique)
     {
         demanderArretDiapo();
     }
@@ -202,7 +201,11 @@ void PresentationLecteur::demanderCreerDiaporama()
 
 void PresentationLecteur::avancerEnBoucle() // Avancer mais pour le mode auto
 {
-    _modele->demandeAvancement();
+    _lecteur->avancer();
+    ImageDansDiaporama* imageCourante = getImageCourante();
+    _vue->updateImageInfo(QString::fromStdString(imageCourante->getChemin()),
+                          QString::fromStdString(imageCourante->getTitre()),
+                          QString::fromStdString(imageCourante->getCategorie()));
 }
 
 void PresentationLecteur::demanderRetourImage1()
@@ -218,20 +221,34 @@ void PresentationLecteur::demanderRetourImage1()
 // Actions liées au lecteur
 
 void PresentationLecteur::demanderChargement() {
+
     // Récupérer puis chnager l'état et mettre à jour l'interface
     UnEtat etatPrécédent = getEtat();
     setEtat(ChoixDiaporama);
-    _infosDiaporamas = recupInfosDiaporamas();
-    _vue->majInterface(getEtat(), _infosDiaporamas);
-    demanderArretDiapo();
-    // Vérifier si l'ancien mode est valide
 
-        setEtat(Manuel);
-        _vue->majInterface(getEtat());
-    if (etatPrécédent == Automatique)
+
+    // Récupérer les infos des diaporamas dans la bd et les envoyer à la vue
+    _infosDiaporamas = _database->recupereDiapos();
+    _vue->setDiaporamas(_infosDiaporamas);
+    _vue->majInterface(getEtat(), _infosDiaporamas);
+
+    demanderArretDiapo();
+
+    // Vérifier si l'ancien mode est valide
+    switch(etatPrécédent)
     {
-        demanderLancement();
+        case Automatique:
+            setEtat(etatPrécédent);
+            demanderLancement();
+            break;
+        case Manuel:
+            setEtat(etatPrécédent);
+            break;
+        default:
+            setEtat(Manuel);
+            break;
     }
+
 
 }
 
@@ -260,7 +277,7 @@ void PresentationLecteur::demanderLancement() {
         }
 
         // Si on n'est pas à la dernière image, lancer le timer + lancer le diapo
-        if(getLecteur()->getImageCourante()->getRangDansDiaporama() <= ->getLecteur()->nbImages() - 1)
+        if(getLecteur()->getImageCourante()->getRangDansDiaporama() <= getLecteur()->nbImages() - 1)
         {
             _timer->start(1000*vitesse); // Lancement du timer
             demanderRetourImage1();
@@ -321,13 +338,20 @@ void PresentationLecteur::demanderChangementDIapo(InfosDiaporama d)
 
 void PresentationLecteur::demanderChangementVitesseDfl(unsigned int pVitesse)
 {
-    _modele->receptionDemandeChangementVitesse(pVitesse);
+    // Modifier la vitesse dans la bd
+    _database->modifierVitesseDfl(_lecteur->getDiaporama()->getId(), pVitesse);
+
+    // Changer dans le diaporama aussi
+    _lecteur->getDiaporama()->setVitesseDefilement(pVitesse);
 }
 
 void PresentationLecteur::demanderCreationDiaporama(Images img, QString titre, unsigned int vitesse)
 {
-    _modele->demanderCreationDiaporama(img, titre, vitesse);
+    // Faire créer le diapo dans la bd
+    _database->creerDiaporama(img, titre, vitesse);
 }
+
+
 
 void PresentationLecteur::transmettreInfosImage(const QString &chemin, const QString &titre, const QString &categorie)
 {

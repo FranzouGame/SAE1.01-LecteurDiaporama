@@ -17,7 +17,6 @@ int main(int argc, char *argv[])
 
 
     // Création des variables
-    ModeleLecteur* modele = new ModeleLecteur();
     PresentationLecteur* presentation = new PresentationLecteur();
     LecteurVue vueLecteur;
     Lecteur* lecteur = new Lecteur();
@@ -27,18 +26,10 @@ int main(int argc, char *argv[])
 
     // Association des différents éléments entre eux
     vueLecteur.setPres(presentation);
-    presentation->setModele(modele);
-    modele->setEtat(ModeleLecteur::Initial);
+    presentation->setLecteur(lecteur);
     presentation->setVue(&vueLecteur);
-    modele->setLecteur(lecteur);
 
     // Connexion des signaux et des slots
-
-    // Modèle -> vue
-    QObject::connect(modele, SIGNAL(imageChanged(QString,QString,QString)), presentation, SLOT(transmettreInfosImage(QString,QString,QString)));
-    QObject::connect(modele, SIGNAL(diapoChanged(QString)), presentation, SLOT(transmettreTitreDiapo(QString)));
-    QObject::connect(modele, SIGNAL(sendDiapoInfos(Diaporamas)), presentation, SLOT(transmettreInfosDiapos(Diaporamas)));
-    QObject::connect(modele, SIGNAL(sendImages(Images)), presentation, SLOT(transmettreImages(Images)));
 
     // Affichage de la fenetre
     vueLecteur.show();

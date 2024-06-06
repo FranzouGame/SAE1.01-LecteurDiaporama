@@ -50,6 +50,7 @@ public:
     // Setters
     void setPres(PresentationLecteur*);
     void setImages(Images);
+    void setDiaporamas(Diaporamas);
 
     // Autres méthodes
     void majInterface(PresentationLecteur::UnEtat, Diaporamas = {});

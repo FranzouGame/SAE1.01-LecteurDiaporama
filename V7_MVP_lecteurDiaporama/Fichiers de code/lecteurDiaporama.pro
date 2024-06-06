@@ -16,7 +16,6 @@ SOURCES += \
     creationdiaporama.cpp \
     main.cpp \
     lecteurvue.cpp \
-    modelelecteur.cpp \
     presentationlecteur.cpp \
     lecteur.cpp \
     diaporama.cpp \
@@ -29,7 +28,6 @@ HEADERS += \
     fenetreapropos.h \
     creationdiaporama.h \
     lecteurvue.h \
-    modelelecteur.h \
     presentationlecteur.h \
     lecteur.h \
     diaporama.h \

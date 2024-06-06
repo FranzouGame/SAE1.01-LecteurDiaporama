@@ -74,6 +74,7 @@ void LecteurVue::demanderReculer() {
 }
 
 void LecteurVue::demanderChangementDiaporama() {
+    qDebug() << "1, taille : " << _infosDiapos.size();
     getPres()->demanderChargement();
 }
 
@@ -150,6 +151,11 @@ void LecteurVue::setImages(Images img)
     _images = img;
 }
 
+void LecteurVue::setDiaporamas(Diaporamas infosDiapos)
+{
+    _infosDiapos = infosDiapos;
+}
+
 
 
 /************************
@@ -199,6 +205,8 @@ void LecteurVue::majInterface(PresentationLecteur::UnEtat e, Diaporamas d)
         {
             ChoixDiaporama* fenetreChoix = new ChoixDiaporama(_infosDiapos, this);
 
+            qDebug() << "2, taille : " << _infosDiapos.size();
+
             // Connexion pour la récupération d'informaitons
             QObject::connect(fenetreChoix, SIGNAL(transmettreInfos(InfosDiaporama)), this, SLOT(recupereInfosDiapoChoisi(InfosDiaporama)));
 
@@ -220,8 +228,6 @@ void LecteurVue::majInterface(PresentationLecteur::UnEtat e, Diaporamas d)
         break;
 
     case PresentationLecteur::CreationDiaporama:
-            // Maj de la barre d'état
-            _labelEtat->setText(QString("Mode : Création"));
         {
             // Créer la fenetre de création de diaporama
             CreationDiaporama* fenetreCreation = new CreationDiaporama(_images, this);
