@@ -1,7 +1,0 @@
-Quand on passe la souris sur le menu fichier la couleur change au blanc et on ne voit pas bien ce qui est écrit (sous la souris, police trop claire).
-Dans les menu, dans un sous menu on ne voit pas sur quoi est la souris exemple : fichier>parametre : le bouton parametre ne change pas de couleur par rapport aux autres sous menu de fichier.
-Quand aucun diapo est charger dans le lecteur si on va dans le menu diaporama le bouton Changer la vitesse de défilement n'est pas grisé (peut porter a confusion pour les debiles qui, meme si ils cliquent ils cliquent encore et encore).
-Quand aucun diapo n'est chargé les bouton suivent et précèdent sont clickable (jsp si c'est comme ca de base je le note au cas où ils devraient être grisés).
-Duplication de sous menu entre fichier > param > changer vitesse ; charger diapo ; enlever diapo.
-Si lecteur est vide bouton enlever diaporama clickable.
-Dans création de diapo : possibilité de créer un diapo sans image et sans titre -> crash de l'appli.
